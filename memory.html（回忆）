@@ -5,105 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>周边收藏 - Reigen Arataka</title>
     <style>
-        body {
-            font-family: "Microsoft YaHei", serif;
-            background: linear-gradient(135deg, #1a1428, #2c1f4a, #1a1428);
-            color: #e0d4ff;
-            text-align: center;
-            padding: 60px 20px;
-            margin: 0;
-            line-height: 1.8;
-        }
-        h1 {
-            color: #d4a5ff;
-            font-size: 3.2em;
-            text-shadow: 0 0 30px rgba(212, 165, 255, 0.6);
-            margin-bottom: 10px;
-        }
-        .subtitle {
-            color: #bb9eff;
-            font-size: 1.5em;
-            margin-bottom: 50px;
-        }
-        .back {
-            color: #ffd700;
-            text-decoration: none;
-            font-size: 1.3em;
-            display: inline-block;
-            margin-bottom: 40px;
-        }
-        .merch-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .merch-item {
-            background: rgba(255,255,255,0.06);
-            border-radius: 20px;
-            padding: 25px;
-            border: 1px solid rgba(212,165,255,0.2);
-            transition: all 0.4s;
-        }
-        .merch-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 0 40px rgba(212, 165, 255, 0.4);
-        }
-        .merch-item img {
-            width: 100%;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 0 25px rgba(0,0,0,0.5);
-        }
-        .merch-item h3 {
-            color: #ffd700;
-            margin: 15px 0 8px;
-        }
-        .price {
-            color: #bb9eff;
-            font-size: 1.1em;
-        }
+        body {font-family: "Microsoft YaHei", serif; background: #1a1428; color: #e0d4ff; text-align: center; padding: 60px 20px; margin: 0;}
+        h1 {color: #d4a5ff;}
+        .back {color: #ffd700; text-decoration: none; font-size: 1.3em;}
+        img {max-width: 100%; border-radius: 15px; margin: 20px 0;}
     </style>
 </head>
 <body>
     <a href="index.html" class="back">← 返回首页</a>
     <h1>周边收藏</h1>
-    <p class="subtitle">灵能事务所限量周边</p>
 
-    <div class="merch-grid">
-        
-        <div class="merch-item">
-            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="Reigen 立牌">
-            <h3>21世纪最强灵能师立牌</h3>
-            <p class="price">限量珍藏版</p>
-        </div>
-
-        <div class="merch-item">
-            <img src="https://picsum.photos/600/400?random=2" alt="西装钥匙扣">
-            <h3>经典西装钥匙扣</h3>
-            <p>“相信我，我是专业的”</p>
-            <p class="price">经典款</p>
-        </div>
-
-        <div class="merch-item">
-            <img src="https://picsum.photos/600/400?random=3" alt="灵能事务所徽章">
-            <h3>灵能事务所会员徽章</h3>
-            <p>只有委托人才配拥有</p>
-            <p class="price">会员限定</p>
-        </div>
-
-        <div class="merch-item">
-            <img src="https://picsum.photos/600/400?random=4" alt="Reigen 手机壳">
-            <h3>灵能师手机壳</h3>
-            <p>保护你的手机，也保护你的心</p>
-            <p class="price">新品</p>
-        </div>
-
-    </div>
-
-    <p style="margin-top: 100px; opacity: 0.6;">
-        Powered by GitHub Pages
-    </p>
+    <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="Reigen">
+    <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="Reigen">
+    <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="Reigen">
 </body>
 </html>
