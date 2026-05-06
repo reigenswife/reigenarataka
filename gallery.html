@@ -16,18 +16,12 @@
         }
         h1 { color: #ffd700; font-size: 3em; margin-bottom: 10px; }
         .subtitle { color: #bb86fc; font-size: 1.5em; margin-bottom: 30px; }
-        .back {
-            color: #ffd700;
-            text-decoration: none;
-            font-size: 1.3em;
-            display: inline-block;
-            margin-bottom: 30px;
-        }
+        .back { color: #ffd700; text-decoration: none; font-size: 1.3em; display: inline-block; margin-bottom: 30px; }
 
-        /* 轮播主容器 */
+        /* 轮播区域 */
         .carousel {
             max-width: 900px;
-            height: 580px;           /* ← 主要调整：固定高度 */
+            height: 580px;           /* 可根据需要调整高度 */
             margin: 0 auto 40px;
             position: relative;
             border-radius: 20px;
@@ -55,11 +49,11 @@
         .carousel-item img {
             width: 100%;
             height: 100%;
-            object-fit: contain;     /* 完整显示，不裁切 */
+            object-fit: cover;        /* ← 修改为 cover，铺满并允许裁切 */
             object-position: center;
         }
 
-        /* 按钮 */
+        /* 左右按钮 */
         .carousel-btn {
             position: absolute;
             top: 50%;
@@ -92,29 +86,25 @@
             background: rgba(255,255,255,0.6);
             border-radius: 50%;
             cursor: pointer;
-            transition: 0.3s;
         }
         .indicator.active {
             background: #ffd700;
             transform: scale(1.3);
         }
 
-        .autoplay-toggle {
-            margin: 20px auto;
+        /* 音乐控制按钮 */
+        .music-control {
+            margin: 15px auto;
             padding: 12px 28px;
-            font-size: 1.1em;
-            background: #bb86fc;
+            background: rgba(187, 134, 252, 0.9);
             color: white;
             border: none;
             border-radius: 30px;
             cursor: pointer;
+            font-size: 1.1em;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-        }
-        .autoplay-toggle:hover {
-            background: #ffd700;
-            color: #000;
         }
 
         .video-container {
@@ -147,17 +137,21 @@
         <div class="carousel-indicators" id="indicators"></div>
     </div>
 
-    <button class="autoplay-toggle" id="toggleBtn" onclick="toggleAutoplay()">
-        ▶️ 自动播放已开启
+    <!-- 背景音乐控制 -->
+    <button class="music-control" id="musicBtn" onclick="toggleMusic()">
+        🎵 播放背景音乐
     </button>
+
+    <audio id="bgm" loop>
+        <!-- 请替换成你上传的音乐 Raw 链接 -->
+        <source src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/你的音乐文件名.mp3" type="audio/mpeg">
+    </audio>
 
     <!-- 视频 -->
     <div class="video-container">
         <iframe width="100%" height="480" 
                 src="https://www.youtube.com/embed/9EPXegPw_Y4"
-                title="Reigen Video" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
+                frameborder="0" allowfullscreen></iframe>
     </div>
 
     <p style="margin-top: 80px; opacity: 0.7;">
@@ -169,30 +163,27 @@
         let currentIndex = 0;
         let autoplay = true;
         let autoplayInterval;
-
-        const carouselInner = document.getElementById('carouselInner');
-        const indicatorsContainer = document.getElementById('indicators');
-        const toggleBtn = document.getElementById('toggleBtn');
+        let isPlaying = false;
+        const audio = document.getElementById('bgm');
+        const musicBtn = document.getElementById('musicBtn');
 
         function updateIndicators() {
             const slides = document.querySelectorAll('.carousel-item');
-            indicatorsContainer.innerHTML = '';
+            const container = document.getElementById('indicators');
+            container.innerHTML = '';
             slides.forEach((_, i) => {
                 const dot = document.createElement('div');
                 dot.classList.add('indicator');
                 if (i === currentIndex) dot.classList.add('active');
                 dot.onclick = () => goToSlide(i);
-                indicatorsContainer.appendChild(dot);
+                container.appendChild(dot);
             });
         }
 
         function showSlide(index) {
             const total = document.querySelectorAll('.carousel-item').length;
-            if (index >= total) currentIndex = 0;
-            else if (index < 0) currentIndex = total - 1;
-            else currentIndex = index;
-
-            carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+            currentIndex = (index + total) % total;
+            document.getElementById('carouselInner').style.transform = `translateX(-${currentIndex * 100}%)`;
             updateIndicators();
         }
 
@@ -200,43 +191,38 @@
         function prevSlide() { showSlide(currentIndex - 1); }
         function goToSlide(index) { showSlide(index); }
 
-        function startAutoplay() {
-            autoplayInterval = setInterval(nextSlide, 3500);
-        }
-        function stopAutoplay() {
-            clearInterval(autoplayInterval);
-        }
+        function startAutoplay() { autoplayInterval = setInterval(nextSlide, 3500); }
+        function stopAutoplay() { clearInterval(autoplayInterval); }
 
-        function toggleAutoplay() {
-            autoplay = !autoplay;
-            if (autoplay) {
-                toggleBtn.textContent = "▶️ 自动播放已开启";
-                toggleBtn.style.background = "#bb86fc";
-                startAutoplay();
+        function toggleMusic() {
+            if (isPlaying) {
+                audio.pause();
+                musicBtn.textContent = "🎵 播放背景音乐";
             } else {
-                toggleBtn.textContent = "⏸️ 自动播放已关闭";
-                toggleBtn.style.background = "#666";
-                stopAutoplay();
+                audio.play().catch(() => alert("浏览器阻止了自动播放，请手动点击"));
+                musicBtn.textContent = "⏸️ 暂停背景音乐";
             }
+            isPlaying = !isPlaying;
         }
-
-        // 键盘控制
-        document.addEventListener('keydown', e => {
-            if (e.key === "ArrowRight") nextSlide();
-            if (e.key === "ArrowLeft") prevSlide();
-        });
-
-        // 鼠标悬停
-        const carousel = document.getElementById('carousel');
-        carousel.addEventListener('mouseenter', () => autoplay && stopAutoplay());
-        carousel.addEventListener('mouseleave', () => autoplay && startAutoplay());
 
         // 初始化
         window.onload = () => {
             updateIndicators();
             showSlide(0);
             startAutoplay();
+            audio.volume = 0.35;   // 默认音量适中
         };
+
+        // 键盘左右键
+        document.addEventListener('keydown', e => {
+            if (e.key === "ArrowRight") nextSlide();
+            if (e.key === "ArrowLeft") prevSlide();
+        });
+
+        // 鼠标悬停暂停轮播
+        const carousel = document.getElementById('carousel');
+        carousel.addEventListener('mouseenter', () => autoplay && stopAutoplay());
+        carousel.addEventListener('mouseleave', () => autoplay && startAutoplay());
     </script>
 </body>
 </html>
