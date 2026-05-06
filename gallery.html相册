@@ -5,20 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>灵犀相册 - Reigen Arataka</title>
     <style>
-        body {font-family: "Microsoft YaHei", serif; background: linear-gradient(135deg, #1a1428, #2c1f4a); color: #e0d4ff; text-align: center; padding: 40px 20px; margin: 0;}
-        h1 {color: #d4a5ff;}
-        .back {color: #ffd700; text-decoration: none; font-size: 1.3em;}
-        .gallery {display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; max-width: 1200px; margin: 40px auto;}
-        .gallery-item {border-radius: 18px; overflow: hidden; box-shadow: 0 0 30px rgba(212,165,255,0.4);}
-        img, iframe {width: 100%; border: none;}
+        body {
+            font-family: "Microsoft YaHei", serif;
+            background: linear-gradient(135deg, #1a1428, #2c1f4a, #1a1428);
+            color: #e0d4ff;
+            text-align: center;
+            padding: 50px 20px;
+            margin: 0;
+        }
+        h1 { color: #d4a5ff; font-size: 3em; }
+        .back { color: #ffd700; text-decoration: none; font-size: 1.3em; margin-bottom: 40px; display: inline-block; }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+        .gallery-item {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(212,165,255,0.4);
+        }
+        img { width: 100%; display: block; }
     </style>
 </head>
 <body>
     <a href="index.html" class="back">← 返回首页</a>
     <h1>灵犀相册</h1>
+
     <div class="gallery">
+        <div class="gallery-item"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="Reigen"></div>
+        <div class="gallery-item"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="Reigen"></div>
         <div class="gallery-item"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="Reigen"></div>
-        <!-- 在这里继续添加更多图片 -->
     </div>
 </body>
 </html>
