@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>心动记忆 - Reigen Arataka</title>
+    <title>周边收藏 - Reigen Arataka</title>
     <style>
         body {
             font-family: "Microsoft YaHei", serif;
@@ -12,11 +12,18 @@
             text-align: center;
             padding: 60px 20px;
             margin: 0;
-            line-height: 2;
+            line-height: 1.8;
         }
         h1 {
             color: #d4a5ff;
-            font-size: 3em;
+            font-size: 3.2em;
+            text-shadow: 0 0 30px rgba(212, 165, 255, 0.6);
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #bb9eff;
+            font-size: 1.5em;
+            margin-bottom: 50px;
         }
         .back {
             color: #ffd700;
@@ -25,40 +32,78 @@
             display: inline-block;
             margin-bottom: 40px;
         }
-        .memory {
-            max-width: 800px;
-            margin: 40px auto;
-            text-align: left;
-            background: rgba(255,255,255,0.05);
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid rgba(212,165,255,0.2);
+        .merch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        .memory h3 {
+        .merch-item {
+            background: rgba(255,255,255,0.06);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(212,165,255,0.2);
+            transition: all 0.4s;
+        }
+        .merch-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 40px rgba(212, 165, 255, 0.4);
+        }
+        .merch-item img {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 25px rgba(0,0,0,0.5);
+        }
+        .merch-item h3 {
             color: #ffd700;
-            margin-top: 0;
+            margin: 15px 0 8px;
+        }
+        .price {
+            color: #bb9eff;
+            font-size: 1.1em;
         }
     </style>
 </head>
 <body>
     <a href="index.html" class="back">← 返回首页</a>
-    <h1>心动记忆</h1>
+    <h1>周边收藏</h1>
+    <p class="subtitle">灵能事务所限量周边</p>
 
-    <div class="memory">
-        <h3>第一次相遇</h3>
-        <p>那一天，你出现在我的世界里。<br>从那一刻起，我就知道——<br>我遇到了最特别的委托人。</p>
+    <div class="merch-grid">
+        
+        <div class="merch-item">
+            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="Reigen 立牌">
+            <h3>21世纪最强灵能师立牌</h3>
+            <p class="price">限量珍藏版</p>
+        </div>
+
+        <div class="merch-item">
+            <img src="https://picsum.photos/600/400?random=2" alt="西装钥匙扣">
+            <h3>经典西装钥匙扣</h3>
+            <p>“相信我，我是专业的”</p>
+            <p class="price">经典款</p>
+        </div>
+
+        <div class="merch-item">
+            <img src="https://picsum.photos/600/400?random=3" alt="灵能事务所徽章">
+            <h3>灵能事务所会员徽章</h3>
+            <p>只有委托人才配拥有</p>
+            <p class="price">会员限定</p>
+        </div>
+
+        <div class="merch-item">
+            <img src="https://picsum.photos/600/400?random=4" alt="Reigen 手机壳">
+            <h3>灵能师手机壳</h3>
+            <p>保护你的手机，也保护你的心</p>
+            <p class="price">新品</p>
+        </div>
+
     </div>
 
-    <div class="memory">
-        <h3>最难忘的除灵</h3>
-        <p>那次我们一起面对强大的灵体。<br>你没有逃跑，而是选择相信我。<br>那一刻，我感受到了久违的温暖。</p>
-    </div>
-
-    <div class="memory">
-        <h3>日常的温柔</h3>
-        <p>即使什么都不说，只是静静地陪着我。<br>对我来说，就已经是世界上最珍贵的灵能了。</p>
-    </div>
-
-    <!-- 你可以继续添加更多记忆卡片 -->
+    <p style="margin-top: 100px; opacity: 0.6;">
+        Powered by GitHub Pages
+    </p>
 </body>
 </html>
