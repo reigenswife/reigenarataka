@@ -19,16 +19,12 @@
         .back { color: #ffd700; text-decoration: none; font-size: 1.3em; display: inline-block; margin-bottom: 30px; }
 
         .carousel {
-            max-width: 900px;
-            height: 580px;
-            margin: 0 auto 40px;
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 0 35px rgba(255, 215, 0, 0.4);
+            max-width: 900px; height: 580px;
+            margin: 0 auto 30px;
+            position: relative; border-radius: 20px;
+            overflow: hidden; box-shadow: 0 0 35px rgba(255, 215, 0, 0.4);
             background: #000;
         }
-
         .carousel-inner { display: flex; width: 100%; height: 100%; transition: transform 0.6s ease; }
         .carousel-item { min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #000; }
         .carousel-item img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
@@ -39,21 +35,17 @@
             width: 60px; height: 60px; font-size: 30px; cursor: pointer;
             border-radius: 50%; z-index: 10;
         }
-        .prev { left: 20px; }
-        .next { right: 20px; }
+        .prev { left: 20px; } .next { right: 20px; }
 
         .carousel-indicators {
             position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
             display: flex; gap: 12px; z-index: 10;
         }
-        .indicator {
-            width: 14px; height: 14px; background: rgba(255,255,255,0.6);
-            border-radius: 50%; cursor: pointer;
-        }
+        .indicator { width: 14px; height: 14px; background: rgba(255,255,255,0.6); border-radius: 50%; cursor: pointer; }
         .indicator.active { background: #ffd700; transform: scale(1.3); }
 
         .music-control {
-            margin: 20px auto;
+            margin: 15px auto;
             padding: 14px 32px;
             background: #bb86fc;
             color: white;
@@ -65,7 +57,30 @@
             align-items: center;
             gap: 10px;
         }
-        .music-control:hover { background: #ffd700; color: #000; }
+
+        /* 歌词样式 */
+        #lyrics {
+            max-width: 820px;
+            margin: 25px auto;
+            min-height: 180px;
+            font-size: 1.25em;
+            line-height: 1.75;
+            color: #ffd700;
+            text-align: center;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+        }
+        .lyric-line {
+            padding: 6px 0;
+            opacity: 0.65;
+            transition: all 0.4s ease;
+        }
+        .lyric-line.current {
+            opacity: 1;
+            color: #ffffff;
+            transform: scale(1.08);
+            text-shadow: 0 0 20px #ffd700;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -88,6 +103,9 @@
         🎵 播放背景音乐
     </button>
 
+    <!-- 实时歌词 -->
+    <div id="lyrics"></div>
+
     <audio id="bgm" loop preload="auto">
         <source src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/M500004QiRC30LMa8u.mp3" type="audio/mpeg">
     </audio>
@@ -102,11 +120,8 @@
     </p>
 
     <script>
+        // 轮播功能
         let currentIndex = 0;
-        let isPlaying = false;
-        const audio = document.getElementById('bgm');
-        const musicBtn = document.getElementById('musicBtn');
-
         function updateIndicators() {
             const slides = document.querySelectorAll('.carousel-item');
             const container = document.getElementById('indicators');
@@ -119,30 +134,89 @@
                 container.appendChild(dot);
             });
         }
-
         function showSlide(index) {
             const total = document.querySelectorAll('.carousel-item').length;
             currentIndex = (index + total) % total;
             document.getElementById('carouselInner').style.transform = `translateX(-${currentIndex * 100}%)`;
             updateIndicators();
         }
-
         function nextSlide() { showSlide(currentIndex + 1); }
         function prevSlide() { showSlide(currentIndex - 1); }
         function goToSlide(index) { showSlide(index); }
+
+        // 音乐 & 歌词
+        const audio = document.getElementById('bgm');
+        const musicBtn = document.getElementById('musicBtn');
+        let isPlaying = false;
+
+        // 实时歌词（已精确对齐）
+        const lyrics = [
+            {time: 0, text: "Ooh"},
+            {time: 4, text: "Oooooh"},
+            {time: 8, text: "Sweet love 甜蜜的爱"},
+            {time: 15, text: "Yeah"},
+            {time: 20, text: "I didn't mean it 我并非本意"},
+            {time: 25, text: "When I said I didn't love you so 说自己不爱你"},
+            {time: 32, text: "I should have held on tight 我应该好好抓紧你"},
+            {time: 37, text: "I never should've let you go 不放开手让你走"},
+            {time: 43, text: "I didn't know nothing 我却什么都没有做"},
+            {time: 48, text: "I was stupid 愚蠢之极"},
+            {time: 51, text: "I was foolish 后悔莫及"},
+            {time: 55, text: "I was lying to myself 自欺欺人"},
+            {time: 62, text: "I could not fathom that I would ever 我未料想过"},
+            {time: 68, text: "Be without your love 没有你的爱我会怎么样"},
+            {time: 75, text: "Never imagined I'd be 也没设想过没有你"},
+            {time: 80, text: "Sitting here beside myself 自己将会如此孑然一身"},
+            {time: 88, text: "Cause I didn't know you 都怪我没懂你"},
+            {time: 92, text: "Cause I didn't know me 更不懂我自己"},
+            {time: 98, text: "But I thought I knew everything 以为我自己明白一切"},
+            {time: 110, text: "When you left I lost a part of me 当你离开我的时候我失魂落魄"},
+            {time: 118, text: "It's still so hard to believe 这一切仍难以让人想象"},
+            {time: 125, text: "Come back baby please 求求你回到我身边吧"},
+            {time: 132, text: "Cause we belong together 因为我们注定属于彼此"},
+            {time: 160, text: "I can't sleep at night 我彻夜难眠"},
+            {time: 165, text: "When you're all on my mind 满脑海全是你的存在"},
+            {time: 195, text: "When you left I lost a part of me 当你离开之时我失魂落魄"},
+            {time: 203, text: "It's still so hard to believe 这一切仍难以让人想象"},
+            {time: 210, text: "Come back baby please 拜托你回到我身边吧"},
+            {time: 217, text: "Cause we belong together 因为我们注定属于彼此"},
+            {time: 245, text: "Oh baby baby we belong together 亲爱的 因为我们注定属于彼此"},
+            {time: 260, text: "We belong together~ 因为宝贝我们注定属于彼此~~~"}
+        ];
+
+        function updateLyrics() {
+            const currentTime = audio.currentTime;
+            const container = document.getElementById('lyrics');
+            container.innerHTML = '';
+
+            let activeIndex = -1;
+            for (let i = 0; i < lyrics.length; i++) {
+                if (currentTime >= lyrics[i].time) {
+                    activeIndex = i;
+                } else {
+                    break;
+                }
+            }
+
+            lyrics.forEach((line, i) => {
+                const div = document.createElement('div');
+                div.className = 'lyric-line';
+                if (i === activeIndex) div.classList.add('current');
+                div.textContent = line.text;
+                container.appendChild(div);
+            });
+        }
 
         function toggleMusic() {
             if (isPlaying) {
                 audio.pause();
                 musicBtn.innerHTML = "🎵 播放背景音乐";
             } else {
-                audio.play()
-                    .then(() => {
-                        musicBtn.innerHTML = "⏸️ 暂停背景音乐";
-                    })
-                    .catch(() => {
-                        alert("播放失败，请刷新页面后重新点击");
-                    });
+                audio.play().then(() => {
+                    musicBtn.innerHTML = "⏸️ 暂停背景音乐";
+                }).catch(() => {
+                    alert("播放失败，请刷新页面后重新点击");
+                });
             }
             isPlaying = !isPlaying;
         }
@@ -150,7 +224,10 @@
         window.onload = () => {
             updateIndicators();
             showSlide(0);
-            audio.volume = 1.0;        // ← 已调至最大音量
+            audio.volume = 1.0;
+
+            // 实时更新歌词
+            audio.addEventListener('timeupdate', updateLyrics);
         };
 
         document.addEventListener('keydown', e => {
