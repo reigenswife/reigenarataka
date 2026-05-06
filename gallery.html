@@ -29,85 +29,43 @@
             background: #000;
         }
 
-        .carousel-inner {
-            display: flex;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.6s ease;
-        }
-
-        .carousel-item {
-            min-width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #000;
-        }
-
-        .carousel-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-        }
+        .carousel-inner { display: flex; width: 100%; height: 100%; transition: transform 0.6s ease; }
+        .carousel-item { min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #000; }
+        .carousel-item img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 
         .carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0,0,0,0.75);
-            color: white;
-            border: none;
-            width: 60px;
-            height: 60px;
-            font-size: 30px;
-            cursor: pointer;
-            border-radius: 50%;
-            z-index: 10;
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(0,0,0,0.75); color: white; border: none;
+            width: 60px; height: 60px; font-size: 30px; cursor: pointer;
+            border-radius: 50%; z-index: 10;
         }
         .prev { left: 20px; }
         .next { right: 20px; }
 
         .carousel-indicators {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 12px;
-            z-index: 10;
+            position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+            display: flex; gap: 12px; z-index: 10;
         }
         .indicator {
-            width: 14px;
-            height: 14px;
-            background: rgba(255,255,255,0.6);
-            border-radius: 50%;
-            cursor: pointer;
+            width: 14px; height: 14px; background: rgba(255,255,255,0.6);
+            border-radius: 50%; cursor: pointer;
         }
-        .indicator.active {
-            background: #ffd700;
-            transform: scale(1.3);
-        }
+        .indicator.active { background: #ffd700; transform: scale(1.3); }
 
         .music-control {
-            margin: 15px auto;
-            padding: 12px 28px;
-            background: rgba(187, 134, 252, 0.9);
+            margin: 20px auto;
+            padding: 14px 32px;
+            background: #bb86fc;
             color: white;
             border: none;
             border-radius: 30px;
             cursor: pointer;
-            font-size: 1.1em;
+            font-size: 1.15em;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
-
-        .video-container {
-            max-width: 900px;
-            margin: 50px auto;
-        }
+        .music-control:hover { background: #ffd700; color: #000; }
     </style>
 </head>
 <body>
@@ -115,40 +73,27 @@
     <h1>Reigen Arataka 画廊</h1>
     <p class="subtitle">灵能师的精彩瞬间</p>
 
-    <!-- 轮播 -->
     <div class="carousel" id="carousel">
         <div class="carousel-inner" id="carouselInner">
-            <div class="carousel-item">
-                <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="Reigen 1">
-            </div>
-            <div class="carousel-item">
-                <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="Reigen 2">
-            </div>
-            <div class="carousel-item">
-                <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="Reigen 3">
-            </div>
+            <div class="carousel-item"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="Reigen 1"></div>
+            <div class="carousel-item"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="Reigen 2"></div>
+            <div class="carousel-item"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="Reigen 3"></div>
         </div>
-
         <button class="carousel-btn prev" onclick="prevSlide()">‹</button>
         <button class="carousel-btn next" onclick="nextSlide()">›</button>
         <div class="carousel-indicators" id="indicators"></div>
     </div>
 
-    <!-- 背景音乐控制 -->
     <button class="music-control" id="musicBtn" onclick="toggleMusic()">
         🎵 播放背景音乐
     </button>
 
-    <!-- 背景音乐 -->
-    <audio id="bgm" loop>
+    <audio id="bgm" loop preload="auto">
         <source src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/M500004QiRC30LMa8u.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- 视频 -->
-    <div class="video-container">
-        <iframe width="100%" height="480" 
-                src="https://www.youtube.com/embed/9EPXegPw_Y4"
-                frameborder="0" allowfullscreen></iframe>
+    <div style="max-width:900px;margin:50px auto;">
+        <iframe width="100%" height="480" src="https://www.youtube.com/embed/9EPXegPw_Y4" frameborder="0" allowfullscreen></iframe>
     </div>
 
     <p style="margin-top: 80px; opacity: 0.7;">
@@ -158,8 +103,6 @@
 
     <script>
         let currentIndex = 0;
-        let autoplay = true;
-        let autoplayInterval;
         let isPlaying = false;
         const audio = document.getElementById('bgm');
         const musicBtn = document.getElementById('musicBtn');
@@ -188,40 +131,32 @@
         function prevSlide() { showSlide(currentIndex - 1); }
         function goToSlide(index) { showSlide(index); }
 
-        function startAutoplay() { autoplayInterval = setInterval(nextSlide, 3500); }
-        function stopAutoplay() { clearInterval(autoplayInterval); }
-
         function toggleMusic() {
             if (isPlaying) {
                 audio.pause();
-                musicBtn.textContent = "🎵 播放背景音乐";
+                musicBtn.innerHTML = "🎵 播放背景音乐";
             } else {
-                audio.play().catch(() => {
-                    alert("浏览器阻止自动播放，请手动点击播放");
-                });
-                musicBtn.textContent = "⏸️ 暂停背景音乐";
+                audio.play()
+                    .then(() => {
+                        musicBtn.innerHTML = "⏸️ 暂停背景音乐";
+                    })
+                    .catch(() => {
+                        alert("播放失败，请刷新页面后重新点击");
+                    });
             }
             isPlaying = !isPlaying;
         }
 
-        // 初始化
         window.onload = () => {
             updateIndicators();
             showSlide(0);
-            startAutoplay();
-            audio.volume = 0.4;   // 默认音量
+            audio.volume = 1.0;        // ← 已调至最大音量
         };
 
-        // 键盘控制
         document.addEventListener('keydown', e => {
             if (e.key === "ArrowRight") nextSlide();
             if (e.key === "ArrowLeft") prevSlide();
         });
-
-        // 鼠标悬停暂停轮播
-        const carousel = document.getElementById('carousel');
-        carousel.addEventListener('mouseenter', () => autoplay && stopAutoplay());
-        carousel.addEventListener('mouseleave', () => autoplay && startAutoplay());
     </script>
 </body>
 </html>
