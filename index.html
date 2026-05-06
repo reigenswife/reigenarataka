@@ -7,49 +7,74 @@
     <style>
         body {
             font-family: "Microsoft YaHei", Arial, sans-serif;
-            background: linear-gradient(135deg, #1e1e2f, #2a2a4a);
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             color: #fff;
             text-align: center;
-            padding: 80px 20px;
+            padding: 60px 20px;
             margin: 0;
             min-height: 100vh;
         }
         h1 {
-            font-size: 3.5em;
-            margin-bottom: 20px;
+            font-size: 3.8em;
+            margin-bottom: 10px;
             color: #ffd700;
-            text-shadow: 0 0 20px #ffd700;
+            text-shadow: 0 0 30px #ffd700;
         }
-        p {
-            font-size: 1.4em;
-            max-width: 700px;
-            margin: 0 auto 30px;
-            line-height: 1.6;
+        .subtitle {
+            font-size: 1.6em;
+            color: #bb86fc;
+            margin-bottom: 40px;
+        }
+        img {
+            max-width: 100%;
+            border-radius: 15px;
+            margin: 30px auto;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
         }
         .btn {
             display: inline-block;
-            padding: 15px 40px;
+            padding: 16px 45px;
             background: #ffd700;
             color: #000;
             text-decoration: none;
             border-radius: 50px;
             font-weight: bold;
-            font-size: 1.3em;
-            margin-top: 20px;
+            font-size: 1.4em;
+            margin: 20px;
         }
         .btn:hover {
             background: #ffed4e;
-            transform: scale(1.05);
+            transform: scale(1.08);
+        }
+        video {
+            max-width: 100%;
+            border-radius: 15px;
+            margin: 30px auto;
         }
     </style>
 </head>
 <body>
     <h1>灵能咨询事务所</h1>
-    <p>我是 Reigen Arataka —— 21世纪最强的灵能师！</p>
+    <p class="subtitle">21世纪最强的灵能师 — Reigen Arataka</p>
+
+    <!-- 这里插入 Reigen 图片（推荐先上传图片到仓库） -->
+    <img src="https://picsum.photos/800/500" alt="Reigen Arataka" />
+
     <p>有什么烦恼、除灵需求、还是想聊天？尽管来找我！</p>
+
     <a href="#" class="btn">立即咨询 →</a>
-    
-    <p style="margin-top: 100px; font-size: 1em; opacity: 0.7;">
+
+    <!-- 插入视频（推荐 YouTube） -->
+    <h2 style="margin: 50px 0 20px;">Reigen 精彩时刻</h2>
+    <iframe width="800" height="450" 
+            src="https://www.youtube.com/embed/dQw4w9wgxcq" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+    </iframe>
+
+    <p style="margin-top: 80px; opacity: 0.7;">
         My favorite character website<br>
         Powered by GitHub Pages
     </p>
