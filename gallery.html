@@ -58,28 +58,29 @@
             gap: 10px;
         }
 
-        /* 歌词样式 */
+        /* 歌词样式 - 白色 + 英文中文横排分开 */
         #lyrics {
-            max-width: 820px;
-            margin: 25px auto;
-            min-height: 180px;
-            font-size: 1.25em;
-            line-height: 1.75;
-            color: #ffd700;
-            text-align: center;
-            text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
-        }
-        .lyric-line {
-            padding: 6px 0;
-            opacity: 0.65;
+            max-width: 920px;
+            margin: 35px auto;
+            height: 160px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.45em;
+            line-height: 1.65;
+            color: #ffffff;                    /* 改成白色 */
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            font-weight: bold;
             transition: all 0.4s ease;
         }
-        .lyric-line.current {
-            opacity: 1;
-            color: #ffffff;
-            transform: scale(1.08);
-            text-shadow: 0 0 20px #ffd700;
-            font-weight: bold;
+        .lyric-en {
+            margin-bottom: 8px;
+            opacity: 0.95;
+        }
+        .lyric-zh {
+            font-size: 1.05em;
+            opacity: 0.85;
         }
     </style>
 </head>
@@ -103,8 +104,7 @@
         🎵 播放背景音乐
     </button>
 
-    <!-- 实时歌词 -->
-    <div id="lyrics"></div>
+    <div id="lyrics">准备播放音乐...</div>
 
     <audio id="bgm" loop preload="auto">
         <source src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/M500004QiRC30LMa8u.mp3" type="audio/mpeg">
@@ -120,7 +120,7 @@
     </p>
 
     <script>
-        // 轮播功能
+        // 轮播部分（保持不变）
         let currentIndex = 0;
         function updateIndicators() {
             const slides = document.querySelectorAll('.carousel-item');
@@ -147,64 +147,96 @@
         // 音乐 & 歌词
         const audio = document.getElementById('bgm');
         const musicBtn = document.getElementById('musicBtn');
+        const lyricsDiv = document.getElementById('lyrics');
         let isPlaying = false;
 
-        // 实时歌词（已精确对齐）
         const lyrics = [
-            {time: 0, text: "Ooh"},
-            {time: 4, text: "Oooooh"},
-            {time: 8, text: "Sweet love 甜蜜的爱"},
-            {time: 15, text: "Yeah"},
-            {time: 20, text: "I didn't mean it 我并非本意"},
-            {time: 25, text: "When I said I didn't love you so 说自己不爱你"},
-            {time: 32, text: "I should have held on tight 我应该好好抓紧你"},
-            {time: 37, text: "I never should've let you go 不放开手让你走"},
-            {time: 43, text: "I didn't know nothing 我却什么都没有做"},
-            {time: 48, text: "I was stupid 愚蠢之极"},
-            {time: 51, text: "I was foolish 后悔莫及"},
-            {time: 55, text: "I was lying to myself 自欺欺人"},
-            {time: 62, text: "I could not fathom that I would ever 我未料想过"},
-            {time: 68, text: "Be without your love 没有你的爱我会怎么样"},
-            {time: 75, text: "Never imagined I'd be 也没设想过没有你"},
-            {time: 80, text: "Sitting here beside myself 自己将会如此孑然一身"},
-            {time: 88, text: "Cause I didn't know you 都怪我没懂你"},
-            {time: 92, text: "Cause I didn't know me 更不懂我自己"},
-            {time: 98, text: "But I thought I knew everything 以为我自己明白一切"},
-            {time: 110, text: "When you left I lost a part of me 当你离开我的时候我失魂落魄"},
-            {time: 118, text: "It's still so hard to believe 这一切仍难以让人想象"},
-            {time: 125, text: "Come back baby please 求求你回到我身边吧"},
-            {time: 132, text: "Cause we belong together 因为我们注定属于彼此"},
-            {time: 160, text: "I can't sleep at night 我彻夜难眠"},
-            {time: 165, text: "When you're all on my mind 满脑海全是你的存在"},
-            {time: 195, text: "When you left I lost a part of me 当你离开之时我失魂落魄"},
-            {time: 203, text: "It's still so hard to believe 这一切仍难以让人想象"},
-            {time: 210, text: "Come back baby please 拜托你回到我身边吧"},
-            {time: 217, text: "Cause we belong together 因为我们注定属于彼此"},
-            {time: 245, text: "Oh baby baby we belong together 亲爱的 因为我们注定属于彼此"},
-            {time: 260, text: "We belong together~ 因为宝贝我们注定属于彼此~~~"}
+            {time: 4.06, text: "Oh-ooh-ooh"},
+            {time: 11.11, text: "Oh"},
+            {time: 13.71, text: "Oh, oh-ooh"},
+            {time: 17.42, text: "Sweet love, yeah"},
+            {time: 21.56, text: "I didn't mean it when I said I didn't love you so"},
+            {time: 25.05, text: "I should have held on tight, I never shoulda let you go"},
+            {time: 28.52, text: "I didn't know nothin', I was stupid, I was foolish"},
+            {time: 31.31, text: "I was lyin' to myself"},
+            {time: 35.30, text: "I could not fathom that I would ever be without your love"},
+            {time: 38.75, text: "Never imagined I'd be sittin' here beside myself"},
+            {time: 42.22, text: "'Cause I didn't know you, 'cause I didn't know me, but I thought I knew everything"},
+            {time: 49.01, text: "The feelin' that I'm feelin' now that I don't hear your voice"},
+            {time: 52.52, text: "Or have your touch and kiss your lips 'cause I don't have a choice"},
+            {time: 55.94, text: "Oh, what I wouldn't give to have you lyin' by my side"},
+            {time: 59.09, text: "Right here, 'cause, baby"},
+            {time: 62.57, text: "When you left, I lost a part of me"},
+            {time: 66.81, text: "It's still so hard to believe"},
+            {time: 70.32, text: "Come back, baby, please"},
+            {time: 72.40, text: "'Cause we belong together"},
+            {time: 75.16, text: "Who else am I gon' lean on when times get rough?"},
+            {time: 78.58, text: "Who's gonna talk to me on the phone till the sun comes up?"},
+            {time: 82.13, text: "Who's gonna take your place? There ain't nobody better"},
+            {time: 85.28, text: "Oh, baby, baby, we belong together"},
+            {time: 89.56, text: "I can't sleep at night, when you are on my mind"},
+            {time: 93.14, text: "Bobby Womack's on the radio"},
+            {time: 98.98, text: "Wait a minute, this is too deep"},
+            {time: 106.91, text: "I only think of you"},
+            {time: 109.41, text: "And it's breakin' my heart"},
+            {time: 113.32, text: "I'm tryna keep it together, but I'm fallin' apart"},
+            {time: 119.17, text: "Throwin' things, cryin'"},
+            {time: 122.95, text: "The pain reflected in this song"},
+            {time: 127.08, text: "I need ya, need ya back in my life, baby"},
+            {time: 142.82, text: "Baby, when you left, I lost a part of me"},
+            {time: 146.26, text: "Come back baby, please"},
+            {time: 151.43, text: "Oh, baby, baby, we belong together"}
         ];
+
+        const zhLyrics = {
+            17.42: "甜蜜的爱",
+            21.56: "我并非本意 说自己不爱你",
+            25.05: "我应该好好抓紧你 不放开手让你走",
+            28.52: "我却什么都没有做 愚蠢之极",
+            31.31: "后悔莫及 自欺欺人",
+            35.30: "我未料想过 没有你的爱我会怎么样",
+            38.75: "也没设想过没有你 自己将会如此孑然一身",
+            42.22: "都怪我没懂你 更不懂我自己 以为我自己明白一切",
+            49.01: "所有曾经那各种缠绵 现在一切已化为乌有",
+            52.52: "再也感受不到你的爱抚和亲吻 可我已别无选择",
+            55.94: "我愿奋不顾身 去换取让你重回到我的身边",
+            59.09: "就我身边 因为我们注定属于彼此",
+            62.57: "当你离开我的时候我失魂落魄",
+            66.81: "这一切仍难以让人想象",
+            70.32: "求求你回到我身边吧",
+            72.40: "因为我们注定属于彼此",
+            75.16: "当我哀痛欲绝的时候 有谁能让我偎依在他身旁？",
+            78.58: "谁又能和我打着电话 听我诉苦直到天亮？",
+            82.13: "谁又能取代这世界上仅存完美的你 根本别无他人",
+            85.28: "亲爱的 因为我们注定属于彼此",
+            89.56: "我彻夜难眠 满脑海全是你的存在",
+            98.98: "等等 这太让人压抑抓狂了",
+            106.91: "我满脑海全是你",
+            109.41: "内心独自承受着剧烈的支离破碎",
+            113.32: "但我却彻底陷入了崩溃",
+            127.08: "我现在立刻需要你重回到我身边",
+            142.82: "当你离去之时我魂不守舍",
+            146.26: "拜托你回到我身边吧",
+            151.43: "因为宝贝我们注定属于彼此~~~"
+        };
 
         function updateLyrics() {
             const currentTime = audio.currentTime;
-            const container = document.getElementById('lyrics');
-            container.innerHTML = '';
+            let enText = "♪ We Belong Together ♪";
+            let zhText = "";
 
-            let activeIndex = -1;
-            for (let i = 0; i < lyrics.length; i++) {
+            for (let i = lyrics.length - 1; i >= 0; i--) {
                 if (currentTime >= lyrics[i].time) {
-                    activeIndex = i;
-                } else {
+                    enText = lyrics[i].text;
+                    zhText = zhLyrics[lyrics[i].time] || "";
                     break;
                 }
             }
 
-            lyrics.forEach((line, i) => {
-                const div = document.createElement('div');
-                div.className = 'lyric-line';
-                if (i === activeIndex) div.classList.add('current');
-                div.textContent = line.text;
-                container.appendChild(div);
-            });
+            lyricsDiv.innerHTML = `
+                <div class="lyric-en">${enText}</div>
+                ${zhText ? `<div class="lyric-zh">${zhText}</div>` : ''}
+            `;
         }
 
         function toggleMusic() {
@@ -214,9 +246,7 @@
             } else {
                 audio.play().then(() => {
                     musicBtn.innerHTML = "⏸️ 暂停背景音乐";
-                }).catch(() => {
-                    alert("播放失败，请刷新页面后重新点击");
-                });
+                }).catch(() => alert("播放失败，请刷新页面后重试"));
             }
             isPlaying = !isPlaying;
         }
@@ -225,8 +255,6 @@
             updateIndicators();
             showSlide(0);
             audio.volume = 1.0;
-
-            // 实时更新歌词
             audio.addEventListener('timeupdate', updateLyrics);
         };
 
