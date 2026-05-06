@@ -18,10 +18,9 @@
         .subtitle { color: #bb86fc; font-size: 1.5em; margin-bottom: 30px; }
         .back { color: #ffd700; text-decoration: none; font-size: 1.3em; display: inline-block; margin-bottom: 30px; }
 
-        /* 轮播区域 */
         .carousel {
             max-width: 900px;
-            height: 580px;           /* 可根据需要调整高度 */
+            height: 580px;
             margin: 0 auto 40px;
             position: relative;
             border-radius: 20px;
@@ -49,11 +48,10 @@
         .carousel-item img {
             width: 100%;
             height: 100%;
-            object-fit: cover;        /* ← 修改为 cover，铺满并允许裁切 */
+            object-fit: cover;
             object-position: center;
         }
 
-        /* 左右按钮 */
         .carousel-btn {
             position: absolute;
             top: 50%;
@@ -92,7 +90,6 @@
             transform: scale(1.3);
         }
 
-        /* 音乐控制按钮 */
         .music-control {
             margin: 15px auto;
             padding: 12px 28px;
@@ -142,9 +139,9 @@
         🎵 播放背景音乐
     </button>
 
+    <!-- 背景音乐 -->
     <audio id="bgm" loop>
-        <!-- 请替换成你上传的音乐 Raw 链接 -->
-        <source src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/你的音乐文件名.mp3" type="audio/mpeg">
+        <source src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/M500004QiRC30LMa8u.mp3" type="audio/mpeg">
     </audio>
 
     <!-- 视频 -->
@@ -199,7 +196,9 @@
                 audio.pause();
                 musicBtn.textContent = "🎵 播放背景音乐";
             } else {
-                audio.play().catch(() => alert("浏览器阻止了自动播放，请手动点击"));
+                audio.play().catch(() => {
+                    alert("浏览器阻止自动播放，请手动点击播放");
+                });
                 musicBtn.textContent = "⏸️ 暂停背景音乐";
             }
             isPlaying = !isPlaying;
@@ -210,10 +209,10 @@
             updateIndicators();
             showSlide(0);
             startAutoplay();
-            audio.volume = 0.35;   // 默认音量适中
+            audio.volume = 0.4;   // 默认音量
         };
 
-        // 键盘左右键
+        // 键盘控制
         document.addEventListener('keydown', e => {
             if (e.key === "ArrowRight") nextSlide();
             if (e.key === "ArrowLeft") prevSlide();
