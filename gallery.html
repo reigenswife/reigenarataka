@@ -19,83 +19,24 @@
         .back { color: #ffd700; text-decoration: none; font-size: 1.3em; display: inline-block; margin-bottom: 30px; }
 
         .carousel {
-            max-width: 900px; 
-            height: 580px;
+            max-width: 900px; height: 580px;
             margin: 0 auto 30px;
-            position: relative; 
-            border-radius: 20px;
-            overflow: hidden; 
-            box-shadow: 0 0 35px rgba(255, 215, 0, 0.4);
+            position: relative; border-radius: 20px;
+            overflow: hidden; box-shadow: 0 0 35px rgba(255, 215, 0, 0.4);
             background: #000;
         }
-
-        .carousel-inner {
-            display: flex;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.95s ease-in-out;
-        }
-
-        .carousel-item {
-            min-width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #000;
-        }
-
-        .carousel-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-        }
+        .carousel-inner { display: flex; width: 100%; height: 100%; transition: transform 0.95s ease-in-out; }
+        .carousel-item { min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #000; }
+        .carousel-item img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 
         .carousel-btn {
-            position: absolute; 
-            top: 50%; 
-            transform: translateY(-50%);
-            background: rgba(0,0,0,0.75); 
-            color: white; 
-            border: none;
-            width: 60px; 
-            height: 60px; 
-            font-size: 30px; 
-            cursor: pointer;
-            border-radius: 50%; 
-            z-index: 10;
-            transition: all 0.3s;
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(0,0,0,0.75); color: white; border: none;
+            width: 60px; height: 60px; font-size: 30px; cursor: pointer;
+            border-radius: 50%; z-index: 10;
         }
-        .carousel-btn:hover {
-            background: #ffd700;
-            color: #000;
-            transform: translateY(-50%) scale(1.1);
-        }
-        .prev { left: 20px; } 
-        .next { right: 20px; }
-
-        .carousel-indicators {
-            position: absolute; 
-            bottom: 20px; 
-            left: 50%; 
-            transform: translateX(-50%);
-            display: flex; 
-            gap: 12px; 
-            z-index: 10;
-        }
-        .indicator { 
-            width: 14px; 
-            height: 14px; 
-            background: rgba(255,255,255,0.6); 
-            border-radius: 50%; 
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .indicator.active { 
-            background: #ffd700; 
-            transform: scale(1.4);
-        }
+        .carousel-btn:hover { background: #ffd700; color: #000; transform: translateY(-50%) scale(1.1); }
+        .prev { left: 20px; } .next { right: 20px; }
 
         .music-control {
             margin: 15px auto;
@@ -106,27 +47,32 @@
             border-radius: 30px;
             cursor: pointer;
             font-size: 1.15em;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
         }
 
+        /* 纯白色歌词 */
         #lyrics {
-            max-width: 920px;
-            margin: 35px auto;
-            height: 170px;
+            max-width: 960px;
+            margin: 40px auto;
+            height: 180px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 1.45em;
-            line-height: 1.65;
-            color: #ffffff;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-            font-weight: bold;
+            text-align: center;
         }
-        .lyric-en { margin-bottom: 8px; opacity: 0.95; }
-        .lyric-zh { font-size: 1.05em; opacity: 0.85; }
+        .lyric-en {
+            font-size: 1.68em;
+            font-weight: bold;
+            color: #ffffff;           /* 纯白色 */
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+            margin-bottom: 10px;
+        }
+        .lyric-zh {
+            font-size: 1.28em;
+            color: #ffffff;           /* 纯白色 */
+            opacity: 0.88;
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+        }
     </style>
 </head>
 <body>
@@ -145,7 +91,9 @@
         🎵 播放背景音乐
     </button>
 
-    <div id="lyrics">准备播放音乐...</div>
+    <div id="lyrics">
+        <div class="lyric-en">准备播放音乐...</div>
+    </div>
 
     <audio id="bgm" loop preload="auto">
         <source src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/M500004QiRC30LMa8u.mp3" type="audio/mpeg">
@@ -161,54 +109,28 @@
     </p>
 
     <script>
+        // 轮播（无限循环）
         const carouselInner = document.getElementById('carouselInner');
         let currentIndex = 1;
-        let isPlaying = false;
-        const audio = document.getElementById('bgm');
-        const musicBtn = document.getElementById('musicBtn');
-        const lyricsDiv = document.getElementById('lyrics');
-
         const images = [
             "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg",
             "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg",
             "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg"
         ];
 
-        // 初始化无限循环轮播
         function initCarousel() {
             carouselInner.innerHTML = '';
-
-            // 最后一张（用于向左循环）
-            const last = document.createElement('div');
-            last.className = 'carousel-item';
-            last.innerHTML = `<img src="${images[images.length-1]}" alt="Reigen">`;
-            carouselInner.appendChild(last);
-
+            // 最后一张
+            let item = document.createElement('div'); item.className = 'carousel-item';
+            item.innerHTML = `<img src="${images[images.length-1]}" alt="">`; carouselInner.appendChild(item);
             // 正常图片
             images.forEach(src => {
-                const item = document.createElement('div');
-                item.className = 'carousel-item';
-                item.innerHTML = `<img src="${src}" alt="Reigen">`;
-                carouselInner.appendChild(item);
+                item = document.createElement('div'); item.className = 'carousel-item';
+                item.innerHTML = `<img src="${src}" alt="">`; carouselInner.appendChild(item);
             });
-
-            // 第一张（用于向右循环）
-            const first = document.createElement('div');
-            first.className = 'carousel-item';
-            first.innerHTML = `<img src="${images[0]}" alt="Reigen">`;
-            carouselInner.appendChild(first);
-        }
-
-        function updateIndicators() {
-            const container = document.getElementById('indicators');
-            container.innerHTML = '';
-            images.forEach((_, i) => {
-                const dot = document.createElement('div');
-                dot.classList.add('indicator');
-                if (i === (currentIndex - 1) % images.length) dot.classList.add('active');
-                dot.onclick = () => goToSlide(i);
-                container.appendChild(dot);
-            });
+            // 第一张
+            item = document.createElement('div'); item.className = 'carousel-item';
+            item.innerHTML = `<img src="${images[0]}" alt="">`; carouselInner.appendChild(item);
         }
 
         function showSlide(transition = true) {
@@ -221,31 +143,33 @@
         function nextSlide() {
             currentIndex++;
             showSlide();
-            if (currentIndex >= images.length + 1) {
-                setTimeout(() => {
-                    currentIndex = 1;
-                    showSlide(false);
-                }, 950);
-            }
+            if (currentIndex >= images.length + 1) setTimeout(() => { currentIndex = 1; showSlide(false); }, 950);
         }
 
         function prevSlide() {
             currentIndex--;
             showSlide();
-            if (currentIndex <= 0) {
-                setTimeout(() => {
-                    currentIndex = images.length;
-                    showSlide(false);
-                }, 950);
-            }
+            if (currentIndex <= 0) setTimeout(() => { currentIndex = images.length; showSlide(false); }, 950);
         }
 
-        function goToSlide(index) {
-            currentIndex = index + 1;
-            showSlide();
+        function updateIndicators() {
+            const container = document.getElementById('indicators');
+            container.innerHTML = '';
+            images.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.classList.add('indicator');
+                if (i === (currentIndex - 1) % images.length) dot.classList.add('active');
+                dot.onclick = () => { currentIndex = i + 1; showSlide(); };
+                container.appendChild(dot);
+            });
         }
 
-        // ==================== 歌词部分 ====================
+        // 音乐 & 歌词
+        const audio = document.getElementById('bgm');
+        const musicBtn = document.getElementById('musicBtn');
+        const lyricsDiv = document.getElementById('lyrics');
+        let isPlaying = false;
+
         const lyrics = [
             {time: 4.06, text: "Oh-ooh-ooh"},
             {time: 11.11, text: "Oh"},
