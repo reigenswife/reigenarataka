@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reigen Arataka · 灵能事务所</title>
     <style>
+        :root {
+            --purple: #d4a5ff;
+            --gold: #ffd700;
+        }
         body {
             font-family: "Microsoft YaHei", serif;
             background: linear-gradient(135deg, #1a1428, #2c1f4a, #1a1428);
@@ -12,47 +16,49 @@
             text-align: center;
             padding: 80px 20px;
             margin: 0;
-            line-height: 1.8;
+            line-height: 1.9;
         }
         h1 {
-            font-size: 3.5em;
-            color: #d4a5ff;
-            text-shadow: 0 0 30px #c79eff;
-            margin-bottom: 20px;
+            font-size: 3.8em;
+            color: var(--purple);
+            text-shadow: 0 0 40px rgba(212, 165, 255, 0.7);
+            margin: 20px 0 10px;
         }
         .subtitle {
-            font-size: 1.6em;
+            font-size: 1.8em;
             color: #bb9eff;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
         }
-        .poem {
-            max-width: 700px;
-            margin: 40px auto;
-            font-size: 1.25em;
-            opacity: 0.9;
+        .countdown {
+            font-size: 2.4em;
+            color: var(--gold);
+            margin: 40px 0;
+            text-shadow: 0 0 25px var(--gold);
         }
-        img {
-            max-width: 100%;
-            border-radius: 16px;
-            margin: 40px auto;
-            box-shadow: 0 0 40px rgba(212, 165, 255, 0.4);
+        .nav-buttons {
+            margin: 70px 0;
         }
         .btn {
             display: inline-block;
-            padding: 18px 50px;
+            padding: 18px 48px;
             background: transparent;
-            color: #d4a5ff;
-            border: 2px solid #d4a5ff;
+            color: var(--purple);
+            border: 2px solid var(--purple);
             text-decoration: none;
             border-radius: 50px;
-            font-size: 1.3em;
-            margin: 30px 15px;
-            transition: all 0.3s;
+            font-size: 1.35em;
+            margin: 15px;
+            transition: all 0.4s;
         }
         .btn:hover {
-            background: #d4a5ff;
+            background: var(--purple);
             color: #1a1428;
-            transform: scale(1.05);
+        }
+        img {
+            max-width: 100%;
+            border-radius: 18px;
+            margin: 40px auto;
+            box-shadow: 0 0 45px rgba(212, 165, 255, 0.5);
         }
     </style>
 </head>
@@ -60,21 +66,43 @@
     <h1>Reigen Arataka</h1>
     <p class="subtitle">21世纪最强的灵能师</p>
 
-    <div class="poem">
-        <p>欢迎来到我的灵能事务所。</p>
-        <p>在这里，你可以卸下伪装，将最真实的自己展现在我面前。</p>
-        <p>无论是烦恼、除灵，还是单纯想找人聊天……</p>
-        <p>我都在。</p>
+    <div>
+        <p>距离 Reigen 生日还剩</p>
+        <div class="countdown" id="countdown">——</div>
     </div>
 
-    <!-- 主图 -->
     <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="Reigen Arataka">
 
-    <a href="gallery.html" class="btn">进入画廊</a>
-    <a href="#" class="btn">关于我</a>
+    <div class="nav-buttons">
+        <a href="gallery.html" class="btn">灵犀相册</a>
+        <a href="memory.html" class="btn">心动记忆</a>
+        <a href="merch.html" class="btn">周边收藏</a>
+    </div>
 
-    <p style="margin-top: 100px; opacity: 0.6; font-size: 1em;">
+    <p style="margin-top: 120px; opacity: 0.6;">
         Powered by GitHub Pages
     </p>
+
+    <script>
+        const targetDate = new Date(2026, 9, 10); // 10月10日（月要-1）
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                document.getElementById("countdown").innerHTML = "生日快乐！🎉";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+            document.getElementById("countdown").innerHTML = `${days} 天 ${hours} 小时`;
+        }
+
+        setInterval(updateCountdown, 60000);
+        updateCountdown();
+    </script>
 </body>
 </html>
