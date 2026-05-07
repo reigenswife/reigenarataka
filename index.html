@@ -6,108 +6,144 @@
     <title>Reigen Arataka · 灵能事务所</title>
     <style>
         :root {
-            --purple: #d4a5ff;
-            --gold: #ffd700;
+            --bg: #f8f7f4;
+            --card: #ffffff;
+            --text: #222222;        /* 深黑色 */
+            --accent: #b38eff;
         }
         body {
-            font-family: "Microsoft YaHei", serif;
-            background: linear-gradient(135deg, #1a1428, #2c1f4a, #1a1428);
-            color: #e0d4ff;
-            text-align: center;
-            padding: 80px 20px;
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
             margin: 0;
-            line-height: 1.9;
+            padding: 40px 20px;
+            line-height: 1.7;
         }
-        h1 { 
-            font-size: 3.8em; 
-            color: var(--purple); 
-            text-shadow: 0 0 40px rgba(212,165,255,0.7); 
-            margin: 20px 0 10px; 
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
         }
-        .subtitle { 
-            font-size: 1.8em; 
-            color: #bb9eff; 
-            margin-bottom: 40px; 
+        .header h1 {
+            font-size: 3.6em;
+            color: #2c1f4a;
+            margin: 0 0 12px 0;
+            text-shadow: 0 4px 20px rgba(179, 142, 255, 0.25);
         }
-        .countdown { 
-            font-size: 2.8em; 
-            color: var(--gold); 
-            margin: 40px 0; 
-            text-shadow: 0 0 30px var(--gold); 
+        .header p {
+            font-size: 1.45em;
+            color: #444444;
+            margin: 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 28px;
+            max-width: 1250px;
+            margin: 0 auto;
+        }
+        .card {
+            background: var(--card);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        .card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(179, 142, 255, 0.25);
+        }
+        .card img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 24px;
+        }
+        .card-title {
+            font-size: 1.45em;
+            margin: 0 0 10px 0;
+            color: #2c1f4a;
             font-weight: bold;
         }
-        .btn {
-            display: inline-block;
-            padding: 18px 48px;
-            background: transparent;
-            color: var(--purple);
-            border: 2px solid var(--purple);
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.35em;
-            margin: 15px;
-            transition: all 0.4s;
+        .card-date {
+            color: #666666;
+            font-size: 0.95em;
+            margin-bottom: 14px;
         }
-        .btn:hover { 
-            background: var(--purple); 
-            color: #1a1428; 
-            transform: scale(1.05);
-        }
-        img { 
-            max-width: 100%; 
-            border-radius: 18px; 
-            margin: 30px auto; 
-            box-shadow: 0 0 45px rgba(212,165,255,0.5); 
+        .card-keyline {
+            color: #444444;
+            font-size: 1.02em;
         }
     </style>
 </head>
 <body>
-    <h1>Reigen Arataka</h1>
-    <p class="subtitle">21世纪最强的灵能师</p>
-
-    <!-- 倒计时 -->
-    <div class="section">
-        <p>距离 Reigen 特别之日还剩：</p>
-        <div class="countdown" id="countdown">计算中...</div>
+    <div class="header">
+        <h1>Reigen Arataka</h1>
+        <p>21世纪最强的灵能师 · 灵能事务所</p>
     </div>
 
-    <!-- 三张图片 -->
-    <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="Reigen 1">
-    <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="Reigen 2">
-    <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="Reigen 3">
+    <div class="grid">
+        <a href="gallery.html" class="card">
+            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="画廊">
+            <div class="card-content">
+                <div class="card-title">灵能画廊</div>
+                <div class="card-date">精彩瞬间</div>
+                <div class="card-keyline">Reigen 最帅气的每一帧</div>
+            </div>
+        </a>
 
-    <div style="margin: 60px 0;">
-        <a href="gallery.html" class="btn">相册</a>
-        <a href="memory.html" class="btn">心动记忆</a>
-        <a href="merch.html" class="btn">周边收藏</a>
+        <a href="memory.html" class="card">
+            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="记忆">
+            <div class="card-content">
+                <div class="card-title">心动记忆</div>
+                <div class="card-date">重要时刻</div>
+                <div class="card-keyline">那些值得反复回味的瞬间</div>
+            </div>
+        </a>
+
+        <a href="#" class="card">
+            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="故事">
+            <div class="card-content">
+                <div class="card-title">灵能故事</div>
+                <div class="card-date">日常记录</div>
+                <div class="card-keyline">事务所的奇妙日常</div>
+            </div>
+        </a>
+
+        <a href="#" class="card">
+            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="语录">
+            <div class="card-content">
+                <div class="card-title">经典语录</div>
+                <div class="card-date">名场面</div>
+                <div class="card-keyline">“我可是21世纪最强的灵能师”</div>
+            </div>
+        </a>
+
+        <a href="#" class="card">
+            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="周边">
+            <div class="card-content">
+                <div class="card-title">周边收藏</div>
+                <div class="card-date">Merch</div>
+                <div class="card-keyline">Reigen 的各种周边展示</div>
+            </div>
+        </a>
+
+        <a href="#" class="card">
+            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="关于">
+            <div class="card-content">
+                <div class="card-title">关于 Reigen</div>
+                <div class="card-date">灵能事务所</div>
+                <div class="card-keyline">关于这位最强灵能师的一切</div>
+            </div>
+        </a>
     </div>
 
-    <p style="margin-top: 100px; opacity: 0.6;">Powered by GitHub Pages</p>
-
-    <script>
-        const targetDate = new Date(2026, 9, 10);  // 2026年10月10日
-
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-            const countdownEl = document.getElementById("countdown");
-
-            if (distance < 0) {
-                countdownEl.innerHTML = "生日快乐！🎉 Reigen 最强！！";
-                return;
-            }
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            countdownEl.innerHTML = `${days} 天 ${hours} 小时 ${minutes} 分 ${seconds} 秒`;
-        }
-
-        // 立即执行 + 每秒更新
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-    </script>
+    <p style="margin-top: 100px; color: #666; font-size: 1.1em;">
+        Powered by GitHub Pages • Reigen Arataka Fan Site
+    </p>
 </body>
 </html>
