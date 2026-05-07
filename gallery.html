@@ -3,237 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reigen 画廊 - 图片 & 视频</title>
+    <title>Reigen Arataka · 灵能事务所</title>
     <style>
+        :root {
+            --bg: #f8f7f4;
+            --card: #ffffff;
+            --text: #222222;        /* 深黑色 */
+            --accent: #b38eff;
+        }
         body {
             font-family: "Microsoft YaHei", Arial, sans-serif;
-            background: #f8f7f4;
-            color: #222222;
-            text-align: center;
-            padding: 40px 20px 180px;
+            background: var(--bg);
+            color: var(--text);
             margin: 0;
-            min-height: 100vh;
+            padding: 40px 20px;
+            line-height: 1.7;
         }
-        h1 { color: #4a2c7d; font-size: 3.2em; margin-bottom: 10px; }
-        .subtitle { color: #555555; font-size: 1.5em; margin-bottom: 30px; }
-        .back { color: #4a2c7d; text-decoration: none; font-size: 1.3em; display: inline-block; margin-bottom: 30px; }
-
-        .carousel {
-            max-width: 900px; height: 580px;
-            margin: 0 auto 40px;
-            position: relative; border-radius: 20px;
-            overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.12);
-            background: #fff;
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
         }
-        .carousel-inner { display: flex; width: 100%; height: 100%; transition: transform 0.95s ease-in-out; }
-        .carousel-item { min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #f0f0f0; }
-        .carousel-item img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
-
-        .carousel-btn {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            background: rgba(0,0,0,0.75); color: white; border: none;
-            width: 60px; height: 60px; font-size: 30px; cursor: pointer;
-            border-radius: 50%; z-index: 10;
+        .header h1 {
+            font-size: 3.6em;
+            color: #2c1f4a;
+            margin: 0 0 12px 0;
+            text-shadow: 0 4px 20px rgba(179, 142, 255, 0.25);
         }
-        .carousel-btn:hover { background: #4a2c7d; transform: translateY(-50%) scale(1.1); }
-        .prev { left: 20px; } .next { right: 20px; }
-
-        .music-control {
-            margin: 20px auto;
-            padding: 14px 32px;
-            background: #4a2c7d;
-            color: white;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 1.15em;
-        }
-
-        #lyrics {
-            position: fixed;
-            bottom: 30px;
-            left: 0;
-            width: 100%;
-            padding: 0 15px;
-            z-index: 100;
-            pointer-events: none;
-        }
-        .lyric-line {
-            position: absolute;
-            width: 100%;
-            opacity: 0;
-            transition: opacity 1.4s ease;
-            pointer-events: none;
-            left: 0;
-        }
-        .lyric-line.active {
-            opacity: 1;
-            position: relative;
-        }
-        .lyric-en {
-            font-size: 1.58em;
-            font-weight: bold;
-            color: #222222;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 8px;
-        }
-        .lyric-zh {
-            font-size: 1.22em;
+        .header p {
+            font-size: 1.45em;
             color: #444444;
+            margin: 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 28px;
+            max-width: 1250px;
+            margin: 0 auto;
+        }
+        .card {
+            background: var(--card);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        .card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(179, 142, 255, 0.25);
+        }
+        .card img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 24px;
+        }
+        .card-title {
+            font-size: 1.45em;
+            margin: 0 0 10px 0;
+            color: #2c1f4a;
+            font-weight: bold;
+        }
+        .card-date {
+            color: #666666;
+            font-size: 0.95em;
+            margin-bottom: 14px;
+        }
+        .card-keyline {
+            color: #444444;
+            font-size: 1.02em;
         }
     </style>
 </head>
 <body>
-    <a href="index.html" class="back">← 返回首页</a>
-    <h1>Reigen Arataka 画廊</h1>
-    <p class="subtitle">灵能师的精彩瞬间</p>
-
-    <div class="carousel" id="carousel">
-        <div class="carousel-inner" id="carouselInner"></div>
-        <button class="carousel-btn prev" onclick="prevSlide()">‹</button>
-        <button class="carousel-btn next" onclick="nextSlide()">›</button>
-        <div class="carousel-indicators" id="indicators"></div>
+    <div class="header">
+        <h1>Reigen Arataka</h1>
+        <p>21世纪最强的灵能师 · 灵能事务所</p>
     </div>
 
-    <button class="music-control" id="musicBtn" onclick="toggleMusic()">
-        🎵 播放背景音乐
-    </button>
+    <div class="grid">
+        <a href="gallery.html" class="card">
+            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="画廊">
+            <div class="card-content">
+                <div class="card-title">灵能画廊</div>
+                <div class="card-date">精彩瞬间</div>
+                <div class="card-keyline">Reigen 最帅气的每一帧</div>
+            </div>
+        </a>
 
-    <div id="lyrics"></div>
+        <a href="memory.html" class="card">
+            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="记忆">
+            <div class="card-content">
+                <div class="card-title">心动记忆</div>
+                <div class="card-date">重要时刻</div>
+                <div class="card-keyline">那些值得反复回味的瞬间</div>
+            </div>
+        </a>
 
-    <audio id="bgm" loop preload="auto">
-        <source src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/M500004QiRC30LMa8u.mp3" type="audio/mpeg">
-    </audio>
+        <a href="#" class="card">
+            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="故事">
+            <div class="card-content">
+                <div class="card-title">灵能故事</div>
+                <div class="card-date">日常记录</div>
+                <div class="card-keyline">事务所的奇妙日常</div>
+            </div>
+        </a>
 
-    <div style="max-width:900px;margin:50px auto;">
-        <iframe width="100%" height="480" src="https://www.youtube.com/embed/9EPXegPw_Y4" frameborder="0" allowfullscreen></iframe>
+        <a href="#" class="card">
+            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="语录">
+            <div class="card-content">
+                <div class="card-title">经典语录</div>
+                <div class="card-date">名场面</div>
+                <div class="card-keyline">“我可是21世纪最强的灵能师”</div>
+            </div>
+        </a>
+
+        <a href="#" class="card">
+            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="周边">
+            <div class="card-content">
+                <div class="card-title">周边收藏</div>
+                <div class="card-date">Merch</div>
+                <div class="card-keyline">Reigen 的各种周边展示</div>
+            </div>
+        </a>
+
+        <a href="#" class="card">
+            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="关于">
+            <div class="card-content">
+                <div class="card-title">关于 Reigen</div>
+                <div class="card-date">灵能事务所</div>
+                <div class="card-keyline">关于这位最强灵能师的一切</div>
+            </div>
+        </a>
     </div>
 
-    <p style="margin-top: 80px; opacity: 0.7; color: #666;">
-        My favorite character website<br>
-        Powered by GitHub Pages
+    <p style="margin-top: 100px; color: #666; font-size: 1.1em;">
+        Powered by GitHub Pages • Reigen Arataka Fan Site
     </p>
-
-    <script>
-        // ==================== 全局函数 ====================
-        let currentIndex = 1;
-        let isPlaying = false;
-        let currentLyricIndex = -1;
-
-        const carouselInner = document.getElementById('carouselInner');
-        const audio = document.getElementById('bgm');
-        const musicBtn = document.getElementById('musicBtn');
-        const lyricsDiv = document.getElementById('lyrics');
-
-        const images = [
-            "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg",
-            "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg",
-            "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg"
-        ];
-
-        // 轮播初始化
-        function initCarousel() {
-            carouselInner.innerHTML = '';
-            let item = document.createElement('div'); item.className = 'carousel-item';
-            item.innerHTML = `<img src="${images[images.length-1]}" alt="">`; carouselInner.appendChild(item);
-            images.forEach(src => {
-                item = document.createElement('div'); item.className = 'carousel-item';
-                item.innerHTML = `<img src="${src}" alt="">`; carouselInner.appendChild(item);
-            });
-            item = document.createElement('div'); item.className = 'carousel-item';
-            item.innerHTML = `<img src="${images[0]}" alt="">`; carouselInner.appendChild(item);
-        }
-
-        function showSlide(transition = true) {
-            if (!transition) carouselInner.style.transition = 'none';
-            carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
-            if (!transition) setTimeout(() => carouselInner.style.transition = 'transform 0.95s ease-in-out', 50);
-            updateIndicators();
-        }
-
-        function nextSlide() { currentIndex++; showSlide(); if (currentIndex >= images.length + 1) setTimeout(() => { currentIndex = 1; showSlide(false); }, 950); }
-        function prevSlide() { currentIndex--; showSlide(); if (currentIndex <= 0) setTimeout(() => { currentIndex = images.length; showSlide(false); }, 950); }
-
-        function updateIndicators() {
-            const container = document.getElementById('indicators');
-            container.innerHTML = '';
-            images.forEach((_, i) => {
-                const dot = document.createElement('div');
-                dot.classList.add('indicator');
-                if (i === (currentIndex - 1) % images.length) dot.classList.add('active');
-                dot.onclick = () => { currentIndex = i + 1; showSlide(); };
-                container.appendChild(dot);
-            });
-        }
-
-        // ==================== 音乐控制 ====================
-        function toggleMusic() {
-            if (isPlaying) {
-                audio.pause();
-                musicBtn.innerHTML = "🎵 播放背景音乐";
-            } else {
-                audio.play().then(() => {
-                    musicBtn.innerHTML = "⏸️ 暂停背景音乐";
-                }).catch(() => alert("播放失败，请刷新页面后重试"));
-            }
-            isPlaying = !isPlaying;
-        }
-
-        // ==================== 歌词 ====================
-        const lyrics = [ /* 你的完整歌词数组 */ 
-            // ... 这里使用你之前的歌词 ...
-            {time: 4, text: "Ooh"},
-            {time: 6, text: "Oooooh"},
-            {time: 8, text: "Sweet love"},
-            {time: 17, text: "Sweet love yeah"},
-            // ... （为了篇幅省略，建议保留你之前版本的完整数组）
-        ];
-
-        const zhLyrics = { /* 你的中文映射 */ };
-
-        function updateLyrics() {
-            const currentTime = audio.currentTime;
-            let enText = "♪ We Belong Together ♪";
-            let zhText = "";
-
-            let newIndex = -1;
-            for (let i = lyrics.length - 1; i >= 0; i--) {
-                if (currentTime >= lyrics[i].time) {
-                    newIndex = i;
-                    enText = lyrics[i].text;
-                    zhText = zhLyrics[lyrics[i].time] || "";
-                    break;
-                }
-            }
-
-            if (newIndex === currentLyricIndex) return;
-            currentLyricIndex = newIndex;
-
-            const newLine = document.createElement('div');
-            newLine.className = 'lyric-line';
-            newLine.innerHTML = `
-                <div class="lyric-en">${enText}</div>
-                ${zhText ? `<div class="lyric-zh">${zhText}</div>` : ''}
-            `;
-
-            lyricsDiv.innerHTML = '';
-            lyricsDiv.appendChild(newLine);
-            setTimeout(() => newLine.classList.add('active'), 50);
-        }
-
-        // 初始化
-        window.onload = () => {
-            initCarousel();
-            showSlide();
-            updateIndicators();
-            audio.volume = 1.0;
-            audio.addEventListener('timeupdate', updateLyrics);
-        };
-
-        document.addEventListener('keydown', e => {
-            if (e.key === "ArrowRight") nextSlide();
-            if (e.key === "ArrowLeft") prevSlide();
-        });
-    </script>
 </body>
 </html>
