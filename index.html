@@ -11,88 +11,131 @@
             --text: #222222;
             --accent: #b38eff;
         }
+        
+        * { box-sizing: border-box; }
+        
         body {
             font-family: "Microsoft YaHei", Arial, sans-serif;
             background: var(--bg);
             color: var(--text);
             margin: 0;
-            padding: 40px 20px;
+            padding: 0;
             line-height: 1.7;
         }
-        .header {
-            text-align: center;
-            margin-bottom: 60px;
+        
+        /* 顶部大图横幅 */
+        .header-banner {
+            position: relative;
+            width: 100%;
+            height: 420px;
+            background: url('https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: flex-end;
         }
-        .header h1 {
-            font-size: 3.6em;
-            color: #2c1f4a;
-            margin: 0 0 12px 0;
-            text-shadow: 0 4px 20px rgba(179, 142, 255, 0.25);
+        
+        .header-title {
+            position: absolute;
+            bottom: 40px;
+            left: 50px;
+            color: white;
+            font-size: 2.8em;   /* 已调小 */
+            font-weight: bold;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.75);
+            z-index: 2;
         }
-        /* 删除了 .header p 的样式，因为不再使用副标题 */
+        
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: 28px;
-            max-width: 1250px;
-            margin: 0 auto;
+            max-width: 1300px;
+            margin: 50px auto;
+            padding: 0 20px;
         }
+        
         .card {
             background: var(--card);
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(179, 142, 255, 0.15);
             transition: all 0.4s ease;
             text-decoration: none;
             color: inherit;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
+        
         .card:hover {
             transform: translateY(-15px);
-            box-shadow: 0 25px 50px rgba(179, 142, 255, 0.25);
+            box-shadow: 0 25px 50px rgba(179, 142, 255, 0.28);
         }
+        
         .card img {
             width: 100%;
             height: 230px;
             object-fit: cover;
+            transition: transform 0.5s ease;
         }
+        
+        .card:hover img {
+            transform: scale(1.05);
+        }
+        
         .card-content {
             padding: 24px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
+        
         .card-title {
-            font-size: 1.45em;
+            font-size: 1.48em;
             margin: 0 0 10px 0;
             color: #2c1f4a;
             font-weight: bold;
         }
+        
         .card-date {
             color: #666666;
             font-size: 0.95em;
             margin-bottom: 14px;
         }
+        
         .card-keyline {
             color: #444444;
             font-size: 1.02em;
+            flex-grow: 1;
+        }
+        
+        footer {
+            margin-top: 80px;
+            padding-bottom: 40px;
+            color: #666;
+            font-size: 1.1em;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Reigen Arataka</h1>
-        <!-- 副标题已删除 -->
+    <!-- 顶部 Reigen 大图 + 名字在左下角 -->
+    <div class="header-banner">
+        <div class="header-title">Reigen Arataka</div>
     </div>
-
+    
+    <!-- 你的六张卡片 -->
     <div class="grid">
-        <!-- 灵能画廊 (链接有效) -->
+        <!-- 相册（已修改） -->
         <a href="gallery.html" class="card">
-            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="画廊">
+            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="相册">
             <div class="card-content">
-                <div class="card-title">灵能画廊</div>
+                <div class="card-title">相册</div>
                 <div class="card-date">精彩瞬间</div>
                 <div class="card-keyline">Reigen 最帅气的每一帧</div>
             </div>
         </a>
-
-        <!-- 心动记忆 (链接有效) -->
+        
+        <!-- 心动记忆 -->
         <a href="memory.html" class="card">
             <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="记忆">
             <div class="card-content">
@@ -101,8 +144,8 @@
                 <div class="card-keyline">那些值得反复回味的瞬间</div>
             </div>
         </a>
-
-        <!-- 灵能故事 (新链接) -->
+        
+        <!-- 灵能故事 -->
         <a href="story.html" class="card">
             <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="故事">
             <div class="card-content">
@@ -111,8 +154,8 @@
                 <div class="card-keyline">事务所的奇妙日常</div>
             </div>
         </a>
-
-        <!-- 经典语录 (新链接) -->
+        
+        <!-- 经典语录 -->
         <a href="quotes.html" class="card">
             <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="语录">
             <div class="card-content">
@@ -121,8 +164,8 @@
                 <div class="card-keyline">“我可是21世纪最强的灵能师”</div>
             </div>
         </a>
-
-        <!-- 周边收藏 (新链接) -->
+        
+        <!-- 周边收藏 -->
         <a href="merch.html" class="card">
             <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="周边">
             <div class="card-content">
@@ -131,8 +174,8 @@
                 <div class="card-keyline">Reigen 的各种周边展示</div>
             </div>
         </a>
-
-        <!-- 关于 Reigen (新链接) -->
+        
+        <!-- 关于 Reigen -->
         <a href="about.html" class="card">
             <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="关于">
             <div class="card-content">
@@ -142,9 +185,9 @@
             </div>
         </a>
     </div>
-
-    <p style="margin-top: 100px; color: #666; font-size: 1.1em; text-align: center;">
+    
+    <footer>
         Powered by GitHub Pages • Reigen Arataka Fan Site
-    </p>
+    </footer>
 </body>
 </html>
