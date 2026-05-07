@@ -382,12 +382,13 @@
                 hasLyrics: true,
                 lyricType: "dont_forget"
             },
-            {
-                title: "Hero",
+                     {
+                title: "Come To Me",
                 artist: "Mariah Carey",
-                url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-                hasLyrics: false
-            }
+                url: "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/come.to.me.mp3",
+                hasLyrics: true,
+                lyricType: "come_to_me"
+            },
         ];
 
         let currentSongIndex = 0;
@@ -693,6 +694,73 @@
             {time: 227.78, text: "When it's for real, it's forever", zh: "真实的感情最持久"},
             {time: 229.54, text: "So don't forget about us", zh: "所以别忘了我们的爱"}
         ];
+                  // 第五首歌的歌词：Come To Me
+        const lyricsComeToMe = [
+            {time: 10.67, text: "The rain falls on my windows", zh: "窗外雨声 淅淅沥沥"},
+            {time: 13.92, text: "And a coldness runs through my soul", zh: "一阵寒流 噬满我心"},
+            {time: 17.17, text: "And the rain falls, oh, the rain falls", zh: "雨一直下个不停"},
+            {time: 20.42, text: "I don't want to be alone", zh: "我不想 孑然一身"},
+            {time: 23.67, text: "I wish that I could Photoshop", zh: "只是想要 修复曾经"},
+            {time: 27.16, text: "All our bad memories", zh: "我们之间 糟糕回忆"},
+            {time: 29.67, text: "'Cause the flashbacks, oh, the flashbacks", zh: "只因记忆 不断闪现"},
+            {time: 32.91, text: "Won't leave me alone", zh: "不断闪现 在我脑海里"},
+            {time: 36.16, text: "If you come back to me, I'll be all that you need", zh: "若你再回 我的身边 我将好好 做你唯一"},
+            {time: 41.67, text: "Baby, come back to me", zh: "宝贝 回我身边"},
+            {time: 44.67, text: "Let me make up for what happened in the past", zh: "所有的过错 让我尽力弥补"},
+            {time: 49.41, text: "Come back, baby, come back to me", zh: "回到我身边吧"},
+            {time: 53.67, text: "Come back, I'll be everything you need", zh: "我会做你的唯一"},
+            {time: 55.17, text: "Come back, baby, come back to me", zh: "回到我身边"},
+            {time: 57.92, text: "Come back, boy, you're one in a million", zh: "谁让你是我 万里挑一"},
+            {time: 61.41, text: "Come back, baby, come back to me", zh: "回到我身边"},
+            {time: 64.41, text: "Come back, I'll be everything you need", zh: "我要做你的唯一"},
+            {time: 67.16, text: "Come back, baby, come back to me", zh: "回到我身边"},
+            {time: 70.17, text: "Come back, you're one in a million", zh: "谁让你是我 万里挑一"},
+            {time: 73.66, text: "Lower east side of Manhattan", zh: "在曼哈顿"},
+            {time: 76.17, text: "She goes shopping for new clothes", zh: "她为自己添置新衣"},
+            {time: 79.41, text: "And she buys this and she buys that", zh: "她买了这件 又买那件"},
+            {time: 82.42, text: "Just leave her alone", zh: "却一直是孤单一人"},
+            {time: 85.67, text: "I wish that he would listen to her side of the story", zh: "我希望他可以听她倾诉"},
+            {time: 91.91, text: "It isn't that bad, it isn't that bad", zh: "这不是最 糟糕的"},
+            {time: 95.16, text: "And she's wiser for it now", zh: "可她已经心知肚明"},
+            {time: 98.42, text: "I admit I cheated, don't know why I did it", zh: "我承认我欺骗了你 但是你知道为什么这样做吗？"},
+            {time: 104.16, text: "But I do regret it", zh: "现在我真的后悔了"},
+            {time: 107.17, text: "Nothing I can do or say can change the past", zh: "可是我却无法做些什么，说些什么来改变你"},
+            {time: 111.92, text: "Come back, baby, come back to me", zh: "回到我身边"},
+            {time: 113.91, text: "Come back, I'll be everything you need", zh: "我将是你的唯一"},
+            {time: 116.91, text: "Come back, baby, come back to me", zh: "回到我身边"},
+            {time: 120.17, text: "Come back, boy, you're one in a million", zh: "你是如此万里挑一"},
+            {time: 123.67, text: "Come back, baby, come back to me", zh: "回到我身边"},
+            {time: 126.16, text: "Come back, I'll be everything you need", zh: "我将是你的唯一"},
+            {time: 129.41, text: "Come back, baby, come back to me", zh: "回到我身边"},
+            {time: 132.42, text: "Come back, you're one in a million", zh: "你是如此地 万里挑一"},
+            {time: 135.92, text: "Everything I ever did, heaven knows I'm sorry, babe", zh: "对于我做过的一切 天知道我有多愧疚"},
+            {time: 142.42, text: "I was too young to see, you were always there for me", zh: "曾经我太年少无知 你总是在那等着我"},
+            {time: 144.17, text: "And my curiosity got the better of me", zh: "我被好奇心打败了"},
+            {time: 145.91, text: "Baby, take it easy on me", zh: "宝贝请对我宽容一些"},
+            {time: 148.66, text: "Anything from A to Z, tell me what you want to be", zh: "我可以为你做任何事 告诉我，你想要的是什么"},
+            {time: 151.67, text: "I open my heart to thee, you are my priority", zh: "我会敞开我的心 你是我最重要的事情"},
+            {time: 154.92, text: "Can't you see you've punished me, more than enough already", zh: "你没有看到我已经饱受你的惩罚了吗 已经够了，甚至太多了"},
+            {time: 158.17, text: "Baby, take it easy on me", zh: "宝贝，放过我吧"},
+            {time: 161.41, text: "Baby, take it easy on me", zh: "宝贝，放过我好不好"},
+            {time: 165.17, text: "Baby, come back to me", zh: "回到我身边"},
+            {time: 167.17, text: "Baby, come back to me", zh: "回到我身边"},
+            {time: 169.66, text: "Come back, baby, come back to me", zh: "回到我身边"},
+            {time: 173.17, text: "Come back, I'll be everything you need", zh: "你将是我的唯一"},
+            {time: 176.17, text: "Come back, baby, come back to me", zh: "回到我身边"},
+            {time: 179.16, text: "Come back, boy, you're one in a million", zh: "你是如此万里挑一"},
+            {time: 182.67, text: "Come back, baby, come back to me", zh: "回到我身边"},
+            {time: 185.42, text: "Come back, I'll be everything you need", zh: "我将是你的唯一"},
+            {time: 188.92, text: "Come back, baby, come back to me", zh: "回到我身边"},
+            {time: 193.16, text: "Come back, you're one in a million", zh: "你是如此万里挑一"},
+            {time: 195.42, text: "Come back, baby, come back to me", zh: "回到我身边"},
+            {time: 198.17, text: "Come back, I'll be everything you need", zh: "我将是你的唯一"},
+            {time: 201.16, text: "Come back, baby, come back to me", zh: "回到我身边"},
+            {time: 204.17, text: "Come back, boy, you're one in a million", zh: "你是如此万里挑一"},
+            {time: 208.16, text: "Come back, baby, come back to me", zh: "回到我身边"},
+            {time: 211.67, text: "Come back, I'll be everything you need", zh: "我将是你的唯一"},
+            {time: 213.91, text: "Come back, baby, come back to me", zh: "回到我身边"},
+            {time: 217.16, text: "Come back, you're one in a million", zh: "你是如此万里挑一"}
+        ];
 
         // 加载歌曲
         function loadSong(index) {
@@ -753,7 +821,7 @@
             }
         }
 
-        // 更新歌词显示（只有一个，正确的版本）
+            // 更新歌词显示（只有一个，正确的版本）
         function updateLyrics() {
             const currentSong = playlist[currentSongIndex];
             if (!currentSong.hasLyrics) return;
@@ -766,6 +834,8 @@
                 currentLyrics = lyricsIStayInLove;
             } else if (currentSong.lyricType === "dont_forget") {
                 currentLyrics = lyricsDontForget;
+            } else if (currentSong.lyricType === "come_to_me") {
+                currentLyrics = lyricsComeToMe;
             } else {
                 currentLyrics = lyrics;  // 默认是 We Belong Together 的歌词
             }
@@ -799,6 +869,7 @@
             lyricsDiv.appendChild(newLine);
             setTimeout(() => newLine.classList.add('active'), 50);
         }
+                
 
         // 音量控制
         function setVolume(value) {
