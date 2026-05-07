@@ -3,54 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>周边收藏 - Reigen Arataka</title>
+    <title>Reigen 周边收藏</title>
     <style>
         body {
-            font-family: "Microsoft YaHei", serif;
-            background: linear-gradient(135deg, #1a1428, #2c1f4a, #1a1428);
-            color: #e0d4ff;
-            text-align: center;
-            padding: 60px 20px;
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+            background: linear-gradient(135deg, #f8f7f4, #f0e9ff);
+            color: #222;
             margin: 0;
+            padding: 40px 20px;
         }
-        h1 { color: #d4a5ff; font-size: 3.2em; margin-bottom: 10px; }
-        .subtitle { color: #bb9eff; font-size: 1.5em; margin-bottom: 50px; }
-        .back { color: #ffd700; text-decoration: none; font-size: 1.3em; margin-bottom: 40px; display: inline-block; }
-        .merch-grid {
+        h1 {
+            text-align: center;
+            color: #4a2c7d;
+            margin-bottom: 40px;
+        }
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
             max-width: 1200px;
             margin: 0 auto;
         }
-        .merch-item {
-            background: rgba(255,255,255,0.06);
-            border-radius: 20px;
-            padding: 20px;
-            transition: all 0.3s;
+        .item {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            padding-bottom: 15px;
         }
-        .merch-item:hover { transform: translateY(-8px); }
-        img { width: 100%; border-radius: 15px; margin-bottom: 15px; }
+        .item img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+        .item p {
+            margin: 15px 10px;
+            font-size: 1.1em;
+            color: #444;
+        }
     </style>
 </head>
 <body>
-    <a href="index.html" class="back">← 返回首页</a>
-    <h1>周边收藏</h1>
-    <p class="subtitle">灵能事务所精选周边</p>
-
-    <div class="merch-grid">
-        <div class="merch-item">
-            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="Reigen">
-            <h3>灵能师珍藏立牌</h3>
+    <h1>Reigen Arataka 周边收藏</h1>
+    
+    <div class="grid">
+        <div class="item">
+            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="周边1">
+            <p>灵能师手办</p>
         </div>
-        <div class="merch-item">
-            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="Reigen">
-            <h3>经典西装造型</h3>
+        <div class="item">
+            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="周边2">
+            <p>Reigen 亚克力立牌</p>
         </div>
-        <div class="merch-item">
-            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="Reigen">
-            <h3>限量纪念版</h3>
+        <div class="item">
+            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="周边3">
+            <p>灵能事务所钥匙扣</p>
         </div>
+        <!-- 可以继续添加更多卡片 -->
     </div>
+
+    <p style="text-align: center; margin-top: 60px;">
+        <a href="index.html" style="color: #b38eff; text-decoration: none;">← 返回首页</a>
+    </p>
 </body>
 </html>
