@@ -354,25 +354,33 @@
 
         // ==================== 更新后的歌词数据（包含带括号的时间戳格式） ====================
         const playlist = [
-            {
-                title: "We Belong Together",
-                artist: "Mariah Carey",
-                url: "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/M500004QiRC30LMa8u.mp3",
-                hasLyrics: true
-            },
-            {
-                title: "Always Be My Baby",
-                artist: "Mariah Carey",
-                url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-                hasLyrics: false
-            },
-            {
-                title: "Hero",
-                artist: "Mariah Carey",
-                url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-                hasLyrics: false
-            }
-        ];
+    {
+        title: "We Belong Together",
+        artist: "Mariah Carey",
+        url: "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/M500004QiRC30LMa8u.mp3",
+        hasLyrics: true,
+        lyricType: "we_belong"  // 标识使用哪组歌词
+    },
+    {
+        title: "Underneath the Stars",
+        artist: "Mariah Carey",
+        url: "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/3594040289.mp3",
+        hasLyrics: true,
+        lyricType: "underneath_stars"
+    },
+    {
+        title: "Always Be My Baby",
+        artist: "Mariah Carey",
+        url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+        hasLyrics: false
+    },
+    {
+        title: "Hero",
+        artist: "Mariah Carey",
+        url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        hasLyrics: false
+    }
+];
 
         let currentSongIndex = 0;
         const audio = document.getElementById('bgm');
@@ -388,6 +396,7 @@
         let isMuted = false;
         let previousVolume = 100;
         let currentLyricIndex = -1;
+        // 记录当前使用的歌词数组
 
         // 更新后的歌词数据（根据你提供的时间轴）
         const lyrics = [
@@ -445,7 +454,63 @@
             {time: 178.07, text: "Who's gon' take your place? There ain't nobody better", zh: "谁又能取代这世界上仅存完美的你 根本另无他人"},
             {time: 181.27, text: "Oh, baby, baby, we belong together~", zh: "因为宝贝我们注定属于彼此~"}
         ];
-
+                // 第二首歌的歌词：Underneath the Stars
+        const lyricsUnderneathStars = [
+            {time: 4.45, text: "One summer night", zh: "一个夏日的夜晚"},
+            {time: 9.02, text: "We ran away for a while", zh: "我们一同跑开"},
+            {time: 15.92, text: "Laughing we hurried beneath the sky", zh: "笑着 我们在天空下匆忙"},
+            {time: 21.20, text: "To an obscure place to hide", zh: "寻找一个安全的可以躲藏的地方"},
+            {time: 25.00, text: "That no-one could find", zh: "没有人能够找到"},
+            {time: 26.93, text: "And we drifted to another state of mind", zh: "接着我们进入了另一种心境"},
+            {time: 32.94, text: "And imagined I was yours and you were mine", zh: "想象我是你的你是我的"},
+            {time: 39.01, text: "As we lay upon the grass", zh: "我们躺在草地上"},
+            {time: 41.22, text: "There in the dark", zh: "黑暗中"},
+            {time: 43.95, text: "Underneath the stars", zh: "我们沐浴璀璨星光"},
+            {time: 45.03, text: "(Young love)", zh: "（年轻的爱）"},
+            {time: 49.69, text: "Underneath the stars", zh: "我们沐浴璀璨星光"},
+            {time: 52.33, text: "(Young love)", zh: "（年轻的爱）"},
+            {time: 56.67, text: "Oh baby", zh: "哦 宝贝"},
+            {time: 59.03, text: "Weak in the knees", zh: "我们双膝酸软"},
+            {time: 63.70, text: "Wrapped in the warm gentle breeze", zh: "沐浴在温暖的微风里"},
+            {time: 68.25, text: "So shy a bundle of butterflies", zh: "如此羞涩 一群蝴蝶带着欲望的温度振翅而飞"},
+            {time: 75.78, text: "Flush with heat of desire", zh: "扑扇着热的欲望"},
+            {time: 79.58, text: "On a natural high", zh: "在一个自然的高度"},
+            {time: 81.50, text: "As we drifted to another place in time", zh: "我们后来渐渐转移到了另一个地方"},
+            {time: 87.52, text: "And the feeling was so heady and sublime", zh: "感觉如此惬意和舒爽"},
+            {time: 93.56, text: "As I lost my heart to you", zh: "我把我的心给了你"},
+            {time: 96.13, text: "There in the dark", zh: "黑暗里"},
+            {time: 98.59, text: "Underneath the stars", zh: "我们沐浴璀璨星光"},
+            {time: 100.85, text: "(Young love)", zh: "（年轻的爱）"},
+            {time: 108.23, text: "(Shum do do do)", zh: "（噜噜噜噜）"},
+            {time: 112.18, text: "Beautiful and bittersweetly", zh: "那是美丽的 有苦也有甜"},
+            {time: 115.22, text: "You were fading into me", zh: "你与我"},
+            {time: 118.30, text: "And I was gently fading into you", zh: "渐渐融到了一起"},
+            {time: 124.35, text: "But the time went sailing by", zh: "但是时间一点点流逝"},
+            {time: 127.23, text: "Reluctantly we said goodbye", zh: "我们不情愿地说了再见"},
+            {time: 130.37, text: "And left our secret place so far behind", zh: "远远地离开了我们的那片秘密基地"},
+            {time: 136.08, text: "And I lay in bed all night", zh: "我整晚躺在床上"},
+            {time: 138.99, text: "And I was drifting", zh: "思绪万千"},
+            {time: 140.99, text: "Drifting", zh: "我的思绪堆积"},
+            {time: 141.59, text: "Drifting", zh: "堆积"},
+            {time: 141.96, text: "Drifting", zh: "堆积"},
+            {time: 142.54, text: "Drifting", zh: "堆积"},
+            {time: 143.34, text: "And I was yours", zh: "我是你的"},
+            {time: 146.66, text: "And you were my own", zh: "而你也是我的"},
+            {time: 148.49, text: "My own baby", zh: "是我一个人的"},
+            {time: 151.64, text: "As we lay", zh: "当我们"},
+            {time: 152.48, text: "As we", zh: "我们在"},
+            {time: 153.09, text: "Lay underneath the stars", zh: "那璀璨的星河之下"},
+            {time: 158.66, text: "(Young love)", zh: "（年轻的爱）"},
+            {time: 160.25, text: "Ohhhhh", zh: "噢"},
+            {time: 165.06, text: "(Young love)", zh: "（年轻的爱）"},
+            {time: 168.38, text: "Underneath the stars", zh: "我们沐浴璀璨星光"},
+            {time: 170.71, text: "(Shum do do do)", zh: "（年轻的爱）"},
+            {time: 179.43, text: "Underneath the stars", zh: "我们沐浴璀璨星光"},
+            {time: 180.83, text: "(Young love)", zh: "（年轻的爱）"},
+            {time: 181.51, text: "Underneath the stars", zh: "我们沐浴璀璨星光"},
+            {time: 182.54, text: "(Young love)", zh: "（年轻的爱）"}
+        ];
+ let currentLyricsArray = lyrics; 
         // 加载歌曲
         function loadSong(index) {
             const song = playlist[index];
@@ -505,40 +570,48 @@
             }
         }
 
-        // 更新歌词显示
-        function updateLyrics() {
-            const currentSong = playlist[currentSongIndex];
-            if (!currentSong.hasLyrics) return;
-            
-            const currentTime = audio.currentTime;
-            let enText = "♪ We Belong Together ♪";
-            let zhText = "";
+     // 更新歌词显示
+function updateLyrics() {
+    const currentSong = playlist[currentSongIndex];
+    if (!currentSong.hasLyrics) return;
+    
+    // 根据歌曲选择对应的歌词数组
+    let currentLyrics = [];
+    if (currentSong.lyricType === "underneath_stars") {
+        currentLyrics = lyricsUnderneathStars;
+    } else {
+        currentLyrics = lyrics;  // 默认是 We Belong Together 的歌词
+    }
+    
+    const currentTime = audio.currentTime;
+    let enText = "♪ " + currentSong.title + " ♪";
+    let zhText = "";
 
-            let newIndex = -1;
-            for (let i = lyrics.length - 1; i >= 0; i--) {
-                if (currentTime >= lyrics[i].time) {
-                    newIndex = i;
-                    enText = lyrics[i].text;
-                    zhText = lyrics[i].zh || "";
-                    break;
-                }
-            }
-
-            if (newIndex === currentLyricIndex) return;
-            currentLyricIndex = newIndex;
-
-            const newLine = document.createElement('div');
-            newLine.className = 'lyric-line';
-            newLine.innerHTML = `
-                <div class="lyric-en">${enText}</div>
-                ${zhText ? `<div class="lyric-zh">${zhText}</div>` : ''}
-            `;
-
-            const lyricsDiv = document.getElementById('lyrics');
-            lyricsDiv.innerHTML = '';
-            lyricsDiv.appendChild(newLine);
-            setTimeout(() => newLine.classList.add('active'), 50);
+    let newIndex = -1;
+    for (let i = currentLyrics.length - 1; i >= 0; i--) {
+        if (currentTime >= currentLyrics[i].time) {
+            newIndex = i;
+            enText = currentLyrics[i].text;
+            zhText = currentLyrics[i].zh || "";
+            break;
         }
+    }
+
+    if (newIndex === currentLyricIndex) return;
+    currentLyricIndex = newIndex;
+
+    const newLine = document.createElement('div');
+    newLine.className = 'lyric-line';
+    newLine.innerHTML = `
+        <div class="lyric-en">${enText}</div>
+        ${zhText ? `<div class="lyric-zh">${zhText}</div>` : ''}
+    `;
+
+    const lyricsDiv = document.getElementById('lyrics');
+    lyricsDiv.innerHTML = '';
+    lyricsDiv.appendChild(newLine);
+    setTimeout(() => newLine.classList.add('active'), 50);
+}
 
         // 音量控制
         function setVolume(value) {
