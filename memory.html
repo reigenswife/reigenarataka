@@ -14,7 +14,7 @@
             line-height: 1.7;
         }
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             background: white;
             border-radius: 20px;
@@ -36,6 +36,16 @@
             color: #b38eff;
             margin-top: 0;
         }
+        .video-wrapper {
+            margin: 20px 0;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        iframe {
+            border-radius: 15px;
+            width: 100%;
+            height: 400px;
+        }
         .back-link {
             display: inline-block;
             margin-top: 30px;
@@ -45,6 +55,10 @@
         }
         .back-link:hover {
             text-decoration: underline;
+        }
+        @media (max-width: 600px) {
+            iframe { height: 250px; }
+            .container { padding: 20px; }
         }
     </style>
 </head>
@@ -64,8 +78,11 @@
         </div>
 
         <div class="memory-item">
-            <h3>🎬 最帅的一帧</h3>
-            <p>（待补充）</p>
+            <h3>🎬 最帅的一帧 / 名场面视频</h3>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/9EPXegPw_Y4" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <p>✨ Reigen 的帅气时刻 ✨</p>
         </div>
 
         <a href="index.html" class="back-link">← 返回首页</a>
