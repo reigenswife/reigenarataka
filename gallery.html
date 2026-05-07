@@ -55,49 +55,166 @@
         .carousel-btn:hover { background: #4a2c7d; transform: translateY(-50%) scale(1.1); }
         .prev { left: 20px; } .next { right: 20px; }
 
-        .music-control {
-            margin: 20px auto;
-            padding: 14px 32px;
-            background: #4a2c7d;
-            color: white;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 1.15em;
-        }
-
-        /* 底部纯文字歌词 */
-        #lyrics {
+        /* 播放器控制栏 - 白色背景黑色字体，位于歌词下方 */
+        .player-wrapper {
             position: fixed;
             bottom: 30px;
             left: 0;
-            width: 100%;
-            padding: 0 15px;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
             z-index: 100;
             pointer-events: none;
         }
-        .lyric-line {
-            position: absolute;
+        
+        /* 歌词区域 */
+        #lyrics {
             width: 100%;
+            text-align: center;
+            margin-bottom: 15px;
+            pointer-events: none;
+        }
+        .lyric-line {
             opacity: 0;
             transition: opacity 1.4s ease;
-            pointer-events: none;
-            left: 0;
+            text-align: center;
         }
         .lyric-line.active {
             opacity: 1;
-            position: relative;
         }
         .lyric-en {
-            font-size: 1.58em;
-            font-weight: bold;
+            font-size: 1.3em;
+            font-weight: 500;
             color: #222222;
             text-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
+            line-height: 1.4;
         }
         .lyric-zh {
-            font-size: 1.22em;
-            color: #444444;
+            font-size: 1em;
+            color: #666666;
+            line-height: 1.3;
+        }
+        
+        /* 播放器 - 白色背景黑色字体 */
+        .player-controls {
+            background: white;
+            border-radius: 50px;
+            padding: 10px 24px;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            border: 1px solid #e0e0e0;
+            pointer-events: auto;
+            margin: 0 auto;
+        }
+        .player-btn {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            color: #333;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .player-btn:hover {
+            background: #4a2c7d;
+            color: white;
+            border-color: #4a2c7d;
+            transform: scale(1.05);
+        }
+        .player-btn:active {
+            transform: scale(0.95);
+        }
+        .song-info {
+            color: #333;
+            text-align: left;
+            min-width: 180px;
+            padding: 0 10px;
+        }
+        .song-title {
+            font-weight: bold;
+            margin-bottom: 3px;
+            font-size: 0.9em;
+        }
+        .song-artist {
+            font-size: 0.7em;
+            opacity: 0.7;
+        }
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-left: 8px;
+        }
+        .volume-slider {
+            width: 70px;
+            cursor: pointer;
+            height: 4px;
+            border-radius: 2px;
+            -webkit-appearance: none;
+            background: #ddd;
+        }
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #4a2c7d;
+            cursor: pointer;
+        }
+        .volume-btn {
+            background: none;
+            border: none;
+            color: #333;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 5px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+        .volume-btn:hover {
+            background: #f0f0f0;
+        }
+
+        /* 指示器样式 */
+        .carousel-indicators {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        .indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .indicator.active {
+            background: white;
+            width: 25px;
+            border-radius: 5px;
+        }
+        .indicator:hover {
+            background: rgba(255,255,255,0.8);
         }
     </style>
 </head>
@@ -113,16 +230,6 @@
         <div class="carousel-indicators" id="indicators"></div>
     </div>
 
-    <button class="music-control" id="musicBtn" onclick="toggleMusic()">
-        🎵 播放背景音乐
-    </button>
-
-    <div id="lyrics"></div>
-
-    <audio id="bgm" loop preload="auto">
-        <source src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/M500004QiRC30LMa8u.mp3" type="audio/mpeg">
-    </audio>
-
     <div style="max-width:900px;margin:50px auto;">
         <iframe width="100%" height="480" src="https://www.youtube.com/embed/9EPXegPw_Y4" frameborder="0" allowfullscreen></iframe>
     </div>
@@ -131,6 +238,28 @@
         My favorite character website<br>
         Powered by GitHub Pages
     </p>
+
+    <!-- 播放器和歌词容器 -->
+    <div class="player-wrapper">
+        <div id="lyrics"></div>
+        <div class="player-controls">
+            <button class="player-btn" id="prevBtn" title="上一首">⏮</button>
+            <button class="player-btn" id="playPauseBtn" title="播放/暂停">▶</button>
+            <button class="player-btn" id="nextBtn" title="下一首">⏭</button>
+            <div class="song-info">
+                <div class="song-title" id="songTitle">We Belong Together</div>
+                <div class="song-artist" id="songArtist">Mariah Carey</div>
+            </div>
+            <div class="volume-control">
+                <button class="volume-btn" id="volumeBtn" title="静音">🔊</button>
+                <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="100">
+            </div>
+        </div>
+    </div>
+
+    <audio id="bgm" preload="auto">
+        <source src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/M500004QiRC30LMa8u.mp3" type="audio/mpeg">
+    </audio>
 
     <script>
         // 轮播
@@ -161,8 +290,27 @@
             updateIndicators();
         }
 
-        function nextSlide() { currentIndex++; showSlide(); if (currentIndex >= images.length + 1) setTimeout(() => { currentIndex = 1; showSlide(false); }, 950); }
-        function prevSlide() { currentIndex--; showSlide(); if (currentIndex <= 0) setTimeout(() => { currentIndex = images.length; showSlide(false); }, 950); }
+        function nextSlide() { 
+            currentIndex++; 
+            showSlide(); 
+            if (currentIndex >= images.length + 1) {
+                setTimeout(() => { 
+                    currentIndex = 1; 
+                    showSlide(false); 
+                }, 950);
+            }
+        }
+        
+        function prevSlide() { 
+            currentIndex--; 
+            showSlide(); 
+            if (currentIndex <= 0) {
+                setTimeout(() => { 
+                    currentIndex = images.length; 
+                    showSlide(false); 
+                }, 950);
+            }
+        }
 
         function updateIndicators() {
             const container = document.getElementById('indicators');
@@ -170,184 +318,184 @@
             images.forEach((_, i) => {
                 const dot = document.createElement('div');
                 dot.classList.add('indicator');
-                if (i === (currentIndex - 1) % images.length) dot.classList.add('active');
-                dot.onclick = () => { currentIndex = i + 1; showSlide(); };
+                let activeIndex = (currentIndex - 1 + images.length) % images.length;
+                if (i === activeIndex) dot.classList.add('active');
+                dot.onclick = () => { 
+                    currentIndex = i + 1; 
+                    showSlide(); 
+                };
                 container.appendChild(dot);
             });
         }
 
-        // ==================== 完整歌词 ====================
-        const audio = document.getElementById('bgm');
-        const musicBtn = document.getElementById('musicBtn');
-        const lyricsDiv = document.getElementById('lyrics');
-        let isPlaying = false;
-        let currentLyricIndex = -1;
-
-        const lyrics = [
-            {time: 4, text: "Ooh"},
-            {time: 6, text: "Oooooh"},
-            {time: 8, text: "Sweet love"},
-            {time: 17, text: "Sweet love yeah"},
-            {time: 22, text: "I didn't mean it when I said I didn't love you so"},
-            {time: 25, text: "I should have held on tight I never should have let you go"},
-            {time: 29, text: "I didn't know nothing I was stupid"},
-            {time: 30, text: "I was foolish I was lying to myself"},
-            {time: 35, text: "I couldn't have fathomed I would ever be without your love"},
-            {time: 39, text: "Never imagined I'd be sitting here beside myself"},
-            {time: 42, text: "'Cause I didn't know you 'cause I didn't know me"},
-            {time: 44, text: "But I thought I knew everything I never felt"},
-            {time: 49, text: "The feeling that I'm feeling now that I don't hear your voice"},
-            {time: 53, text: "Or have your touch and kiss your lips"},
-            {time: 54, text: "Cause I don't have a choice"},
-            {time: 56, text: "Or what I wouldn't give to have you lying by my side"},
-            {time: 59, text: "Right here"},
-            {time: 60, text: "'Cause baby"},
-            {time: 62, text: "When you left I lost a part of me"},
-            {time: 67, text: "It's still so hard to believe"},
-            {time: 70, text: "Come back baby please"},
-            {time: 73, text: "Cause we belong together"},
-            {time: 75, text: "Who else am I gon' lean on when times get rough"},
-            {time: 79, text: "Who's going to talk to me on the phone 'til the sun comes up"},
-            {time: 82, text: "Who's going to take your place"},
-            {time: 85, text: "Oh baby baby we belong together"},
-            {time: 90, text: "I can't sleep at night when you're on my mind"},
-            {time: 93, text: "Bobby Womack's on the radio"},
-            {time: 98, text: "Wait a minute this is too deep"},
-            {time: 106, text: "I only think of you"},
-            {time: 109, text: "And it's breakin' my heart"},
-            {time: 113, text: "I'm tryna keep it together but I'm falling apart"},
-            {time: 119, text: "Throwin' things crying"},
-            {time: 127, text: "I need ya need ya back in my life baby"},
-            {time: 142, text: "Baby when you left I lost a part of me"},
-            {time: 146, text: "Come back baby please"},
-            {time: 151, text: "Oh baby baby we belong together"},
-            {time: 159, text: "Wait a minute this is too deep, too deep"},
-            {time: 162, text: "I gotta change the station"},
-            {time: 163, text: "So I turn the dial"},
-            {time: 167, text: "Trying to catch a break"},
-            {time: 169, text: "And then I hear Babyface"},
-            {time: 172, text: "I only think of you"},
-            {time: 175, text: "And it's breaking my heart"},
-            {time: 177, text: "I'm trying to keep it together"},
-            {time: 179, text: "But I'm falling apart"},
-            {time: 181, text: "I'm feeling all out of my element"},
-            {time: 183, text: "I'm throwing things"},
-            {time: 185, text: "Crying Trying to figure out"},
-            {time: 187, text: "Where the hell I went wrong"},
-            {time: 191, text: "The pain reflected in this song"},
-            {time: 195, text: "Ain't even half of what"},
-            {time: 197, text: "I'm feeling inside"},
-            {time: 201, text: "I need you need you back in my life baby"},
-            {time: 211, text: "When you left I lost a part of me"},
-            {time: 215, text: "It's still so hard to believe"},
-            {time: 219, text: "Come back baby please"},
-            {time: 221, text: "Cause we belong together"},
-            {time: 224, text: "Who else am I gonna lean on"},
-            {time: 227, text: "When times get rough"},
-            {time: 231, text: "Who's gonna talk to me on the phone"},
-            {time: 234, text: "Till the sun comes up"},
-            {time: 238, text: "Who's gonna take your place"},
-            {time: 240, text: "There ain't nobody better"},
-            {time: 243, text: "Oh baby baby we belong together baby"},
-            {time: 251, text: "When you left I lost a part of me"},
-            {time: 256, text: "It's still so hard to believe"},
-            {time: 258, text: "Come back baby please"},
-            {time: 260, text: "Cause we belong together"},
-            {time: 262, text: "Who else am I gonna lean on"},
-            {time: 265, text: "When times get rough"},
-            {time: 268, text: "Who's gonna talk to me"},
-            {time: 270, text: "Till the sun comes up"},
-            {time: 272, text: "Who's gonna take your place"},
-            {time: 274, text: "There ain't nobody better"},
-            {time: 276, text: "Oh baby baby We belong together~"}
+        // ==================== 更新后的歌词数据 ====================
+        const lyricsData = [
+            { time: 4.06, en: "Oh-ooh-ooh", zh: "" },
+            { time: 11.11, en: "Oh", zh: "" },
+            { time: 13.71, en: "Oh, oh-ooh", zh: "" },
+            { time: 17.42, en: "Sweet love, yeah", zh: "甜蜜的爱" },
+            { time: 21.56, en: "I didn't mean it when I said I didn't love you so", zh: "我并非本意 说自己不爱你" },
+            { time: 25.05, en: "I should have held on tight, I never shoulda let you go", zh: "我应该好好抓紧你 不放开手让你走" },
+            { time: 28.52, en: "I didn't know nothin', I was stupid, I was foolish", zh: "我却什么都没有做 愚蠢之极" },
+            { time: 31.31, en: "I was lyin' to myself", zh: "后悔莫及 自欺欺人" },
+            { time: 35.30, en: "I could not fathom that I would ever be without your love", zh: "我未料想过 没有你的爱我会怎么样" },
+            { time: 38.75, en: "Never imagined I'd be sittin' here beside myself", zh: "也没设想过没有你 自己将会如此孑然一身" },
+            { time: 42.22, en: "'Cause I didn't know you, 'cause I didn't know me, but I thought I knew everything", zh: "都怪我没懂你 更不懂我自己 以为我自己明白一切" },
+            { time: 45.42, en: "I never felt", zh: "" },
+            { time: 49.01, en: "The feelin' that I'm feelin' now that I don't hear your voice", zh: "所有曾经那各种缠绵 现在一切已化为乌有" },
+            { time: 52.52, en: "Or have your touch and kiss your lips 'cause I don't have a choice", zh: "再也感受不到你的爱抚和亲吻 可我已别无选择" },
+            { time: 55.94, en: "Oh, what I wouldn't give to have you lyin' by my side", zh: "我愿奋不顾身 去换取让你重回到我的身边" },
+            { time: 59.09, en: "Right here, 'cause, baby (We belong together)", zh: "就我身边 因为我们注定属于彼此" },
+            { time: 62.57, en: "When you left, I lost a part of me (Together)", zh: "当你离开我的时候我失魂落魄" },
+            { time: 66.81, en: "It's still so hard to believe (Come back, come back)", zh: "这一切仍难以让人想象" },
+            { time: 70.32, en: "Come back, baby, please (Come back, come back)", zh: "求求你回到我身边吧" },
+            { time: 72.40, en: "'Cause we belong together", zh: "因为我们注定属于彼此" },
+            { time: 75.16, en: "Who else am I gon' lean on when times get rough? (Ooh, yeah)", zh: "当我哀痛欲绝的时候 有谁能让我偎依在他身旁？" },
+            { time: 78.58, en: "Who's gonna talk to me on the phone till the sun comes up? (Ooh, yeah)", zh: "谁又能和我打着电话 听我诉苦直到天亮？" },
+            { time: 82.13, en: "Who's gonna take your place? There ain't nobody better (Ooh, yeah)", zh: "谁又能取代这世界上仅存完美的你 根本别无他人" },
+            { time: 85.28, en: "Oh, baby, baby, we belong together", zh: "亲爱的 因为我们注定属于彼此" },
+            { time: 89.56, en: "I can't sleep at night, when you are on my mind", zh: "我彻夜难眠 满脑海全是你的存在" },
+            { time: 93.14, en: "Bobby Womack's on the radio, sayin' to me (\"If you think you're lonely now\")", zh: "电台里面放着Bobby Womack的歌 对着我唱 “如果你此刻寂寞难耐”" },
+            { time: 98.98, en: "Wait a minute, this is too deep (Too deep)", zh: "等等 这太让人压抑抓狂了" },
+            { time: 101.83, en: "I gotta change the station", zh: "" },
+            { time: 103.27, en: "So I turn the dial, tryna catch a break", zh: "于是我立刻转台 尝试平复一下凌乱的内心" },
+            { time: 106.68, en: "And then I hear Babyface", zh: "" },
+            { time: 109.41, en: "I only think of you", zh: "我满脑海全是你" },
+            { time: 112.04, en: "And it's breakin' my heart", zh: "内心独自承受着剧烈的支离破碎" },
+            { time: 113.32, en: "I'm tryna keep it together, but I'm fallin' apart", zh: "我想挽回这迫在眉睫的局面 但我却彻底陷入了崩溃" },
+            { time: 116.91, en: "I'm feelin' all out of my element", zh: "我几乎神魂落魄" },
+            { time: 119.17, en: "Throwin' things, cryin', tryna figure out where the hell I went wrong", zh: "一边哭喊着摔着东西 一边想弄明白我到底做错了什么" },
+            { time: 122.95, en: "The pain reflected in this song, it ain't even half of what I'm feelin' inside", zh: "这首歌所体现的痛苦 远不及我现在所感受到的一半" },
+            { time: 127.08, en: "I need ya, need ya back in my life, baby", zh: "我现在立刻需要你重回到我身边" },
+            { time: 131.21, en: "When you left, I lost a part of me (Together)", zh: "当你离开之时我失魂落魄" },
+            { time: 135.13, en: "And it's still so hard to believe (Come back, come back)", zh: "这一切仍难以让人想象" },
+            { time: 138.78, en: "Come back, baby, please (Come back, come back)", zh: "拜托你回到我身边吧" },
+            { time: 140.99, en: "'Cause we belong together", zh: "因为我们注定属于彼此" },
+            { time: 143.77, en: "Who else am I gon' lean on, when times get rough? (Ooh, yeah)", zh: "当我哀痛欲绝的时候 有谁能让我偎依在他身旁？" },
+            { time: 147.14, en: "Who's gonna talk to me on the phone till the sun comes up? (Ooh, yeah)", zh: "谁又能和我打着电话 听我诉苦直到天亮？" },
+            { time: 150.62, en: "Who's gonna take your place? There ain't nobody better (Ooh, yeah)", zh: "谁又能取代这世界上仅存完美的你 根本别无他人" },
+            { time: 153.81, en: "Oh, baby, baby, we belong together", zh: "亲爱的 我们属于彼此" },
+            { time: 156.86, en: "Baby, when you left, I lost a part of me", zh: "当你离去之时我魂不守舍" },
+            { time: 162.82, en: "It's still so hard to believe", zh: "这一切都难以叫人想象" },
+            { time: 166.26, en: "Come back baby, please", zh: "拜托你回到我身边吧" },
+            { time: 168.40, en: "'Cause we belong together", zh: "因为我们注定属于彼此" },
+            { time: 171.43, en: "Who am I gonna lean on when times get rough? (Ooh, yeah)", zh: "当我哀痛欲绝的时候 谁能与我渡过难关？" },
+            { time: 174.83, en: "Who's gon' talk to me till the sun comes up? (Ooh, yeah)", zh: "谁又能和我打着电话 听我诉苦直到天亮？" },
+            { time: 178.07, en: "Who's gon' take your place? There ain't nobody better (Ooh, yeah)", zh: "谁又能取代这世界上仅存完美的你 根本另无他人" },
+            { time: 181.27, en: "Oh, baby, baby, we belong together", zh: "因为宝贝我们注定属于彼此~" }
         ];
 
-        const zhLyrics = {
-            4: "Ooh", 6: "Oooooh", 8: "Sweet love 甜蜜的爱",
-            17: "甜蜜的爱",
-            22: "当我说不爱你的时候 那并非我本意",
-            25: "我应该好好珍惜你 不应该让你走",
-            29: "我不知所措 我太傻",
-            30: "太天真 我在自欺欺人",
-            35: "我不该陷入太深 不该爱你爱到无法自拔",
-            39: "从未想过 自己会如此的形单影孤",
-            42: "都是因为我不懂你 更不懂我自己",
-            44: "但是我却了解到 所有没有你的感受",
-            49: "所有曾经的种种缠绵 再也听不到你的声音",
-            53: "再也感受不到你的爱抚与亲吻",
-            54: "因为我别无选择",
-            56: "我愿奋不顾身 让你重回我的身边",
-            59: "就在我的身边",
-            60: "因为宝贝",
-            62: "当你离开我的时候我魂不守舍",
-            67: "这一切都让人难以相信",
-            70: "请回到我的身边 宝贝",
-            73: "我们注定属于彼此",
-            75: "当我苦不堪言的时候 还能依靠谁？",
-            79: "还有谁会在电话的另一头 安慰我一整夜？",
-            82: "还有谁能够取代这世界上独一无二的你？",
-            85: "宝贝 我们注定属于彼此",
-            90: "我夜不能寐 因为脑海中满是你的存在",
-            98: "等会儿 这太压抑了 太难受了",
-            106: "我只在乎你",
-            109: "我的心承受着撕裂般的剧痛",
-            113: "我想要尽力挽救这种局面",
-            127: "需要你回到我的生活之中 宝贝",
-            142: "宝贝 当你离开我的时候我魂不守舍",
-            146: "请回到我的身边 宝贝",
-            151: "因为宝贝我们注定属于彼此",
-            159: "等等 这太让人压抑抓狂了",
-            162: "我必须转换一下气氛",
-            163: "于是我立刻转台",
-            167: "尝试平复一下凌乱的内心",
-            169: "而又却听到Babyface的歌",
-            172: "我满脑海全是你",
-            175: "内心独自承受着剧烈的支离破碎",
-            177: "我想挽回这迫在眉睫的局面",
-            179: "但我却彻底陷入了崩溃",
-            181: "我几乎神魂落魄",
-            183: "一边哭喊着摔着东西",
-            185: "一边想弄明白",
-            187: "我到底做错了什么",
-            191: "这首歌所体现的痛苦",
-            195: "远不及",
-            197: "我现在所感受到的一半",
-            201: "我现在立刻需要你重回到我身边",
-            211: "当你离开之时我失魂落魄",
-            215: "这一切仍难以让人想象",
-            219: "拜托你回到我身边吧",
-            221: "因为我们注定属于彼此",
-            224: "当我哀痛欲绝的时候",
-            227: "有谁能让我偎依在他身旁？",
-            231: "谁又能和我打着电话",
-            234: "听我诉苦直到天亮？",
-            238: "谁又能取代这世界上仅存完美的你",
-            240: "根本别无他人",
-            243: "Oh 宝贝宝贝 我们属于彼此",
-            251: "当你离去之时我魂不守舍",
-            256: "这一切都难以叫人想象",
-            258: "拜托你回到我身边吧",
-            260: "因为我们注定属于彼此啊",
-            262: "当我哀痛欲绝的时候",
-            265: "谁能与我渡过难关？",
-            268: "谁又能和我打着电话",
-            270: "听我诉苦直到天亮？",
-            272: "谁又能取代这世界上仅存完美的你",
-            274: "根本另无他人",
-            276: "因为宝贝我们注定属于彼此~~~"
-        };
+        // 歌曲列表
+        const playlist = [
+            {
+                title: "We Belong Together",
+                artist: "Mariah Carey",
+                url: "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/M500004QiRC30LMa8u.mp3",
+                hasLyrics: true
+            },
+            {
+                title: "Always Be My Baby",
+                artist: "Mariah Carey",
+                url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+                hasLyrics: false
+            },
+            {
+                title: "Hero",
+                artist: "Mariah Carey",
+                url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+                hasLyrics: false
+            }
+        ];
 
+        let currentSongIndex = 0;
+        const audio = document.getElementById('bgm');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const songTitleElem = document.getElementById('songTitle');
+        const songArtistElem = document.getElementById('songArtist');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const volumeBtn = document.getElementById('volumeBtn');
+        
+        let isPlaying = false;
+        let isMuted = false;
+        let previousVolume = 100;
+        let currentLyricIndex = -1;
+
+        // 加载歌曲
+        function loadSong(index) {
+            const song = playlist[index];
+            if (!song) return;
+            
+            audio.src = song.url;
+            songTitleElem.textContent = song.title;
+            songArtistElem.textContent = song.artist;
+            
+            if (isPlaying) {
+                audio.play().catch(err => console.log("自动播放被阻止:", err));
+            }
+            
+            // 重置歌词
+            currentLyricIndex = -1;
+            const lyricsDiv = document.getElementById('lyrics');
+            lyricsDiv.innerHTML = '';
+            
+            if (!song.hasLyrics) {
+                const noLyricMsg = document.createElement('div');
+                noLyricMsg.className = 'lyric-line active';
+                noLyricMsg.innerHTML = `<div class="lyric-en">♪ ${song.title} ♪</div><div class="lyric-zh">暂无歌词</div>`;
+                lyricsDiv.appendChild(noLyricMsg);
+            }
+        }
+
+        // 切换播放/暂停
+        function togglePlayPause() {
+            if (isPlaying) {
+                audio.pause();
+                playPauseBtn.textContent = '▶';
+            } else {
+                audio.play().catch(err => {
+                    console.log("播放失败:", err);
+                    alert("播放失败，请检查音乐链接是否有效");
+                });
+                playPauseBtn.textContent = '⏸';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // 下一首
+        function nextSong() {
+            currentSongIndex = (currentSongIndex + 1) % playlist.length;
+            loadSong(currentSongIndex);
+            if (isPlaying) {
+                audio.play().catch(err => console.log("自动播放失败:", err));
+            }
+        }
+
+        // 上一首
+        function prevSong() {
+            currentSongIndex = (currentSongIndex - 1 + playlist.length) % playlist.length;
+            loadSong(currentSongIndex);
+            if (isPlaying) {
+                audio.play().catch(err => console.log("自动播放失败:", err));
+            }
+        }
+
+        // 更新歌词显示
         function updateLyrics() {
+            const currentSong = playlist[currentSongIndex];
+            if (!currentSong.hasLyrics) return;
+            
             const currentTime = audio.currentTime;
             let enText = "♪ We Belong Together ♪";
             let zhText = "";
 
             let newIndex = -1;
-            for (let i = lyrics.length - 1; i >= 0; i--) {
-                if (currentTime >= lyrics[i].time) {
+            for (let i = lyricsData.length - 1; i >= 0; i--) {
+                if (currentTime >= lyricsData[i].time) {
                     newIndex = i;
-                    enText = lyrics[i].text;
-                    zhText = zhLyrics[lyrics[i].time] || "";
+                    enText = lyricsData[i].en;
+                    zhText = lyricsData[i].zh;
                     break;
                 }
             }
@@ -362,34 +510,71 @@
                 ${zhText ? `<div class="lyric-zh">${zhText}</div>` : ''}
             `;
 
+            const lyricsDiv = document.getElementById('lyrics');
             lyricsDiv.innerHTML = '';
             lyricsDiv.appendChild(newLine);
             setTimeout(() => newLine.classList.add('active'), 50);
         }
 
-        function toggleMusic() {
-            if (isPlaying) {
-                audio.pause();
-                musicBtn.innerHTML = "🎵 播放背景音乐";
+        // 音量控制
+        function setVolume(value) {
+            audio.volume = value / 100;
+            volumeSlider.value = value;
+            if (value === 0) {
+                volumeBtn.textContent = '🔇';
+                isMuted = true;
             } else {
-                audio.play().then(() => {
-                    musicBtn.innerHTML = "⏸️ 暂停背景音乐";
-                }).catch(() => alert("播放失败，请刷新页面后重试"));
+                volumeBtn.textContent = value > 50 ? '🔊' : '🔉';
+                isMuted = false;
             }
-            isPlaying = !isPlaying;
+        }
+
+        function toggleMute() {
+            if (isMuted) {
+                setVolume(previousVolume);
+            } else {
+                previousVolume = audio.volume * 100;
+                setVolume(0);
+            }
+        }
+
+        // 事件监听
+        function initPlayer() {
+            playPauseBtn.onclick = togglePlayPause;
+            prevBtn.onclick = prevSong;
+            nextBtn.onclick = nextSong;
+            volumeSlider.oninput = (e) => setVolume(parseInt(e.target.value));
+            volumeBtn.onclick = toggleMute;
+            
+            audio.addEventListener('timeupdate', updateLyrics);
+            audio.addEventListener('ended', nextSong);
+            audio.addEventListener('play', () => {
+                isPlaying = true;
+                playPauseBtn.textContent = '⏸';
+            });
+            audio.addEventListener('pause', () => {
+                isPlaying = false;
+                playPauseBtn.textContent = '▶';
+            });
+            
+            loadSong(0);
+            setVolume(100);
         }
 
         window.onload = () => {
             initCarousel();
             showSlide();
             updateIndicators();
-            audio.volume = 1.0;
-            audio.addEventListener('timeupdate', updateLyrics);
+            initPlayer();
         };
 
         document.addEventListener('keydown', e => {
             if (e.key === "ArrowRight") nextSlide();
             if (e.key === "ArrowLeft") prevSlide();
+            if (e.key === " ") {
+                e.preventDefault();
+                togglePlayPause();
+            }
         });
     </script>
 </body>
