@@ -10,7 +10,7 @@
             background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             color: #fff;
             text-align: center;
-            padding: 40px 20px;
+            padding: 40px 20px 120px; /* 底部留空间给歌词 */
             margin: 0;
             min-height: 100vh;
         }
@@ -49,29 +49,47 @@
             font-size: 1.15em;
         }
 
-        /* 纯白色歌词 */
+        /* 底部固定悬浮歌词 */
         #lyrics {
-            max-width: 960px;
-            margin: 40px auto;
-            height: 180px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 20px 15px 25px;
+            z-index: 100;
+            border-top: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.6);
+        }
+        .lyric-line {
+            position: absolute;
+            width: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            pointer-events: none;
+            left: 0;
+        }
+        .lyric-line.active {
+            opacity: 1;
+            position: relative;
         }
         .lyric-en {
-            font-size: 1.68em;
+            font-size: 1.55em;
             font-weight: bold;
-            color: #ffffff;           /* 纯白色 */
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
-            margin-bottom: 10px;
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
+            margin-bottom: 8px;
         }
         .lyric-zh {
-            font-size: 1.28em;
-            color: #ffffff;           /* 纯白色 */
-            opacity: 0.88;
-            text-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+            font-size: 1.2em;
+            color: #ffffff;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .lyric-en { font-size: 1.35em; }
+            .lyric-zh { font-size: 1.05em; }
         }
     </style>
 </head>
@@ -91,9 +109,7 @@
         🎵 播放背景音乐
     </button>
 
-    <div id="lyrics">
-        <div class="lyric-en">准备播放音乐...</div>
-    </div>
+    <div id="lyrics"></div>
 
     <audio id="bgm" loop preload="auto">
         <source src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/M500004QiRC30LMa8u.mp3" type="audio/mpeg">
@@ -109,7 +125,7 @@
     </p>
 
     <script>
-        // 轮播（无限循环）
+        // 轮播代码（无限循环）
         const carouselInner = document.getElementById('carouselInner');
         let currentIndex = 1;
         const images = [
@@ -120,15 +136,14 @@
 
         function initCarousel() {
             carouselInner.innerHTML = '';
-            // 最后一张
             let item = document.createElement('div'); item.className = 'carousel-item';
             item.innerHTML = `<img src="${images[images.length-1]}" alt="">`; carouselInner.appendChild(item);
-            // 正常图片
+            
             images.forEach(src => {
                 item = document.createElement('div'); item.className = 'carousel-item';
                 item.innerHTML = `<img src="${src}" alt="">`; carouselInner.appendChild(item);
             });
-            // 第一张
+            
             item = document.createElement('div'); item.className = 'carousel-item';
             item.innerHTML = `<img src="${images[0]}" alt="">`; carouselInner.appendChild(item);
         }
@@ -140,17 +155,8 @@
             updateIndicators();
         }
 
-        function nextSlide() {
-            currentIndex++;
-            showSlide();
-            if (currentIndex >= images.length + 1) setTimeout(() => { currentIndex = 1; showSlide(false); }, 950);
-        }
-
-        function prevSlide() {
-            currentIndex--;
-            showSlide();
-            if (currentIndex <= 0) setTimeout(() => { currentIndex = images.length; showSlide(false); }, 950);
-        }
+        function nextSlide() { currentIndex++; showSlide(); if (currentIndex >= images.length + 1) setTimeout(() => { currentIndex = 1; showSlide(false); }, 950); }
+        function prevSlide() { currentIndex--; showSlide(); if (currentIndex <= 0) setTimeout(() => { currentIndex = images.length; showSlide(false); }, 950); }
 
         function updateIndicators() {
             const container = document.getElementById('indicators');
@@ -164,11 +170,12 @@
             });
         }
 
-        // 音乐 & 歌词
+        // 歌词部分
         const audio = document.getElementById('bgm');
         const musicBtn = document.getElementById('musicBtn');
         const lyricsDiv = document.getElementById('lyrics');
         let isPlaying = false;
+        let currentLyricIndex = -1;
 
         const lyrics = [
             {time: 4.06, text: "Oh-ooh-ooh"},
@@ -209,8 +216,7 @@
         ];
 
         const zhLyrics = {
-            17.42: "甜蜜的爱",
-            21.56: "我并非本意 说自己不爱你",
+            17.42: "甜蜜的爱", 21.56: "我并非本意 说自己不爱你",
             25.05: "我应该好好抓紧你 不放开手让你走",
             28.52: "我却什么都没有做 愚蠢之极",
             31.31: "后悔莫及 自欺欺人",
@@ -245,18 +251,29 @@
             let enText = "♪ We Belong Together ♪";
             let zhText = "";
 
+            let newIndex = -1;
             for (let i = lyrics.length - 1; i >= 0; i--) {
                 if (currentTime >= lyrics[i].time) {
+                    newIndex = i;
                     enText = lyrics[i].text;
                     zhText = zhLyrics[lyrics[i].time] || "";
                     break;
                 }
             }
 
-            lyricsDiv.innerHTML = `
+            if (newIndex === currentLyricIndex) return;
+            currentLyricIndex = newIndex;
+
+            const newLine = document.createElement('div');
+            newLine.className = 'lyric-line';
+            newLine.innerHTML = `
                 <div class="lyric-en">${enText}</div>
                 ${zhText ? `<div class="lyric-zh">${zhText}</div>` : ''}
             `;
+
+            lyricsDiv.innerHTML = '';
+            lyricsDiv.appendChild(newLine);
+            setTimeout(() => newLine.classList.add('active'), 10);
         }
 
         function toggleMusic() {
