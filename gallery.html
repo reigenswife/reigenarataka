@@ -285,7 +285,7 @@
         <source src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/M500004QiRC30LMa8u.mp3" type="audio/mpeg">
     </audio>
 
-    <script>
+      <script>
         // 轮播
         const carouselInner = document.getElementById('carouselInner');
         let currentIndex = 1;
@@ -352,8 +352,8 @@
             });
         }
 
-        // ==================== 更新后的歌词数据（包含带括号的时间戳格式） ====================
-              const playlist = [
+        // ==================== 播放列表 ====================
+        const playlist = [
             {
                 title: "We Belong Together",
                 artist: "Mariah Carey",
@@ -376,10 +376,11 @@
                 lyricType: "i_stay_in_love"
             },
             {
-                title: "Always Be My Baby",
+                title: "Don't Forget About Us",
                 artist: "Mariah Carey",
-                url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-                hasLyrics: false
+                url: "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/Don't.Forget.About.Us.mp3",
+                hasLyrics: true,
+                lyricType: "dont_forget"
             },
             {
                 title: "Hero",
@@ -388,6 +389,7 @@
                 hasLyrics: false
             }
         ];
+
         let currentSongIndex = 0;
         const audio = document.getElementById('bgm');
         const playPauseBtn = document.getElementById('playPauseBtn');
@@ -402,9 +404,8 @@
         let isMuted = false;
         let previousVolume = 100;
         let currentLyricIndex = -1;
-        // 记录当前使用的歌词数组
 
-        // 更新后的歌词数据（根据你提供的时间轴）
+        // 第一首歌的歌词：We Belong Together
         const lyrics = [
             {time: 4.06, text: "Oh-ooh-ooh", zh: ""},
             {time: 11.11, text: "Oh", zh: ""},
@@ -460,7 +461,8 @@
             {time: 178.07, text: "Who's gon' take your place? There ain't nobody better", zh: "谁又能取代这世界上仅存完美的你 根本另无他人"},
             {time: 181.27, text: "Oh, baby, baby, we belong together~", zh: "因为宝贝我们注定属于彼此~"}
         ];
-                // 第二首歌的歌词：Underneath the Stars
+
+        // 第二首歌的歌词：Underneath the Stars
         const lyricsUnderneathStars = [
             {time: 4.45, text: "One summer night", zh: "一个夏日的夜晚"},
             {time: 9.02, text: "We ran away for a while", zh: "我们一同跑开"},
@@ -516,7 +518,8 @@
             {time: 181.51, text: "Underneath the stars", zh: "我们沐浴璀璨星光"},
             {time: 182.54, text: "(Young love)", zh: "（年轻的爱）"}
         ];
-                // 第三首歌的歌词：I Stay In Love
+
+        // 第三首歌的歌词：I Stay In Love
         const lyricsIStayInLove = [
             {time: 2.85, text: "Oh, ooh-ooh-ooh", zh: ""},
             {time: 6.30, text: "Oh, ooh-ooh", zh: ""},
@@ -582,7 +585,115 @@
             {time: 204.09, text: "Baby, I stay in love with you (I stay in love)", zh: "亲爱的，我还是深深地爱着你"},
             {time: 207.02, text: "Na na na na na na na na na", zh: "Dying inside cause I can't stand it"}
         ];
- let currentLyricsArray = lyrics; 
+
+        // 第四首歌的歌词：Don't Forget About Us
+        const lyricsDontForget = [
+            {time: 1.08, text: "\"Don't Forget About Us\"", zh: "别忘了我们的爱"},
+            {time: 2.60, text: "(Don't forget about us)", zh: "别忘了我们的爱"},
+            {time: 4.10, text: "Don't baby, don't baby, don't let it go", zh: "不能忘记"},
+            {time: 7.61, text: "No baby, no baby, no baby, no", zh: "oh 亲爱的"},
+            {time: 9.11, text: "(Don't forget about us)", zh: "别忘了我们的爱"},
+            {time: 10.87, text: "Don't baby, don't baby, don't let it go", zh: "留住那些美好"},
+            {time: 13.37, text: "My baby boy", zh: "My baby boy..."},
+            {time: 17.13, text: "Just let it die with no goodbyes", zh: "就让它随风而逝 不告而别"},
+            {time: 20.41, text: "Details don't matter, we both paid the price", zh: "细节已无关紧要 我们都付出了代价"},
+            {time: 23.92, text: "Tears in my eyes", zh: "我眼中的泪水"},
+            {time: 25.42, text: "You know sometimes it'd be like that, baby, yeah (Oh)", zh: "你可知道 它时常出现"},
+            {time: 31.93, text: "Now every time I see you, I pretend I'm fine (I pretend I'm fine)", zh: "如今每次见到你 我假装我很好"},
+            {time: 38.45, text: "When I wanna reach out to you", zh: "想要与你联系"},
+            {time: 41.96, text: "But I turn and I walk and I let it ride", zh: "却又转身离去，让机会溜走"},
+            {time: 45.47, text: "Baby, I must confess", zh: "宝贝我必须承认"},
+            {time: 48.98, text: "We were bigger than anything (Anything)", zh: "我们的爱大过一切"},
+            {time: 51.99, text: "Remember us at our best", zh: "留住我们的精彩瞬间"},
+            {time: 55.75, text: "And don't forget about (About us)", zh: "千万别忘记"},
+            {time: 57.25, text: "Late nights, playing in the dark", zh: "深夜里暗中嬉戏"},
+            {time: 58.76, text: "(Don't baby, don't baby, don't let it go)", zh: "不能忘记"},
+            {time: 60.51, text: "And waking up inside my arms", zh: "你在我身边醒来"},
+            {time: 61.51, text: "(Don't baby, don't baby, don't let it go)", zh: "不能忘记"},
+            {time: 63.51, text: "Boy, you'll always be in my heart and", zh: "我心里永远只有你"},
+            {time: 65.27, text: "(Don't baby, don't baby, don't let it go)", zh: "不能忘记"},
+            {time: 67.27, text: "I can see it in your eyes, you still want it", zh: "在你眼中我读出 无尽的欲望"},
+            {time: 69.03, text: "So don't forget about us", zh: "所以别忘了我们的爱"},
+            {time: 70.54, text: "(Don't baby, don't baby, don't let it go)", zh: "不能忘记"},
+            {time: 71.05, text: "I'm just speaking from experience", zh: "这都是我的经验之谈"},
+            {time: 74.33, text: "(Don't baby, don't baby, don't let it go)", zh: "不能忘记"},
+            {time: 75.58, text: "Nothing can compare to your first true love (About us)", zh: "第一选择最最重要"},
+            {time: 77.84, text: "(Don't baby, don't baby, don't let it go)", zh: "不能忘记"},
+            {time: 78.61, text: "So I hope this will remind you", zh: "我唱支歌来提醒你"},
+            {time: 80.86, text: "When it's for real, it's forever", zh: "真实的感情最持久"},
+            {time: 82.38, text: "So don't forget about us", zh: "所以别忘了我们的爱"},
+            {time: 83.63, text: "Oh, they say that you're in a new relationship", zh: "他们说 你有了新的感情"},
+            {time: 87.14, text: "But we both know nothing comes close to", zh: "但我们都知道 它比不上"},
+            {time: 90.64, text: "What we had, it perseveres", zh: "我们曾经拥有的，仍在继续"},
+            {time: 94.16, text: "That we both can't forget it", zh: "我们都无法忘记"},
+            {time: 95.91, text: "How good we used to get it (Oh)", zh: "我们曾是那样相爱"},
+            {time: 98.92, text: "There's only one me and you", zh: "世上只有一个我和你"},
+            {time: 102.18, text: "And how we used to shine (We used to shine)", zh: "发出独一无二的光芒"},
+            {time: 105.44, text: "No matter who you go through", zh: "无论你的光芒射到哪"},
+            {time: 108.95, text: "We are one, that's a fact that you can't deny", zh: "我们都密不可分，事实如此 无法否认"},
+            {time: 112.20, text: "So, baby, we just can't let the fire pass us by", zh: "宝贝，我们无法忘记 那些刀山火海下的回忆"},
+            {time: 118.73, text: "Forever we'd both regret it", zh: "永不分开，死而无憾"},
+            {time: 122.73, text: "So don't forget about (About us)", zh: "所以别忘了我们的爱"},
+            {time: 123.99, text: "Late nights, playing in the dark", zh: "深夜里暗中嬉戏"},
+            {time: 124.74, text: "(Don't baby, don't baby, don't let it go)", zh: "不能忘记"},
+            {time: 127.01, text: "And waking up inside my arms", zh: "你在我身边醒来"},
+            {time: 128.77, text: "(Don't baby, don't baby, don't let it go)", zh: "不能忘记"},
+            {time: 130.52, text: "Boy, you'll always be in my heart and", zh: "我心里永远只有你"},
+            {time: 132.79, text: "(Don't baby, don't baby, don't let it go)", zh: "不能忘记"},
+            {time: 134.29, text: "I can see it in your eyes, you still want it", zh: "在你眼中我读出 无尽的欲望"},
+            {time: 135.84, text: "So don't forget about us", zh: "所以别忘了我们的爱"},
+            {time: 137.60, text: "(Don't baby, don't baby, don't let it go)", zh: "不能忘记"},
+            {time: 138.10, text: "I'm just speaking from experience", zh: "这都是我的经验之谈"},
+            {time: 141.12, text: "(Don't baby, don't baby, don't let it go)", zh: "不能忘记"},
+            {time: 142.37, text: "Nothing can compare to your first true love (About us)", zh: "第一选择最最重要"},
+            {time: 144.63, text: "(Don't baby, don't baby, don't let it go)", zh: "不能忘记"},
+            {time: 145.63, text: "So I hope this will remind you", zh: "我唱支歌来提醒你"},
+            {time: 147.66, text: "When it's for real, it's forever", zh: "真实的感情最持久"},
+            {time: 149.41, text: "So don't forget about us", zh: "所以别忘了我们的爱"},
+            {time: 150.92, text: "And if she's got your head all messed up now", zh: "现在如果她让你的头绪乱糟糟"},
+            {time: 152.93, text: "That's the trickery", zh: "这是一场骗局"},
+            {time: 154.46, text: "So why you act like you don't know how this loving used to be?", zh: "然而你胡作又非为，似乎忘了我们的爱"},
+            {time: 157.49, text: "Ah, I bet she can't do it like me, she'll never be MC", zh: "她一定不如我爱你 她永远成不了女一号"},
+            {time: 160.78, text: "Baby, don't you, don't you forget about us (About us)", zh: "宝贝，不是吗？所以别忘了我们的爱"},
+            {time: 164.04, text: "Late nights, playing in the dark", zh: "深夜里暗中嬉戏"},
+            {time: 165.29, text: "(Don't baby, don't baby, don't let it go)", zh: "不能忘记"},
+            {time: 167.05, text: "And waking up inside my arms (About us)", zh: "你在我身边醒来"},
+            {time: 169.06, text: "(Don't baby, don't baby, don't let it go)", zh: "不能忘记"},
+            {time: 170.31, text: "Boy, you'll always be in my heart and", zh: "我心里永远只有你"},
+            {time: 173.07, text: "(Don't baby, don't baby, don't let it go)", zh: "不能忘记"},
+            {time: 174.32, text: "I can see it in your eyes, you still want it", zh: "在你眼中我读出 无尽的欲望"},
+            {time: 176.07, text: "So don't forget about us (About us) (Oh babe)", zh: "所以别忘了我们的爱"},
+            {time: 177.83, text: "I'm just speaking from experience", zh: "这都是我的经验之谈"},
+            {time: 180.12, text: "(Don't baby, don't baby, don't let it go)", zh: "不能忘记"},
+            {time: 182.38, text: "Nothing can compare to your first true love (About us)", zh: "第一选择最最重要"},
+            {time: 184.64, text: "(Don't baby, don't baby, don't let it go)", zh: "不能忘记"},
+            {time: 185.42, text: "So I hope this will remind you", zh: "我唱支歌来提醒你"},
+            {time: 185.95, text: "(Don't baby, don't baby, don't let it go)", zh: "不能忘记"},
+            {time: 187.46, text: "When it's for real, it's forever", zh: "真实的感情最持久"},
+            {time: 189.48, text: "So don't forget about us", zh: "所以别忘了我们的爱"},
+            {time: 190.98, text: "Late nights, playing in the dark", zh: "深夜里暗中嬉戏"},
+            {time: 191.99, text: "(Don't baby, don't baby, don't let it go)", zh: "不能忘记"},
+            {time: 194.28, text: "And waking up inside my arms", zh: "你在我身边醒来"},
+            {time: 196.28, text: "(Don't baby, don't baby, don't let it go)", zh: "不能忘记"},
+            {time: 197.28, text: "Boy, you'll always be in my heart and", zh: "我心里永远只有你"},
+            {time: 199.81, text: "(Don't baby, don't baby, don't let it go)", zh: "不能忘记"},
+            {time: 201.06, text: "I can see it in your eyes, you still want it", zh: "在你眼中我读出 无尽的欲望"},
+            {time: 202.82, text: "So don't forget about us (About us)", zh: "所以别忘了我们的爱"},
+            {time: 204.32, text: "I'm just speaking from experience", zh: "这都是我的经验之谈"},
+            {time: 207.87, text: "(Don't baby, don't baby, don't let it go)", zh: "不能忘记"},
+            {time: 208.88, text: "Nothing can compare to your first true love (About us)", zh: "第一选择最最重要"},
+            {time: 211.64, text: "(Don't baby, don't baby, don't let it go)", zh: "不能忘记"},
+            {time: 212.17, text: "So I hope this will remind you, babe", zh: "我唱支歌来提醒你"},
+            {time: 214.17, text: "(Don't baby, don't baby, don't let it go)", zh: "不能忘记"},
+            {time: 214.42, text: "When it's for real, it's forever", zh: "真实的感情最持久"},
+            {time: 216.21, text: "So don't forget about us (About us)", zh: "所以别忘了我们的爱"},
+            {time: 218.01, text: "Don't baby, don't baby, don't let it go", zh: "不能忘记"},
+            {time: 221.52, text: "No baby, no baby, no baby, no (Don't forget about us)", zh: "oh 亲爱的"},
+            {time: 225.03, text: "Don't baby, don't baby, don't let it go", zh: "留住那些美好"},
+            {time: 227.78, text: "When it's for real, it's forever", zh: "真实的感情最持久"},
+            {time: 229.54, text: "So don't forget about us", zh: "所以别忘了我们的爱"}
+        ];
+
         // 加载歌曲
         function loadSong(index) {
             const song = playlist[index];
@@ -642,7 +753,7 @@
             }
         }
 
-             // 更新歌词显示
+        // 更新歌词显示（只有一个，正确的版本）
         function updateLyrics() {
             const currentSong = playlist[currentSongIndex];
             if (!currentSong.hasLyrics) return;
@@ -653,6 +764,8 @@
                 currentLyrics = lyricsUnderneathStars;
             } else if (currentSong.lyricType === "i_stay_in_love") {
                 currentLyrics = lyricsIStayInLove;
+            } else if (currentSong.lyricType === "dont_forget") {
+                currentLyrics = lyricsDontForget;
             } else {
                 currentLyrics = lyrics;  // 默认是 We Belong Together 的歌词
             }
@@ -686,6 +799,7 @@
             lyricsDiv.appendChild(newLine);
             setTimeout(() => newLine.classList.add('active'), 50);
         }
+
         // 音量控制
         function setVolume(value) {
             audio.volume = value / 100;
