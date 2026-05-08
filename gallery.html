@@ -268,6 +268,7 @@
             <button class="player-btn" id="prevBtn" title="上一首">⏮</button>
             <button class="player-btn" id="playPauseBtn" title="播放/暂停">▶</button>
             <button class="player-btn" id="nextBtn" title="下一首">⏭</button>
+             <button class="player-btn" id="shuffleBtn" title="随机播放">🔀</button>
             <div class="song-info">
                 <div class="song-title" id="songTitle">We Belong Together</div>
                 <div class="song-artist" id="songArtist">Mariah Carey</div>
@@ -403,6 +404,7 @@ const images = [
         ];
 
         let currentSongIndex = 0;
+        let isShuffle = false;  // 添加这行：随机播放开关
         const audio = document.getElementById('bgm');
         const playPauseBtn = document.getElementById('playPauseBtn');
         const prevBtn = document.getElementById('prevBtn');
@@ -785,9 +787,19 @@ const lyricsDontForget = [
             isPlaying = !isPlaying;
         }
 
-        // 下一首
+            // 下一首
         function nextSong() {
-            currentSongIndex = (currentSongIndex + 1) % playlist.length;
+            if (isShuffle) {
+                // 随机播放：随机选一首，但不要和当前一样（除非只有一首歌）
+                let newIndex = currentSongIndex;
+                while (newIndex === currentSongIndex && playlist.length > 1) {
+                    newIndex = Math.floor(Math.random() * playlist.length);
+                }
+                currentSongIndex = newIndex;
+            } else {
+                // 顺序播放
+                currentSongIndex = (currentSongIndex + 1) % playlist.length;
+            }
             loadSong(currentSongIndex);
             if (isPlaying) {
                 audio.play().catch(err => console.log("自动播放失败:", err));
@@ -874,12 +886,28 @@ const lyricsDontForget = [
                 setVolume(0);
             }
         }
+                  // 切换随机播放模式
+        function toggleShuffle() {
+            isShuffle = !isShuffle;
+            const shuffleBtn = document.getElementById('shuffleBtn');
+            if (isShuffle) {
+                shuffleBtn.style.background = '#4a2c7d';
+                shuffleBtn.style.color = 'white';
+                shuffleBtn.title = '顺序播放';
+            } else {
+                shuffleBtn.style.background = '#f5f5f5';
+                shuffleBtn.style.color = '#333';
+                shuffleBtn.title = '随机播放';
+            }
+        }
 
         // 事件监听
         function initPlayer() {
             playPauseBtn.onclick = togglePlayPause;
             prevBtn.onclick = prevSong;
             nextBtn.onclick = nextSong;
+                      const shuffleBtn = document.getElementById('shuffleBtn');
+            shuffleBtn.onclick = toggleShuffle;  
             volumeSlider.oninput = (e) => setVolume(parseInt(e.target.value));
             volumeBtn.onclick = toggleMute;
             
