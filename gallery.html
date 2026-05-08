@@ -33,8 +33,8 @@
         }
 
         .carousel {
-            max-width: 900px; 
-            height: 580px;
+            max-width: 1000px; 
+            height: 620px;
             margin: 0 auto 40px;
             position: relative; 
             border-radius: 20px;
@@ -287,11 +287,24 @@
         // 轮播
         const carouselInner = document.getElementById('carouselInner');
         let currentIndex = 1;
-        const images = [
-            "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg",
-            "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg",
-            "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg"
-        ];
+    // ==================== 轮播图片（使用 images 文件夹） ====================
+const images = [
+    "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/images/reigen-1.jpg",
+    "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/images/reigen-2.jpg",
+    "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/images/reigen-3.jpg",
+    "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/images/reigen-4.jpg",
+    "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/images/reigen-5.jpg",
+    "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/images/reigen-6.jpg",
+    "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/images/reigen-7.jpg",
+    "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/images/reigen-8.jpg",
+    "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/images/reigen-9.jpg",
+    "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/images/reigen-10.jpg",
+    "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/images/reigen-11.jpg",
+    "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/images/reigen-12.jpg",
+    "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/images/reigen-13.jpg",
+    "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/images/reigen-14.jpg",
+    "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/images/reigen-15.jpg",
+];
 
         function initCarousel() {
             carouselInner.innerHTML = '';
