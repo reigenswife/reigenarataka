@@ -6,126 +6,166 @@
     <title>Reigen Arataka · 灵能事务所</title>
     <style>
         :root {
-            --bg: #f8f7f4;
+            --bg: #f0f7ff;
             --card: #ffffff;
-            --text: #222222;
-            --accent: #b38eff;
+            --text: #1e3a8a;
+            --accent: #3b9eff;
+            --subtitle: #6478a0;
         }
         
         * { box-sizing: border-box; }
         
         body {
-            font-family: "Microsoft YaHei", Arial, sans-serif;
-            background: var(--bg);
+            font-family: "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+            background: 
+                linear-gradient(#e6f0ff 1px, transparent 1px),
+                linear-gradient(90deg, #e6f0ff 1px, transparent 1px);
+            background-size: 40px 40px;
             color: var(--text);
             margin: 0;
             padding: 0;
-            line-height: 1.7;
+            line-height: 1.8;
         }
         
-        /* 顶部大图横幅 */
+        /* 顶部横幅 */
         .header-banner {
             position: relative;
             width: 100%;
-            height: 420px;
-            background: url('https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg') center/cover no-repeat;
+            height: 580px;
+            background: linear-gradient(rgba(240,247,255,0.25), rgba(240,247,255,0.7)), 
+                        url('https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg') center/cover no-repeat;
             display: flex;
             align-items: flex-end;
+            padding-bottom: 60px;
+        }
+        
+        .header-content {
+            max-width: 1420px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 70px;
+            display: flex;
+            align-items: flex-end;
+            gap: 30px;
+        }
+        
+        /* Logo 区域 */
+        .logo {
+            width: 110px;
+            height: 110px;
+            background: url('https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg') center/cover;
+            border-radius: 50%;
+            border: 6px solid #ffffff;
+            box-shadow: 0 8px 25px rgba(59, 158, 255, 0.3);
+            flex-shrink: 0;
         }
         
         .header-title {
-            position: absolute;
-            bottom: 40px;
-            left: 50px;
-            color: white;
-            font-size: 2.8em;   /* 已调小 */
-            font-weight: bold;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.75);
-            z-index: 2;
+            color: #fff;
+            font-size: 4.1em;           /* 进一步加大 */
+            font-weight: 800;
+            text-shadow: 0 6px 30px rgba(0,0,0,0.65);
+            letter-spacing: -0.04em;
+            margin-bottom: 8px;
         }
         
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 28px;
-            max-width: 1300px;
-            margin: 50px auto;
-            padding: 0 20px;
+            grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
+            gap: 42px;
+            max-width: 1420px;
+            margin: 100px auto;
+            padding: 0 40px;
         }
         
         .card {
             background: var(--card);
-            border-radius: 20px;
+            border-radius: 26px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(179, 142, 255, 0.15);
-            transition: all 0.4s ease;
+            box-shadow: 0 15px 40px rgba(59, 158, 255, 0.15);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             text-decoration: none;
             color: inherit;
             height: 100%;
             display: flex;
             flex-direction: column;
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 25px 50px rgba(179, 142, 255, 0.28);
+            transform: translateY(-20px);
+            box-shadow: 0 35px 70px rgba(59, 158, 255, 0.25);
         }
         
         .card img {
             width: 100%;
-            height: 230px;
+            height: 260px;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.8s ease;
         }
         
         .card:hover img {
-            transform: scale(1.05);
+            transform: scale(1.07);
         }
         
         .card-content {
-            padding: 24px;
+            padding: 32px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
         
         .card-title {
-            font-size: 1.48em;
-            margin: 0 0 10px 0;
-            color: #2c1f4a;
-            font-weight: bold;
+            font-size: 1.68em;
+            margin: 0 0 12px 0;
+            color: #1e40af;
+            font-weight: 700;
+        }
+        
+        .card:hover .card-title {
+            color: var(--accent);
         }
         
         .card-date {
-            color: #666666;
+            color: var(--subtitle);
             font-size: 0.95em;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
         
         .card-keyline {
-            color: #444444;
-            font-size: 1.02em;
+            color: #334155;
+            font-size: 1.06em;
             flex-grow: 1;
         }
         
         footer {
-            margin-top: 80px;
-            padding-bottom: 40px;
-            color: #666;
-            font-size: 1.1em;
+            margin-top: 140px;
+            padding-bottom: 80px;
+            color: #6478a0;
+            font-size: 1.05em;
             text-align: center;
         }
     </style>
 </head>
 <body>
-    <!-- 顶部 Reigen 大图 + 名字在左下角 -->
+    <!-- 顶部横幅 + Logo -->
     <div class="header-banner">
-        <div class="header-title">Reigen Arataka</div>
+        <div class="header-content">
+            <div class="logo"></div>
+            <div>
+                <div class="header-title">Reigen Arataka</div>
+            </div>
+        </div>
     </div>
     
-    <!-- 你的六张卡片 -->
+    <!-- 卡片区域 -->
     <div class="grid">
-        <!-- 相册（已修改） -->
         <a href="gallery.html" class="card">
             <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="相册">
             <div class="card-content">
@@ -135,7 +175,6 @@
             </div>
         </a>
         
-        <!-- 心动记忆 -->
         <a href="memory.html" class="card">
             <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="记忆">
             <div class="card-content">
@@ -145,7 +184,6 @@
             </div>
         </a>
         
-        <!-- 灵能故事 -->
         <a href="story.html" class="card">
             <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="故事">
             <div class="card-content">
@@ -155,7 +193,6 @@
             </div>
         </a>
         
-        <!-- 经典语录 -->
         <a href="quotes.html" class="card">
             <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="语录">
             <div class="card-content">
@@ -165,7 +202,6 @@
             </div>
         </a>
         
-        <!-- 周边收藏 -->
         <a href="merch.html" class="card">
             <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="周边">
             <div class="card-content">
@@ -175,7 +211,6 @@
             </div>
         </a>
         
-        <!-- 关于 Reigen -->
         <a href="about.html" class="card">
             <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="关于">
             <div class="card-content">
@@ -189,5 +224,20 @@
     <footer>
         Powered by GitHub Pages • Reigen Arataka Fan Site
     </footer>
+
+    <script>
+        const cards = document.querySelectorAll('.card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 110);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        cards.forEach(card => observer.observe(card));
+    </script>
 </body>
 </html>
