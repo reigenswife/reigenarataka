@@ -6,22 +6,26 @@
   <title>Reigen Arataka · 灵能事务所</title>
   <style>
     :root {
-      --bg1: #dbe4f1;
-      --bg2: #edf3fb;
+      --bg1: #dfe9f7;
+      --bg2: #eef4fc;
       --frame: #bfd1e6;
-      --frame-strong: #9fb8d5;
-      --panel: rgba(255,255,255,0.82);
-      --panel-soft: rgba(241,246,252,0.9);
-      --text: #415264;
-      --muted: #74869b;
-      --line: #cfdceb;
-      --lace: #f8fbff;
+      --frame-strong: #97b4d3;
+      --panel: rgba(255,255,255,0.84);
+      --panel-soft: rgba(245,249,255,0.92);
+      --text: #43566a;
+      --muted: #76889d;
+      --line: #d5e2f0;
       --accent: #8eb1d6;
       --accent2: #d9b7ea;
+      --white: #ffffff;
     }
 
     * {
       box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -29,69 +33,75 @@
       font-family: "Maple Mono", "Consolas", "Courier New", "Microsoft YaHei", monospace;
       color: var(--text);
       background:
-        linear-gradient(rgba(255,255,255,0.16), rgba(255,255,255,0.16)),
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,0.65), transparent 16%),
+        radial-gradient(circle at 85% 16%, rgba(255,255,255,0.55), transparent 18%),
+        linear-gradient(rgba(255,255,255,0.15), rgba(255,255,255,0.15)),
         repeating-linear-gradient(
           to bottom,
-          rgba(120, 150, 190, 0.08) 0px,
-          rgba(120, 150, 190, 0.08) 1px,
+          rgba(120,150,190,0.08) 0px,
+          rgba(120,150,190,0.08) 1px,
           transparent 2px,
           transparent 4px
         ),
-        radial-gradient(circle at top left, rgba(255,255,255,0.7), transparent 28%),
         linear-gradient(135deg, var(--bg1), var(--bg2));
       min-height: 100vh;
-      padding: 30px 20px 40px;
-      position: relative;
+      padding: 28px 18px 40px;
       overflow-x: hidden;
+      position: relative;
     }
 
-    /* 背景装饰 */
-    body::before,
-    body::after {
+    body::before {
       content: "";
       position: fixed;
       inset: 0;
       pointer-events: none;
-      z-index: 0;
-    }
-
-    body::before {
       background:
-        linear-gradient(to right, rgba(160,180,210,0.15) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(160,180,210,0.15) 1px, transparent 1px);
+        linear-gradient(to right, rgba(170,190,220,0.14) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(170,190,220,0.14) 1px, transparent 1px);
       background-size: 36px 36px;
-      opacity: 0.35;
+      opacity: 0.4;
     }
 
-    body::after {
-      background:
-        radial-gradient(circle at 10% 18%, rgba(255,255,255,0.5), transparent 15%),
-        radial-gradient(circle at 88% 25%, rgba(255,255,255,0.45), transparent 18%),
-        radial-gradient(circle at 25% 80%, rgba(255,255,255,0.3), transparent 14%);
-      opacity: 0.6;
+    .float-deco {
+      position: fixed;
+      font-size: 14px;
+      color: rgba(130,160,200,0.45);
+      pointer-events: none;
+      z-index: 0;
+      animation: drift 6s ease-in-out infinite;
+    }
+
+    .d1 { top: 70px; left: 50px; }
+    .d2 { top: 140px; right: 70px; animation-delay: 1s; }
+    .d3 { bottom: 100px; left: 90px; animation-delay: 2s; }
+    .d4 { bottom: 160px; right: 100px; animation-delay: 3s; }
+
+    @keyframes drift {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
     }
 
     .wrapper {
       position: relative;
       z-index: 1;
-      max-width: 1400px;
+      max-width: 1380px;
       margin: 0 auto;
-      background: rgba(255,255,255,0.35);
-      border: 2px solid #d7e4f3;
+      background: rgba(255,255,255,0.36);
+      border: 2px solid #d6e3f2;
       border-radius: 30px;
       padding: 18px;
       box-shadow:
-        0 0 0 6px rgba(247,250,255,0.75),
-        0 0 0 8px rgba(176,198,223,0.65),
-        0 20px 45px rgba(84, 108, 139, 0.12);
+        0 0 0 6px rgba(248,251,255,0.82),
+        0 0 0 8px rgba(182,201,224,0.65),
+        0 20px 44px rgba(92,114,145,0.12);
       backdrop-filter: blur(3px);
     }
 
     .inner-frame {
-      border: 2px dashed #c6d8eb;
+      border: 2px dashed #c7d8ea;
       border-radius: 24px;
       padding: 16px;
-      background: rgba(255,255,255,0.32);
+      background: rgba(255,255,255,0.34);
       position: relative;
     }
 
@@ -104,23 +114,22 @@
       pointer-events: none;
     }
 
-    /* 顶部大图 */
     .hero {
-      border-radius: 18px;
+      position: relative;
       overflow: hidden;
+      border-radius: 18px;
       border: 2px solid var(--frame);
       background: white;
       box-shadow: inset 0 0 0 4px rgba(255,255,255,0.75);
-      position: relative;
       margin-bottom: 14px;
     }
 
     .hero img {
       width: 100%;
-      height: 300px;
+      height: 320px;
       object-fit: cover;
       display: block;
-      filter: saturate(0.88) brightness(1.02);
+      filter: saturate(0.9) brightness(1.03);
     }
 
     .hero::after {
@@ -128,7 +137,7 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(to top, rgba(78,96,118,0.18), transparent 45%),
+        linear-gradient(to top, rgba(70,90,110,0.24), transparent 48%),
         repeating-linear-gradient(
           to bottom,
           rgba(255,255,255,0.06) 0px,
@@ -143,24 +152,34 @@
       position: absolute;
       left: 28px;
       bottom: 24px;
+      color: white;
       z-index: 2;
-      color: #fff;
       text-shadow: 0 2px 12px rgba(0,0,0,0.35);
     }
 
     .hero-title h1 {
       margin: 0;
-      font-size: 2.2rem;
+      font-size: 2.3rem;
       letter-spacing: 2px;
     }
 
     .hero-title p {
       margin: 6px 0 0;
       font-size: 0.92rem;
-      opacity: 0.95;
+      opacity: 0.96;
     }
 
-    /* 三栏布局 */
+    .top-marquee {
+      margin-bottom: 14px;
+      background: rgba(255,255,255,0.76);
+      border: 2px solid var(--frame);
+      border-radius: 16px;
+      padding: 10px 14px;
+      color: #627b99;
+      font-size: 0.9rem;
+      box-shadow: inset 0 0 0 4px rgba(255,255,255,0.6);
+    }
+
     .grid {
       display: grid;
       grid-template-columns: 280px 1fr 300px;
@@ -174,25 +193,24 @@
       gap: 14px;
     }
 
-    /* 面板 */
     .panel {
       background: var(--panel);
       border: 2px solid var(--frame);
       border-radius: 22px;
       overflow: hidden;
       box-shadow:
-        inset 0 0 0 4px rgba(255,255,255,0.65),
-        0 8px 22px rgba(133, 157, 186, 0.10);
+        inset 0 0 0 4px rgba(255,255,255,0.66),
+        0 8px 22px rgba(133,157,186,0.10);
       backdrop-filter: blur(4px);
     }
 
     .panel-header {
-      background: linear-gradient(to bottom, #e7f0fa, #dce8f5);
-      border-bottom: 1px solid #c6d7e8;
+      background: linear-gradient(to bottom, #e8f1fb, #dbe8f5);
+      border-bottom: 1px solid #c8d8e9;
       padding: 12px 18px;
       font-size: 0.95rem;
       letter-spacing: 1px;
-      color: #5d7390;
+      color: #5f7694;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -201,13 +219,13 @@
     .panel-header::before {
       content: "✦";
       font-size: 0.82rem;
-      color: #6f8fb2;
+      color: #7292b6;
     }
 
     .panel-body {
       padding: 16px;
       background:
-        linear-gradient(rgba(255,255,255,0.25), rgba(255,255,255,0.25)),
+        linear-gradient(rgba(255,255,255,0.23), rgba(255,255,255,0.23)),
         repeating-linear-gradient(
           to bottom,
           rgba(173,195,219,0.11) 0px,
@@ -217,7 +235,6 @@
         );
     }
 
-    /* 左侧目录 */
     .menu-list {
       display: flex;
       flex-direction: column;
@@ -225,80 +242,37 @@
     }
 
     .menu-item {
+      display: block;
       text-decoration: none;
       color: var(--text);
-      background: rgba(255,255,255,0.75);
-      border: 1px dashed #c8d8e8;
+      background: rgba(255,255,255,0.78);
+      border: 1px dashed #c9d8e8;
       border-radius: 14px;
       padding: 12px 14px;
       font-size: 0.95rem;
       transition: 0.25s ease;
-      display: block;
     }
 
     .menu-item:hover {
       transform: translateX(4px);
       border-color: var(--frame-strong);
       background: white;
-      color: #35516f;
+      color: #365270;
       box-shadow: 0 6px 14px rgba(141,177,214,0.16);
     }
 
     .mini-photo img,
-    .side-photo img {
+    .side-photo img,
+    .sticker img {
       width: 100%;
       display: block;
-      border-radius: 14px;
-      border: 1px solid #c9d8e7;
       object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid #cad9e8;
     }
 
-    .mini-photo img {
-      height: 220px;
-    }
-
-    .side-photo img {
-      height: 180px;
-    }
-
-    /* 视频卡片样式 */
-    .video-container {
-      position: relative;
-      width: 100%;
-      border-radius: 16px;
-      overflow: hidden;
-      background: #000;
-      aspect-ratio: 16 / 9;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
-    }
-
-    .video-container video {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-      background: #0a0e14;
-    }
-
-    .memory-video {
-      margin-top: 6px;
-    }
-
-    .video-caption {
-      margin-top: 10px;
-      font-size: 0.85rem;
-      color: #5f7896;
-      text-align: center;
-      letter-spacing: 0.3px;
-      border-top: 1px dashed #cddeef;
-      padding-top: 10px;
-    }
-
-    /* 中间 about */
-    .about-card {
-      min-height: 520px;
-      position: relative;
-    }
+    .mini-photo img { height: 220px; }
+    .side-photo img { height: 180px; }
 
     .about-main {
       display: grid;
@@ -314,48 +288,55 @@
       font-weight: 600;
     }
 
-    .about-text .lead {
-      font-size: 1.1rem;
+    .lead {
+      font-size: 1.08rem;
       line-height: 1.9;
       margin-bottom: 18px;
       color: #394a5d;
     }
 
-    .about-text .desc {
+    .desc {
       color: var(--muted);
       line-height: 2;
-      font-size: 0.97rem;
+      font-size: 0.96rem;
+    }
+
+    .signature {
+      margin-top: 24px;
+      color: #6a82a0;
+      font-size: 0.93rem;
     }
 
     .sticker {
-      align-self: end;
-      justify-self: center;
-      width: 100%;
-      max-width: 240px;
-      background: rgba(255,255,255,0.72);
-      border: 1px dashed #c9d9e8;
+      background: rgba(255,255,255,0.76);
+      border: 1px dashed #cad9e8;
       border-radius: 18px;
       padding: 10px;
       box-shadow: 0 10px 20px rgba(120,140,170,0.08);
     }
 
     .sticker img {
-      width: 100%;
-      display: block;
-      border-radius: 12px;
-      object-fit: cover;
-      height: 260px;
+      height: 270px;
     }
 
-    .signature {
-      margin-top: 26px;
-      color: #68809d;
-      font-size: 0.94rem;
+    .chips {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
-    /* 右侧 visitors */
+    .chip {
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      background: #edf4fc;
+      border: 1px solid #d3e0ed;
+      color: #5f7ca0;
+    }
+
     .visitor-box {
-      background: rgba(255,255,255,0.72);
+      background: rgba(255,255,255,0.74);
       border: 1px dashed #c7d8ea;
       border-radius: 16px;
       padding: 14px;
@@ -375,12 +356,11 @@
     }
 
     .sparkle {
-      color: #d28baa;
-      font-size: 1.15rem;
+      color: #cf8fac;
+      font-size: 1.05rem;
       letter-spacing: 2px;
     }
 
-    /* 日历 */
     .calendar {
       text-align: center;
       font-size: 0.92rem;
@@ -412,13 +392,27 @@
       font-size: 0.82rem;
     }
 
-    .calendar-grid .date.active {
+    .calendar-grid .active {
       background: #cdddf0;
       color: #35516f;
       font-weight: 700;
     }
 
-    /* 底部功能区 */
+    .badge-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .badge {
+      font-size: 0.8rem;
+      padding: 6px 10px;
+      border-radius: 10px;
+      background: #f4f8fd;
+      border: 1px solid #d8e3ef;
+      color: #607a98;
+    }
+
     .bottom-sections {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -427,7 +421,7 @@
     }
 
     .feature {
-      background: rgba(255,255,255,0.78);
+      background: rgba(255,255,255,0.8);
       border: 2px solid var(--frame);
       border-radius: 20px;
       overflow: hidden;
@@ -475,11 +469,12 @@
       border: 1px solid #d5e1ee;
     }
 
-    /* 视频特色卡片特殊样式覆盖 */
-    .video-feature .video-container {
-      margin-bottom: 8px;
-      border-radius: 14px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    .footer-note {
+      margin-top: 14px;
+      text-align: center;
+      color: #7b8ea4;
+      font-size: 0.88rem;
+      padding: 14px;
     }
 
     @media (max-width: 1100px) {
@@ -525,17 +520,18 @@
       .panel-header {
         font-size: 0.88rem;
       }
-
-      .video-container {
-        aspect-ratio: 16 / 9;
-      }
     }
   </style>
 </head>
 <body>
+  <div class="float-deco d1">✦ ✧</div>
+  <div class="float-deco d2">♡</div>
+  <div class="float-deco d3">☁</div>
+  <div class="float-deco d4">✦</div>
+
   <div class="wrapper">
     <div class="inner-frame">
-      <!-- 顶部横幅 -->
+
       <section class="hero">
         <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="Reigen Arataka">
         <div class="hero-title">
@@ -544,16 +540,19 @@
         </div>
       </section>
 
-      <!-- 主体三栏 -->
+      <div class="top-marquee">
+        <marquee scrollamount="4">欢迎来到 Reigen archive ♡ 这里收藏照片、台词、剧情片段、追番心情与关于他的温柔记忆 ✦</marquee>
+      </div>
+
       <section class="grid">
         <!-- 左栏 -->
         <div class="column">
           <div class="panel">
-            <div class="panel-header">目录 directory</div>
+            <div class="panel-header">directory</div>
             <div class="panel-body">
               <div class="menu-list">
                 <a href="#" class="menu-item">📸 gallery / 相册</a>
-                <a href="#" class="menu-item">🎬 影像记忆 / video</a>
+                <a href="#" class="menu-item">💖 memory / 心动记忆</a>
                 <a href="#" class="menu-item">📖 diary / 灵能故事</a>
                 <a href="#" class="menu-item">💬 quotes / 经典语录</a>
                 <a href="#" class="menu-item">🛍 merch / 周边收藏</a>
@@ -565,12 +564,12 @@
           <div class="panel">
             <div class="panel-header">photo card</div>
             <div class="panel-body mini-photo">
-              <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="心动记忆">
+              <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="Reigen photo">
             </div>
           </div>
 
           <div class="panel">
-            <div class="panel-header">note</div>
+            <div class="panel-header">favorite quote</div>
             <div class="panel-body">
               <p style="margin:0; line-height:1.9; color:var(--muted); font-size:0.92rem;">
                 “我可是21世纪最强的灵能师。”<br>
@@ -582,7 +581,7 @@
 
         <!-- 中栏 -->
         <div class="column">
-          <div class="panel about-card">
+          <div class="panel">
             <div class="panel-header">about me</div>
             <div class="panel-body">
               <div class="about-main">
@@ -593,59 +592,55 @@
                     记录喜欢的瞬间、对白、故事，还有那些让人心动的小小记忆。
                   </div>
                   <div class="desc">
-                    这个页面参考了复古个人主页的排版风格，用更柔和的蓝白配色、描边面板、
-                    顶部横幅和三栏模块来呈现内容。中间区域适合放简介、文字、更新日志、
-                    或者你想写给 Reigen 的小短文。<br><br>
-                    右侧下方的「影像记忆」板块现在展示为一段珍藏视频，收录灵幻新隆最令人心动的片段。
-                    如果你喜欢的话，可以随时替换视频链接，让回忆动起来。
-
+                    这个页面是复古个人主页风格的首页，你可以继续把它扩展成完整站点：
+                    例如角色介绍、追番记录、图集入口、语录归档、留言板、收藏链接、
+                    甚至做成 diary 风格的同人主页。<br><br>
+                    如果你喜欢类似 neocities 的感觉，重点就是：
+                    柔和配色、可爱装饰、模块化面板、小挂件、像素感排版，
+                    再加上一点个人化内容，就会非常有氛围。
                   </div>
+
+                  <div class="chips">
+                    <span class="chip"># psychic</span>
+                    <span class="chip"># archive</span>
+                    <span class="chip"># diary</span>
+                    <span class="chip"># fanpage</span>
+                  </div>
+
                   <div class="signature">by reigenswife ♡</div>
                 </div>
 
                 <div class="sticker">
-                  <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="Reigen 日常">
+                  <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="Reigen daily">
                 </div>
               </div>
             </div>
           </div>
 
           <div class="bottom-sections">
-            <!-- gallery 模块保留 -->
             <div class="feature">
               <div class="panel-header">gallery</div>
               <div class="panel-body">
                 <h3>📸 相册</h3>
-                <p>收集 Reigen 的截图、官方图、喜欢的画面与保存下来的美好瞬间。</p>
+                <p>收集截图、官方图、保存下来的喜欢瞬间，做成专属图集页面。</p>
                 <span class="tag">24 张图片</span>
               </div>
             </div>
 
-            <!-- 【视频模块】 使用你指定的 GitHub 视频源 -->
-            <div class="feature video-feature">
-              <div class="panel-header">🎬 影像记忆 · video</div>
+            <div class="feature">
+              <div class="panel-header">memories</div>
               <div class="panel-body">
-                <h3>✨ 心动剪影 · 珍藏片段</h3>
-                <div class="video-container memory-video">
-                  <video controls>
-                    <source src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/videos/ass.mp4" type="video/mp4">
-                    您的浏览器不支持 video 标签，可在此处替换为你珍藏的灵幻视频片段。
-                  </video>
-                </div>
-                <div class="video-caption">
-                  ♡ “来自 Reigen 的珍贵影像 · 永远值得铭记的瞬间” ♡<br>
-                  （珍藏版视频 | 灵幻新隆）
-                </div>
-                <span class="tag">🎞️ 1 则珍藏视频</span>
+                <h3>💖 心动记忆</h3>
+                <p>记录特别喜欢的剧情、表情、台词，以及只属于你的情绪片段。</p>
+                <span class="tag">12 个片段</span>
               </div>
             </div>
 
-            <!-- story 模块 -->
             <div class="feature">
               <div class="panel-header">story</div>
               <div class="panel-body">
                 <h3>📖 灵能故事</h3>
-                <p>像日记一样整理剧情碎片、同人设定或关于 Reigen 的日常记录。</p>
+                <p>像日记一样整理剧情感想、同人设定和角色相关的小记录。</p>
                 <span class="tag">8 篇记录</span>
               </div>
             </div>
@@ -675,11 +670,23 @@
               </div>
               <div class="calendar-grid">
                 <div class="day">日</div><div class="day">一</div><div class="day">二</div><div class="day">三</div><div class="day">四</div><div class="day">五</div><div class="day">六</div>
-                <div></div><div></div><div></div><div></div><div class="date">1</div><div class="date">2</div><div class="date">3</div>
-                <div class="date">4</div><div class="date">5</div><div class="date">6</div><div class="date">7</div><div class="date">8</div><div class="date active">9</div><div class="date">10</div>
-                <div class="date">11</div><div class="date">12</div><div class="date">13</div><div class="date">14</div><div class="date">15</div><div class="date">16</div><div class="date">17</div>
-                <div class="date">18</div><div class="date">19</div><div class="date">20</div><div class="date">21</div><div class="date">22</div><div class="date">23</div><div class="date">24</div>
-                <div class="date">25</div><div class="date">26</div><div class="date">27</div><div class="date">28</div><div class="date">29</div><div class="date">30</div><div class="date">31</div>
+                <div></div><div></div><div></div><div></div><div>1</div><div>2</div><div>3</div>
+                <div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div class="active">9</div><div>10</div>
+                <div>11</div><div>12</div><div>13</div><div>14</div><div>15</div><div>16</div><div>17</div>
+                <div>18</div><div>19</div><div>20</div><div>21</div><div>22</div><div>23</div><div>24</div>
+                <div>25</div><div>26</div><div>27</div><div>28</div><div>29</div><div>30</div><div>31</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">badges</div>
+            <div class="panel-body">
+              <div class="badge-list">
+                <span class="badge">reigen fan</span>
+                <span class="badge">mp100</span>
+                <span class="badge">archive</span>
+                <span class="badge">neocities mood</span>
               </div>
             </div>
           </div>
@@ -695,14 +702,19 @@
             <div class="panel-header">updates</div>
             <div class="panel-body">
               <p style="margin:0; color:var(--muted); line-height:1.9; font-size:0.92rem;">
-                + 新增视频模块 / 影像记忆<br>
-                + 将「心动记忆」升级为多媒体珍藏<br>
-                + 优化复古三栏布局，支持视频播放
+                + 新增相册模块<br>
+                + 更新首页横幅<br>
+                + 调整为复古三栏布局<br>
+                + 增加梦幻漂浮装饰
               </p>
             </div>
           </div>
         </div>
       </section>
+
+      <div class="footer-note">
+        made with love ♡ Reigen personal archive
+      </div>
     </div>
   </div>
 
@@ -733,7 +745,7 @@
             const diffDays = Math.floor((todayDate - lastDate) / (1000 * 60 * 60 * 24));
             if (diffDays > 0 && diffDays < 1000) {
               let newCount = data.count + diffDays;
-              // 保持上限不超过9999，样式为五位数字保持美观 (最多五位数)
+              // 保持上限不超过99999，样式为五位数字保持美观 (最多五位数)
               if (newCount > 99999) newCount = 99999;
               currentCount = newCount;
             } else if (diffDays >= 0) {
