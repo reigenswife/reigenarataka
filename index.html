@@ -25,7 +25,6 @@
             background: var(--bg);
             margin: 0;
             padding: 40px 24px;
-            /* 优化的网格背景 */
             background-image: 
                 linear-gradient(var(--grid-line) 1.5px, transparent 1.5px),
                 linear-gradient(90deg, var(--grid-line) 1.5px, transparent 1.5px);
@@ -58,7 +57,6 @@
             cursor: pointer;
         }
 
-        /* 模拟参考站点的随机倾斜感 */
         .photocard:nth-child(1) { transform: rotate(-2deg); }
         .photocard:nth-child(2) { transform: rotate(1.5deg); }
         .photocard:nth-child(3) { transform: rotate(-1deg); }
@@ -82,7 +80,7 @@
         }
         
         .lace-wrapper {
-            background: rgba(255, 255, 255, 0.6); /* 玻璃拟态外框 */
+            background: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(5px);
             border-radius: 40px;
             padding: 12px;
@@ -98,7 +96,6 @@
             position: relative;
         }
         
-        /* 顶部装饰符号 */
         .inner-card::before {
             content: "✧ SPIRITS & SUCH ✧";
             position: absolute;
@@ -115,7 +112,6 @@
             border-radius: 20px;
         }
         
-        /* 大横图视觉 */
         .hero {
             position: relative;
             border-radius: 24px;
@@ -147,7 +143,6 @@
             letter-spacing: -1px;
         }
         
-        /* --- 功能区块 Grid --- */
         .sections {
             display: grid;
             grid-template-columns: repeat(12, 1fr);
@@ -167,6 +162,8 @@
             align-items: center;
             position: relative;
             overflow: hidden;
+            text-decoration: none;
+            color: inherit;
         }
         
         .section:hover {
@@ -176,7 +173,6 @@
             box-shadow: 0 8px 20px rgba(141, 181, 214, 0.15);
         }
         
-        /* 比例分配 */
         .s1 { grid-column: span 3; }
         .s2 { grid-column: span 4; }
         .s3 { grid-column: span 6; }
@@ -208,7 +204,6 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
         
-        /* 特别致谢块样式 - 无标题版 */
         .section.s4 {
             background: linear-gradient(to right, #f8fbff, #ffffff);
             padding: 30px;
@@ -218,7 +213,6 @@
             display: none;
         }
 
-        /* --- 移动端适配 --- */
         @media (max-width: 1000px) {
             .container { grid-template-columns: 1fr; }
             .sidebar {
@@ -258,11 +252,12 @@
                     </div>
                     
                     <div class="sections">
-                        <div class="section s1">
-                            <h3>📸 灵能画廊</h3>
+                        <!-- 相册卡片 - 已改为跳转到画廊页面 -->
+                        <a href="gallery.html" class="section s1" style="text-decoration: none; color: inherit;">
+                            <h3>📸 相册</h3>
                             <p>精彩瞬间</p>
                             <div class="counter">✨ 24 张</div>
-                        </div>
+                        </a>
                         <div class="section s2">
                             <h3>💖 心动记忆</h3>
                             <p>重要时刻</p>
@@ -328,9 +323,8 @@
                             <div class="counter">🔗 1/2</div>
                         </div>
                         
-                        <!-- 特别致谢区块 - 标题已删除 -->
                         <div class="section s4">
-                            <p>感谢 <strong>我自己</strong> · 本网站为 Reigen FUN应援站</p>
+                            <p>感谢 <strong>rottenware</strong> 等优秀创作者带来的灵感 · 本网站为 Reigen 粉丝应援站</p>
                         </div>
                     </div>
                 </div>
