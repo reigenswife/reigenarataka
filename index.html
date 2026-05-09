@@ -6,238 +6,336 @@
     <title>Reigen Arataka · 灵能事务所</title>
     <style>
         :root {
-            --bg: #f0f7ff;
-            --card: #ffffff;
-            --text: #1e3a8a;
-            --accent: #3b9eff;
-            --subtitle: #6478a0;
+            /* 深度参考 seolhae 的色彩系统 */
+            --bg: #f2f6fa;           /* 更干净的页面背景 */
+            --grid-line: #e3eaf3;    /* 更浅的网格线 */
+            --border-light: #d8e4f0; /* 边框色 */
+            --inner-bg: #ffffff;     /* 纯白内容区 */
+            --accent: #8db5d6;       /* 核心点缀色 */
+            --accent-soft: #f0f5f9;  /* 悬浮淡蓝色 */
+            --text-main: #4a5a6a;    /* 深灰蓝文字 */
+            --text-soft: #8ca0b3;    /* 辅助淡文字 */
+            --shadow: 0 10px 30px rgba(180, 190, 210, 0.2);
         }
         
         * { box-sizing: border-box; }
         
         body {
-            font-family: "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
-            background: 
-                linear-gradient(#e6f0ff 1px, transparent 1px),
-                linear-gradient(90deg, #e6f0ff 1px, transparent 1px);
-            background-size: 40px 40px;
-            color: var(--text);
+            font-family: "SF Pro Display", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--bg);
             margin: 0;
-            padding: 0;
-            line-height: 1.8;
+            padding: 40px 24px;
+            /* 优化的网格背景 */
+            background-image: 
+                linear-gradient(var(--grid-line) 1.5px, transparent 1.5px),
+                linear-gradient(90deg, var(--grid-line) 1.5px, transparent 1.5px);
+            background-size: 30px 30px;
+            color: var(--text-main);
         }
         
-        /* 顶部横幅 */
-        .header-banner {
-            position: relative;
-            width: 100%;
-            height: 580px;
-            background: linear-gradient(rgba(240,247,255,0.25), rgba(240,247,255,0.7)), 
-                        url('https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg') center/cover no-repeat;
-            display: flex;
-            align-items: flex-end;
-            padding-bottom: 60px;
-        }
-        
-        .header-content {
-            max-width: 1420px;
+        .container {
+            max-width: 1400px;
             margin: 0 auto;
-            width: 100%;
-            padding: 0 70px;
-            display: flex;
-            align-items: flex-end;
-            gap: 30px;
-        }
-        
-        /* Logo 区域 */
-        .logo {
-            width: 110px;
-            height: 110px;
-            background: url('https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg') center/cover;
-            border-radius: 50%;
-            border: 6px solid #ffffff;
-            box-shadow: 0 8px 25px rgba(59, 158, 255, 0.3);
-            flex-shrink: 0;
-        }
-        
-        .header-title {
-            color: #fff;
-            font-size: 4.1em;           /* 进一步加大 */
-            font-weight: 800;
-            text-shadow: 0 6px 30px rgba(0,0,0,0.65);
-            letter-spacing: -0.04em;
-            margin-bottom: 8px;
-        }
-        
-        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
-            gap: 42px;
-            max-width: 1420px;
-            margin: 100px auto;
-            padding: 0 40px;
+            grid-template-columns: 280px 1fr;
+            gap: 32px;
         }
         
-        .card {
-            background: var(--card);
-            border-radius: 26px;
-            overflow: hidden;
-            box-shadow: 0 15px 40px rgba(59, 158, 255, 0.15);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            text-decoration: none;
-            color: inherit;
-            height: 100%;
+        /* --- 左侧 Photocard 区域 --- */
+        .sidebar {
             display: flex;
             flex-direction: column;
-            opacity: 0;
-            transform: translateY(40px);
+            gap: 24px;
         }
         
-        .card.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .photocard {
+            background: white;
+            border-radius: 16px;
+            padding: 10px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-light);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        /* 模拟参考站点的随机倾斜感 */
+        .photocard:nth-child(1) { transform: rotate(-2deg); }
+        .photocard:nth-child(2) { transform: rotate(1.5deg); }
+        .photocard:nth-child(3) { transform: rotate(-1deg); }
+
+        .photocard:hover {
+            transform: translateY(-8px) rotate(0deg) scale(1.03);
+            box-shadow: 0 15px 40px rgba(141, 181, 214, 0.3);
+            z-index: 10;
         }
         
-        .card:hover {
-            transform: translateY(-20px);
-            box-shadow: 0 35px 70px rgba(59, 158, 255, 0.25);
-        }
-        
-        .card img {
+        .photocard img {
             width: 100%;
-            height: 260px;
+            border-radius: 8px;
+            display: block;
+        }
+        
+        /* --- 右侧主内容区域 --- */
+        .main {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .lace-wrapper {
+            background: rgba(255, 255, 255, 0.6); /* 玻璃拟态外框 */
+            backdrop-filter: blur(5px);
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+        
+        .inner-card {
+            background: var(--inner-bg);
+            border-radius: 32px;
+            padding: 40px;
+            border: 1px solid var(--border-light);
+            position: relative;
+        }
+        
+        /* 顶部装饰符号 */
+        .inner-card::before {
+            content: "✧ SPIRITS & SUCH ✧";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 0 25px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: var(--accent);
+            letter-spacing: 4px;
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+        }
+        
+        /* 大横图视觉 */
+        .hero {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            height: 400px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+        
+        .hero img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             transition: transform 0.8s ease;
         }
-        
-        .card:hover img {
-            transform: scale(1.07);
+
+        .hero:hover img {
+            transform: scale(1.05);
         }
         
-        .card-content {
-            padding: 32px;
-            flex-grow: 1;
+        .hero-title {
+            position: absolute;
+            bottom: 40px;
+            left: 45px;
+            color: white;
+            font-size: 4em;
+            font-weight: 800;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            letter-spacing: -1px;
+        }
+        
+        /* --- 功能区块 Grid --- */
+        .sections {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 18px;
+        }
+        
+        .section {
+            background: #fff;
+            border: 1px solid #edf2f7;
+            border-radius: 22px;
+            padding: 24px 15px;
+            text-align: center;
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
         }
         
-        .card-title {
-            font-size: 1.68em;
-            margin: 0 0 12px 0;
-            color: #1e40af;
+        .section:hover {
+            background: var(--accent-soft);
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(141, 181, 214, 0.15);
+        }
+        
+        /* 比例分配 */
+        .s1 { grid-column: span 3; }
+        .s2 { grid-column: span 4; }
+        .s3 { grid-column: span 6; }
+        .s4 { grid-column: span 12; }
+        
+        .section h3 {
+            margin: 0 0 10px 0;
+            color: var(--text-main);
+            font-size: 1.1em;
             font-weight: 700;
         }
         
-        .card:hover .card-title {
+        .section p {
+            margin: 0;
+            font-size: 0.85em;
+            color: var(--text-soft);
+            line-height: 1.5;
+        }
+        
+        .counter {
+            font-size: 0.7rem;
+            background: white;
+            padding: 4px 14px;
+            border-radius: 30px;
+            margin-top: 15px;
             color: var(--accent);
+            font-weight: bold;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
         
-        .card-date {
-            color: var(--subtitle);
-            font-size: 0.95em;
-            margin-bottom: 16px;
+        /* 特别致谢块样式 - 无标题版 */
+        .section.s4 {
+            background: linear-gradient(to right, #f8fbff, #ffffff);
+            padding: 30px;
         }
         
-        .card-keyline {
-            color: #334155;
-            font-size: 1.06em;
-            flex-grow: 1;
+        .section.s4 h3 {
+            display: none;
         }
-        
-        footer {
-            margin-top: 140px;
-            padding-bottom: 80px;
-            color: #6478a0;
-            font-size: 1.05em;
-            text-align: center;
+
+        /* --- 移动端适配 --- */
+        @media (max-width: 1000px) {
+            .container { grid-template-columns: 1fr; }
+            .sidebar {
+                flex-direction: row;
+                overflow-x: auto;
+                padding-bottom: 10px;
+                justify-content: flex-start;
+            }
+            .photocard { min-width: 180px; transform: none !important; }
+            .hero-title { font-size: 2.8em; }
+        }
+
+        @media (max-width: 600px) {
+            .s1, .s2, .s3 { grid-column: span 12; }
+            .inner-card { padding: 20px; }
+            .hero { height: 240px; }
+            .hero-title { font-size: 2em; left: 20px; bottom: 20px; }
         }
     </style>
 </head>
 <body>
-    <!-- 顶部横幅 + Logo -->
-    <div class="header-banner">
-        <div class="header-content">
-            <div class="logo"></div>
-            <div>
-                <div class="header-title">Reigen Arataka</div>
+    <div class="container">
+        
+        <div class="sidebar">
+            <div class="photocard"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="Reigen帅气瞬间"></div>
+            <div class="photocard"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="心动记忆"></div>
+            <div class="photocard"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="灵能日常"></div>
+        </div>
+        
+        <div class="main">
+            <div class="lace-wrapper">
+                <div class="inner-card">
+                    
+                    <div class="hero">
+                        <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="Reigen Arataka 主视觉">
+                        <div class="hero-title">Reigen Arataka</div>
+                    </div>
+                    
+                    <div class="sections">
+                        <div class="section s1">
+                            <h3>📸 灵能画廊</h3>
+                            <p>精彩瞬间</p>
+                            <div class="counter">✨ 24 张</div>
+                        </div>
+                        <div class="section s2">
+                            <h3>💖 心动记忆</h3>
+                            <p>重要时刻</p>
+                            <div class="counter">❤️ 12 个</div>
+                        </div>
+                        <div class="section s1">
+                            <h3>📖 灵能故事</h3>
+                            <p>日常记录</p>
+                            <div class="counter">📘 8 话</div>
+                        </div>
+                        
+                        <div class="section s3">
+                            <h3>💬 经典语录</h3>
+                            <p>“我可是21世纪最强的灵能师”</p>
+                            <div class="counter">🌟 15 句</div>
+                        </div>
+                        
+                        <div class="section s1">
+                            <h3>🛍️ 周边收藏</h3>
+                            <p>Merch 展示</p>
+                            <div class="counter">🎁 9 件</div>
+                        </div>
+                        <div class="section s1">
+                            <h3>👤 关于 Reigen</h3>
+                            <p>最强灵能师</p>
+                            <div class="counter">⚡ 传说</div>
+                        </div>
+                        <div class="section s2">
+                            <h3>🎵 音乐空间</h3>
+                            <p>主题曲 & BGM</p>
+                            <div class="counter">🎧 0:00 ▶</div>
+                        </div>
+                        
+                        <div class="section s1">
+                            <h3>✨ 成就系统</h3>
+                            <p>灵能力解锁</p>
+                            <div class="counter">🔓 3/10</div>
+                        </div>
+                        <div class="section s1">
+                            <h3>🐱 拍拍 Reigen</h3>
+                            <p>互动计数</p>
+                            <div class="counter">👏 128 次</div>
+                        </div>
+                        <div class="section s2">
+                            <h3>🗓️ 事务所日志</h3>
+                            <p>最新更新</p>
+                            <div class="counter">📅 2026.05</div>
+                        </div>
+                        
+                        <div class="section s1">
+                            <h3>🎴 粉丝创作</h3>
+                            <p>Art by you</p>
+                            <div class="counter">💌 投稿</div>
+                        </div>
+                        <div class="section s1">
+                            <h3>🔮 灵能测试</h3>
+                            <p>你的灵能属性</p>
+                            <div class="counter">✨ 互动</div>
+                        </div>
+                        <div class="section s2">
+                            <h3>🔗 友链交换</h3>
+                            <p>webring</p>
+                            <div class="counter">🔗 1/2</div>
+                        </div>
+                        
+                        <!-- 特别致谢区块 - 标题已删除 -->
+                        <div class="section s4">
+                            <p>感谢 <strong>我自己</strong> · 本网站为 Reigen FUN应援站</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    
-    <!-- 卡片区域 -->
-    <div class="grid">
-        <a href="gallery.html" class="card">
-            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="相册">
-            <div class="card-content">
-                <div class="card-title">相册</div>
-                <div class="card-date">精彩瞬间</div>
-                <div class="card-keyline">Reigen 最帅气的每一帧</div>
-            </div>
-        </a>
-        
-        <a href="memory.html" class="card">
-            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="记忆">
-            <div class="card-content">
-                <div class="card-title">心动记忆</div>
-                <div class="card-date">重要时刻</div>
-                <div class="card-keyline">那些值得反复回味的瞬间</div>
-            </div>
-        </a>
-        
-        <a href="story.html" class="card">
-            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="故事">
-            <div class="card-content">
-                <div class="card-title">灵能故事</div>
-                <div class="card-date">日常记录</div>
-                <div class="card-keyline">事务所的奇妙日常</div>
-            </div>
-        </a>
-        
-        <a href="quotes.html" class="card">
-            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="语录">
-            <div class="card-content">
-                <div class="card-title">经典语录</div>
-                <div class="card-date">名场面</div>
-                <div class="card-keyline">“我可是21世纪最强的灵能师”</div>
-            </div>
-        </a>
-        
-        <a href="merch.html" class="card">
-            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="周边">
-            <div class="card-content">
-                <div class="card-title">周边收藏</div>
-                <div class="card-date">Merch</div>
-                <div class="card-keyline">Reigen 的各种周边展示</div>
-            </div>
-        </a>
-        
-        <a href="about.html" class="card">
-            <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="关于">
-            <div class="card-content">
-                <div class="card-title">关于 Reigen</div>
-                <div class="card-date">灵能事务所</div>
-                <div class="card-keyline">关于这位最强灵能师的一切</div>
-            </div>
-        </a>
-    </div>
-    
-    <footer>
-        Powered by GitHub Pages • Reigen Arataka Fan Site
-    </footer>
-
-    <script>
-        const cards = document.querySelectorAll('.card');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, index * 110);
-                }
-            });
-        }, { threshold: 0.1 });
-        
-        cards.forEach(card => observer.observe(card));
-    </script>
 </body>
 </html>
