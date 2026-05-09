@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Reigen Arataka · 灵能事务所</title>
+  <title>Reigen Arataka · 个人收藏站</title>
   <style>
     :root {
       --bg1: #dfe9f7;
@@ -19,31 +19,18 @@
       --accent2: #d9b7ea;
       --white: #ffffff;
     }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
       font-family: "Maple Mono", "Consolas", "Courier New", "Microsoft YaHei", monospace;
       color: var(--text);
-      background:
-        radial-gradient(circle at 15% 20%, rgba(255,255,255,0.65), transparent 16%),
-        radial-gradient(circle at 85% 16%, rgba(255,255,255,0.55), transparent 18%),
-        linear-gradient(rgba(255,255,255,0.15), rgba(255,255,255,0.15)),
-        repeating-linear-gradient(
-          to bottom,
-          rgba(120,150,190,0.08) 0px,
-          rgba(120,150,190,0.08) 1px,
-          transparent 2px,
-          transparent 4px
-        ),
-        linear-gradient(135deg, var(--bg1), var(--bg2));
+      background: radial-gradient(circle at 15% 20%, rgba(255,255,255,0.65), transparent 16%),
+                  radial-gradient(circle at 85% 16%, rgba(255,255,255,0.55), transparent 18%),
+                  linear-gradient(rgba(255,255,255,0.15), rgba(255,255,255,0.15)),
+                  repeating-linear-gradient(to bottom, rgba(120,150,190,0.08) 0px, rgba(120,150,190,0.08) 1px, transparent 2px, transparent 4px),
+                  linear-gradient(135deg, var(--bg1), var(--bg2));
       min-height: 100vh;
       padding: 28px 18px 40px;
       overflow-x: hidden;
@@ -55,9 +42,8 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      background:
-        linear-gradient(to right, rgba(170,190,220,0.14) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(170,190,220,0.14) 1px, transparent 1px);
+      background: linear-gradient(to right, rgba(170,190,220,0.14) 1px, transparent 1px),
+                  linear-gradient(to bottom, rgba(170,190,220,0.14) 1px, transparent 1px);
       background-size: 36px 36px;
       opacity: 0.4;
     }
@@ -70,7 +56,6 @@
       z-index: 0;
       animation: drift 6s ease-in-out infinite;
     }
-
     .d1 { top: 70px; left: 50px; }
     .d2 { top: 140px; right: 70px; animation-delay: 1s; }
     .d3 { bottom: 100px; left: 90px; animation-delay: 2s; }
@@ -90,10 +75,7 @@
       border: 2px solid #d6e3f2;
       border-radius: 30px;
       padding: 18px;
-      box-shadow:
-        0 0 0 6px rgba(248,251,255,0.82),
-        0 0 0 8px rgba(182,201,224,0.65),
-        0 20px 44px rgba(92,114,145,0.12);
+      box-shadow: 0 0 0 6px rgba(248,251,255,0.82), 0 0 0 8px rgba(182,201,224,0.65), 0 20px 44px rgba(92,114,145,0.12);
       backdrop-filter: blur(3px);
     }
 
@@ -114,412 +96,70 @@
       pointer-events: none;
     }
 
-    .hero {
-      position: relative;
-      overflow: hidden;
-      border-radius: 18px;
-      border: 2px solid var(--frame);
-      background: white;
-      box-shadow: inset 0 0 0 4px rgba(255,255,255,0.75);
-      margin-bottom: 14px;
-    }
+    .hero { position: relative; overflow: hidden; border-radius: 18px; border: 2px solid var(--frame); background: white; box-shadow: inset 0 0 0 4px rgba(255,255,255,0.75); margin-bottom: 14px; }
+    .hero img { width: 100%; height: 320px; object-fit: cover; display: block; filter: saturate(0.9) brightness(1.03); }
+    .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(70,90,110,0.24), transparent 48%), repeating-linear-gradient(to bottom, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 1px, transparent 2px, transparent 4px); pointer-events: none; }
+    .hero-title { position: absolute; left: 28px; bottom: 24px; color: white; z-index: 2; text-shadow: 0 2px 12px rgba(0,0,0,0.35); }
+    .hero-title h1 { margin: 0; font-size: 2.3rem; letter-spacing: 2px; }
+    .hero-title p { margin: 6px 0 0; font-size: 0.9rem; opacity: 0.96; }
 
-    .hero img {
-      width: 100%;
-      height: 320px;
-      object-fit: cover;
-      display: block;
-      filter: saturate(0.9) brightness(1.03);
-    }
+    .top-marquee { margin-bottom: 14px; background: rgba(255,255,255,0.76); border: 2px solid var(--frame); border-radius: 16px; padding: 10px 14px; color: #627b99; font-size: 0.9rem; box-shadow: inset 0 0 0 4px rgba(255,255,255,0.6); }
+    .grid { display: grid; grid-template-columns: 280px 1fr 300px; gap: 14px; align-items: start; }
+    .column { display: flex; flex-direction: column; gap: 14px; }
+    .panel { background: var(--panel); border: 2px solid var(--frame); border-radius: 22px; overflow: hidden; box-shadow: inset 0 0 0 4px rgba(255,255,255,0.66), 0 8px 22px rgba(133,157,186,0.10); backdrop-filter: blur(4px); }
+    .panel-header { background: linear-gradient(to bottom, #e8f1fb, #dbe8f5); border-bottom: 1px solid #c8d8e9; padding: 12px 18px; font-size: 0.95rem; letter-spacing: 1px; color: #5f7694; display: flex; align-items: center; gap: 8px; }
+    .panel-header::before { content: "✦"; font-size: 0.82rem; color: #7292b6; }
+    .panel-body { padding: 16px; background: linear-gradient(rgba(255,255,255,0.23), rgba(255,255,255,0.23)), repeating-linear-gradient(to bottom, rgba(173,195,219,0.11) 0px, rgba(173,195,219,0.11) 1px, transparent 2px, transparent 28px); }
 
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(to top, rgba(70,90,110,0.24), transparent 48%),
-        repeating-linear-gradient(
-          to bottom,
-          rgba(255,255,255,0.06) 0px,
-          rgba(255,255,255,0.06) 1px,
-          transparent 2px,
-          transparent 4px
-        );
-      pointer-events: none;
-    }
+    /* 菜单样式 */
+    .menu-list { display: flex; flex-direction: column; gap: 12px; }
+    .menu-item { display: block; color: var(--text); text-decoration: none; font-size: 0.95rem; padding: 4px 0; border-bottom: 1px dotted var(--line); transition: all 0.2s; }
+    .menu-item:hover { padding-left: 8px; color: #2e4e6e; border-bottom-color: #b2c9e2; }
 
-    .hero-title {
-      position: absolute;
-      left: 28px;
-      bottom: 24px;
-      color: white;
-      z-index: 2;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.35);
-    }
+    /* photo card 样式 (用于左侧的小图) */
+    .mini-photo { text-align: center; }
+    .mini-photo img { max-width: 100%; border-radius: 16px; border: 2px solid var(--frame-strong); box-shadow: 4px 4px 14px rgba(0,0,0,0.06); }
 
-    .hero-title h1 {
-      margin: 0;
-      font-size: 2.3rem;
-      letter-spacing: 2px;
-    }
+    /* 宠物容器样式：与 mini-photo 视觉一致 */
+    .pet-container { text-align: center; }
+    .pet-iframe { width: 100%; aspect-ratio: 1 / 1; max-width: 260px; border: 2px solid var(--frame-strong); border-radius: 16px; background: #ffffff; box-shadow: 4px 4px 14px rgba(0,0,0,0.06); }
 
-    .hero-title p {
-      margin: 6px 0 0;
-      font-size: 0.92rem;
-      opacity: 0.96;
-    }
+    .about-main { display: flex; gap: 20px; flex-wrap: wrap; justify-content: space-between; }
+    .about-text { flex: 2; }
+    .about-text h2 { margin: 0 0 12px 0; font-size: 1.4rem; color: #52718e; }
+    .lead { font-size: 0.98rem; margin-bottom: 16px; line-height: 1.5; background: rgba(255,255,255,0.5); padding: 8px 12px; border-radius: 18px; }
+    .desc { font-size: 0.9rem; color: var(--muted); margin-bottom: 18px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0 8px; }
+    .chip { background: #eff5fc; border-radius: 48px; padding: 4px 16px; font-size: 0.8rem; color: #5981a2; border: 1px solid #c8dcf0; }
+    .signature { font-size: 0.78rem; text-align: right; color: #88a0bb; margin-top: 14px; border-top: 1px dashed var(--line); padding-top: 14px; }
+    .sticker { flex: 1; min-width: 100px; text-align: center; }
+    .sticker img { max-width: 100%; border-radius: 20px; }
 
-    .top-marquee {
-      margin-bottom: 14px;
-      background: rgba(255,255,255,0.76);
-      border: 2px solid var(--frame);
-      border-radius: 16px;
-      padding: 10px 14px;
-      color: #627b99;
-      font-size: 0.9rem;
-      box-shadow: inset 0 0 0 4px rgba(255,255,255,0.6);
-    }
+    .bottom-sections { display: flex; flex-direction: column; gap: 14px; }
+    .feature { background: var(--panel-soft); border-radius: 22px; border: 1px solid #cce0f2; overflow: hidden; }
+    .feature .panel-header { background: #eef3fc; }
+    .tag { display: inline-block; background: white; padding: 4px 14px; border-radius: 50px; font-size: 0.75rem; color: #6787a6; border: 1px solid #c4d4e8; margin-top: 10px; }
 
-    .grid {
-      display: grid;
-      grid-template-columns: 280px 1fr 300px;
-      gap: 14px;
-      align-items: start;
-    }
+    /* 访客计数器 */
+    .visitor-box { text-align: center; }
+    .counter { font-size: 2.2rem; font-weight: bold; letter-spacing: 2px; background: rgba(255,255,240,0.7); border-radius: 28px; padding: 8px 6px; margin: 12px 0; font-family: monospace; color: #496b89; border: 1px solid #c9ddf1; }
+    .sparkle { font-size: 0.88rem; letter-spacing: 3px; color: #b290c5; }
 
-    .column {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
+    .calendar-top { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 18px; color: #758ea9; }
+    .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; text-align: center; font-size: 0.78rem; }
+    .day { font-weight: bold; color: #8199b7; margin-bottom: 4px; }
+    .active { background: #d6e6fa; border-radius: 30px; color: #2f5b84; font-weight: bold; }
 
-    .panel {
-      background: var(--panel);
-      border: 2px solid var(--frame);
-      border-radius: 22px;
-      overflow: hidden;
-      box-shadow:
-        inset 0 0 0 4px rgba(255,255,255,0.66),
-        0 8px 22px rgba(133,157,186,0.10);
-      backdrop-filter: blur(4px);
-    }
+    .badge-list { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+    .badge { background: #eef2f8; border-radius: 30px; padding: 4px 14px; font-size: 0.75rem; border: 1px solid #c7d8ec; color: #577594; }
 
-    .panel-header {
-      background: linear-gradient(to bottom, #e8f1fb, #dbe8f5);
-      border-bottom: 1px solid #c8d8e9;
-      padding: 12px 18px;
-      font-size: 0.95rem;
-      letter-spacing: 1px;
-      color: #5f7694;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .panel-header::before {
-      content: "✦";
-      font-size: 0.82rem;
-      color: #7292b6;
-    }
-
-    .panel-body {
-      padding: 16px;
-      background:
-        linear-gradient(rgba(255,255,255,0.23), rgba(255,255,255,0.23)),
-        repeating-linear-gradient(
-          to bottom,
-          rgba(173,195,219,0.11) 0px,
-          rgba(173,195,219,0.11) 1px,
-          transparent 2px,
-          transparent 28px
-        );
-    }
-
-    .menu-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .menu-item {
-      display: block;
-      text-decoration: none;
-      color: var(--text);
-      background: rgba(255,255,255,0.78);
-      border: 1px dashed #c9d8e8;
-      border-radius: 14px;
-      padding: 12px 14px;
-      font-size: 0.95rem;
-      transition: 0.25s ease;
-    }
-
-    .menu-item:hover {
-      transform: translateX(4px);
-      border-color: var(--frame-strong);
-      background: white;
-      color: #365270;
-      box-shadow: 0 6px 14px rgba(141,177,214,0.16);
-    }
-
-    .mini-photo img,
-    .side-photo img,
-    .sticker img {
-      width: 100%;
-      display: block;
-      object-fit: cover;
-      border-radius: 14px;
-      border: 1px solid #cad9e8;
-    }
-
-    .mini-photo img { height: 220px; }
-    .side-photo img { height: 180px; }
-
-    .about-main {
-      display: grid;
-      grid-template-columns: 1.25fr 0.75fr;
-      gap: 18px;
-      align-items: start;
-    }
-
-    .about-text h2 {
-      margin: 0 0 14px;
-      font-size: 1.8rem;
-      color: #4a617f;
-      font-weight: 600;
-    }
-
-    .lead {
-      font-size: 1.08rem;
-      line-height: 1.9;
-      margin-bottom: 18px;
-      color: #394a5d;
-    }
-
-    .desc {
-      color: var(--muted);
-      line-height: 2;
-      font-size: 0.96rem;
-    }
-
-    .signature {
-      margin-top: 24px;
-      color: #6a82a0;
-      font-size: 0.93rem;
-    }
-
-    .sticker {
-      background: rgba(255,255,255,0.76);
-      border: 1px dashed #cad9e8;
-      border-radius: 18px;
-      padding: 10px;
-      box-shadow: 0 10px 20px rgba(120,140,170,0.08);
-    }
-
-    .sticker img {
-      height: 270px;
-    }
-
-    .chips {
-      margin-top: 16px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .chip {
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 0.82rem;
-      background: #edf4fc;
-      border: 1px solid #d3e0ed;
-      color: #5f7ca0;
-    }
-
-    .visitor-box {
-      background: rgba(255,255,255,0.74);
-      border: 1px dashed #c7d8ea;
-      border-radius: 16px;
-      padding: 14px;
-    }
-
-    .visitor-box p {
-      margin: 0 0 8px;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .counter {
-      font-size: 1.5rem;
-      letter-spacing: 6px;
-      color: #445872;
-      margin: 10px 0 6px;
-    }
-
-    .sparkle {
-      color: #cf8fac;
-      font-size: 1.05rem;
-      letter-spacing: 2px;
-    }
-
-    .calendar {
-      text-align: center;
-      font-size: 0.92rem;
-      color: #60758f;
-    }
-
-    .calendar-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-      font-weight: 600;
-    }
-
-    .calendar-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 8px;
-    }
-
-    .calendar-grid div {
-      padding: 6px 0;
-      border-radius: 10px;
-    }
-
-    .calendar-grid .day {
-      color: #7f93aa;
-      font-weight: 700;
-      font-size: 0.82rem;
-    }
-
-    .calendar-grid .active {
-      background: #cdddf0;
-      color: #35516f;
-      font-weight: 700;
-    }
-
-    .badge-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .badge {
-      font-size: 0.8rem;
-      padding: 6px 10px;
-      border-radius: 10px;
-      background: #f4f8fd;
-      border: 1px solid #d8e3ef;
-      color: #607a98;
-    }
-
-    .bottom-sections {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-top: 14px;
-    }
-
-    .feature {
-      background: rgba(255,255,255,0.8);
-      border: 2px solid var(--frame);
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: inset 0 0 0 4px rgba(255,255,255,0.62);
-      transition: 0.25s ease;
-    }
-
-    .feature:hover {
-      transform: translateY(-4px);
-      box-shadow:
-        inset 0 0 0 4px rgba(255,255,255,0.62),
-        0 10px 20px rgba(133,157,186,0.16);
-      border-color: var(--frame-strong);
-    }
-
-    .feature .panel-header {
-      padding: 11px 16px;
-    }
-
-    .feature .panel-body {
-      padding: 18px 16px;
-    }
-
-    .feature h3 {
-      margin: 0 0 8px;
-      font-size: 1.02rem;
-      color: #45607d;
-    }
-
-    .feature p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.8;
-      font-size: 0.92rem;
-    }
-
-    .tag {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: #ecf3fb;
-      color: #5e7ea1;
-      font-size: 0.84rem;
-      border: 1px solid #d5e1ee;
-    }
-
-    .footer-note {
-      margin-top: 14px;
-      text-align: center;
-      color: #7b8ea4;
-      font-size: 0.88rem;
-      padding: 14px;
-    }
+    .footer-note { margin-top: 28px; text-align: center; font-size: 0.75rem; color: #7d98b5; border-top: 2px dotted #c7daee; padding-top: 18px; }
 
     @media (max-width: 1100px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .about-main {
-        grid-template-columns: 1fr;
-      }
-
-      .bottom-sections {
-        grid-template-columns: 1fr;
-      }
-
-      .hero img {
-        height: 240px;
-      }
+      .grid { grid-template-columns: 1fr; }
     }
-
     @media (max-width: 640px) {
-      body {
-        padding: 18px 10px 28px;
-      }
-
-      .wrapper {
-        padding: 10px;
-        border-radius: 20px;
-      }
-
-      .inner-frame {
-        padding: 10px;
-      }
-
-      .hero-title h1 {
-        font-size: 1.5rem;
-      }
-
-      .hero-title p {
-        font-size: 0.8rem;
-      }
-
-      .panel-header {
-        font-size: 0.88rem;
-      }
+      body { padding: 18px 10px 28px; }
     }
   </style>
 </head>
@@ -531,12 +171,11 @@
 
   <div class="wrapper">
     <div class="inner-frame">
-
       <section class="hero">
         <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="Reigen Arataka">
         <div class="hero-title">
           <h1>REIGEN ARATAKA</h1>
-          <p>霊とか相談所 · quiet archive of memories</p>
+          <p>quiet archive of memories · 個人收藏站</p>
         </div>
       </section>
 
@@ -560,20 +199,17 @@
               </div>
             </div>
           </div>
-
           <div class="panel">
             <div class="panel-header">photo card</div>
             <div class="panel-body mini-photo">
               <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="Reigen photo">
             </div>
           </div>
-
           <div class="panel">
             <div class="panel-header">favorite quote</div>
             <div class="panel-body">
               <p style="margin:0; line-height:1.9; color:var(--muted); font-size:0.92rem;">
-                “我可是21世纪最强的灵能师。”<br>
-                —— Reigen Arataka
+                “我可是21世纪最强的灵能师。”<br>—— Reigen Arataka
               </p>
             </div>
           </div>
@@ -592,31 +228,22 @@
                     记录喜欢的瞬间、对白、故事，还有那些让人心动的小小记忆。
                   </div>
                   <div class="desc">
-                    这个页面是复古个人主页风格的首页，你可以继续把它扩展成完整站点：
-                    例如角色介绍、追番记录、图集入口、语录归档、留言板、收藏链接、
-                    甚至做成 diary 风格的同人主页。<br><br>
-                    如果你喜欢类似 neocities 的感觉，重点就是：
-                    柔和配色、可爱装饰、模块化面板、小挂件、像素感排版，
-                    再加上一点个人化内容，就会非常有氛围。
+                    这个页面是复古个人主页风格的首页，你可以继续把它扩展成完整站点。
                   </div>
-
                   <div class="chips">
                     <span class="chip"># psychic</span>
                     <span class="chip"># archive</span>
                     <span class="chip"># diary</span>
                     <span class="chip"># fanpage</span>
                   </div>
-
                   <div class="signature">by reigenswife ♡</div>
                 </div>
-
                 <div class="sticker">
                   <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="Reigen daily">
                 </div>
               </div>
             </div>
           </div>
-
           <div class="bottom-sections">
             <div class="feature">
               <div class="panel-header">gallery</div>
@@ -626,7 +253,6 @@
                 <span class="tag">24 张图片</span>
               </div>
             </div>
-
             <div class="feature">
               <div class="panel-header">memories</div>
               <div class="panel-body">
@@ -635,7 +261,6 @@
                 <span class="tag">12 个片段</span>
               </div>
             </div>
-
             <div class="feature">
               <div class="panel-header">story</div>
               <div class="panel-body">
@@ -663,11 +288,7 @@
           <div class="panel">
             <div class="panel-header">calendar</div>
             <div class="panel-body calendar">
-              <div class="calendar-top">
-                <span>◀</span>
-                <span>2026 / 05</span>
-                <span>▶</span>
-              </div>
+              <div class="calendar-top"><span>◀</span><span>2026 / 05</span><span>▶</span></div>
               <div class="calendar-grid">
                 <div class="day">日</div><div class="day">一</div><div class="day">二</div><div class="day">三</div><div class="day">四</div><div class="day">五</div><div class="day">六</div>
                 <div></div><div></div><div></div><div></div><div>1</div><div>2</div><div>3</div>
@@ -691,10 +312,15 @@
             </div>
           </div>
 
+          <!-- 宠物模块：大小与左侧 photo card 视觉一致 -->
           <div class="panel">
-            <div class="panel-header">photo</div>
-            <div class="panel-body side-photo">
-              <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="Reigen">
+            <div class="panel-header">Reigen's tamaNOTchi ♡</div>
+            <div class="panel-body pet-container">
+              <iframe 
+                src="https://tamanotchi.world/32711c" 
+                class="pet-iframe"
+                title="Reigen's Pet">
+              </iframe>
             </div>
           </div>
 
@@ -705,7 +331,7 @@
                 + 新增相册模块<br>
                 + 更新首页横幅<br>
                 + 调整为复古三栏布局<br>
-                + 增加梦幻漂浮装饰
+                + 增加 Reigen 小宠物
               </p>
             </div>
           </div>
@@ -719,60 +345,37 @@
   </div>
 
   <script>
-    // 每日自动增加计数器 (基于本地存储的日期判断)
     (function() {
       const counterElem = document.getElementById('visitorCounter');
       if (!counterElem) return;
-      
-      // 获取存储的关键字
-      const storageKey = 'reigen_visitor_base';
-      const todayStr = new Date().toISOString().slice(0,10); // YYYY-MM-DD
-      
-      let currentCount = 920; // 初始设定为 920 (显示为00920)
-      
-      // 尝试读取存储的数据
-      const saved = localStorage.getItem(storageKey);
-      if (saved) {
-        try {
-          const data = JSON.parse(saved);
-          if (data.date === todayStr) {
-            // 如果已经是今天，直接使用存储的计数
-            currentCount = data.count;
-          } else {
-            // 否则依据上次存储的日期，按天数增加
-            const lastDate = new Date(data.date);
-            const todayDate = new Date(todayStr);
-            const diffDays = Math.floor((todayDate - lastDate) / (1000 * 60 * 60 * 24));
-            if (diffDays > 0 && diffDays < 1000) {
-              let newCount = data.count + diffDays;
-              // 保持上限不超过99999，样式为五位数字保持美观 (最多五位数)
-              if (newCount > 99999) newCount = 99999;
-              currentCount = newCount;
-            } else if (diffDays >= 0) {
-              currentCount = data.count + 1; // 至少增加1
+
+      let currentCount = 920;
+
+      try {
+        const storageKey = 'reigen_visitor_base';
+        const todayStr = new Date().toISOString().slice(0,10);
+
+        if (typeof localStorage !== "undefined") {
+          const saved = localStorage.getItem(storageKey);
+          if (saved) {
+            const data = JSON.parse(saved);
+            if (data.date === todayStr) {
+              currentCount = data.count;
             } else {
-              // 如果时间异常（未来日期）就重置为920
-              currentCount = 920;
+              const diffDays = Math.max(1, Math.floor((new Date(todayStr) - new Date(data.date)) / 86400000));
+              currentCount = data.count + diffDays;
+              if (currentCount > 99999) currentCount = 99999;
             }
           }
-        } catch(e) { console.warn(e); }
-      } else {
-        // 初次访问，设置为920
-        currentCount = 920;
+
+          localStorage.setItem(storageKey, JSON.stringify({ date: todayStr, count: currentCount }));
+        }
+      } catch (e) {
+        console.warn("localStorage 不可用，使用默认数值");
       }
-      
-      // 确保为正整数
-      currentCount = Math.floor(Math.max(0, currentCount));
-      
-      // 格式化为至少5位数字，前面补零 (例如 00920)
+
       const formattedCount = String(currentCount).padStart(5, '0');
       counterElem.innerText = formattedCount;
-      
-      // 保存今日数据
-      localStorage.setItem(storageKey, JSON.stringify({
-        date: todayStr,
-        count: currentCount
-      }));
     })();
   </script>
 </body>
