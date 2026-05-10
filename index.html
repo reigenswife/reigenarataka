@@ -18,6 +18,10 @@
       --accent: #8eb1d6;
       --accent2: #d9b7ea;
       --white: #ffffff;
+      --paper: #fffdf8;
+      --paper-line: rgba(160,180,210,0.16);
+      --paper-shadow: rgba(110,130,160,0.12);
+      --lace: rgba(255,255,255,0.72);
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -66,6 +70,19 @@
       50% { transform: translateY(-8px); }
     }
 
+    /* 蕾丝外壳 - 新增 */
+    .lace-shell {
+      position: relative;
+      max-width: 1420px;
+      margin: 0 auto;
+      padding: 18px;
+      border-radius: 38px;
+      background: radial-gradient(circle, var(--lace) 32%, transparent 34%) 0 0 / 22px 22px,
+                  radial-gradient(circle, rgba(230,238,250,0.85) 24%, transparent 26%) 11px 11px / 22px 22px,
+                  linear-gradient(rgba(255,255,255,0.35), rgba(255,255,255,0.35));
+      box-shadow: 0 12px 30px rgba(120,140,170,0.10);
+    }
+
     .wrapper {
       position: relative;
       z-index: 1;
@@ -111,16 +128,13 @@
     .panel-header::before { content: "✦"; font-size: 0.82rem; color: #7292b6; }
     .panel-body { padding: 16px; background: linear-gradient(rgba(255,255,255,0.23), rgba(255,255,255,0.23)), repeating-linear-gradient(to bottom, rgba(173,195,219,0.11) 0px, rgba(173,195,219,0.11) 1px, transparent 2px, transparent 28px); }
 
-    /* 菜单样式 */
     .menu-list { display: flex; flex-direction: column; gap: 12px; }
     .menu-item { display: block; color: var(--text); text-decoration: none; font-size: 0.95rem; padding: 4px 0; border-bottom: 1px dotted var(--line); transition: all 0.2s; }
     .menu-item:hover { padding-left: 8px; color: #2e4e6e; border-bottom-color: #b2c9e2; }
 
-    /* photo card 样式 (用于左侧的小图) */
     .mini-photo { text-align: center; }
     .mini-photo img { max-width: 100%; border-radius: 16px; border: 2px solid var(--frame-strong); box-shadow: 4px 4px 14px rgba(0,0,0,0.06); }
 
-    /* 宠物容器样式：与 mini-photo 视觉一致 */
     .pet-container { text-align: center; }
     .pet-iframe { width: 100%; aspect-ratio: 1 / 1; max-width: 260px; border: 2px solid var(--frame-strong); border-radius: 16px; background: #ffffff; box-shadow: 4px 4px 14px rgba(0,0,0,0.06); }
 
@@ -140,7 +154,6 @@
     .feature .panel-header { background: #eef3fc; }
     .tag { display: inline-block; background: white; padding: 4px 14px; border-radius: 50px; font-size: 0.75rem; color: #6787a6; border: 1px solid #c4d4e8; margin-top: 10px; }
 
-    /* 访客计数器 */
     .visitor-box { text-align: center; }
     .counter { font-size: 2.2rem; font-weight: bold; letter-spacing: 2px; background: rgba(255,255,240,0.7); border-radius: 28px; padding: 8px 6px; margin: 12px 0; font-family: monospace; color: #496b89; border: 1px solid #c9ddf1; }
     .sparkle { font-size: 0.88rem; letter-spacing: 3px; color: #b290c5; }
@@ -155,194 +168,312 @@
 
     .footer-note { margin-top: 28px; text-align: center; font-size: 0.75rem; color: #7d98b5; border-top: 2px dotted #c7daee; padding-top: 18px; }
 
+    /* 左右悬浮小窗 - 新增 */
+    .side-widget {
+      position: fixed;
+      top: 120px;
+      z-index: 5;
+      width: 120px;
+      background: linear-gradient(to bottom, #f1e8fb, #e0d2f5);
+      border: 2px solid #c8b3e4;
+      border-radius: 16px;
+      box-shadow: 0 10px 18px rgba(130,110,170,0.15);
+      overflow: hidden;
+    }
+    .side-widget.left { left: 14px; }
+    .side-widget.right { right: 14px; top: 280px; }
+    .side-widget .title {
+      background: linear-gradient(to bottom, #d8c1f2, #ccb2ea);
+      color: #6f5f93;
+      font-size: 0.78rem;
+      padding: 8px 10px;
+      border-bottom: 1px solid #bfa8dc;
+      text-transform: lowercase;
+      letter-spacing: 1px;
+    }
+    .side-widget .content {
+      padding: 10px;
+      font-size: 0.78rem;
+      color: #6f7791;
+      line-height: 1.7;
+      background: rgba(255,255,255,0.7);
+    }
+    .side-widget .content img {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid #d5c5ea;
+      margin-bottom: 8px;
+    }
+
+    /* 像素挂件 - 新增 */
+    .pixel-charm {
+      position: fixed;
+      z-index: 4;
+      font-size: 18px;
+      opacity: 0.72;
+      animation: floaty 5s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .pc1 { left: 22px; bottom: 120px; }
+    .pc2 { right: 24px; bottom: 90px; animation-delay: 1.5s; }
+    .pc3 { right: 170px; top: 86px; animation-delay: 2.4s; }
+    @keyframes floaty {
+      0%,100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(4deg); }
+    }
+
+    /* 回到顶部按钮 - 新增 */
+    .back-top {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 10;
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(to bottom, #f9fcff, #dceafb);
+      border: 2px solid #b9d0e7;
+      color: #547493;
+      padding: 10px 14px;
+      font-family: inherit;
+      font-size: 0.82rem;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(120,145,180,0.16);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .back-top:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 22px rgba(120,145,180,0.22);
+    }
+
     @media (max-width: 1100px) {
       .grid { grid-template-columns: 1fr; }
+      .side-widget { display: none; }
     }
     @media (max-width: 640px) {
       body { padding: 18px 10px 28px; }
+      .hero img { height: 250px; }
+      .hero-title h1 { font-size: 1.6rem; }
+      .lace-shell { padding: 10px; }
     }
   </style>
 </head>
-<body>
+<body id="top">
   <div class="float-deco d1">✦ ✧</div>
   <div class="float-deco d2">♡</div>
   <div class="float-deco d3">☁</div>
   <div class="float-deco d4">✦</div>
 
-  <div class="wrapper">
-    <div class="inner-frame">
-      <section class="hero">
-        <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="Reigen Arataka">
-        <div class="hero-title">
-          <h1>REIGEN ARATAKA</h1>
-          <p>quiet archive of memories · 個人收藏站</p>
-        </div>
-      </section>
+  <!-- 像素挂件 -->
+  <div class="pixel-charm pc1">✦</div>
+  <div class="pixel-charm pc2">♡</div>
+  <div class="pixel-charm pc3">☁</div>
 
-      <div class="top-marquee">
-        <marquee scrollamount="4">欢迎来到 Reigen archive ♡ 这里收藏照片、台词、剧情片段、追番心情与关于他的温柔记忆 ✦</marquee>
-      </div>
+  <!-- 左右悬浮窗 -->
+  <aside class="side-widget left">
+    <div class="title">photo</div>
+    <div class="content">
+      <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="side photo">
+      saved memory ♡<br>
+      old web mood
+    </div>
+  </aside>
+  <aside class="side-widget right">
+    <div class="title">memo</div>
+    <div class="content">
+      Reigen archive<br>
+      gallery / diary<br>
+      quotes / love log
+    </div>
+  </aside>
 
-      <section class="grid">
-        <!-- 左栏 -->
-        <div class="column">
-          <div class="panel">
-            <div class="panel-header">directory</div>
-            <div class="panel-body">
-              <div class="menu-list">
-                <a href="#" class="menu-item">📸 gallery / 相册</a>
-                <a href="#" class="menu-item">💖 memory / 心动记忆</a>
-                <a href="#" class="menu-item">📖 diary / 灵能故事</a>
-                <a href="#" class="menu-item">💬 quotes / 经典语录</a>
-                <a href="#" class="menu-item">🛍 merch / 周边收藏</a>
-                <a href="#" class="menu-item">👤 about / 关于 Reigen</a>
-              </div>
-            </div>
+  <!-- 蕾丝外壳 -->
+  <div class="lace-shell">
+    <div class="wrapper">
+      <div class="inner-frame">
+        <section class="hero">
+          <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="Reigen Arataka">
+          <div class="hero-title">
+            <h1>REIGEN ARATAKA</h1>
+            <p>quiet archive of memories · 個人收藏站</p>
           </div>
-          <div class="panel">
-            <div class="panel-header">photo card</div>
-            <div class="panel-body mini-photo">
-              <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="Reigen photo">
-            </div>
-          </div>
-          <div class="panel">
-            <div class="panel-header">favorite quote</div>
-            <div class="panel-body">
-              <p style="margin:0; line-height:1.9; color:var(--muted); font-size:0.92rem;">
-                “我可是21世纪最强的灵能师。”<br>—— Reigen Arataka
-              </p>
-            </div>
-          </div>
+        </section>
+
+        <div class="top-marquee">
+          <marquee scrollamount="4">欢迎来到 Reigen archive ♡ 这里收藏照片、台词、剧情片段、追番心情与关于他的温柔记忆 ✦</marquee>
         </div>
 
-        <!-- 中栏 -->
-        <div class="column">
-          <div class="panel">
-            <div class="panel-header">about me</div>
-            <div class="panel-body">
-              <div class="about-main">
-                <div class="about-text">
-                  <h2>你好，welcome to my site,</h2>
-                  <div class="lead">
-                    这里是一个关于 <b>Reigen Arataka</b> 的温柔收藏页，<br>
-                    记录喜欢的瞬间、对白、故事，还有那些让人心动的小小记忆。
-                  </div>
-                  <div class="desc">
-                    这个页面是复古个人主页风格的首页，你可以继续把它扩展成完整站点。
-                  </div>
-                  <div class="chips">
-                    <span class="chip"># psychic</span>
-                    <span class="chip"># archive</span>
-                    <span class="chip"># diary</span>
-                    <span class="chip"># fanpage</span>
-                  </div>
-                  <div class="signature">by reigenswife ♡</div>
-                </div>
-                <div class="sticker">
-                  <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="Reigen daily">
+        <section class="grid">
+          <!-- 左栏 -->
+          <div class="column">
+            <div class="panel">
+              <div class="panel-header">directory</div>
+              <div class="panel-body">
+                <div class="menu-list">
+                  <a href="#" class="menu-item">📸 gallery / 相册</a>
+                  <a href="#" class="menu-item">💖 memory / 心动记忆</a>
+                  <a href="#" class="menu-item">📖 diary / 灵能故事</a>
+                  <a href="#" class="menu-item">💬 quotes / 经典语录</a>
+                  <a href="#" class="menu-item">🛍 merch / 周边收藏</a>
+                  <a href="#" class="menu-item">👤 about / 关于 Reigen</a>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="bottom-sections">
-            <div class="feature">
-              <div class="panel-header">gallery</div>
-              <div class="panel-body">
-                <h3>📸 相册</h3>
-                <p>收集截图、官方图、保存下来的喜欢瞬间，做成专属图集页面。</p>
-                <span class="tag">24 张图片</span>
+            <div class="panel">
+              <div class="panel-header">photo card</div>
+              <div class="panel-body mini-photo">
+                <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="Reigen photo">
               </div>
             </div>
-            <div class="feature">
-              <div class="panel-header">memories</div>
+            <div class="panel">
+              <div class="panel-header">favorite quote</div>
               <div class="panel-body">
-                <h3>💖 心动记忆</h3>
-                <p>记录特别喜欢的剧情、表情、台词，以及只属于你的情绪片段。</p>
-                <span class="tag">12 个片段</span>
+                <p style="margin:0; line-height:1.9; color:var(--muted); font-size:0.92rem;">
+                  “我可是21世纪最强的灵能师。”<br>—— Reigen Arataka
+                </p>
               </div>
             </div>
-            <div class="feature">
-              <div class="panel-header">story</div>
+            <div class="panel">
+              <div class="panel-header">merch</div>
               <div class="panel-body">
-                <h3>📖 灵能故事</h3>
-                <p>像日记一样整理剧情感想、同人设定和角色相关的小记录。</p>
-                <span class="tag">8 篇记录</span>
+                <p style="margin:0; line-height:1.9; color:var(--muted); font-size:0.92rem;">
+                  收藏亚克力、吧唧、纸片、立牌、明信片与周边清单。<br>
+                  你之后可以继续扩展成完整的 merch 页面。
+                </p>
               </div>
             </div>
           </div>
+
+          <!-- 中栏（保留了原有的关于内容，但不是新代码中的 paper-panel 版本） -->
+          <div class="column">
+            <div class="panel">
+              <div class="panel-header">about me</div>
+              <div class="panel-body">
+                <div class="about-main">
+                  <div class="about-text">
+                    <h2>你好，welcome to my site,</h2>
+                    <div class="lead">
+                      这里是一个关于 <b>Reigen Arataka</b> 的温柔收藏页，<br>
+                      记录喜欢的瞬间、对白、故事，还有那些让人心动的小小记忆。
+                    </div>
+                    <div class="desc">
+                      这个页面是复古个人主页风格的首页，你可以继续把它扩展成完整站点。
+                    </div>
+                    <div class="chips">
+                      <span class="chip"># psychic</span>
+                      <span class="chip"># archive</span>
+                      <span class="chip"># diary</span>
+                      <span class="chip"># fanpage</span>
+                    </div>
+                    <div class="signature">by reigenswife ♡</div>
+                  </div>
+                  <div class="sticker">
+                    <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="Reigen daily">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bottom-sections">
+              <div class="feature">
+                <div class="panel-header">gallery</div>
+                <div class="panel-body">
+                  <h3>📸 相册</h3>
+                  <p>收集截图、官方图、保存下来的喜欢瞬间，做成专属图集页面。</p>
+                  <span class="tag">24 张图片</span>
+                </div>
+              </div>
+              <div class="feature">
+                <div class="panel-header">memories</div>
+                <div class="panel-body">
+                  <h3>💖 心动记忆</h3>
+                  <p>记录特别喜欢的剧情、表情、台词，以及只属于你的情绪片段。</p>
+                  <span class="tag">12 个片段</span>
+                </div>
+              </div>
+              <div class="feature">
+                <div class="panel-header">story</div>
+                <div class="panel-body">
+                  <h3>📖 灵能故事</h3>
+                  <p>像日记一样整理剧情感想、同人设定和角色相关的小记录。</p>
+                  <span class="tag">8 篇记录</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 右栏 -->
+          <div class="column">
+            <div class="panel">
+              <div class="panel-header">site visitors</div>
+              <div class="panel-body">
+                <div class="visitor-box">
+                  <p>今天也在喜欢 Reigen 吗？</p>
+                  <div class="counter" id="visitorCounter">00920</div>
+                  <div class="sparkle">♡ ♡ ♡ ♡ ♡</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-header">calendar</div>
+              <div class="panel-body calendar">
+                <div class="calendar-top"><span>◀</span><span>2026 / 05</span><span>▶</span></div>
+                <div class="calendar-grid">
+                  <div class="day">日</div><div class="day">一</div><div class="day">二</div><div class="day">三</div><div class="day">四</div><div class="day">五</div><div class="day">六</div>
+                  <div></div><div></div><div></div><div></div><div>1</div><div>2</div><div>3</div>
+                  <div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div class="active">9</div><div>10</div>
+                  <div>11</div><div>12</div><div>13</div><div>14</div><div>15</div><div>16</div><div>17</div>
+                  <div>18</div><div>19</div><div>20</div><div>21</div><div>22</div><div>23</div><div>24</div>
+                  <div>25</div><div>26</div><div>27</div><div>28</div><div>29</div><div>30</div><div>31</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-header">badges</div>
+              <div class="panel-body">
+                <div class="badge-list">
+                  <span class="badge">reigen fan</span>
+                  <span class="badge">mp100</span>
+                  <span class="badge">archive</span>
+                  <span class="badge">neocities mood</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-header">Reigen's tamaNOTchi ♡</div>
+              <div class="panel-body pet-container">
+                <iframe 
+                  src="https://tamanotchi.world/32711c" 
+                  class="pet-iframe"
+                  title="Reigen's Pet">
+                </iframe>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-header">updates</div>
+              <div class="panel-body">
+                <p style="margin:0; color:var(--muted); line-height:1.9; font-size:0.92rem;">
+                  + 新增蕾丝外边框<br>
+                  + 增加左右悬浮小窗<br>
+                  + 菜单可点击跳转<br>
+                  + 增加小挂件与回到顶部按钮
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="footer-note">
+          made with love ♡ Reigen personal archive
         </div>
-
-        <!-- 右栏 -->
-        <div class="column">
-          <div class="panel">
-            <div class="panel-header">site visitors</div>
-            <div class="panel-body">
-              <div class="visitor-box">
-                <p>今天也在喜欢 Reigen 吗？</p>
-                <div class="counter" id="visitorCounter">00920</div>
-                <div class="sparkle">♡ ♡ ♡ ♡ ♡</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="panel">
-            <div class="panel-header">calendar</div>
-            <div class="panel-body calendar">
-              <div class="calendar-top"><span>◀</span><span>2026 / 05</span><span>▶</span></div>
-              <div class="calendar-grid">
-                <div class="day">日</div><div class="day">一</div><div class="day">二</div><div class="day">三</div><div class="day">四</div><div class="day">五</div><div class="day">六</div>
-                <div></div><div></div><div></div><div></div><div>1</div><div>2</div><div>3</div>
-                <div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div class="active">9</div><div>10</div>
-                <div>11</div><div>12</div><div>13</div><div>14</div><div>15</div><div>16</div><div>17</div>
-                <div>18</div><div>19</div><div>20</div><div>21</div><div>22</div><div>23</div><div>24</div>
-                <div>25</div><div>26</div><div>27</div><div>28</div><div>29</div><div>30</div><div>31</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="panel">
-            <div class="panel-header">badges</div>
-            <div class="panel-body">
-              <div class="badge-list">
-                <span class="badge">reigen fan</span>
-                <span class="badge">mp100</span>
-                <span class="badge">archive</span>
-                <span class="badge">neocities mood</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 宠物模块：大小与左侧 photo card 视觉一致 -->
-          <div class="panel">
-            <div class="panel-header">Reigen's tamaNOTchi ♡</div>
-            <div class="panel-body pet-container">
-              <iframe 
-                src="https://tamanotchi.world/32711c" 
-                class="pet-iframe"
-                title="Reigen's Pet">
-              </iframe>
-            </div>
-          </div>
-
-          <div class="panel">
-            <div class="panel-header">updates</div>
-            <div class="panel-body">
-              <p style="margin:0; color:var(--muted); line-height:1.9; font-size:0.92rem;">
-                + 新增相册模块<br>
-                + 更新首页横幅<br>
-                + 调整为复古三栏布局<br>
-                + 增加 Reigen 小宠物
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <div class="footer-note">
-        made with love ♡ Reigen personal archive
       </div>
     </div>
   </div>
+
+  <!-- 回到顶部按钮 -->
+  <button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ top</button>
 
   <script>
     (function() {
