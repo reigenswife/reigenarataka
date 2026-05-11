@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Reigen Arataka · 个人收藏站 · 放大版</title>
+  <title>Reigen Arataka · 个人收藏站 · 留白版</title>
   <style>
     :root {
       --bg1: #dfe9f7;
@@ -24,7 +24,6 @@
       --pink: #e8c9f4;
       --blue: #dcecff;
       --yellow: #fff8d8;
-      /* 放大核心：基础字体 + 间距全面放大 */
       --base-scale: 1.18;
     }
 
@@ -61,12 +60,25 @@
       z-index: 0;
     }
 
-    a { color: #5b7ea3; font-size: 1em; }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 8% 18%, rgba(255,255,255,0.28), transparent 14%),
+        radial-gradient(circle at 92% 22%, rgba(255,255,255,0.22), transparent 12%),
+        radial-gradient(circle at 12% 82%, rgba(255,255,255,0.18), transparent 10%),
+        radial-gradient(circle at 88% 74%, rgba(255,255,255,0.18), transparent 10%);
+      mix-blend-mode: screen;
+    }
+
+    a { color: #5b7ea3; font-size: 1em; text-decoration: none; }
     a:hover { color: #8b6b9e; }
 
     ::selection { background: #e8c9f4; color: #45627e; }
 
-    /* 所有浮动装饰物维持比例且略微放大 */
     .float-deco,
     .float-sparkle,
     .hanging-tag {
@@ -141,7 +153,6 @@
       50% { opacity: 1; }
     }
 
-    /* 外壳蕾丝区域整体放大，留白增加 */
     .lace-shell {
       position: relative;
       max-width: 1480px;
@@ -153,6 +164,7 @@
         radial-gradient(circle, rgba(230,238,250,0.85) 24%, transparent 26%) 13px 13px / 26px 26px,
         linear-gradient(rgba(255,255,255,0.35), rgba(255,255,255,0.35));
       box-shadow: 0 16px 36px rgba(120,140,170,0.12);
+      z-index: 1;
     }
 
     .wrapper {
@@ -277,9 +289,6 @@
       box-shadow: inset 0 0 0 5px rgba(255,255,255,0.6);
       overflow: hidden;
     }
-    marquee {
-      font-size: 1rem;
-    }
 
     .grid {
       display: grid;
@@ -327,25 +336,8 @@
         linear-gradient(135deg, rgba(255,255,255,0.3), rgba(245,249,255,0.2));
       position: relative;
     }
-    .panel-body::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: 0 48px 48px 0;
-      border-color: transparent #f0f5ff transparent transparent;
-      opacity: 0.5;
-      pointer-events: none;
-    }
 
-    .menu-list {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
+    .menu-list { display: flex; flex-direction: column; gap: 16px; }
     .menu-item {
       display: block;
       color: var(--text);
@@ -353,564 +345,162 @@
       font-size: 1rem;
       padding: 6px 0;
       border-bottom: 1px dotted var(--line);
-      transition: all 0.2s;
-    }
-    .menu-item:hover {
-      padding-left: 12px;
-      color: #2e4e6e;
-      border-bottom-color: #b2c9e2;
-      background: linear-gradient(to right, rgba(217,183,234,0.13), transparent);
     }
 
     .mini-photo { text-align: center; }
-    .mini-photo img,
-    .sticker img,
-    .album-cover,
-    .image-wall img,
-    .tiny-img {
-      max-width: 100%;
-      border-radius: 20px;
-      border: 2px solid var(--frame-strong);
-      box-shadow: 5px 5px 18px rgba(0,0,0,0.06);
-    }
-
-    .quote-text {
-      margin: 0;
-      line-height: 2.1;
-      color: var(--muted);
-      font-size: 1rem;
-    }
-
-    .status-box {
-      background: rgba(255,255,255,0.56);
-      border: 1px dashed #c9dbee;
-      border-radius: 18px;
-      padding: 16px;
-      color: #627b99;
-      line-height: 1.85;
-      font-size: 0.95rem;
-    }
-    .status-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      border-bottom: 1px dotted rgba(160,180,210,0.45);
-      padding: 6px 0;
-    }
-    .status-row:last-child { border-bottom: 0; }
-    .status-label { color: #91a4bb; }
-
-    .about-main {
-      display: flex;
-      gap: 28px;
-      flex-wrap: wrap;
-      justify-content: space-between;
-    }
-    .about-text {
-      flex: 2;
-      min-width: 280px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.82) 0%, rgba(245,249,255,0.6) 100%);
-      border-left: 4px solid #d9b7ea;
-      padding: 28px 32px;
-      border-radius: 20px;
-      position: relative;
-    }
-    .about-text::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      background: repeating-linear-gradient(0deg, #d9b7ea 0px, #d9b7ea 1px, transparent 1px, transparent 24px);
-      border-radius: 20px 0 0 20px;
-    }
-    .about-text h2 {
-      margin: 0 0 16px 0;
-      font-size: 1.7rem;
-      color: #52718e;
-    }
-    .lead {
-      font-size: 1.05rem;
-      margin-bottom: 20px;
-      line-height: 1.7;
-      background: rgba(255,255,255,0.5);
-      padding: 12px 16px;
-      border-radius: 24px;
-    }
-    .desc {
-      font-size: 0.98rem;
-      color: var(--muted);
-      margin-bottom: 22px;
-      line-height: 1.85;
-    }
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin: 24px 0 12px;
-    }
-    .chip {
-      background: #eff5fc;
-      border-radius: 60px;
-      padding: 6px 20px;
-      font-size: 0.9rem;
-      color: #5981a2;
-      border: 1px solid #c8dcf0;
-    }
-    .signature {
-      font-size: 0.88rem;
-      text-align: right;
-      color: #88a0bb;
-      margin-top: 18px;
-      border-top: 1px dashed var(--line);
-      padding-top: 18px;
-    }
-    .sticker {
-      flex: 1;
-      min-width: 150px;
-      text-align: center;
-    }
-
-    .feature {
-      background: var(--panel-soft);
-      border-radius: 28px;
-      border: 1px solid #cce0f2;
-      overflow: hidden;
-    }
-    .feature .panel-header { background: #eef3fc; }
-    .feature h3 {
-      margin: 0 0 10px;
-      color: #52718e;
-      font-size: 1.2rem;
-    }
-    .feature p {
-      margin: 0;
-      line-height: 1.9;
-      color: #72869e;
-      font-size: 0.96rem;
-    }
-    .tag {
-      display: inline-block;
-      background: white;
-      padding: 6px 18px;
-      border-radius: 60px;
-      font-size: 0.85rem;
-      color: #6787a6;
-      border: 1px solid #c4d4e8;
-      margin-top: 14px;
-    }
-
-    .diary-entry {
-      padding: 16px;
-      border-bottom: 1px dashed #d5e2f0;
-      background: rgba(255,255,255,0.38);
-      border-radius: 16px;
-      margin-bottom: 14px;
-    }
-    .diary-entry:last-child { margin-bottom: 0; }
-    .diary-date {
-      font-size: 0.85rem;
-      color: #9ab0c5;
-      margin-bottom: 8px;
-      letter-spacing: 1px;
-    }
-    .diary-text {
-      font-size: 0.96rem;
-      line-height: 1.8;
-      color: #627b99;
-    }
-
-    .image-wall {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-    .image-wall img {
+    .mini-photo img {
       width: 100%;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
       border-radius: 18px;
-      transition: transform .22s ease, filter .22s ease;
-    }
-    .image-wall img:hover {
-      transform: translateY(-4px) rotate(-1deg);
-      filter: brightness(1.04) saturate(1.05);
+      border: 2px solid #d6e3f2;
+      display: block;
     }
 
-    .tiny-note {
-      display: inline-block;
-      background: var(--yellow);
-      border: 1px solid #eadfa6;
-      border-radius: 14px;
-      padding: 14px 18px;
-      color: #7a7f8a;
-      font-size: 0.94rem;
-      line-height: 1.8;
-      transform: rotate(-1deg);
-      box-shadow: 6px 6px 0 rgba(190,205,225,0.28);
-    }
-
-    .music-box {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-    }
-    .album-cover {
-      width: 76px;
-      height: 76px;
-      object-fit: cover;
-      border-radius: 18px;
-      flex: 0 0 auto;
-    }
-    .music-info { min-width: 0; }
-    .song {
-      font-size: 1.02rem;
-      color: #547493;
-      font-weight: bold;
-      margin-bottom: 6px;
-    }
-    .artist,
-    .music-note {
-      font-size: 0.86rem;
-      color: #8aa0b8;
-      line-height: 1.6;
-    }
-
-    .visitor-box { text-align: center; }
-    .visitor-box p { margin: 0; color: #71879f; font-size: 1rem; }
-    .counter {
-      font-size: 2.6rem;
-      font-weight: bold;
-      letter-spacing: 3px;
-      background: rgba(255,255,240,0.7);
-      border-radius: 36px;
-      padding: 12px 8px;
-      margin: 16px 0;
-      font-family: monospace;
-      color: #496b89;
-      border: 1px solid #c9ddf1;
-    }
-    .sparkle {
-      font-size: 1rem;
-      letter-spacing: 4px;
-      color: #b290c5;
-    }
-
-    .calendar-top {
-      display: flex;
-      justify-content: space-between;
-      font-size: 1rem;
-      margin-bottom: 22px;
-      color: #758ea9;
-    }
-    .calendar-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 8px;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-    .day {
-      font-weight: bold;
-      color: #8199b7;
-      margin-bottom: 6px;
-    }
-    .active {
-      background: #d6e6fa;
-      border-radius: 40px;
-      color: #2f5b84;
-      font-weight: bold;
-    }
-
-    .badge-list,
-    .blinkies,
-    .link-buttons {
+    .badge-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      justify-content: center;
+      gap: 10px;
     }
     .badge {
-      background: #eef2f8;
-      border-radius: 40px;
-      padding: 6px 18px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(240,246,255,0.92);
+      border: 1px solid #d4dfeb;
+      color: #69819a;
       font-size: 0.85rem;
-      border: 1px solid #c7d8ec;
-      color: #577594;
+    }
+
+    .blinkies {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
     }
     .blinkie {
-      min-width: 102px;
-      height: 38px;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      border: 1.5px solid #9fb9d5;
-      background:
-        linear-gradient(90deg, rgba(217,183,234,0.36), rgba(142,177,214,0.36)),
-        repeating-linear-gradient(45deg, rgba(255,255,255,0.35) 0 4px, transparent 4px 10px);
-      color: #526d8a;
-      font-size: 0.78rem;
-      text-decoration: none;
-      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.45);
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #f7fbff, #eef5ff);
+      border: 1px solid #d4dfeb;
+      font-size: 0.8rem;
+      color: #5f7694;
     }
-    .blinkie:hover { transform: translateY(-3px); }
 
-    .pet-container { text-align: center; }
+    .pet-container { display: flex; justify-content: center; }
     .pet-iframe {
       width: 100%;
-      aspect-ratio: 1 / 1;
-      max-width: 300px;
-      border: 2px solid var(--frame-strong);
-      border-radius: 24px;
-      background: #ffffff;
-      box-shadow: 6px 6px 18px rgba(0,0,0,0.06);
-    }
-
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      padding: 6px 0;
-    }
-    .timeline-item {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-      opacity: 0.75;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      padding: 10px 14px;
-      border-radius: 16px;
-    }
-    .timeline-item:hover {
-      opacity: 1;
-      background: rgba(217,183,234,0.1);
-      transform: translateX(6px);
-    }
-    .timeline-item.active {
-      opacity: 1;
-      background: rgba(217,183,234,0.15);
-      font-weight: bold;
-    }
-    .timeline-dot {
-      font-size: 24px;
-      min-width: 28px;
-      text-align: center;
-      animation: pulse 2s ease-in-out infinite;
-    }
-    .timeline-date {
-      font-size: 0.9rem;
-      color: #88a0bb;
-      min-width: 96px;
-    }
-    .timeline-mood {
-      font-size: 1rem;
-      color: #5f7694;
-      font-weight: 500;
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.18); }
-    }
-
-    .stat-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-bottom: 22px;
-    }
-    .stat-box {
-      text-align: center;
-      background: linear-gradient(135deg, rgba(217,183,234,0.08), rgba(142,177,214,0.08));
-      border: 1px solid rgba(217,183,234,0.3);
+      height: 180px;
+      border: 0;
       border-radius: 18px;
-      padding: 16px 10px;
-      transition: all 0.3s ease;
-    }
-    .stat-box:hover {
-      background: linear-gradient(135deg, rgba(217,183,234,0.15), rgba(142,177,214,0.15));
-      transform: translateY(-3px);
-      box-shadow: 0 6px 16px rgba(217,183,234,0.2);
-    }
-    .stat-number {
-      font-size: 2.1rem;
-      font-weight: bold;
-      color: #8eb1d6;
-      margin-bottom: 6px;
-    }
-    .stat-label {
-      font-size: 0.85rem;
-      color: #88a0bb;
-      letter-spacing: 1px;
-    }
-    .progress-bar {
-      height: 10px;
-      background: rgba(142,177,214,0.15);
-      border-radius: 14px;
-      overflow: hidden;
-      margin-bottom: 10px;
-      border: 1px solid rgba(142,177,214,0.3);
-    }
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #d9b7ea, #8eb1d6);
-      border-radius: 14px;
-      animation: fillProgress 2s ease-out;
-    }
-    @keyframes fillProgress { 0% { width: 0; } }
-    .progress-label {
-      font-size: 0.9rem;
-      color: #76889d;
-      text-align: right;
+      background: white;
     }
 
     .wishlist {
-      list-style: none;
-      padding: 0;
       margin: 0;
+      padding-left: 20px;
+      line-height: 1.9;
+      color: var(--text);
     }
-    .wishlist li {
-      padding: 10px 0 10px 28px;
-      border-bottom: 1px dashed #d5e2f0;
-      position: relative;
-      color: #6e849b;
-      font-size: 0.96rem;
-      line-height: 1.6;
-    }
-    .wishlist li::before {
-      content: "♡";
-      position: absolute;
-      left: 4px;
-      color: #b290c5;
-      font-size: 1.1rem;
-    }
-    .wishlist li:last-child { border-bottom: 0; }
 
-    .guestbook-box {
-      background: rgba(255,255,255,0.55);
-      border: 1px dashed #c7d8ec;
-      border-radius: 18px;
-      padding: 16px;
-      line-height: 1.85;
-      color: #6d839c;
-      font-size: 0.96rem;
+    .guestbook-box, .updates-text, .status-box, .tiny-note {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--text);
     }
+
     .guestbook-form {
-      display: grid;
-      gap: 12px;
-      margin-top: 16px;
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
     .guestbook-form input,
     .guestbook-form textarea {
       width: 100%;
-      border: 1px solid #c7d8ec;
-      background: rgba(255,255,255,0.74);
+      border: 1.5px solid #d3dfee;
       border-radius: 14px;
-      padding: 12px 14px;
-      color: #596f88;
-      font-family: inherit;
-      font-size: 0.92rem;
+      background: rgba(255,255,255,0.9);
+      padding: 10px 12px;
+      font: inherit;
+      color: var(--text);
       outline: none;
     }
-    .guestbook-form textarea { min-height: 90px; resize: vertical; }
-    .soft-button {
-      border: 1px solid #b9d0e7;
-      border-radius: 60px;
-      background: linear-gradient(to bottom, #f9fcff, #dceafb);
-      color: #547493;
-      padding: 10px 18px;
-      font-family: inherit;
-      cursor: pointer;
-      font-size: 0.95rem;
-      box-shadow: 0 6px 14px rgba(120,145,180,0.12);
-    }
-    .soft-button:hover { transform: translateY(-2px); }
+    .guestbook-form textarea { min-height: 100px; resize: vertical; }
 
-    .updates-text {
-      margin: 0;
-      color: var(--muted);
-      line-height: 2;
-      font-size: 0.98rem;
+    .soft-button {
+      border: 1.5px solid #bcd0e5;
+      background: linear-gradient(135deg, #f7fbff, #e8f1fb);
+      border-radius: 999px;
+      padding: 10px 16px;
+      cursor: pointer;
+      color: #5f7694;
+      font: inherit;
     }
 
     .footer-note {
-      margin-top: 38px;
+      margin-top: 18px;
       text-align: center;
-      font-size: 0.85rem;
-      color: #7d98b5;
-      border-top: 2px dotted #c7daee;
-      padding-top: 24px;
-      line-height: 1.9;
+      color: #7d8fa3;
+      font-size: 0.82rem;
+      line-height: 1.8;
+      letter-spacing: 0.5px;
+      opacity: 0.88;
     }
 
     .back-top {
       position: fixed;
-      right: 28px;
-      bottom: 28px;
-      z-index: 10;
-      border: none;
-      border-radius: 60px;
-      background: linear-gradient(to bottom, #f9fcff, #dceafb);
-      border: 2px solid #b9d0e7;
-      color: #547493;
-      padding: 12px 20px;
-      font-family: inherit;
-      font-size: 0.95rem;
+      right: 18px;
+      bottom: 16px;
+      z-index: 20;
+      border: 1.5px solid #bfd1e6;
+      background: rgba(255,255,255,0.86);
+      color: #5f7694;
+      border-radius: 999px;
+      padding: 10px 14px;
       cursor: pointer;
-      box-shadow: 0 10px 22px rgba(120,145,180,0.16);
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-    .back-top:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 28px rgba(120,145,180,0.22);
+      box-shadow: 0 8px 20px rgba(133,157,186,0.14);
     }
 
     .cursor-star {
       position: fixed;
       pointer-events: none;
       z-index: 9999;
-      color: rgba(217,183,234,0.88);
-      font-size: 15px;
-      animation: cursorFade .8s ease-out forwards;
+      font-size: 18px;
+      color: rgba(217,183,234,0.75);
+      text-shadow: 0 0 10px rgba(217,183,234,0.45);
+      animation: cursorFade 0.85s ease-out forwards;
     }
     @keyframes cursorFade {
-      0% { opacity: 1; transform: translateY(0) scale(1); }
-      100% { opacity: 0; transform: translateY(-20px) scale(0.55); }
+      0% { transform: translate(0,0) scale(1); opacity: 1; }
+      100% { transform: translate(0,-18px) scale(0.65); opacity: 0; }
     }
 
-    @media (max-width: 1200px) {
-      .grid { grid-template-columns: 1fr; gap: 28px; }
-      .hero-sticker { display: inline-block; }
-      .stat-grid { grid-template-columns: repeat(2, 1fr); }
-      body { padding: 28px 20px 42px; }
+    @media (max-width: 1320px) {
+      .grid { grid-template-columns: 1fr; }
+      .hero img { height: 320px; }
     }
-    @media (max-width: 680px) {
-      body { padding: 22px 12px 32px; }
-      .hero img { height: 280px; }
-      .lace-shell { padding: 14px; }
-      .wrapper { padding: 16px; }
+
+    @media (max-width: 768px) {
+      body { padding: 18px 12px 40px; }
+      .wrapper, .lace-shell { padding: 14px; border-radius: 28px; }
       .inner-frame { padding: 14px; }
-      .image-wall { grid-template-columns: repeat(2, 1fr); }
-      .about-text { min-width: 100%; padding: 20px; }
-      .hanging-tag,
-      .float-sparkle { display: none; }
+      .hero-title { left: 20px; bottom: 18px; }
+      .hero-sticker { right: 18px; bottom: 18px; }
+      .hero img { height: 240px; }
     }
   </style>
 </head>
-<body id="top">
-  <div class="float-deco d1">✦ ✧</div>
+<body>
+  <div class="float-deco d1">✦</div>
   <div class="float-deco d2">♡</div>
-  <div class="float-deco d3">☁</div>
-  <div class="float-deco d4">✦</div>
+  <div class="float-deco d3">✧</div>
+  <div class="float-deco d4">♡</div>
 
-  <div class="hanging-tag tag-1"><span>✧</span><div class="tag-body">diary</div></div>
-  <div class="hanging-tag tag-2"><span>✦</span><div class="tag-body">photo</div></div>
-  <div class="hanging-tag tag-3"><span>✧</span><div class="tag-body">about</div></div>
+  <div class="hanging-tag tag-1"><span>⋆</span><div class="tag-body">diary</div></div>
+  <div class="hanging-tag tag-2"><span>⋆</span><div class="tag-body">photo</div></div>
+  <div class="hanging-tag tag-3"><span>⋆</span><div class="tag-body">about</div></div>
 
-  <div class="float-sparkle sparkle-1">✧</div>
-  <div class="float-sparkle sparkle-2">★</div>
-  <div class="float-sparkle sparkle-3">☆</div>
+  <div class="float-sparkle sparkle-1">♡</div>
+  <div class="float-sparkle sparkle-2">✧</div>
+  <div class="float-sparkle sparkle-3">♡</div>
   <div class="float-sparkle sparkle-4">✦</div>
   <div class="float-sparkle sparkle-5">✧</div>
 
@@ -918,170 +508,59 @@
     <div class="wrapper">
       <div class="inner-frame">
         <section class="hero">
-          <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="Reigen Arataka">
+          <img src="https://images.unsplash.com/photo-1520637836862-4d197d17c09a?auto=format&fit=crop&w=1600&q=80" alt="hero">
           <div class="hero-title">
-            <h1>REIGEN ARATAKA</h1>
-            <p>quiet archive of memories · 個人收藏站</p>
+            <h1>Reigen Arataka</h1>
+            <p>personal archive · soft blue web · diary mood</p>
           </div>
-          <div class="hero-sticker">status: saving tiny feelings ♡</div>
+          <div class="hero-sticker">online ♡ updating</div>
         </section>
 
         <div class="top-marquee">
-          <marquee scrollamount="5">欢迎来到 Reigen archive ♡ 这里收藏照片、台词、剧情片段、追番心情、网页小物和关于他的温柔记忆 ✦ last updated: 2026.05.10 ✦</marquee>
+          <marquee behavior="scroll" direction="left">welcome to the Reigen personal archive · old web vibes · diary / gallery / wishlist / guestbook · best viewed while daydreaming</marquee>
         </div>
 
         <section class="grid">
           <div class="column">
             <div class="panel">
-              <div class="panel-header">directory</div>
+              <div class="panel-header">menu</div>
               <div class="panel-body">
                 <div class="menu-list">
-                  <a href="#gallery" class="menu-item">📸 gallery / 相册</a>
-                  <a href="#memories" class="menu-item">💖 memory / 心动记忆</a>
-                  <a href="#diary" class="menu-item">📖 diary / 灵能故事</a>
-                  <a href="#quotes" class="menu-item">💬 quotes / 经典语录</a>
-                  <a href="#wishlist" class="menu-item">🛍 wishlist / 周边清单</a>
-                  <a href="#about" class="menu-item">👤 about / 关于本站</a>
+                  <a class="menu-item" href="#diary">diary</a>
+                  <a class="menu-item" href="#gallery">gallery</a>
+                  <a class="menu-item" href="#wishlist">wishlist</a>
+                  <a class="menu-item" href="#guestbook">guestbook</a>
                 </div>
               </div>
             </div>
 
             <div class="panel">
-              <div class="panel-header">photo card</div>
-              <div class="panel-body mini-photo">
-                <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="Reigen photo">
-              </div>
-            </div>
-
-            <div class="panel" id="quotes">
-              <div class="panel-header">favorite quote</div>
+              <div class="panel-header">about</div>
               <div class="panel-body">
-                <p class="quote-text">
-                  “我可是21世纪最强的灵能师。”<br>
-                  —— Reigen Arataka<br><br>
-                  <span style="color:#9aabc0;">收藏理由：很荒唐，但又很有生命力。</span>
-                </p>
-              </div>
-            </div>
-
-            <div class="panel">
-              <div class="panel-header">site status</div>
-              <div class="panel-body">
-                <div class="status-box">
-                  <div class="status-row"><span class="status-label">mood</span><span>sleepy but happy</span></div>
-                  <div class="status-row"><span class="status-label">watching</span><span>Mob Psycho 100</span></div>
-                  <div class="status-row"><span class="status-label">collecting</span><span>screenshots & lines</span></div>
-                  <div class="status-row"><span class="status-label">layout</span><span>lace archive v2 (放大版)</span></div>
+                <div class="tiny-note">
+                  这里是一个偏旧站气氛的个人收藏页，记录碎碎念、图片、状态和喜欢的软软网页元素。
                 </div>
-              </div>
-            </div>
-
-            <div class="panel">
-              <div class="panel-header">collection stats</div>
-              <div class="panel-body">
-                <div class="stat-grid">
-                  <div class="stat-box"><div class="stat-number">42</div><div class="stat-label">照片</div></div>
-                  <div class="stat-box"><div class="stat-number">18</div><div class="stat-label">日记</div></div>
-                  <div class="stat-box"><div class="stat-number">26</div><div class="stat-label">星标</div></div>
-                  <div class="stat-box"><div class="stat-number">7</div><div class="stat-label">分类</div></div>
-                </div>
-                <div class="progress-bar"><div class="progress-fill" style="width: 68%"></div></div>
-                <div class="progress-label">集齐度：68%</div>
               </div>
             </div>
           </div>
 
           <div class="column">
-            <div class="panel" id="about">
-              <div class="panel-header">about this archive</div>
-              <div class="panel-body">
-                <div class="about-main">
-                  <div class="about-text">
-                    <h2>你好，welcome to my site,</h2>
-                    <div class="lead">
-                      这里是一个关于 <b>Reigen Arataka</b> 的温柔收藏页，<br>
-                      记录喜欢的瞬间、对白、故事，还有那些让人心动的小小记忆。
-                    </div>
-                    <div class="desc">
-                      这个页面不是正式资料库，更像是一个旧互联网式的小房间：会慢慢贴照片、写碎碎念、存喜欢的台词，也会堆一些没有用但很可爱的网页小物。
-                    </div>
-                    <div class="chips">
-                      <span class="chip"># psychic</span>
-                      <span class="chip"># archive</span>
-                      <span class="chip"># diary</span>
-                      <span class="chip"># fanpage</span>
-                      <span class="chip"># neocities</span>
-                    </div>
-                    <div class="signature">by reigenswife ♡</div>
-                  </div>
-                  <div class="sticker">
-                    <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="Reigen daily">
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="feature" id="gallery">
-              <div class="panel-header">gallery wall</div>
-              <div class="panel-body">
-                <h3>📸 小型截图墙</h3>
-                <p style="margin-bottom:14px;">这里可以继续替换成你自己的截图、官方图、同人图收藏。现在先用你已有的图片做占位。</p>
-                <div class="image-wall">
-                  <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="gallery 1">
-                  <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="gallery 2">
-                  <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="gallery 3">
-                  <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="gallery 4">
-                  <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="gallery 5">
-                  <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="gallery 6">
-                </div>
-                <span class="tag">click nothing, just stare lovingly</span>
-              </div>
-            </div>
-
-            <div class="feature" id="memories">
-              <div class="panel-header">memories</div>
-              <div class="panel-body">
-                <h3>💖 心动记忆</h3>
-                <p>记录特别喜欢的剧情、表情、台词，以及只属于你的情绪片段。</p>
-                <span class="tag">12 个片段</span>
-              </div>
-            </div>
-
-            <div class="feature">
-              <div class="panel-header">story notes</div>
-              <div class="panel-body">
-                <h3>📖 灵能故事</h3>
-                <p>像日记一样整理剧情感想、同人设定和角色相关的小记录。这里之后可以扩展成 diary.html。</p>
-                <span class="tag">8 篇记录</span>
-              </div>
-            </div>
-
             <div class="panel" id="diary">
               <div class="panel-header">diary log</div>
               <div class="panel-body">
-                <div class="diary-entry">
-                  <div class="diary-date">2026.05.10</div>
-                  <div class="diary-text">今天把首页重新整理了一遍，加了更多像旧个人主页的小模块。目标是让它看起来不是模板，而是真的有人在这里住着。</div>
-                </div>
-                <div class="diary-entry">
-                  <div class="diary-date">2026.05.09</div>
-                  <div class="diary-text">发现蓝色和淡紫色放在一起真的很适合 Reigen archive，有一点清爽，又有一点轻飘飘的梦感。</div>
-                </div>
-                <div class="diary-entry">
-                  <div class="diary-date">2026.05.08</div>
-                  <div class="diary-text">想继续收集截图、台词和小表情。也许之后单独做一个 gallery 页面，把每张图都配一句碎碎念。</div>
-                </div>
+                <p>2026.05.10<br>今天把首页结构整理了一下，增加了更舒适的留白和更柔和的视觉层次。</p>
+                <hr>
+                <p>2026.05.09<br>正在慢慢补充 archive 的内容，希望页面像一个安静的小房间。</p>
+                <hr>
+                <p>2026.05.08<br>继续完善 gallery、wishlist 和 guestbook 的布局，保持轻盈感。</p>
               </div>
             </div>
 
-            <div class="panel">
-              <div class="panel-header">mood timeline</div>
+            <div class="panel" id="gallery">
+              <div class="panel-header">gallery</div>
               <div class="panel-body">
-                <div class="timeline">
-                  <div class="timeline-item active" title="今天"><div class="timeline-dot">✧</div><div class="timeline-date">Today</div><div class="timeline-mood">😊 开心</div></div>
-                  <div class="timeline-item"><div class="timeline-dot">✦</div><div class="timeline-date">Yesterday</div><div class="timeline-mood">😌 平静</div></div>
-                  <div class="timeline-item"><div class="timeline-dot">★</div><div class="timeline-date">2 days ago</div><div class="timeline-mood">😍 喜悦</div></div>
-                  <div class="timeline-item"><div class="timeline-dot">☆</div><div class="timeline-date">3 days ago</div><div class="timeline-mood">🤔 思考</div></div>
+                <div class="mini-photo">
+                  <img src="https://picsum.photos/900/420?blur=1" alt="gallery">
                 </div>
               </div>
             </div>
@@ -1089,98 +568,39 @@
             <div class="panel">
               <div class="panel-header">tiny note</div>
               <div class="panel-body">
-                <div class="tiny-note">i miss old internet websites where every page felt like someone quietly decorating a room for no reason...</div>
+                <div class="tiny-note">
+                  I miss old internet websites where every page felt like someone quietly decorating a room for no reason...
+                </div>
               </div>
             </div>
           </div>
 
           <div class="column">
             <div class="panel">
-              <div class="panel-header">site visitors</div>
+              <div class="panel-header">status</div>
               <div class="panel-body">
-                <div class="visitor-box">
-                  <p>今天也在喜欢 Reigen 吗？</p>
-                  <div class="counter" id="visitorCounter">00920</div>
-                  <div class="sparkle">♡ ♡ ♡ ♡ ♡</div>
+                <div class="status-box">
+                  ♡ online<br>
+                  ♡ listening to soft bgm<br>
+                  ♡ arranging the archive slowly
                 </div>
               </div>
             </div>
 
             <div class="panel">
-              <div class="panel-header">now playing</div>
-              <div class="panel-body">
-                <div class="music-box">
-                  <img class="album-cover" src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="album cover">
-                  <div class="music-info">
-                    <div class="song">lonely archive radio</div>
-                    <div class="artist">soft blue internet</div>
-                    <div class="music-note">♪ replace this with your real song</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="panel">
-              <div class="panel-header">calendar</div>
-              <div class="panel-body calendar">
-                <div class="calendar-top"><span>◀</span><span>2026 / 05</span><span>▶</span></div>
-                <div class="calendar-grid">
-                  <div class="day">日</div><div class="day">一</div><div class="day">二</div><div class="day">三</div><div class="day">四</div><div class="day">五</div><div class="day">六</div>
-                  <div></div><div></div><div></div><div></div><div>1</div><div>2</div><div>3</div>
-                  <div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div class="active">10</div>
-                  <div>11</div><div>12</div><div>13</div><div>14</div><div>15</div><div>16</div><div>17</div>
-                  <div>18</div><div>19</div><div>20</div><div>21</div><div>22</div><div>23</div><div>24</div>
-                  <div>25</div><div>26</div><div>27</div><div>28</div><div>29</div><div>30</div><div>31</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="panel">
-              <div class="panel-header">badges</div>
-              <div class="panel-body">
-                <div class="badge-list">
-                  <span class="badge">reigen fan</span>
-                  <span class="badge">mp100</span>
-                  <span class="badge">archive</span>
-                  <span class="badge">neocities mood</span>
-                  <span class="badge">soft web</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="panel">
-              <div class="panel-header">blinkies</div>
-              <div class="panel-body">
-                <div class="blinkies">
-                  <a class="blinkie" href="#">REIGEN FAN</a>
-                  <a class="blinkie" href="#">OLD WEB</a>
-                  <a class="blinkie" href="#">MP100 ♡</a>
-                  <a class="blinkie" href="#">DIARY LOG</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="panel">
-              <div class="panel-header">Reigen's tamagotchi ♡</div>
-              <div class="panel-body pet-container">
-                <iframe src="https://tamanotchi.world/32711c" class="pet-iframe" title="Reigen's Pet"></iframe>
-              </div>
-            </div>
-
-            <div class="panel" id="wishlist">
               <div class="panel-header">wishlist</div>
               <div class="panel-body">
                 <ul class="wishlist">
-                  <li>整理 Reigen 截图文件夹</li>
-                  <li>做一个独立 gallery.html</li>
+                  <li>整理截图文件夹</li>
+                  <li>做一个独立 gallery 页面</li>
                   <li>补完台词收藏页</li>
                   <li>找几个真正的 88x31 buttons</li>
-                  <li>给 guestbook 接入可留言服务</li>
+                  <li>给 guestbook 接入留言服务</li>
                 </ul>
               </div>
             </div>
 
-            <div class="panel">
+            <div class="panel" id="guestbook">
               <div class="panel-header">guestbook</div>
               <div class="panel-body">
                 <div class="guestbook-box">
@@ -1192,19 +612,6 @@
                     <button class="soft-button" type="button" onclick="alert('这是装饰版留言框，还没有接入真实留言功能 ♡')">sign guestbook</button>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            <div class="panel">
-              <div class="panel-header">updates</div>
-              <div class="panel-body">
-                <p class="updates-text">
-                  + 完整首页结构·放大视觉舒适版<br>
-                  + 新增 now playing, diary log, gallery wall<br>
-                  + 新增 status / wishlist / guestbook<br>
-                  + 蕾丝边框与蓝紫色旧站风格<br>
-                  + 鼠标星星尾迹·整体尺寸提升
-                </p>
               </div>
             </div>
           </div>
@@ -1221,31 +628,6 @@
   <button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ top</button>
 
   <script>
-    (function() {
-      const counterElem = document.getElementById('visitorCounter');
-      if (!counterElem) return;
-      let currentCount = 920;
-      try {
-        const storageKey = 'reigen_visitor_base';
-        const todayStr = new Date().toISOString().slice(0,10);
-        if (typeof localStorage !== "undefined") {
-          const saved = localStorage.getItem(storageKey);
-          if (saved) {
-            const data = JSON.parse(saved);
-            if (data.date === todayStr) {
-              currentCount = data.count;
-            } else {
-              const diffDays = Math.max(1, Math.floor((new Date(todayStr) - new Date(data.date)) / 86400000));
-              currentCount = data.count + diffDays;
-              if (currentCount > 99999) currentCount = 99999;
-            }
-          }
-          localStorage.setItem(storageKey, JSON.stringify({ date: todayStr, count: currentCount }));
-        }
-      } catch (e) { console.warn("localStorage 不可用"); }
-      counterElem.innerText = String(currentCount).padStart(5, '0');
-    })();
-
     (function() {
       let last = 0;
       document.addEventListener('mousemove', function(e) {
