@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Reigen Arataka · 个人收藏站 · 留白版</title>
+  <title>Reigen Arataka · 个人收藏站 · 放大版</title>
   <style>
     :root {
       --bg1: #dfe9f7;
@@ -60,21 +60,7 @@
       z-index: 0;
     }
 
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      background:
-        radial-gradient(circle at 8% 18%, rgba(255,255,255,0.28), transparent 14%),
-        radial-gradient(circle at 92% 22%, rgba(255,255,255,0.22), transparent 12%),
-        radial-gradient(circle at 12% 82%, rgba(255,255,255,0.18), transparent 10%),
-        radial-gradient(circle at 88% 74%, rgba(255,255,255,0.18), transparent 10%);
-      mix-blend-mode: screen;
-    }
-
-    a { color: #5b7ea3; font-size: 1em; text-decoration: none; }
+    a { color: #5b7ea3; font-size: 1em; }
     a:hover { color: #8b6b9e; }
 
     ::selection { background: #e8c9f4; color: #45627e; }
@@ -164,7 +150,6 @@
         radial-gradient(circle, rgba(230,238,250,0.85) 24%, transparent 26%) 13px 13px / 26px 26px,
         linear-gradient(rgba(255,255,255,0.35), rgba(255,255,255,0.35));
       box-shadow: 0 16px 36px rgba(120,140,170,0.12);
-      z-index: 1;
     }
 
     .wrapper {
@@ -190,34 +175,12 @@
       backdrop-filter: blur(4px);
     }
 
-    .wrapper::before,
-    .wrapper::after {
-      content: "✧ ✧ ✧";
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 15px;
-      color: rgba(217,183,234,0.5);
-      letter-spacing: 16px;
-      pointer-events: none;
-    }
-    .wrapper::before { top: -12px; }
-    .wrapper::after { bottom: -12px; }
-
     .inner-frame {
       border: 2.5px dashed #c7d8ea;
       border-radius: 28px;
       padding: 24px;
       background: rgba(255,255,255,0.34);
       position: relative;
-    }
-    .inner-frame::before {
-      content: "";
-      position: absolute;
-      inset: -12px;
-      border-radius: 34px;
-      border: 2.5px dotted rgba(191,209,230,0.8);
-      pointer-events: none;
     }
 
     .hero {
@@ -345,189 +308,221 @@
       font-size: 1rem;
       padding: 6px 0;
       border-bottom: 1px dotted var(--line);
+      transition: all 0.2s;
+    }
+    .menu-item:hover {
+      padding-left: 12px;
+      color: #2e4e6e;
+      border-bottom-color: #b2c9e2;
+      background: linear-gradient(to right, rgba(217,183,234,0.13), transparent);
+    }
+
+    .content-layout {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 22px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.85);
+      border: 1.5px solid #cfdfef;
+      border-radius: 20px;
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+
+    .tag-row, .badge-row, .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .tag, .badge, .tiny-pill {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #eef5ff;
+      border: 1px solid #d0e0f1;
+      color: #607793;
+      font-size: 0.85rem;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .gallery img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 16px;
+      border: 2px solid #d1dfef;
+    }
+
+    .updates-text, .about-text, .status-text, .diary-text, .guestbook-box, .links-text {
+      line-height: 1.8;
+      font-size: 0.98rem;
     }
 
     .mini-photo { text-align: center; }
     .mini-photo img {
-      width: 100%;
-      border-radius: 18px;
-      border: 2px solid #d6e3f2;
-      display: block;
-    }
-
-    .badge-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .badge {
-      padding: 7px 12px;
-      border-radius: 999px;
-      background: rgba(240,246,255,0.92);
-      border: 1px solid #d4dfeb;
-      color: #69819a;
-      font-size: 0.85rem;
+      max-width: 100%;
+      border-radius: 20px;
+      border: 2px solid #d1dfef;
     }
 
     .blinkies {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
     .blinkie {
-      display: inline-block;
-      padding: 8px 12px;
+      display: block;
+      text-align: center;
+      padding: 10px 8px;
       border-radius: 12px;
-      background: linear-gradient(135deg, #f7fbff, #eef5ff);
-      border: 1px solid #d4dfeb;
-      font-size: 0.8rem;
-      color: #5f7694;
-    }
-
-    .pet-container { display: flex; justify-content: center; }
-    .pet-iframe {
-      width: 100%;
-      height: 180px;
-      border: 0;
-      border-radius: 18px;
-      background: white;
+      background: linear-gradient(135deg, #fff, #eef5ff);
+      border: 1px solid #cfdfee;
+      text-decoration: none;
+      color: #617993;
+      font-size: 0.88rem;
+      font-weight: 700;
     }
 
     .wishlist {
       margin: 0;
       padding-left: 20px;
       line-height: 1.9;
-      color: var(--text);
-    }
-
-    .guestbook-box, .updates-text, .status-box, .tiny-note {
-      font-size: 0.95rem;
-      line-height: 1.8;
-      color: var(--text);
     }
 
     .guestbook-form {
-      margin-top: 14px;
-      display: flex;
-      flex-direction: column;
+      display: grid;
       gap: 10px;
+      margin-top: 14px;
     }
-    .guestbook-form input,
-    .guestbook-form textarea {
+    .guestbook-form input, .guestbook-form textarea {
       width: 100%;
-      border: 1.5px solid #d3dfee;
+      border: 1px solid #cfdfee;
       border-radius: 14px;
-      background: rgba(255,255,255,0.9);
-      padding: 10px 12px;
+      padding: 12px 14px;
       font: inherit;
+      background: rgba(255,255,255,0.92);
       color: var(--text);
       outline: none;
     }
-    .guestbook-form textarea { min-height: 100px; resize: vertical; }
-
-    .soft-button {
-      border: 1.5px solid #bcd0e5;
-      background: linear-gradient(135deg, #f7fbff, #e8f1fb);
-      border-radius: 999px;
-      padding: 10px 16px;
-      cursor: pointer;
+    .guestbook-form textarea { min-height: 110px; resize: vertical; }
+    .soft-button, .back-top {
+      border: none;
+      background: linear-gradient(135deg, #dcecff, #f4e6ff);
       color: #5f7694;
+      border-radius: 999px;
+      padding: 12px 18px;
       font: inherit;
+      cursor: pointer;
+      box-shadow: 0 10px 18px rgba(130,150,180,0.12);
+    }
+    .back-top {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 999;
     }
 
     .footer-note {
-      margin-top: 18px;
+      margin-top: 22px;
       text-align: center;
-      color: #7d8fa3;
-      font-size: 0.82rem;
+      font-size: 0.92rem;
+      color: #6f8299;
       line-height: 1.8;
-      letter-spacing: 0.5px;
-      opacity: 0.88;
-    }
-
-    .back-top {
-      position: fixed;
-      right: 18px;
-      bottom: 16px;
-      z-index: 20;
-      border: 1.5px solid #bfd1e6;
-      background: rgba(255,255,255,0.86);
-      color: #5f7694;
-      border-radius: 999px;
-      padding: 10px 14px;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(133,157,186,0.14);
     }
 
     .cursor-star {
       position: fixed;
-      pointer-events: none;
       z-index: 9999;
+      pointer-events: none;
+      color: rgba(170,140,210,0.95);
       font-size: 18px;
-      color: rgba(217,183,234,0.75);
-      text-shadow: 0 0 10px rgba(217,183,234,0.45);
-      animation: cursorFade 0.85s ease-out forwards;
+      text-shadow: 0 0 8px rgba(255,255,255,0.85);
+      animation: starFade 0.85s ease-out forwards;
     }
-    @keyframes cursorFade {
-      0% { transform: translate(0,0) scale(1); opacity: 1; }
-      100% { transform: translate(0,-18px) scale(0.65); opacity: 0; }
+    @keyframes starFade {
+      0% { transform: scale(0.8); opacity: 1; }
+      100% { transform: translateY(-14px) scale(1.4); opacity: 0; }
     }
 
-    @media (max-width: 1320px) {
+    @media (max-width: 1200px) {
       .grid { grid-template-columns: 1fr; }
-      .hero img { height: 320px; }
+      .content-layout { grid-template-columns: 1fr; }
     }
-
-    @media (max-width: 768px) {
-      body { padding: 18px 12px 40px; }
-      .wrapper, .lace-shell { padding: 14px; border-radius: 28px; }
+    @media (max-width: 700px) {
+      body { padding: 16px 10px 36px; }
+      .wrapper, .lace-shell { padding: 12px; border-radius: 24px; }
       .inner-frame { padding: 14px; }
-      .hero-title { left: 20px; bottom: 18px; }
-      .hero-sticker { right: 18px; bottom: 18px; }
-      .hero img { height: 240px; }
+      .hero img { height: 280px; }
+      .gallery { grid-template-columns: 1fr 1fr; }
+      .blinkies { grid-template-columns: 1fr; }
+      .hero-title { left: 18px; right: 18px; bottom: 18px; }
     }
   </style>
 </head>
 <body>
-  <div class="float-deco d1">✦</div>
-  <div class="float-deco d2">♡</div>
-  <div class="float-deco d3">✧</div>
-  <div class="float-deco d4">♡</div>
 
-  <div class="hanging-tag tag-1"><span>⋆</span><div class="tag-body">diary</div></div>
-  <div class="hanging-tag tag-2"><span>⋆</span><div class="tag-body">photo</div></div>
-  <div class="hanging-tag tag-3"><span>⋆</span><div class="tag-body">about</div></div>
+  <div class="float-deco d1">✿</div>
+  <div class="float-deco d2">✿</div>
+  <div class="float-deco d3">✿</div>
+  <div class="float-deco d4">✿</div>
 
-  <div class="float-sparkle sparkle-1">♡</div>
-  <div class="float-sparkle sparkle-2">✧</div>
-  <div class="float-sparkle sparkle-3">♡</div>
-  <div class="float-sparkle sparkle-4">✦</div>
-  <div class="float-sparkle sparkle-5">✧</div>
+  <div class="float-sparkle sparkle-1">✧</div>
+  <div class="float-sparkle sparkle-2">♡</div>
+  <div class="float-sparkle sparkle-3">✦</div>
+  <div class="float-sparkle sparkle-4">✧</div>
+  <div class="float-sparkle sparkle-5">♡</div>
+
+  <div class="hanging-tag tag-1">
+    <span>♡</span>
+    <div class="tag-body">soft web archive</div>
+  </div>
+  <div class="hanging-tag tag-2">
+    <span>✧</span>
+    <div class="tag-body">Reigen personal site</div>
+  </div>
+  <div class="hanging-tag tag-3">
+    <span>♡</span>
+    <div class="tag-body">old internet mood</div>
+  </div>
 
   <div class="lace-shell">
     <div class="wrapper">
       <div class="inner-frame">
-        <section class="hero">
-          <img src="https://images.unsplash.com/photo-1520637836862-4d197d17c09a?auto=format&fit=crop&w=1600&q=80" alt="hero">
+
+        <div class="hero">
+          <img src="https://images.unsplash.com/photo-1499002238440-d264edd596ec?q=80&w=1600&auto=format&fit=crop" alt="hero">
           <div class="hero-title">
             <h1>Reigen Arataka</h1>
-            <p>personal archive · soft blue web · diary mood</p>
+            <p>个人收藏站 · 放大版 · soft web / archive / daydream</p>
           </div>
-          <div class="hero-sticker">online ♡ updating</div>
-        </section>
+          <div class="hero-sticker">welcome to my tiny corner ♡</div>
+        </div>
 
         <div class="top-marquee">
-          <marquee behavior="scroll" direction="left">welcome to the Reigen personal archive · old web vibes · diary / gallery / wishlist / guestbook · best viewed while daydreaming</marquee>
+          <marquee behavior="scroll" direction="left" scrollamount="6">
+            welcome to Reigen's archive ♡ 这里记录收藏、更新、心情碎片、图库与小按钮 ·
+            old web, soft colors, and lots of tiny stars ✧
+          </marquee>
         </div>
 
         <section class="grid">
           <div class="column">
             <div class="panel">
-              <div class="panel-header">menu</div>
+              <div class="panel-header">navigation</div>
               <div class="panel-body">
                 <div class="menu-list">
-                  <a class="menu-item" href="#diary">diary</a>
+                  <a class="menu-item" href="#about">about</a>
+                  <a class="menu-item" href="#status">status</a>
+                  <a class="menu-item" href="#nowplaying">now playing</a>
                   <a class="menu-item" href="#gallery">gallery</a>
+                  <a class="menu-item" href="#diary">diary log</a>
+                  <a class="menu-item" href="#links">links</a>
                   <a class="menu-item" href="#wishlist">wishlist</a>
                   <a class="menu-item" href="#guestbook">guestbook</a>
                 </div>
@@ -535,41 +530,91 @@
             </div>
 
             <div class="panel">
-              <div class="panel-header">about</div>
-              <div class="panel-body">
-                <div class="tiny-note">
-                  这里是一个偏旧站气氛的个人收藏页，记录碎碎念、图片、状态和喜欢的软软网页元素。
+              <div class="panel-header">profile</div>
+              <div class="panel-body mini-photo">
+                <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=900&auto=format&fit=crop" alt="mini">
+                <div class="card" style="margin-top:14px;">
+                  <div><strong>name:</strong> Reigen Arataka</div>
+                  <div><strong>site type:</strong> personal archive</div>
+                  <div><strong>vibe:</strong> pastel old web</div>
+                  <div><strong>status:</strong> collecting tiny things</div>
                 </div>
               </div>
             </div>
           </div>
 
           <div class="column">
-            <div class="panel" id="diary">
-              <div class="panel-header">diary log</div>
+            <div class="panel" id="about">
+              <div class="panel-header">about this page</div>
               <div class="panel-body">
-                <p>2026.05.10<br>今天把首页结构整理了一下，增加了更舒适的留白和更柔和的视觉层次。</p>
-                <hr>
-                <p>2026.05.09<br>正在慢慢补充 archive 的内容，希望页面像一个安静的小房间。</p>
-                <hr>
-                <p>2026.05.08<br>继续完善 gallery、wishlist 和 guestbook 的布局，保持轻盈感。</p>
+                <div class="about-text">
+                  这是一个偏“旧网感”的个人主页，灵感来自个人收藏站、Neocities 风格页面、
+                  以及那些会认真摆放按钮、留言板、更新日志和小图片的时代。<br><br>
+                  页面保留了你原本的 Reigen / MP100 主题，同时补充成更完整的首页结构，
+                  适合放收藏、写日记、展示链接、放图库和更新记录。
+                </div>
+
+                <div class="badge-row" style="margin-top:14px;">
+                  <span class="badge">mp100</span>
+                  <span class="badge">archive</span>
+                  <span class="badge">neocities mood</span>
+                  <span class="badge">soft web</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel" id="status">
+              <div class="panel-header">status</div>
+              <div class="panel-body">
+                <div class="status-text">
+                  currently: listening to ambient music /整理收藏图床 / 写站点小组件<br>
+                  mood: calm, dreamy, slightly nostalgic<br>
+                  to do: 给每个页面加上独立风格的小标题和装饰边框
+                </div>
+                <div class="tag-row" style="margin-top:14px;">
+                  <span class="tag">online</span>
+                  <span class="tag">listening</span>
+                  <span class="tag">collecting</span>
+                  <span class="tag">coding</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel" id="nowplaying">
+              <div class="panel-header">now playing</div>
+              <div class="panel-body">
+                <div class="card">
+                  <strong>song:</strong> lo-fi / ambient / rainy loop<br>
+                  <strong>artist:</strong> various artists<br>
+                  <strong>volume:</strong> low but warm
+                </div>
+                <div class="links-text">
+                  你可以把这里换成 Spotify embed、QQ 音乐卡片、或者只保留文字播放器风格。
+                </div>
               </div>
             </div>
 
             <div class="panel" id="gallery">
-              <div class="panel-header">gallery</div>
+              <div class="panel-header">gallery wall</div>
               <div class="panel-body">
-                <div class="mini-photo">
-                  <img src="https://picsum.photos/900/420?blur=1" alt="gallery">
+                <div class="gallery">
+                  <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800&auto=format&fit=crop" alt="">
+                  <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop" alt="">
+                  <img src="https://images.unsplash.com/photo-1493244040629-496f6d136cc3?q=80&w=800&auto=format&fit=crop" alt="">
+                  <img src="https://images.unsplash.com/photo-1504707748692-419802cf939d?q=80&w=800&auto=format&fit=crop" alt="">
+                  <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop" alt="">
+                  <img src="https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?q=80&w=800&auto=format&fit=crop" alt="">
                 </div>
               </div>
             </div>
 
-            <div class="panel">
-              <div class="panel-header">tiny note</div>
+            <div class="panel" id="diary">
+              <div class="panel-header">diary log</div>
               <div class="panel-body">
-                <div class="tiny-note">
-                  I miss old internet websites where every page felt like someone quietly decorating a room for no reason...
+                <div class="diary-text">
+                  <strong>2026/05/11</strong> · 今天把首页补得更完整了，增加了更多板块和旧网感装饰。<br>
+                  <strong>2026/05/10</strong> · 调整了蓝紫色配色与蕾丝边框。<br>
+                  <strong>2026/05/08</strong> · 开始整理收藏区、留言板和按钮墙。
                 </div>
               </div>
             </div>
@@ -577,26 +622,55 @@
 
           <div class="column">
             <div class="panel">
-              <div class="panel-header">status</div>
+              <div class="panel-header">blinkies</div>
               <div class="panel-body">
-                <div class="status-box">
-                  ♡ online<br>
-                  ♡ listening to soft bgm<br>
-                  ♡ arranging the archive slowly
+                <div class="blinkies">
+                  <a class="blinkie" href="#">REIGEN FAN</a>
+                  <a class="blinkie" href="#">OLD WEB</a>
+                  <a class="blinkie" href="#">MP100 ♡</a>
+                  <a class="blinkie" href="#">DIARY LOG</a>
                 </div>
               </div>
             </div>
 
             <div class="panel">
+              <div class="panel-header">links</div>
+              <div class="panel-body">
+                <div class="links-text">
+                  <a href="#">my blog</a><br>
+                  <a href="#">archive page</a><br>
+                  <a href="#">88x31 buttons</a><br>
+                  <a href="#">favorite fanworks</a><br>
+                  <a href="#">resources</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-header">Reigen's tamagotchi ♡</div>
+              <div class="panel-body">
+                <iframe src="https://tamanotchi.world/32711c" style="width:100%;height:260px;border:0;border-radius:18px;background:#fff;" title="Reigen's Pet"></iframe>
+              </div>
+            </div>
+
+            <div class="panel" id="wishlist">
               <div class="panel-header">wishlist</div>
               <div class="panel-body">
                 <ul class="wishlist">
-                  <li>整理截图文件夹</li>
-                  <li>做一个独立 gallery 页面</li>
+                  <li>整理 Reigen 截图文件夹</li>
+                  <li>做一个独立 gallery.html</li>
                   <li>补完台词收藏页</li>
                   <li>找几个真正的 88x31 buttons</li>
-                  <li>给 guestbook 接入留言服务</li>
+                  <li>给 guestbook 接入可留言服务</li>
                 </ul>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-header">visitor counter</div>
+              <div class="panel-body">
+                <div style="font-size:2rem;font-weight:700;letter-spacing:4px;text-align:center;" id="visitorCounter">00920</div>
+                <div style="text-align:center;margin-top:8px;color:#7890a8;">visitors today</div>
               </div>
             </div>
 
@@ -614,6 +688,19 @@
                 </div>
               </div>
             </div>
+
+            <div class="panel">
+              <div class="panel-header">updates</div>
+              <div class="panel-body">
+                <p class="updates-text">
+                  + 完整首页结构·放大视觉舒适版<br>
+                  + 新增 now playing, diary log, gallery wall<br>
+                  + 新增 status / wishlist / guestbook<br>
+                  + 蕾丝边框与蓝紫色旧站风格<br>
+                  + 鼠标星星尾迹·整体尺寸提升
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -628,6 +715,31 @@
   <button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ top</button>
 
   <script>
+    (function() {
+      const counterElem = document.getElementById('visitorCounter');
+      if (!counterElem) return;
+      let currentCount = 920;
+      try {
+        const storageKey = 'reigen_visitor_base';
+        const todayStr = new Date().toISOString().slice(0,10);
+        if (typeof localStorage !== "undefined") {
+          const saved = localStorage.getItem(storageKey);
+          if (saved) {
+            const data = JSON.parse(saved);
+            if (data.date === todayStr) {
+              currentCount = data.count;
+            } else {
+              const diffDays = Math.max(1, Math.floor((new Date(todayStr) - new Date(data.date)) / 86400000));
+              currentCount = data.count + diffDays;
+              if (currentCount > 99999) currentCount = 99999;
+            }
+          }
+          localStorage.setItem(storageKey, JSON.stringify({ date: todayStr, count: currentCount }));
+        }
+      } catch (e) { console.warn("localStorage 不可用"); }
+      counterElem.innerText = String(currentCount).padStart(5, '0');
+    })();
+
     (function() {
       let last = 0;
       document.addEventListener('mousemove', function(e) {
