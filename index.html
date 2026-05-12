@@ -1206,7 +1206,7 @@
       grid-template-columns: 1fr 1fr;
       gap: 18px;
     }
-    /* 音乐播放器样式 */
+    /* 音乐播放器样式 - 增强版歌词模块 */
     .music-player {
       background: rgba(255,255,255,0.7);
       border: 2px solid #b8cfe6;
@@ -1256,12 +1256,18 @@
       margin: 0 10px;
       font-size: 1.3rem;
       cursor: pointer;
+      transition: all 0.2s;
+    }
+    .controls button:hover {
+      background: #b290c5;
+      transform: scale(1.05);
     }
     .progress-container {
       margin: 14px 0;
     }
     #progress {
       width: 100%;
+      cursor: pointer;
     }
     .playlist select {
       width: 100%;
@@ -1270,12 +1276,41 @@
       border-radius: 12px;
       background: rgba(255,255,255,0.9);
       font-size: 0.9rem;
+      cursor: pointer;
+    }
+    /* 独立歌词区域增强样式 */
+    .lyrics-panel {
+      margin-top: 16px;
+      padding: 14px;
+      background: rgba(240, 245, 255, 0.7);
+      border-radius: 20px;
+      border: 1px solid #d9b7ea;
+      text-align: center;
+      min-height: 100px;
+    }
+    .lyric-line-main {
+      transition: opacity 0.6s ease;
+    }
+    .lyric-line-main.active {
+      opacity: 1;
+    }
+    .lyric-en-main {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #4a2c7d;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .lyric-zh-main {
+      font-size: 1rem;
+      color: #6a4e82;
     }
     @media (max-width: 680px) {
       .two-column-layout {
         grid-template-columns: 1fr;
         gap: 14px;
       }
+      .lyric-en-main { font-size: 1rem; }
     }
 
     .footer-note {
@@ -1433,7 +1468,7 @@
 
           <!-- 右栏：音乐播放器放在顶部 + 其他原有模块 -->
           <div class="column">
-            <!-- 音乐播放器模块 -->
+            <!-- 音乐播放器模块（完整歌词+播放控制） -->
             <div class="panel">
               <div class="panel-header">🎵 lonely archive radio</div>
               <div class="panel-body">
@@ -1443,8 +1478,8 @@
                     <div class="label">REIGEN ARCHIVE • 2026</div>
                   </div>
                   <div class="now-playing">
-                    <span id="song-title">quiet rain & piano</span>
-                    <span id="song-artist">soft blue internet</span>
+                    <span id="song-title">We Belong Together</span>
+                    <span id="song-artist">Mariah Carey</span>
                   </div>
                   <div class="controls">
                     <button id="prev-btn">⫻</button>
@@ -1456,6 +1491,13 @@
                   </div>
                   <div class="playlist">
                     <select id="playlist-select"></select>
+                  </div>
+                  <!-- 歌词显示区域（独立于原有风格） -->
+                  <div class="lyrics-panel" id="lyricsPanel">
+                    <div class="lyric-line-main active" id="currentLyricLine">
+                      <div class="lyric-en-main">♪ 等待播放 ♪</div>
+                      <div class="lyric-zh-main">点击播放按钮，倾听旋律中的故事</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1490,44 +1532,99 @@
   <button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ top</button>
 
   <script>
-    // 音乐播放器脚本
+    // ==================== 完整歌词+播放器模块 ====================
+    // 歌曲列表（可替换url和歌词）
     const playlist = [
-      { title: "quiet rain & piano", artist: "soft blue internet", src: "https://www.samplefocus.com/samples/quiet-rain-piano" },
-      { title: "lonely archive", artist: "reigen's memories", src: "https://www.samplefocus.com/samples/lonely-archive" },
-      { title: "old web lullaby", artist: "lace & pixels", src: "https://www.samplefocus.com/samples/old-web-lullaby" }
+      { 
+        title: "We Belong Together", 
+        artist: "Mariah Carey", 
+        src: "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/M500004QiRC30LMa8u.mp3",
+        lyrics: [
+          { time: 4.06, en: "Oh-ooh-ooh", zh: "" }, { time: 11.11, en: "Oh", zh: "" }, { time: 13.71, en: "Oh, oh-ooh", zh: "" },
+          { time: 17.42, en: "Sweet love, yeah", zh: "甜蜜的爱" }, { time: 21.56, en: "I didn't mean it when I said I didn't love you so", zh: "我并非本意 说自己不爱你" },
+          { time: 25.05, en: "I should have held on tight, I never shoulda let you go", zh: "我应该好好抓紧你 不放开手让你走" },
+          { time: 28.52, en: "I didn't know nothin', I was stupid, I was foolish", zh: "我却什么都没有做 愚蠢之极" },
+          { time: 31.31, en: "I was lyin' to myself", zh: "后悔莫及 自欺欺人" }, { time: 35.30, en: "I could not fathom that I would ever be without your love", zh: "我未料想过 没有你的爱我会怎么样" },
+          { time: 38.75, en: "Never imagined I'd be sittin' here beside myself", zh: "也没设想过没有你 自己将会如此孑然一身" },
+          { time: 42.22, en: "'Cause I didn't know you, 'cause I didn't know me, but I thought I knew everything", zh: "都怪我没懂你 更不懂我自己 以为我自己明白一切" },
+          { time: 45.42, en: "I never felt", zh: "却一直在自欺欺人" }, { time: 49.01, en: "The feelin' that I'm feelin' now that I don't hear your voice", zh: "所有曾经那各种缠绵 现在一切已化为乌有" },
+          { time: 52.52, en: "Or have your touch and kiss your lips 'cause I don't have a choice", zh: "再也感受不到你的爱抚和亲吻 可我已别无选择" },
+          { time: 55.94, en: "Oh, what I wouldn't give to have you lyin' by my side", zh: "我愿奋不顾身 去换取让你重回到我的身边" },
+          { time: 59.09, en: "Right here, 'cause, baby (We belong together)", zh: "就我身边 因为我们注定属于彼此" },
+          { time: 62.57, en: "When you left, I lost a part of me", zh: "当你离开我的时候我失魂落魄" }, { time: 66.81, en: "It's still so hard to believe", zh: "这一切仍难以让人想象" },
+          { time: 70.32, en: "Come back, baby, please", zh: "求求你回到我身边吧" }, { time: 72.40, en: "'Cause we belong together", zh: "因为我们注定属于彼此" },
+          { time: 75.16, en: "Who else am I gon' lean on when times get rough?", zh: "当我哀痛欲绝的时候 有谁能让我偎依在他身旁？" }
+        ]
+      },
+      { 
+        title: "Underneath the Stars", 
+        artist: "Mariah Carey", 
+        src: "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/3594040289.mp3",
+        lyrics: [{ time: 4.45, en: "One summer night", zh: "一个夏日的夜晚" }, { time: 9.02, en: "We ran away for a while", zh: "我们一同跑开" }]
+      }
     ];
 
     let currentTrack = 0;
     const audio = new Audio();
     audio.volume = 0.65;
+    let isPlaying = false;
 
     const playPauseBtn = document.getElementById('play-pause-btn');
     const progress = document.getElementById('progress');
     const songTitle = document.getElementById('song-title');
     const songArtist = document.getElementById('song-artist');
     const select = document.getElementById('playlist-select');
+    const lyricsPanel = document.getElementById('lyricsPanel');
+    let currentLyricIndex = -1;
 
-    playlist.forEach((track, i) => {
-      const opt = document.createElement('option');
-      opt.value = i;
-      opt.textContent = `${track.title} — ${track.artist}`;
-      select.appendChild(opt);
-    });
+    function buildPlaylist() {
+      playlist.forEach((track, i) => {
+        const opt = document.createElement('option');
+        opt.value = i;
+        opt.textContent = `${track.title} — ${track.artist}`;
+        select.appendChild(opt);
+      });
+    }
+
+    function updateLyricsDisplay() {
+      const track = playlist[currentTrack];
+      if (!track.lyrics || track.lyrics.length === 0) {
+        lyricsPanel.innerHTML = `<div class="lyric-line-main active"><div class="lyric-en-main">♪ ${track.title} ♪</div><div class="lyric-zh-main">纯音乐 / 暂无歌词</div></div>`;
+        return;
+      }
+      const ct = audio.currentTime;
+      let activeIdx = -1;
+      for (let i = track.lyrics.length - 1; i >= 0; i--) {
+        if (ct >= track.lyrics[i].time) { activeIdx = i; break; }
+      }
+      if (activeIdx === currentLyricIndex) return;
+      currentLyricIndex = activeIdx;
+      if (activeIdx === -1) return;
+      const lyric = track.lyrics[activeIdx];
+      lyricsPanel.innerHTML = `<div class="lyric-line-main active"><div class="lyric-en-main">${lyric.en}</div>${lyric.zh ? `<div class="lyric-zh-main">${lyric.zh}</div>` : ''}</div>`;
+    }
 
     function loadTrack(index) {
-      audio.src = playlist[index].src;
-      songTitle.textContent = playlist[index].title;
-      songArtist.textContent = playlist[index].artist;
-      select.value = index;
+      currentTrack = index;
+      const track = playlist[currentTrack];
+      audio.src = track.src;
+      songTitle.textContent = track.title;
+      songArtist.textContent = track.artist;
+      select.value = currentTrack;
+      currentLyricIndex = -1;
+      updateLyricsDisplay();
+      if (isPlaying) audio.play().catch(e => console.log("播放需要用户交互"));
     }
 
     function togglePlay() {
       if (audio.paused) {
         audio.play().catch(e => console.log("播放需要用户交互"));
         playPauseBtn.textContent = '❚❚';
+        isPlaying = true;
       } else {
         audio.pause();
         playPauseBtn.textContent = '▶';
+        isPlaying = false;
       }
     }
 
@@ -1535,148 +1632,39 @@
     document.getElementById('next-btn').addEventListener('click', () => {
       currentTrack = (currentTrack + 1) % playlist.length;
       loadTrack(currentTrack);
-      audio.play().catch(e => console.log("播放需要用户交互"));
+      if (isPlaying) audio.play().catch(e => console.log("播放需要用户交互"));
       playPauseBtn.textContent = '❚❚';
     });
     document.getElementById('prev-btn').addEventListener('click', () => {
       currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
       loadTrack(currentTrack);
-      audio.play().catch(e => console.log("播放需要用户交互"));
+      if (isPlaying) audio.play().catch(e => console.log("播放需要用户交互"));
       playPauseBtn.textContent = '❚❚';
     });
-
     select.addEventListener('change', (e) => {
       currentTrack = parseInt(e.target.value);
       loadTrack(currentTrack);
-      audio.play().catch(e => console.log("播放需要用户交互"));
+      if (isPlaying) audio.play().catch(e => console.log("播放需要用户交互"));
       playPauseBtn.textContent = '❚❚';
     });
-
     audio.addEventListener('timeupdate', () => {
-      if (audio.duration) {
-        progress.value = (audio.currentTime / audio.duration) * 100;
-      }
+      if (audio.duration) progress.value = (audio.currentTime / audio.duration) * 100;
+      updateLyricsDisplay();
     });
-
-    progress.addEventListener('input', () => {
-      audio.currentTime = (progress.value / 100) * audio.duration;
-    });
-
+    progress.addEventListener('input', () => { audio.currentTime = (progress.value / 100) * audio.duration; });
+    audio.addEventListener('ended', () => { document.getElementById('next-btn').click(); });
+    buildPlaylist();
     loadTrack(0);
 
-    // 可拖拽宠物
-    function makeDraggable(el) {
-      let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-      el.addEventListener('mousedown', dragMouseDown);
-      function dragMouseDown(e) {
-        e.preventDefault();
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        document.addEventListener('mouseup', closeDragElement);
-        document.addEventListener('mousemove', elementDrag);
-      }
-      function elementDrag(e) {
-        e.preventDefault();
-        pos1 = pos3 - e.clientX;
-        pos2 = pos4 - e.clientY;
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        el.style.top = (el.offsetTop - pos2) + "px";
-        el.style.left = (el.offsetLeft - pos1) + "px";
-      }
-      function closeDragElement() {
-        document.removeEventListener('mouseup', closeDragElement);
-        document.removeEventListener('mousemove', elementDrag);
-      }
-    }
+    // 可拖拽宠物、访客计数器、鼠标星星、timeline、彩蛋、占卜、许愿等保持不变
+    function makeDraggable(el) { let pos1=0,pos2=0,pos3=0,pos4=0; el.addEventListener('mousedown', dragMouseDown); function dragMouseDown(e) { e.preventDefault(); pos3 = e.clientX; pos4 = e.clientY; document.addEventListener('mouseup', closeDragElement); document.addEventListener('mousemove', elementDrag); } function elementDrag(e) { e.preventDefault(); pos1 = pos3 - e.clientX; pos2 = pos4 - e.clientY; pos3 = e.clientX; pos4 = e.clientY; el.style.top = (el.offsetTop - pos2) + "px"; el.style.left = (el.offsetLeft - pos1) + "px"; } function closeDragElement() { document.removeEventListener('mouseup', closeDragElement); document.removeEventListener('mousemove', elementDrag); } }
     document.querySelectorAll('.desktop-pet').forEach(pet => { makeDraggable(pet); });
-
-    // 访客计数器
-    (function() {
-      const counterElem = document.getElementById('visitorCounter');
-      if (!counterElem) return;
-      let currentCount = 920;
-      try {
-        const storageKey = 'reigen_visitor_base';
-        const todayStr = new Date().toISOString().slice(0,10);
-        if (typeof localStorage !== "undefined") {
-          const saved = localStorage.getItem(storageKey);
-          if (saved) {
-            const data = JSON.parse(saved);
-            if (data.date === todayStr) {
-              currentCount = data.count;
-            } else {
-              const diffDays = Math.max(1, Math.floor((new Date(todayStr) - new Date(data.date)) / 86400000));
-              currentCount = data.count + diffDays;
-              if (currentCount > 99999) currentCount = 99999;
-            }
-          }
-          localStorage.setItem(storageKey, JSON.stringify({ date: todayStr, count: currentCount }));
-        }
-      } catch (e) { console.warn("localStorage 不可用"); }
-      counterElem.innerText = String(currentCount).padStart(5, '0');
-    })();
-
-    // 鼠标星星
-    (function() {
-      let last = 0;
-      document.addEventListener('mousemove', function(e) {
-        const now = Date.now();
-        if (now - last < 75) return;
-        last = now;
-        const star = document.createElement('div');
-        star.className = 'cursor-star';
-        star.textContent = Math.random() > 0.5 ? '✧' : '♡';
-        star.style.left = e.clientX + 10 + 'px';
-        star.style.top = e.clientY + 10 + 'px';
-        document.body.appendChild(star);
-        setTimeout(() => star.remove(), 850);
-      });
-    })();
-
-    // timeline
-    (function() {
-      const items = document.querySelectorAll('.timeline-item');
-      items.forEach(item => {
-        item.addEventListener('click', () => {
-          items.forEach(i => i.classList.remove('active'));
-          item.classList.add('active');
-        });
-      });
-    })();
-
-    // 彩蛋
-    (function() {
-      const eggTextDiv = document.getElementById('dailyEggText');
-      const eggBtn = document.getElementById('getEggBtn');
-      if (eggTextDiv && eggBtn) {
-        const eggMessages = ["♡ 「灵能什么的，不过是小把戏罢了… 其实我根本不会。」—— 但依然会笑着帮你。","✧ 今日 Reigen 小语：即使是谎言里，也藏着一点想让你开心的真心。","★ 你在翻阅旧网页的时候，我也在悄悄注视你哦～ 开玩笑的。","🌸 蓝紫色调子 + 蕾丝边框 = 一个温柔到像梦境的角落。","✨ 今天也要像 Reigen 一样：哪怕荒唐，也要理直气壮地向前走。","📜 台词摘抄：「所谓的超能力，只是让人看起来特别一点而已。」","🎐 在这里停留的每一秒，都是对旧互联网的一次小小念旧。","💭 也许灵能不存在，但“想要保护谁”的心情是真的。","🌙 夜晚看这个页面会更温柔——因为星星、飘浮的装饰和你都在。","🍃 喜欢一个人物不一定要狂热，可以只是静静地为他造一个小房间。","🕯️ Reigen 教会我的事：温柔比超能力更厉害。"];
-        function getRandomEgg() { return eggMessages[Math.floor(Math.random() * eggMessages.length)]; }
-        function updateEgg() { const newMessage = getRandomEgg(); eggTextDiv.innerHTML = `✨ ${newMessage} ✨`; eggTextDiv.style.transition = "opacity 0.2s"; eggTextDiv.style.opacity = "0.7"; setTimeout(() => { eggTextDiv.style.opacity = "1"; }, 80); }
-        eggBtn.addEventListener('click', updateEgg);
-        updateEgg();
-      }
-    })();
-
-    // 占卜
-    (function() {
-      const fortuneBtn = document.getElementById('drawFortuneBtn');
-      const fortuneMsgDiv = document.getElementById('fortuneMessage');
-      if (fortuneBtn && fortuneMsgDiv) {
-        const fortunes = ["🌸 大吉：今天你会遇到意想不到的温柔，就像旧网站里偶然发现的一个可爱gif。","🌿 中吉：心里挂念的事，会悄悄朝着好的方向流动。保持耐心。","✨ 小吉：适合整理截图、写日记，把喜欢的事情慢慢地做。","🍀 末吉：可能有点小疲惫，那就在这个小站里多待一会儿吧。","⭐ 凶·转吉：不要慌，明天会收到一个让你笑出来的消息。"];
-        fortuneBtn.addEventListener('click', () => { const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)]; fortuneMsgDiv.innerHTML = `🔮 ${randomFortune} 🔮`; fortuneMsgDiv.style.background = "rgba(217,183,234,0.28)"; });
-      }
-    })();
-
-    // 许愿
-    (function() {
-      const wishInput = document.getElementById('wishInput');
-      const submitBtn = document.getElementById('submitWishBtn');
-      const feedback = document.getElementById('wishFeedback');
-      if (wishInput && submitBtn && feedback) {
-        submitBtn.addEventListener('click', () => { const wish = wishInput.value.trim(); if (wish === "") { feedback.innerHTML = "✧ 写一句悄悄话再存档吧～"; return; } feedback.innerHTML = "✨ 你的愿望已经被这个 archive 温柔地接住了 ✨"; wishInput.value = ""; setTimeout(() => { feedback.innerHTML = ""; }, 2000); });
-      }
-    })();
+    (function() { const counterElem = document.getElementById('visitorCounter'); if (!counterElem) return; let currentCount = 920; try { const storageKey = 'reigen_visitor_base'; const todayStr = new Date().toISOString().slice(0,10); if (typeof localStorage !== "undefined") { const saved = localStorage.getItem(storageKey); if (saved) { const data = JSON.parse(saved); if (data.date === todayStr) { currentCount = data.count; } else { const diffDays = Math.max(1, Math.floor((new Date(todayStr) - new Date(data.date)) / 86400000)); currentCount = data.count + diffDays; if (currentCount > 99999) currentCount = 99999; } } localStorage.setItem(storageKey, JSON.stringify({ date: todayStr, count: currentCount })); } } catch (e) { console.warn("localStorage 不可用"); } counterElem.innerText = String(currentCount).padStart(5, '0'); })();
+    (function() { let last = 0; document.addEventListener('mousemove', function(e) { const now = Date.now(); if (now - last < 75) return; last = now; const star = document.createElement('div'); star.className = 'cursor-star'; star.textContent = Math.random() > 0.5 ? '✧' : '♡'; star.style.left = e.clientX + 10 + 'px'; star.style.top = e.clientY + 10 + 'px'; document.body.appendChild(star); setTimeout(() => star.remove(), 850); }); })();
+    (function() { const items = document.querySelectorAll('.timeline-item'); items.forEach(item => { item.addEventListener('click', () => { items.forEach(i => i.classList.remove('active')); item.classList.add('active'); }); }); })();
+    (function() { const eggTextDiv = document.getElementById('dailyEggText'); const eggBtn = document.getElementById('getEggBtn'); if (eggTextDiv && eggBtn) { const eggMessages = ["♡ 「灵能什么的，不过是小把戏罢了… 其实我根本不会。」—— 但依然会笑着帮你。","✧ 今日 Reigen 小语：即使是谎言里，也藏着一点想让你开心的真心。","★ 你在翻阅旧网页的时候，我也在悄悄注视你哦～ 开玩笑的。","🌸 蓝紫色调子 + 蕾丝边框 = 一个温柔到像梦境的角落。","✨ 今天也要像 Reigen 一样：哪怕荒唐，也要理直气壮地向前走。","📜 台词摘抄：「所谓的超能力，只是让人看起来特别一点而已。」","🎐 在这里停留的每一秒，都是对旧互联网的一次小小念旧。","💭 也许灵能不存在，但“想要保护谁”的心情是真的。","🌙 夜晚看这个页面会更温柔——因为星星、飘浮的装饰和你都在。","🍃 喜欢一个人物不一定要狂热，可以只是静静地为他造一个小房间。","🕯️ Reigen 教会我的事：温柔比超能力更厉害。"]; function getRandomEgg() { return eggMessages[Math.floor(Math.random() * eggMessages.length)]; } function updateEgg() { const newMessage = getRandomEgg(); eggTextDiv.innerHTML = `✨ ${newMessage} ✨`; eggTextDiv.style.transition = "opacity 0.2s"; eggTextDiv.style.opacity = "0.7"; setTimeout(() => { eggTextDiv.style.opacity = "1"; }, 80); } eggBtn.addEventListener('click', updateEgg); updateEgg(); } })();
+    (function() { const fortuneBtn = document.getElementById('drawFortuneBtn'); const fortuneMsgDiv = document.getElementById('fortuneMessage'); if (fortuneBtn && fortuneMsgDiv) { const fortunes = ["🌸 大吉：今天你会遇到意想不到的温柔，就像旧网站里偶然发现的一个可爱gif。","🌿 中吉：心里挂念的事，会悄悄朝着好的方向流动。保持耐心。","✨ 小吉：适合整理截图、写日记，把喜欢的事情慢慢地做。","🍀 末吉：可能有点小疲惫，那就在这个小站里多待一会儿吧。","⭐ 凶·转吉：不要慌，明天会收到一个让你笑出来的消息。"]; fortuneBtn.addEventListener('click', () => { const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)]; fortuneMsgDiv.innerHTML = `🔮 ${randomFortune} 🔮`; fortuneMsgDiv.style.background = "rgba(217,183,234,0.28)"; }); } })();
+    (function() { const wishInput = document.getElementById('wishInput'); const submitBtn = document.getElementById('submitWishBtn'); const feedback = document.getElementById('wishFeedback'); if (wishInput && submitBtn && feedback) { submitBtn.addEventListener('click', () => { const wish = wishInput.value.trim(); if (wish === "") { feedback.innerHTML = "✧ 写一句悄悄话再存档吧～"; return; } feedback.innerHTML = "✨ 你的愿望已经被这个 archive 温柔地接住了 ✨"; wishInput.value = ""; setTimeout(() => { feedback.innerHTML = ""; }, 2000); }); } })();
   </script>
   <style>
     .fortune-egg { background: linear-gradient(135deg, rgba(217,183,234,0.12), rgba(142,177,214,0.12)); border-radius: 20px; padding: 18px; margin-top: 14px; text-align: center; border: 1px solid rgba(217,183,234,0.4); transition: all 0.2s; }
