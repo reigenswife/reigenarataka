@@ -35,7 +35,6 @@
       --blue: #dcecff;
       --yellow: #fff8d8;
       --mint: #e3f6ef;
-      /* 调整基准字号，从1.18提升到1.35，视觉更大且清晰 */
       --base-scale: 1.35;
     }
 
@@ -56,7 +55,6 @@
       padding: 48px 32px 64px;
       overflow-x: hidden;
       position: relative;
-      /* 直接增大基础字号，避免缩放模糊 */
       font-size: calc(16px * var(--base-scale));
     }
 
@@ -77,7 +75,6 @@
     a:hover { color: #8b6b9e; }
     ::selection { background: #e8c9f4; color: #45627e; }
 
-    /* 可拖拽宠物样式 */
     .desktop-pet {
       position: fixed;
       font-size: 52px;
@@ -125,7 +122,6 @@
     }
 
     .hanging-tag { animation: sway 3s ease-in-out infinite; }
-
     .hanging-tag span {
       display: block;
       font-size: calc(28px * var(--base-scale));
@@ -472,7 +468,6 @@
     }
 
     .mini-photo { text-align: center; }
-
     .mini-photo img,
     .sticker img,
     .album-cover,
@@ -603,13 +598,11 @@
     }
 
     .feature .panel-header { background: #eef3fc; }
-
     .feature h3 {
       margin: 0 0 12px;
       color: #52718e;
       font-size: 1.3rem;
     }
-
     .feature p {
       margin: 0;
       line-height: 1.9;
@@ -635,16 +628,13 @@
       border-radius: 16px;
       margin-bottom: 16px;
     }
-
     .diary-entry:last-child { margin-bottom: 0; }
-
     .diary-date {
       font-size: 0.9rem;
       color: #9ab0c5;
       margin-bottom: 10px;
       letter-spacing: 1px;
     }
-
     .diary-text {
       font-size: 1rem;
       line-height: 1.8;
@@ -656,7 +646,6 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
     }
-
     .image-wall img {
       width: 100%;
       aspect-ratio: 1 / 1;
@@ -664,7 +653,6 @@
       border-radius: 18px;
       transition: transform .22s ease, filter .22s ease;
     }
-
     .image-wall img:hover {
       transform: translateY(-4px) rotate(-1deg);
       filter: brightness(1.04) saturate(1.05);
@@ -690,7 +678,6 @@
       gap: 18px;
       align-items: center;
     }
-
     .album-cover {
       width: 80px;
       height: 80px;
@@ -698,18 +685,14 @@
       border-radius: 18px;
       flex: 0 0 auto;
     }
-
     .music-info { min-width: 0; }
-
     .song {
       font-size: 1.1rem;
       color: #547493;
       font-weight: bold;
       margin-bottom: 6px;
     }
-
-    .artist,
-    .music-note {
+    .artist, .music-note {
       font-size: 0.95rem;
       color: #8aa0b8;
       line-height: 1.6;
@@ -717,7 +700,6 @@
 
     .visitor-box { text-align: center; }
     .visitor-box p { margin: 0; color: #71879f; font-size: 1.05rem; }
-
     .counter {
       font-size: 2.8rem;
       font-weight: bold;
@@ -730,7 +712,6 @@
       color: #496b89;
       border: 1px solid #c9ddf1;
     }
-
     .sparkle {
       font-size: 1.1rem;
       letter-spacing: 4px;
@@ -744,7 +725,6 @@
       margin-bottom: 24px;
       color: #758ea9;
     }
-
     .calendar-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
@@ -752,13 +732,11 @@
       text-align: center;
       font-size: 0.95rem;
     }
-
     .day {
       font-weight: bold;
       color: #8199b7;
       margin-bottom: 8px;
     }
-
     .active {
       background: #d6e6fa;
       border-radius: 40px;
@@ -766,17 +744,12 @@
       font-weight: bold;
     }
 
-    .badge-list,
-    .blinkies,
-    .link-buttons,
-    .stamp-grid,
-    .web-friends {
+    .badge-list, .blinkies, .link-buttons, .stamp-grid, .web-friends {
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
       justify-content: center;
     }
-
     .badge {
       background: #eef2f8;
       border-radius: 40px;
@@ -785,7 +758,6 @@
       border: 1px solid #c7d8ec;
       color: #577594;
     }
-
     .blinkie {
       min-width: 110px;
       height: 42px;
@@ -802,11 +774,9 @@
       box-shadow: inset 0 0 0 2px rgba(255,255,255,0.45);
       transition: transform .2s ease;
     }
-
     .blinkie:hover { transform: translateY(-3px); }
 
     .pet-container { text-align: center; }
-
     .pet-iframe {
       width: 100%;
       aspect-ratio: 1 / 1;
@@ -823,7 +793,6 @@
       gap: 18px;
       padding: 8px 0;
     }
-
     .timeline-item {
       display: flex;
       gap: 18px;
@@ -834,38 +803,32 @@
       padding: 12px 16px;
       border-radius: 16px;
     }
-
     .timeline-item:hover {
       opacity: 1;
       background: rgba(217,183,234,0.1);
       transform: translateX(6px);
     }
-
     .timeline-item.active {
       opacity: 1;
       background: rgba(217,183,234,0.15);
       font-weight: bold;
     }
-
     .timeline-dot {
       font-size: 28px;
       min-width: 32px;
       text-align: center;
       animation: pulse 2s ease-in-out infinite;
     }
-
     .timeline-date {
       font-size: 0.95rem;
       color: #88a0bb;
       min-width: 100px;
     }
-
     .timeline-mood {
       font-size: 1.05rem;
       color: #5f7694;
       font-weight: 500;
     }
-
     @keyframes pulse {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.18); }
@@ -877,7 +840,6 @@
       gap: 18px;
       margin-bottom: 24px;
     }
-
     .stat-box {
       text-align: center;
       background: linear-gradient(135deg, rgba(217,183,234,0.08), rgba(142,177,214,0.08));
@@ -886,26 +848,22 @@
       padding: 18px 12px;
       transition: all 0.3s ease;
     }
-
     .stat-box:hover {
       background: linear-gradient(135deg, rgba(217,183,234,0.15), rgba(142,177,214,0.15));
       transform: translateY(-3px);
       box-shadow: 0 6px 16px rgba(217,183,234,0.2);
     }
-
     .stat-number {
       font-size: 2.3rem;
       font-weight: bold;
       color: #8eb1d6;
       margin-bottom: 8px;
     }
-
     .stat-label {
       font-size: 0.9rem;
       color: #88a0bb;
       letter-spacing: 1px;
     }
-
     .progress-bar {
       height: 12px;
       background: rgba(142,177,214,0.15);
@@ -914,16 +872,13 @@
       margin-bottom: 12px;
       border: 1px solid rgba(142,177,214,0.3);
     }
-
     .progress-fill {
       height: 100%;
       background: linear-gradient(90deg, #d9b7ea, #8eb1d6);
       border-radius: 14px;
       animation: fillProgress 2s ease-out;
     }
-
     @keyframes fillProgress { 0% { width: 0; } }
-
     .progress-label {
       font-size: 0.95rem;
       color: #76889d;
@@ -935,7 +890,6 @@
       padding: 0;
       margin: 0;
     }
-
     .wishlist li {
       padding: 12px 0 12px 32px;
       border-bottom: 1px dashed #d5e2f0;
@@ -944,7 +898,6 @@
       font-size: 1rem;
       line-height: 1.6;
     }
-
     .wishlist li::before {
       content: "♡";
       position: absolute;
@@ -952,7 +905,6 @@
       color: #b290c5;
       font-size: 1.2rem;
     }
-
     .wishlist li:last-child { border-bottom: 0; }
 
     .guestbook-box {
@@ -964,13 +916,11 @@
       color: #6d839c;
       font-size: 1rem;
     }
-
     .guestbook-form {
       display: grid;
       gap: 14px;
       margin-top: 18px;
     }
-
     .guestbook-form input,
     .guestbook-form textarea {
       width: 100%;
@@ -983,7 +933,6 @@
       font-size: 0.95rem;
       outline: none;
     }
-
     .guestbook-form textarea { min-height: 100px; resize: vertical; }
 
     .soft-button {
@@ -998,7 +947,6 @@
       box-shadow: 0 6px 14px rgba(120,145,180,0.12);
       transition: transform .2s ease;
     }
-
     .soft-button:hover { transform: translateY(-2px); }
 
     .updates-text {
@@ -1013,20 +961,17 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 16px;
     }
-
     .favorite-card {
       background: rgba(255,255,255,0.55);
       border: 1px solid #cfe0f0;
       border-radius: 20px;
       padding: 16px;
     }
-
     .favorite-card h4 {
       margin: 0 0 12px;
       color: #597796;
       font-size: 1.05rem;
     }
-
     .favorite-card p {
       margin: 0;
       color: #75879c;
@@ -1041,7 +986,6 @@
       display: grid;
       gap: 12px;
     }
-
     .side-list li {
       padding: 12px 14px;
       border: 1px dashed #cdddf0;
@@ -1073,10 +1017,7 @@
       font-size: 0.95rem;
       box-shadow: 0 4px 10px rgba(120,145,180,0.08);
     }
-
-    .link-pill:hover {
-      transform: translateY(-2px);
-    }
+    .link-pill:hover { transform: translateY(-2px); }
 
     .webfriend {
       min-width: 130px;
@@ -1110,7 +1051,6 @@
       display: grid;
       gap: 12px;
     }
-
     .rule {
       background: rgba(255,255,255,0.5);
       border-left: 4px solid #d9b7ea;
@@ -1125,7 +1065,6 @@
       display: grid;
       gap: 14px;
     }
-
     .currently-item {
       border: 1px dashed #cfe0f2;
       border-radius: 16px;
@@ -1206,7 +1145,8 @@
       grid-template-columns: 1fr 1fr;
       gap: 18px;
     }
-    /* 音乐播放器样式 - 增强版歌词模块 */
+
+    /* 音乐播放器样式 */
     .music-player {
       background: rgba(255,255,255,0.7);
       border: 2px solid #b8cfe6;
@@ -1278,7 +1218,6 @@
       font-size: 0.9rem;
       cursor: pointer;
     }
-    /* 独立歌词区域增强样式 */
     .lyrics-panel {
       margin-top: 16px;
       padding: 14px;
@@ -1290,8 +1229,6 @@
     }
     .lyric-line-main {
       transition: opacity 0.6s ease;
-    }
-    .lyric-line-main.active {
       opacity: 1;
     }
     .lyric-en-main {
@@ -1305,11 +1242,9 @@
       font-size: 1rem;
       color: #6a4e82;
     }
+
     @media (max-width: 680px) {
-      .two-column-layout {
-        grid-template-columns: 1fr;
-        gap: 14px;
-      }
+      .two-column-layout { grid-template-columns: 1fr; gap: 14px; }
       .lyric-en-main { font-size: 1rem; }
     }
 
@@ -1340,7 +1275,6 @@
       box-shadow: 0 10px 22px rgba(120,145,180,0.16);
       transition: transform .2s ease, box-shadow .2s ease;
     }
-
     .back-top:hover {
       transform: translateY(-3px);
       box-shadow: 0 15px 28px rgba(120,145,180,0.22);
@@ -1354,7 +1288,6 @@
       font-size: 18px;
       animation: cursorFade .8s ease-out forwards;
     }
-
     @keyframes cursorFade {
       0% { opacity: 1; transform: translateY(0) scale(1); }
       100% { opacity: 0; transform: translateY(-20px) scale(0.55); }
@@ -1367,7 +1300,6 @@
       .welcome-strip { grid-template-columns: 1fr; }
       body { padding: 32px 24px 48px; }
     }
-
     @media (max-width: 680px) {
       body { padding: 24px 16px 36px; }
       .hero img { height: 320px; }
@@ -1377,9 +1309,13 @@
       .image-wall { grid-template-columns: repeat(2, 1fr); }
       .favorites-grid { grid-template-columns: 1fr; }
       .about-text { min-width: 100%; padding: 22px; }
-      .hanging-tag,
-      .float-sparkle { display: none; }
+      .hanging-tag, .float-sparkle { display: none; }
     }
+    .fortune-egg { background: linear-gradient(135deg, rgba(217,183,234,0.12), rgba(142,177,214,0.12)); border-radius: 20px; padding: 18px; margin-top: 14px; text-align: center; border: 1px solid rgba(217,183,234,0.4); transition: all 0.2s; }
+    .fortune-egg:hover { background: linear-gradient(135deg, rgba(217,183,234,0.22), rgba(142,177,214,0.22)); border-color: #d9b7ea; }
+    .fortune-text { font-size: 1rem; color: #5f7694; margin: 14px 0 12px; line-height: 1.65; min-height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.6); border-radius: 16px; padding: 14px; font-style: italic; }
+    .fortune-btn { background: rgba(217,183,234,0.28); border: 1px solid #c7d8ec; border-radius: 60px; padding: 8px 20px; font-size: 0.9rem; color: #6a4e82; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+    .fortune-btn:hover { background: #d9b7ea; color: white; border-color: #d9b7ea; transform: translateY(-2px); }
   </style>
 </head>
 <body id="top">
@@ -1447,7 +1383,7 @@
             <div class="panel"><div class="panel-header">⏳ 时光沙漏</div><div class="panel-body"><div class="new-feature-panel"><div class="new-feature-title">今日推荐旧网页</div><div class="new-feature-content"><div class="hourglass-grid"><div class="hourglass-item"><span>📟 1999年个人主页博物馆</span><span>➜ 正在加载回忆</span></div><div class="hourglass-item"><span>🎞️ 像素按钮生成器</span><span>✦ 灵感站点</span></div><div class="hourglass-item"><span>📻 复古聊天室模拟器</span><span>♡ 可可爱爱</span></div></div><div class="breathing-text">“旧网页就像一本泛黄的日记，每点开一个都是时间的诗。” 今天推荐的这三个小角落，藏着90年代互联网的呼吸声。如果你也迷恋粗糙的gif和不对称的表格，这里会是你的秘密花园。</div></div></div></div></div>
             <div class="panel"><div class="panel-header">🎧 匿名共感电台</div><div class="panel-body"><div class="new-feature-panel"><div class="new-feature-title">此刻正在收听：「蓝紫色雨夜·灵能回忆录」 混合音轨</div><div class="new-feature-content"><div style="margin-bottom: 10px;">▸ 雨声 + 老式磁带底噪 + 灵能百合影集中间那段温柔的钢琴间隙 ▸ 推荐搭配蕾丝主题页面一起服用，助你沉入回忆的深海。</div><div>🎵 播放列表：01. quiet archive theme / 02. old web lullaby / 03. reigen’s laughter (soft edit)</div><div class="breathing-text" style="margin-top: 10px;">没有歌词，只有氛围。就像在某个下雨的下午，你坐在旧电脑前，屏幕的光映在脸上，而你喜欢的故事正以像素的形式慢慢显影。</div></div></div></div></div>
             
-            <!-- 角色深夜电台 - 左侧部分：Reigen未公开语录·拾贝 -->
+            <!-- 角色深夜电台 -->
             <div class="panel"><div class="panel-header">🌙 角色深夜电台 · 拾贝</div><div class="panel-body"><div class="new-feature-panel" style="margin-bottom: 0;"><div class="new-feature-title">Reigen 未公开语录·拾贝</div><div class="new-feature-content"><ul class="zone-list"><li>「其实我知道自己没那么厉害，但至少……要让他们觉得被保护着。」—— 匿名语音备忘录片段。</li><li>「今天事务所来了一个很麻烦的委托，我用了三杯咖啡和两倍笑容把它解决掉。啊，这就是专业啊。」—— 某日手机速记。</li><li>「被人信任的感觉会上瘾，所以我必须演得更好。不过偶尔，也会希望有个人看穿我的慌张。」—— 深夜思考笔记。</li></ul><div class="breathing-text">这些句子从未出现在正片里，但它们像是角色的另一面镜子。在这里，我们允许虚构，也允许温柔。</div></div></div></div></div>
           </div>
 
@@ -1466,9 +1402,9 @@
             <div class="panel"><div class="panel-header">🔮 像素占卜屋</div><div class="panel-body"><div class="new-feature-panel"><div class="new-feature-title">今日灵能运势</div><div class="new-feature-content"><div id="fortuneMessage" style="background: rgba(217,183,234,0.18); border-radius: 16px; padding: 14px; margin-bottom: 14px; font-style: italic;">✨ 点击下方按钮，抽取今天的 Reigen 式幸运签 ✨</div><button class="soft-button" id="drawFortuneBtn" style="font-size:0.9rem; padding:8px 18px;">🎴 抽一张签 🎴</button></div></div><div class="new-feature-panel"><div class="new-feature-title">🕯️ 许愿池·存档处</div><div class="new-feature-content"><div>在这里许下一个小愿望，它会像旧网页的星星碎片一样被收藏起来。</div><div style="display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap;"><input type="text" id="wishInput" placeholder="写一句悄悄愿望..." style="flex:1; background:rgba(255,255,255,0.7); border:1px solid #c7d8ec; border-radius:30px; padding:10px 16px; font-family:inherit;"><button class="soft-button" id="submitWishBtn" style="padding:8px 18px;">✨ 存档</button></div><div id="wishFeedback" style="font-size:0.85rem; color:#8aa0b8; margin-top: 12px; text-align:center;"></div><div class="breathing-text" style="margin-top: 14px;">「你的每一份喜欢，都会被这个安静的小站轻轻接住。」今天也有 13 位路过的人在这里留下了悄悄话。</div></div></div></div></div>
           </div>
 
-          <!-- 右栏：音乐播放器放在顶部 + 其他原有模块 -->
+          <!-- 右栏 -->
           <div class="column">
-            <!-- 音乐播放器模块（完整歌词+播放控制） -->
+            <!-- 音乐播放器模块（完整5首歌曲+歌词） -->
             <div class="panel">
               <div class="panel-header">🎵 lonely archive radio</div>
               <div class="panel-body">
@@ -1492,9 +1428,8 @@
                   <div class="playlist">
                     <select id="playlist-select"></select>
                   </div>
-                  <!-- 歌词显示区域（独立于原有风格） -->
                   <div class="lyrics-panel" id="lyricsPanel">
-                    <div class="lyric-line-main active" id="currentLyricLine">
+                    <div class="lyric-line-main">
                       <div class="lyric-en-main">♪ 等待播放 ♪</div>
                       <div class="lyric-zh-main">点击播放按钮，倾听旋律中的故事</div>
                     </div>
@@ -1532,8 +1467,7 @@
   <button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ top</button>
 
   <script>
-    // ==================== 完整歌词+播放器模块 ====================
-    // 歌曲列表（可替换url和歌词）
+    // ==================== 完整5首歌曲+歌词播放器 ====================
     const playlist = [
       { 
         title: "We Belong Together", 
@@ -1560,7 +1494,44 @@
         title: "Underneath the Stars", 
         artist: "Mariah Carey", 
         src: "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/3594040289.mp3",
-        lyrics: [{ time: 4.45, en: "One summer night", zh: "一个夏日的夜晚" }, { time: 9.02, en: "We ran away for a while", zh: "我们一同跑开" }]
+        lyrics: [
+          { time: 4.45, en: "One summer night", zh: "一个夏日的夜晚" }, { time: 9.02, en: "We ran away for a while", zh: "我们一同跑开" },
+          { time: 15.92, en: "Laughing we hurried beneath the sky", zh: "笑着 我们在天空下匆忙" }, { time: 21.20, en: "To an obscure place to hide", zh: "寻找一个安全的可以躲藏的地方" },
+          { time: 25.00, en: "That no-one could find", zh: "没有人能够找到" }, { time: 26.93, en: "And we drifted to another state of mind", zh: "接着我们进入了另一种心境" },
+          { time: 32.94, en: "And imagined I was yours and you were mine", zh: "想象我是你的你是我的" }, { time: 39.01, en: "As we lay upon the grass", zh: "我们躺在草地上" },
+          { time: 41.22, en: "There in the dark", zh: "黑暗中" }, { time: 43.95, en: "Underneath the stars", zh: "我们沐浴璀璨星光" }
+        ]
+      },
+      { 
+        title: "I Stay In Love", 
+        artist: "Mariah Carey", 
+        src: "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/i.stay.love.mp3",
+        lyrics: [
+          { time: 2.85, en: "Oh, ooh-ooh-ooh", zh: "" }, { time: 6.30, en: "Oh, ooh-ooh", zh: "" }, { time: 9.76, en: "Oh-oh, ooh-ooh-ooh", zh: "" },
+          { time: 12.41, en: "Why do I stay, why do I stay in love? Ooh", zh: "为什么我还要留在爱情里？" },
+          { time: 16.93, en: "Oh, ooh-ooh-ooh (Why do I stay)", zh: "为什么我还要留下" }, { time: 24.05, en: "Baby, I stay in love with you", zh: "宝贝，我依然深爱着你" }
+        ]
+      },
+      { 
+        title: "Don't Forget About Us", 
+        artist: "Mariah Carey", 
+        src: "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/Don't.Forget.About.Us..mp3",
+        lyrics: [
+          { time: 2.60, en: "(Don't forget about us)", zh: "别将我们遗忘" }, { time: 4.10, en: "Don't baby, don't baby, don't let it go", zh: "亲爱的别放手 别让它溜走" },
+          { time: 7.61, en: "No baby, no baby, no baby, no", zh: "不 宝贝 请不要这样" }, { time: 9.11, en: "(Don't forget about us)", zh: "别将我们遗忘" },
+          { time: 10.87, en: "Don't baby, don't baby, don't let it go", zh: "亲爱的别放手 别让它溜走" }, { time: 13.37, en: "My baby boy", zh: "我的爱人啊" },
+          { time: 17.13, en: "Just let it die with no goodbyes", zh: "任爱消逝无需告别" }, { time: 20.41, en: "Details don't matter, we both paid the price", zh: "细节已不重要 我们都付出代价" }
+        ]
+      },
+      { 
+        title: "Come To Me", 
+        artist: "Mariah Carey", 
+        src: "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/come.buck.to.me.mp3",
+        lyrics: [
+          { time: 10.67, en: "The rain falls on my windows", zh: "窗外雨声 淅淅沥沥" }, { time: 13.92, en: "And a coldness runs through my soul", zh: "一阵寒流 噬满我心" },
+          { time: 17.17, en: "And the rain falls, oh, the rain falls", zh: "雨一直下个不停" }, { time: 20.42, en: "I don't want to be alone", zh: "我不想 孑然一身" },
+          { time: 23.67, en: "I wish that I could Photoshop", zh: "只是想要 修复曾经" }, { time: 27.16, en: "All our bad memories", zh: "我们之间 糟糕回忆" }
+        ]
       }
     ];
 
@@ -1578,6 +1549,7 @@
     let currentLyricIndex = -1;
 
     function buildPlaylist() {
+      select.innerHTML = '';
       playlist.forEach((track, i) => {
         const opt = document.createElement('option');
         opt.value = i;
@@ -1589,7 +1561,7 @@
     function updateLyricsDisplay() {
       const track = playlist[currentTrack];
       if (!track.lyrics || track.lyrics.length === 0) {
-        lyricsPanel.innerHTML = `<div class="lyric-line-main active"><div class="lyric-en-main">♪ ${track.title} ♪</div><div class="lyric-zh-main">纯音乐 / 暂无歌词</div></div>`;
+        lyricsPanel.innerHTML = `<div class="lyric-line-main"><div class="lyric-en-main">♪ ${track.title} ♪</div><div class="lyric-zh-main">纯音乐 / 暂无歌词</div></div>`;
         return;
       }
       const ct = audio.currentTime;
@@ -1601,7 +1573,7 @@
       currentLyricIndex = activeIdx;
       if (activeIdx === -1) return;
       const lyric = track.lyrics[activeIdx];
-      lyricsPanel.innerHTML = `<div class="lyric-line-main active"><div class="lyric-en-main">${lyric.en}</div>${lyric.zh ? `<div class="lyric-zh-main">${lyric.zh}</div>` : ''}</div>`;
+      lyricsPanel.innerHTML = `<div class="lyric-line-main"><div class="lyric-en-main">${lyric.en}</div>${lyric.zh ? `<div class="lyric-zh-main">${lyric.zh}</div>` : ''}</div>`;
     }
 
     function loadTrack(index) {
@@ -1656,22 +1628,119 @@
     buildPlaylist();
     loadTrack(0);
 
-    // 可拖拽宠物、访客计数器、鼠标星星、timeline、彩蛋、占卜、许愿等保持不变
-    function makeDraggable(el) { let pos1=0,pos2=0,pos3=0,pos4=0; el.addEventListener('mousedown', dragMouseDown); function dragMouseDown(e) { e.preventDefault(); pos3 = e.clientX; pos4 = e.clientY; document.addEventListener('mouseup', closeDragElement); document.addEventListener('mousemove', elementDrag); } function elementDrag(e) { e.preventDefault(); pos1 = pos3 - e.clientX; pos2 = pos4 - e.clientY; pos3 = e.clientX; pos4 = e.clientY; el.style.top = (el.offsetTop - pos2) + "px"; el.style.left = (el.offsetLeft - pos1) + "px"; } function closeDragElement() { document.removeEventListener('mouseup', closeDragElement); document.removeEventListener('mousemove', elementDrag); } }
+    // 可拖拽宠物
+    function makeDraggable(el) {
+      let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      el.addEventListener('mousedown', dragMouseDown);
+      function dragMouseDown(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.addEventListener('mouseup', closeDragElement);
+        document.addEventListener('mousemove', elementDrag);
+      }
+      function elementDrag(e) {
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        el.style.top = (el.offsetTop - pos2) + "px";
+        el.style.left = (el.offsetLeft - pos1) + "px";
+      }
+      function closeDragElement() {
+        document.removeEventListener('mouseup', closeDragElement);
+        document.removeEventListener('mousemove', elementDrag);
+      }
+    }
     document.querySelectorAll('.desktop-pet').forEach(pet => { makeDraggable(pet); });
-    (function() { const counterElem = document.getElementById('visitorCounter'); if (!counterElem) return; let currentCount = 920; try { const storageKey = 'reigen_visitor_base'; const todayStr = new Date().toISOString().slice(0,10); if (typeof localStorage !== "undefined") { const saved = localStorage.getItem(storageKey); if (saved) { const data = JSON.parse(saved); if (data.date === todayStr) { currentCount = data.count; } else { const diffDays = Math.max(1, Math.floor((new Date(todayStr) - new Date(data.date)) / 86400000)); currentCount = data.count + diffDays; if (currentCount > 99999) currentCount = 99999; } } localStorage.setItem(storageKey, JSON.stringify({ date: todayStr, count: currentCount })); } } catch (e) { console.warn("localStorage 不可用"); } counterElem.innerText = String(currentCount).padStart(5, '0'); })();
-    (function() { let last = 0; document.addEventListener('mousemove', function(e) { const now = Date.now(); if (now - last < 75) return; last = now; const star = document.createElement('div'); star.className = 'cursor-star'; star.textContent = Math.random() > 0.5 ? '✧' : '♡'; star.style.left = e.clientX + 10 + 'px'; star.style.top = e.clientY + 10 + 'px'; document.body.appendChild(star); setTimeout(() => star.remove(), 850); }); })();
-    (function() { const items = document.querySelectorAll('.timeline-item'); items.forEach(item => { item.addEventListener('click', () => { items.forEach(i => i.classList.remove('active')); item.classList.add('active'); }); }); })();
-    (function() { const eggTextDiv = document.getElementById('dailyEggText'); const eggBtn = document.getElementById('getEggBtn'); if (eggTextDiv && eggBtn) { const eggMessages = ["♡ 「灵能什么的，不过是小把戏罢了… 其实我根本不会。」—— 但依然会笑着帮你。","✧ 今日 Reigen 小语：即使是谎言里，也藏着一点想让你开心的真心。","★ 你在翻阅旧网页的时候，我也在悄悄注视你哦～ 开玩笑的。","🌸 蓝紫色调子 + 蕾丝边框 = 一个温柔到像梦境的角落。","✨ 今天也要像 Reigen 一样：哪怕荒唐，也要理直气壮地向前走。","📜 台词摘抄：「所谓的超能力，只是让人看起来特别一点而已。」","🎐 在这里停留的每一秒，都是对旧互联网的一次小小念旧。","💭 也许灵能不存在，但“想要保护谁”的心情是真的。","🌙 夜晚看这个页面会更温柔——因为星星、飘浮的装饰和你都在。","🍃 喜欢一个人物不一定要狂热，可以只是静静地为他造一个小房间。","🕯️ Reigen 教会我的事：温柔比超能力更厉害。"]; function getRandomEgg() { return eggMessages[Math.floor(Math.random() * eggMessages.length)]; } function updateEgg() { const newMessage = getRandomEgg(); eggTextDiv.innerHTML = `✨ ${newMessage} ✨`; eggTextDiv.style.transition = "opacity 0.2s"; eggTextDiv.style.opacity = "0.7"; setTimeout(() => { eggTextDiv.style.opacity = "1"; }, 80); } eggBtn.addEventListener('click', updateEgg); updateEgg(); } })();
-    (function() { const fortuneBtn = document.getElementById('drawFortuneBtn'); const fortuneMsgDiv = document.getElementById('fortuneMessage'); if (fortuneBtn && fortuneMsgDiv) { const fortunes = ["🌸 大吉：今天你会遇到意想不到的温柔，就像旧网站里偶然发现的一个可爱gif。","🌿 中吉：心里挂念的事，会悄悄朝着好的方向流动。保持耐心。","✨ 小吉：适合整理截图、写日记，把喜欢的事情慢慢地做。","🍀 末吉：可能有点小疲惫，那就在这个小站里多待一会儿吧。","⭐ 凶·转吉：不要慌，明天会收到一个让你笑出来的消息。"]; fortuneBtn.addEventListener('click', () => { const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)]; fortuneMsgDiv.innerHTML = `🔮 ${randomFortune} 🔮`; fortuneMsgDiv.style.background = "rgba(217,183,234,0.28)"; }); } })();
-    (function() { const wishInput = document.getElementById('wishInput'); const submitBtn = document.getElementById('submitWishBtn'); const feedback = document.getElementById('wishFeedback'); if (wishInput && submitBtn && feedback) { submitBtn.addEventListener('click', () => { const wish = wishInput.value.trim(); if (wish === "") { feedback.innerHTML = "✧ 写一句悄悄话再存档吧～"; return; } feedback.innerHTML = "✨ 你的愿望已经被这个 archive 温柔地接住了 ✨"; wishInput.value = ""; setTimeout(() => { feedback.innerHTML = ""; }, 2000); }); } })();
+
+    // 访客计数器
+    (function() {
+      const counterElem = document.getElementById('visitorCounter');
+      if (!counterElem) return;
+      let currentCount = 920;
+      try {
+        const storageKey = 'reigen_visitor_base';
+        const todayStr = new Date().toISOString().slice(0,10);
+        if (typeof localStorage !== "undefined") {
+          const saved = localStorage.getItem(storageKey);
+          if (saved) {
+            const data = JSON.parse(saved);
+            if (data.date === todayStr) {
+              currentCount = data.count;
+            } else {
+              const diffDays = Math.max(1, Math.floor((new Date(todayStr) - new Date(data.date)) / 86400000));
+              currentCount = data.count + diffDays;
+              if (currentCount > 99999) currentCount = 99999;
+            }
+          }
+          localStorage.setItem(storageKey, JSON.stringify({ date: todayStr, count: currentCount }));
+        }
+      } catch (e) { console.warn("localStorage 不可用"); }
+      counterElem.innerText = String(currentCount).padStart(5, '0');
+    })();
+
+    // 鼠标星星
+    (function() {
+      let last = 0;
+      document.addEventListener('mousemove', function(e) {
+        const now = Date.now();
+        if (now - last < 75) return;
+        last = now;
+        const star = document.createElement('div');
+        star.className = 'cursor-star';
+        star.textContent = Math.random() > 0.5 ? '✧' : '♡';
+        star.style.left = e.clientX + 10 + 'px';
+        star.style.top = e.clientY + 10 + 'px';
+        document.body.appendChild(star);
+        setTimeout(() => star.remove(), 850);
+      });
+    })();
+
+    // timeline
+    (function() {
+      const items = document.querySelectorAll('.timeline-item');
+      items.forEach(item => {
+        item.addEventListener('click', () => {
+          items.forEach(i => i.classList.remove('active'));
+          item.classList.add('active');
+        });
+      });
+    })();
+
+    // 彩蛋
+    (function() {
+      const eggTextDiv = document.getElementById('dailyEggText');
+      const eggBtn = document.getElementById('getEggBtn');
+      if (eggTextDiv && eggBtn) {
+        const eggMessages = ["♡ 「灵能什么的，不过是小把戏罢了… 其实我根本不会。」—— 但依然会笑着帮你。","✧ 今日 Reigen 小语：即使是谎言里，也藏着一点想让你开心的真心。","★ 你在翻阅旧网页的时候，我也在悄悄注视你哦～ 开玩笑的。","🌸 蓝紫色调子 + 蕾丝边框 = 一个温柔到像梦境的角落。","✨ 今天也要像 Reigen 一样：哪怕荒唐，也要理直气壮地向前走。","📜 台词摘抄：「所谓的超能力，只是让人看起来特别一点而已。」","🎐 在这里停留的每一秒，都是对旧互联网的一次小小念旧。","💭 也许灵能不存在，但“想要保护谁”的心情是真的。","🌙 夜晚看这个页面会更温柔——因为星星、飘浮的装饰和你都在。","🍃 喜欢一个人物不一定要狂热，可以只是静静地为他造一个小房间。","🕯️ Reigen 教会我的事：温柔比超能力更厉害。"];
+        function getRandomEgg() { return eggMessages[Math.floor(Math.random() * eggMessages.length)]; }
+        function updateEgg() { const newMessage = getRandomEgg(); eggTextDiv.innerHTML = `✨ ${newMessage} ✨`; eggTextDiv.style.transition = "opacity 0.2s"; eggTextDiv.style.opacity = "0.7"; setTimeout(() => { eggTextDiv.style.opacity = "1"; }, 80); }
+        eggBtn.addEventListener('click', updateEgg);
+        updateEgg();
+      }
+    })();
+
+    // 占卜
+    (function() {
+      const fortuneBtn = document.getElementById('drawFortuneBtn');
+      const fortuneMsgDiv = document.getElementById('fortuneMessage');
+      if (fortuneBtn && fortuneMsgDiv) {
+        const fortunes = ["🌸 大吉：今天你会遇到意想不到的温柔，就像旧网站里偶然发现的一个可爱gif。","🌿 中吉：心里挂念的事，会悄悄朝着好的方向流动。保持耐心。","✨ 小吉：适合整理截图、写日记，把喜欢的事情慢慢地做。","🍀 末吉：可能有点小疲惫，那就在这个小站里多待一会儿吧。","⭐ 凶·转吉：不要慌，明天会收到一个让你笑出来的消息。"];
+        fortuneBtn.addEventListener('click', () => { const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)]; fortuneMsgDiv.innerHTML = `🔮 ${randomFortune} 🔮`; fortuneMsgDiv.style.background = "rgba(217,183,234,0.28)"; });
+      }
+    })();
+
+    // 许愿
+    (function() {
+      const wishInput = document.getElementById('wishInput');
+      const submitBtn = document.getElementById('submitWishBtn');
+      const feedback = document.getElementById('wishFeedback');
+      if (wishInput && submitBtn && feedback) {
+        submitBtn.addEventListener('click', () => { const wish = wishInput.value.trim(); if (wish === "") { feedback.innerHTML = "✧ 写一句悄悄话再存档吧～"; return; } feedback.innerHTML = "✨ 你的愿望已经被这个 archive 温柔地接住了 ✨"; wishInput.value = ""; setTimeout(() => { feedback.innerHTML = ""; }, 2000); });
+      }
+    })();
   </script>
-  <style>
-    .fortune-egg { background: linear-gradient(135deg, rgba(217,183,234,0.12), rgba(142,177,214,0.12)); border-radius: 20px; padding: 18px; margin-top: 14px; text-align: center; border: 1px solid rgba(217,183,234,0.4); transition: all 0.2s; }
-    .fortune-egg:hover { background: linear-gradient(135deg, rgba(217,183,234,0.22), rgba(142,177,214,0.22)); border-color: #d9b7ea; }
-    .fortune-text { font-size: 1rem; color: #5f7694; margin: 14px 0 12px; line-height: 1.65; min-height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.6); border-radius: 16px; padding: 14px; font-style: italic; }
-    .fortune-btn { background: rgba(217,183,234,0.28); border: 1px solid #c7d8ec; border-radius: 60px; padding: 8px 20px; font-size: 0.9rem; color: #6a4e82; cursor: pointer; transition: all 0.2s; font-family: inherit; }
-    .fortune-btn:hover { background: #d9b7ea; color: white; border-color: #d9b7ea; transform: translateY(-2px); }
-  </style>
 </body>
 </html>
