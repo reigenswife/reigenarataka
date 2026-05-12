@@ -13,7 +13,7 @@
   <link rel="manifest" href="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/site.webmanifest" />
   <meta name="theme-color" content="#8eb1d6" />
   
-  <title>Reigen Arataka </title>
+  <title>Reigen Arataka</title>
   <style>
     :root {
       --bg1: #dfe9f7;
@@ -35,9 +35,8 @@
       --blue: #dcecff;
       --yellow: #fff8d8;
       --mint: #e3f6ef;
-      --base-scale: 1.18;
-      /* 整体放大1.2倍 */
-      --zoom-scale: 1.2;
+      /* 调整基准字号，从1.18提升到1.35，视觉更大且清晰 */
+      --base-scale: 1.35;
     }
 
     * { box-sizing: border-box; }
@@ -54,26 +53,11 @@
         repeating-linear-gradient(to bottom, rgba(120,150,190,0.08) 0px, rgba(120,150,190,0.08) 1px, transparent 2px, transparent 4px),
         linear-gradient(135deg, var(--bg1), var(--bg2));
       min-height: 100vh;
-      padding: 36px 24px 52px;
+      padding: 48px 32px 64px;
       overflow-x: hidden;
       position: relative;
-      font-size: calc(14px * var(--base-scale) * var(--zoom-scale));
-    }
-
-    /* 整体内容容器放大1.2倍 */
-    .lace-shell {
-      transform: scale(var(--zoom-scale));
-      transform-origin: top center;
-      width: calc(100% / var(--zoom-scale));
-      margin: 0 auto;
-      position: relative;
-      left: 0;
-      right: 0;
-    }
-
-    /* 调整body内边距以适配缩放后的留白 */
-    body {
-      padding: calc(36px * var(--zoom-scale)) calc(24px * var(--zoom-scale)) calc(52px * var(--zoom-scale));
+      /* 直接增大基础字号，避免缩放模糊 */
+      font-size: calc(16px * var(--base-scale));
     }
 
     body::before {
@@ -93,6 +77,29 @@
     a:hover { color: #8b6b9e; }
     ::selection { background: #e8c9f4; color: #45627e; }
 
+    /* 可拖拽宠物样式 */
+    .desktop-pet {
+      position: fixed;
+      font-size: 52px;
+      cursor: grab;
+      user-select: none;
+      z-index: 20;
+      filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.15));
+      transition: transform 0.1s;
+    }
+
+    .desktop-pet:active {
+      cursor: grabbing;
+      transform: scale(1.15);
+    }
+
+    .desktop-pet img {
+      border: 2px solid #d9b7ea;
+      box-shadow: 0 4px 12px rgba(217,183,234,0.3);
+      border-radius: 12px;
+      width: 68px;
+    }
+
     .float-deco,
     .float-sparkle,
     .hanging-tag {
@@ -102,15 +109,15 @@
     }
 
     .float-deco {
-      font-size: calc(18px * var(--base-scale) * var(--zoom-scale));
+      font-size: calc(24px * var(--base-scale));
       color: rgba(130,160,200,0.45);
       animation: drift 6s ease-in-out infinite;
     }
 
-    .d1 { top: calc(80px * var(--zoom-scale)); left: calc(60px * var(--zoom-scale)); }
-    .d2 { top: calc(170px * var(--zoom-scale)); right: calc(90px * var(--zoom-scale)); animation-delay: 1s; }
-    .d3 { bottom: calc(130px * var(--zoom-scale)); left: calc(110px * var(--zoom-scale)); animation-delay: 2s; }
-    .d4 { bottom: calc(190px * var(--zoom-scale)); right: calc(130px * var(--zoom-scale)); animation-delay: 3s; }
+    .d1 { top: 80px; left: 60px; }
+    .d2 { top: 170px; right: 90px; animation-delay: 1s; }
+    .d3 { bottom: 130px; left: 110px; animation-delay: 2s; }
+    .d4 { bottom: 190px; right: 130px; animation-delay: 3s; }
 
     @keyframes drift {
       0%, 100% { transform: translateY(0px); }
@@ -121,7 +128,7 @@
 
     .hanging-tag span {
       display: block;
-      font-size: calc(22px * var(--base-scale) * var(--zoom-scale));
+      font-size: calc(28px * var(--base-scale));
       color: rgba(217,183,234,0.7);
       text-align: center;
       margin-bottom: 6px;
@@ -133,16 +140,16 @@
       border: 1.5px solid #d9b7ea;
       border-radius: 16px;
       padding: 8px 18px;
-      font-size: calc(0.85rem * var(--base-scale) * var(--zoom-scale));
+      font-size: calc(0.9rem * var(--base-scale));
       color: #8b6b9e;
       letter-spacing: 1px;
       box-shadow: 0 4px 12px rgba(217,183,234,0.2);
       white-space: nowrap;
     }
 
-    .tag-1 { top: calc(110px * var(--zoom-scale)); left: calc(50px * var(--zoom-scale)); animation-delay: 0s; }
-    .tag-2 { top: calc(370px * var(--zoom-scale)); right: calc(50px * var(--zoom-scale)); animation-delay: 1s; }
-    .tag-3 { bottom: calc(330px * var(--zoom-scale)); left: calc(65px * var(--zoom-scale)); animation-delay: 2s; }
+    .tag-1 { top: 110px; left: 50px; animation-delay: 0s; }
+    .tag-2 { top: 370px; right: 50px; animation-delay: 1s; }
+    .tag-3 { bottom: 330px; left: 65px; animation-delay: 2s; }
 
     @keyframes sway {
       0%, 100% { transform: translateY(0px); }
@@ -156,17 +163,17 @@
     }
 
     .float-sparkle {
-      font-size: calc(20px * var(--base-scale) * var(--zoom-scale));
+      font-size: calc(28px * var(--base-scale));
       animation: twinkle 3s ease-in-out infinite, drift 8s ease-in-out infinite;
       text-shadow: 0 0 8px rgba(217,183,234,0.6);
       color: rgba(217,183,234,0.7);
     }
 
-    .sparkle-1 { top: calc(230px * var(--zoom-scale)); right: calc(80px * var(--zoom-scale)); animation-delay: 0s; }
-    .sparkle-2 { bottom: calc(400px * var(--zoom-scale)); left: calc(45px * var(--zoom-scale)); animation-delay: 0.6s; }
-    .sparkle-3 { top: calc(580px * var(--zoom-scale)); right: calc(100px * var(--zoom-scale)); animation-delay: 1.2s; }
-    .sparkle-4 { top: calc(320px * var(--zoom-scale)); left: calc(30px * var(--zoom-scale)); animation-delay: 1.8s; }
-    .sparkle-5 { bottom: calc(220px * var(--zoom-scale)); right: calc(60px * var(--zoom-scale)); animation-delay: 2.4s; }
+    .sparkle-1 { top: 230px; right: 80px; animation-delay: 0s; }
+    .sparkle-2 { bottom: 400px; left: 45px; animation-delay: 0.6s; }
+    .sparkle-3 { top: 580px; right: 100px; animation-delay: 1.2s; }
+    .sparkle-4 { top: 320px; left: 30px; animation-delay: 1.8s; }
+    .sparkle-5 { bottom: 220px; right: 60px; animation-delay: 2.4s; }
 
     @keyframes twinkle {
       0%, 100% { opacity: 0.3; }
@@ -175,9 +182,9 @@
 
     .lace-shell {
       position: relative;
-      max-width: 1480px;
+      max-width: 1600px;
       margin: 0 auto;
-      padding: 24px;
+      padding: 28px;
       border-radius: 48px;
       background:
         radial-gradient(circle, var(--lace) 32%, transparent 34%) 0 0 / 26px 26px,
@@ -189,13 +196,13 @@
     .wrapper {
       position: relative;
       z-index: 1;
-      max-width: 1450px;
+      max-width: 100%;
       margin: 0 auto;
       background: rgba(255,255,255,0.36);
       border: 4px solid transparent;
       border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><defs><pattern id="lace" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="12" cy="6" r="2.5" fill="%23d6e3f2"/><circle cx="18" cy="12" r="2" fill="%23c8d8ea"/><circle cx="6" cy="12" r="2" fill="%23c8d8ea"/><circle cx="12" cy="18" r="2.5" fill="%23d6e3f2"/></pattern></defs><rect width="24" height="24" fill="url(%23lace)"/></svg>') 12 repeat;
       border-radius: 38px;
-      padding: 24px;
+      padding: 28px;
       box-shadow:
         inset 0 0 26px rgba(255,255,255,0.9),
         inset 0 0 48px rgba(217,183,234,0.15),
@@ -227,7 +234,7 @@
     .inner-frame {
       border: 2.5px dashed #c7d8ea;
       border-radius: 28px;
-      padding: 24px;
+      padding: 28px;
       background: rgba(255,255,255,0.34);
       position: relative;
     }
@@ -248,12 +255,12 @@
       border: 2px solid var(--frame);
       background: white;
       box-shadow: inset 0 0 0 6px rgba(255,255,255,0.75);
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
 
     .hero img {
       width: 100%;
-      height: 420px;
+      height: 480px;
       object-fit: cover;
       display: block;
       filter: saturate(0.9) brightness(1.03);
@@ -280,13 +287,13 @@
 
     .hero-title h1 {
       margin: 0;
-      font-size: clamp(2.2rem, 5vw, 3rem);
+      font-size: clamp(2.5rem, 6vw, 3.5rem);
       letter-spacing: 2px;
     }
 
     .hero-title p {
       margin: 8px 0 0;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       opacity: 0.96;
     }
 
@@ -300,30 +307,30 @@
       border-radius: 999px;
       padding: 10px 22px;
       color: #6f85a1;
-      font-size: 0.9rem;
+      font-size: 1rem;
       font-weight: 500;
       box-shadow: 0 10px 22px rgba(0,0,0,0.08);
     }
 
     .top-marquee {
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       background: rgba(255,255,255,0.78);
       border: 2px solid var(--frame);
       border-radius: 20px;
-      padding: 14px 20px;
+      padding: 16px 24px;
       color: #627b99;
-      font-size: 1rem;
+      font-size: 1.1rem;
       box-shadow: inset 0 0 0 5px rgba(255,255,255,0.6);
       overflow: hidden;
     }
 
-    marquee { font-size: 1rem; }
+    marquee { font-size: 1.1rem; }
 
     .welcome-strip {
-      margin-bottom: 20px;
+      margin-bottom: 28px;
       display: grid;
       grid-template-columns: 1.2fr .8fr;
-      gap: 20px;
+      gap: 28px;
     }
 
     .mini-banner {
@@ -335,33 +342,33 @@
     }
 
     .mini-banner .banner-head {
-      padding: 14px 20px;
+      padding: 16px 24px;
       background: linear-gradient(to bottom, #edf4fd, #dfeaf7);
       border-bottom: 1px solid #c8d8e9;
       color: #5f7694;
-      font-size: 1rem;
+      font-size: 1.1rem;
       letter-spacing: 1px;
     }
 
     .mini-banner .banner-body {
-      padding: 18px 20px;
+      padding: 20px 24px;
       line-height: 1.95;
       color: #6b8199;
-      font-size: 0.96rem;
+      font-size: 1rem;
     }
 
     .mini-stamp-box {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 12px;
       align-content: flex-start;
       justify-content: center;
-      padding: 16px;
+      padding: 18px;
     }
 
     .tiny-stamp {
       min-width: 88px;
-      height: 31px;
+      height: 36px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -371,22 +378,22 @@
         linear-gradient(90deg, rgba(255,255,255,0.95), rgba(233,242,252,0.95)),
         repeating-linear-gradient(45deg, rgba(217,183,234,0.18) 0 6px, transparent 6px 12px);
       color: #5e7998;
-      font-size: 0.72rem;
-      padding: 0 8px;
+      font-size: 0.85rem;
+      padding: 0 12px;
       box-shadow: 0 4px 10px rgba(120,145,180,0.08);
     }
 
     .grid {
       display: grid;
-      grid-template-columns: 330px 1fr 360px;
-      gap: 22px;
+      grid-template-columns: 380px 1fr 400px;
+      gap: 28px;
       align-items: start;
     }
 
     .column {
       display: flex;
       flex-direction: column;
-      gap: 22px;
+      gap: 28px;
       min-width: 0;
     }
 
@@ -402,8 +409,8 @@
     .panel-header {
       background: linear-gradient(to bottom, #e8f1fb, #dbe8f5);
       border-bottom: 1.5px solid #c8d8e9;
-      padding: 16px 24px;
-      font-size: 1.1rem;
+      padding: 18px 28px;
+      font-size: 1.2rem;
       letter-spacing: 1px;
       color: #5f7694;
       display: flex;
@@ -414,12 +421,12 @@
 
     .panel-header::before {
       content: "✦";
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       color: #7292b6;
     }
 
     .panel-body {
-      padding: 22px;
+      padding: 26px;
       background:
         repeating-linear-gradient(90deg, rgba(255,255,255,0.5) 0px, rgba(255,255,255,0.5) 2px, transparent 2px, transparent 5px),
         repeating-linear-gradient(0deg, rgba(200,220,240,0.15) 0px, rgba(200,220,240,0.15) 1px, transparent 1px, transparent 32px),
@@ -444,15 +451,15 @@
     .menu-list {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 18px;
     }
 
     .menu-item {
       display: block;
       color: var(--text);
       text-decoration: none;
-      font-size: 1rem;
-      padding: 6px 0;
+      font-size: 1.05rem;
+      padding: 8px 0;
       border-bottom: 1px dotted var(--line);
       transition: all 0.2s;
     }
@@ -490,10 +497,10 @@
       background: rgba(255,255,255,0.56);
       border: 1px dashed #c9dbee;
       border-radius: 18px;
-      padding: 16px;
+      padding: 18px;
       color: #627b99;
       line-height: 1.85;
-      font-size: 0.95rem;
+      font-size: 1rem;
     }
 
     .status-row {
@@ -501,7 +508,7 @@
       justify-content: space-between;
       gap: 16px;
       border-bottom: 1px dotted rgba(160,180,210,0.45);
-      padding: 6px 0;
+      padding: 8px 0;
     }
 
     .status-row:last-child { border-bottom: 0; }
@@ -509,7 +516,7 @@
 
     .about-main {
       display: flex;
-      gap: 28px;
+      gap: 32px;
       flex-wrap: wrap;
       justify-content: space-between;
     }
@@ -519,7 +526,7 @@
       min-width: 280px;
       background: linear-gradient(180deg, rgba(255,255,255,0.82) 0%, rgba(245,249,255,0.6) 100%);
       border-left: 4px solid #d9b7ea;
-      padding: 28px 32px;
+      padding: 32px 36px;
       border-radius: 20px;
       position: relative;
     }
@@ -536,55 +543,55 @@
     }
 
     .about-text h2 {
-      margin: 0 0 16px 0;
-      font-size: 1.7rem;
+      margin: 0 0 18px 0;
+      font-size: 2rem;
       color: #52718e;
     }
 
     .lead {
-      font-size: 1.05rem;
-      margin-bottom: 20px;
+      font-size: 1.1rem;
+      margin-bottom: 24px;
       line-height: 1.7;
       background: rgba(255,255,255,0.5);
-      padding: 12px 16px;
+      padding: 14px 18px;
       border-radius: 24px;
     }
 
     .desc {
-      font-size: 0.98rem;
+      font-size: 1rem;
       color: var(--muted);
-      margin-bottom: 22px;
+      margin-bottom: 24px;
       line-height: 1.85;
     }
 
     .chips {
       display: flex;
       flex-wrap: wrap;
-      gap: 14px;
-      margin: 24px 0 12px;
+      gap: 16px;
+      margin: 28px 0 14px;
     }
 
     .chip {
       background: #eff5fc;
       border-radius: 60px;
-      padding: 6px 20px;
-      font-size: 0.9rem;
+      padding: 8px 24px;
+      font-size: 0.95rem;
       color: #5981a2;
       border: 1px solid #c8dcf0;
     }
 
     .signature {
-      font-size: 0.88rem;
+      font-size: 0.95rem;
       text-align: right;
       color: #88a0bb;
-      margin-top: 18px;
+      margin-top: 20px;
       border-top: 1px dashed var(--line);
-      padding-top: 18px;
+      padding-top: 20px;
     }
 
     .sticker {
       flex: 1;
-      min-width: 150px;
+      min-width: 180px;
       text-align: center;
     }
 
@@ -598,48 +605,48 @@
     .feature .panel-header { background: #eef3fc; }
 
     .feature h3 {
-      margin: 0 0 10px;
+      margin: 0 0 12px;
       color: #52718e;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
     }
 
     .feature p {
       margin: 0;
       line-height: 1.9;
       color: #72869e;
-      font-size: 0.96rem;
+      font-size: 1rem;
     }
 
     .tag {
       display: inline-block;
       background: white;
-      padding: 6px 18px;
+      padding: 8px 22px;
       border-radius: 60px;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: #6787a6;
       border: 1px solid #c4d4e8;
-      margin-top: 14px;
+      margin-top: 16px;
     }
 
     .diary-entry {
-      padding: 16px;
+      padding: 18px;
       border-bottom: 1px dashed #d5e2f0;
       background: rgba(255,255,255,0.38);
       border-radius: 16px;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
 
     .diary-entry:last-child { margin-bottom: 0; }
 
     .diary-date {
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: #9ab0c5;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       letter-spacing: 1px;
     }
 
     .diary-text {
-      font-size: 0.96rem;
+      font-size: 1rem;
       line-height: 1.8;
       color: #627b99;
     }
@@ -647,7 +654,7 @@
     .image-wall {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+      gap: 14px;
     }
 
     .image-wall img {
@@ -668,9 +675,9 @@
       background: var(--yellow);
       border: 1px solid #eadfa6;
       border-radius: 14px;
-      padding: 14px 18px;
+      padding: 16px 22px;
       color: #7a7f8a;
-      font-size: 0.94rem;
+      font-size: 1rem;
       line-height: 1.8;
       transform: rotate(-1deg);
       box-shadow: 6px 6px 0 rgba(190,205,225,0.28);
@@ -680,13 +687,13 @@
 
     .music-box {
       display: flex;
-      gap: 16px;
+      gap: 18px;
       align-items: center;
     }
 
     .album-cover {
-      width: 76px;
-      height: 76px;
+      width: 80px;
+      height: 80px;
       object-fit: cover;
       border-radius: 18px;
       flex: 0 0 auto;
@@ -695,7 +702,7 @@
     .music-info { min-width: 0; }
 
     .song {
-      font-size: 1.02rem;
+      font-size: 1.1rem;
       color: #547493;
       font-weight: bold;
       margin-bottom: 6px;
@@ -703,29 +710,29 @@
 
     .artist,
     .music-note {
-      font-size: 0.86rem;
+      font-size: 0.95rem;
       color: #8aa0b8;
       line-height: 1.6;
     }
 
     .visitor-box { text-align: center; }
-    .visitor-box p { margin: 0; color: #71879f; font-size: 1rem; }
+    .visitor-box p { margin: 0; color: #71879f; font-size: 1.05rem; }
 
     .counter {
-      font-size: 2.6rem;
+      font-size: 2.8rem;
       font-weight: bold;
       letter-spacing: 3px;
       background: rgba(255,255,240,0.7);
       border-radius: 36px;
-      padding: 12px 8px;
-      margin: 16px 0;
+      padding: 14px 12px;
+      margin: 18px 0;
       font-family: monospace;
       color: #496b89;
       border: 1px solid #c9ddf1;
     }
 
     .sparkle {
-      font-size: 1rem;
+      font-size: 1.1rem;
       letter-spacing: 4px;
       color: #b290c5;
     }
@@ -733,23 +740,23 @@
     .calendar-top {
       display: flex;
       justify-content: space-between;
-      font-size: 1rem;
-      margin-bottom: 22px;
+      font-size: 1.05rem;
+      margin-bottom: 24px;
       color: #758ea9;
     }
 
     .calendar-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      gap: 8px;
+      gap: 10px;
       text-align: center;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
     }
 
     .day {
       font-weight: bold;
       color: #8199b7;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .active {
@@ -766,22 +773,22 @@
     .web-friends {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 14px;
       justify-content: center;
     }
 
     .badge {
       background: #eef2f8;
       border-radius: 40px;
-      padding: 6px 18px;
-      font-size: 0.85rem;
+      padding: 8px 22px;
+      font-size: 0.9rem;
       border: 1px solid #c7d8ec;
       color: #577594;
     }
 
     .blinkie {
-      min-width: 102px;
-      height: 38px;
+      min-width: 110px;
+      height: 42px;
       display: inline-flex;
       justify-content: center;
       align-items: center;
@@ -790,7 +797,7 @@
         linear-gradient(90deg, rgba(217,183,234,0.36), rgba(142,177,214,0.36)),
         repeating-linear-gradient(45deg, rgba(255,255,255,0.35) 0 4px, transparent 4px 10px);
       color: #526d8a;
-      font-size: 0.78rem;
+      font-size: 0.85rem;
       text-decoration: none;
       box-shadow: inset 0 0 0 2px rgba(255,255,255,0.45);
       transition: transform .2s ease;
@@ -803,7 +810,7 @@
     .pet-iframe {
       width: 100%;
       aspect-ratio: 1 / 1;
-      max-width: 300px;
+      max-width: 320px;
       border: 2px solid var(--frame-strong);
       border-radius: 24px;
       background: #ffffff;
@@ -813,18 +820,18 @@
     .timeline {
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      padding: 6px 0;
+      gap: 18px;
+      padding: 8px 0;
     }
 
     .timeline-item {
       display: flex;
-      gap: 16px;
+      gap: 18px;
       align-items: center;
       opacity: 0.75;
       transition: all 0.3s ease;
       cursor: pointer;
-      padding: 10px 14px;
+      padding: 12px 16px;
       border-radius: 16px;
     }
 
@@ -841,20 +848,20 @@
     }
 
     .timeline-dot {
-      font-size: 24px;
-      min-width: 28px;
+      font-size: 28px;
+      min-width: 32px;
       text-align: center;
       animation: pulse 2s ease-in-out infinite;
     }
 
     .timeline-date {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: #88a0bb;
-      min-width: 96px;
+      min-width: 100px;
     }
 
     .timeline-mood {
-      font-size: 1rem;
+      font-size: 1.05rem;
       color: #5f7694;
       font-weight: 500;
     }
@@ -867,8 +874,8 @@
     .stat-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-bottom: 22px;
+      gap: 18px;
+      margin-bottom: 24px;
     }
 
     .stat-box {
@@ -876,7 +883,7 @@
       background: linear-gradient(135deg, rgba(217,183,234,0.08), rgba(142,177,214,0.08));
       border: 1px solid rgba(217,183,234,0.3);
       border-radius: 18px;
-      padding: 16px 10px;
+      padding: 18px 12px;
       transition: all 0.3s ease;
     }
 
@@ -887,24 +894,24 @@
     }
 
     .stat-number {
-      font-size: 2.1rem;
+      font-size: 2.3rem;
       font-weight: bold;
       color: #8eb1d6;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .stat-label {
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: #88a0bb;
       letter-spacing: 1px;
     }
 
     .progress-bar {
-      height: 10px;
+      height: 12px;
       background: rgba(142,177,214,0.15);
       border-radius: 14px;
       overflow: hidden;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       border: 1px solid rgba(142,177,214,0.3);
     }
 
@@ -918,7 +925,7 @@
     @keyframes fillProgress { 0% { width: 0; } }
 
     .progress-label {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: #76889d;
       text-align: right;
     }
@@ -930,20 +937,20 @@
     }
 
     .wishlist li {
-      padding: 10px 0 10px 28px;
+      padding: 12px 0 12px 32px;
       border-bottom: 1px dashed #d5e2f0;
       position: relative;
       color: #6e849b;
-      font-size: 0.96rem;
+      font-size: 1rem;
       line-height: 1.6;
     }
 
     .wishlist li::before {
       content: "♡";
       position: absolute;
-      left: 4px;
+      left: 6px;
       color: #b290c5;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
     }
 
     .wishlist li:last-child { border-bottom: 0; }
@@ -952,16 +959,16 @@
       background: rgba(255,255,255,0.55);
       border: 1px dashed #c7d8ec;
       border-radius: 18px;
-      padding: 16px;
+      padding: 18px;
       line-height: 1.85;
       color: #6d839c;
-      font-size: 0.96rem;
+      font-size: 1rem;
     }
 
     .guestbook-form {
       display: grid;
-      gap: 12px;
-      margin-top: 16px;
+      gap: 14px;
+      margin-top: 18px;
     }
 
     .guestbook-form input,
@@ -970,24 +977,24 @@
       border: 1px solid #c7d8ec;
       background: rgba(255,255,255,0.74);
       border-radius: 14px;
-      padding: 12px 14px;
+      padding: 14px;
       color: #596f88;
       font-family: inherit;
-      font-size: 0.92rem;
+      font-size: 0.95rem;
       outline: none;
     }
 
-    .guestbook-form textarea { min-height: 90px; resize: vertical; }
+    .guestbook-form textarea { min-height: 100px; resize: vertical; }
 
     .soft-button {
       border: 1px solid #b9d0e7;
       border-radius: 60px;
       background: linear-gradient(to bottom, #f9fcff, #dceafb);
       color: #547493;
-      padding: 10px 18px;
+      padding: 12px 20px;
       font-family: inherit;
       cursor: pointer;
-      font-size: 0.95rem;
+      font-size: 1rem;
       box-shadow: 0 6px 14px rgba(120,145,180,0.12);
       transition: transform .2s ease;
     }
@@ -998,33 +1005,33 @@
       margin: 0;
       color: var(--muted);
       line-height: 2;
-      font-size: 0.98rem;
+      font-size: 1rem;
     }
 
     .favorites-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
+      gap: 16px;
     }
 
     .favorite-card {
       background: rgba(255,255,255,0.55);
       border: 1px solid #cfe0f0;
       border-radius: 20px;
-      padding: 14px;
+      padding: 16px;
     }
 
     .favorite-card h4 {
-      margin: 0 0 10px;
+      margin: 0 0 12px;
       color: #597796;
-      font-size: 1rem;
+      font-size: 1.05rem;
     }
 
     .favorite-card p {
       margin: 0;
       color: #75879c;
       line-height: 1.8;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
     }
 
     .side-list {
@@ -1032,38 +1039,38 @@
       margin: 0;
       padding: 0;
       display: grid;
-      gap: 10px;
+      gap: 12px;
     }
 
     .side-list li {
-      padding: 10px 12px;
+      padding: 12px 14px;
       border: 1px dashed #cdddf0;
       border-radius: 14px;
       background: rgba(255,255,255,0.45);
       color: #6c849d;
       line-height: 1.7;
-      font-size: 0.93rem;
+      font-size: 0.98rem;
     }
 
     .small-hr {
       height: 1px;
       border: 0;
       background: linear-gradient(to right, transparent, #cadcf0, transparent);
-      margin: 16px 0;
+      margin: 20px 0;
     }
 
     .link-pill {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 40px;
-      padding: 8px 14px;
+      min-height: 44px;
+      padding: 10px 18px;
       border: 1px solid #c5d8ec;
       border-radius: 999px;
       background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(236,244,252,0.95));
       color: #5c7998;
       text-decoration: none;
-      font-size: 0.88rem;
+      font-size: 0.95rem;
       box-shadow: 0 4px 10px rgba(120,145,180,0.08);
     }
 
@@ -1072,20 +1079,20 @@
     }
 
     .webfriend {
-      min-width: 120px;
-      padding: 10px 14px;
+      min-width: 130px;
+      padding: 12px 16px;
       border-radius: 16px;
       border: 1px solid #c7d8ec;
       background: rgba(255,255,255,0.72);
       color: #5e7b99;
       text-align: center;
-      font-size: 0.88rem;
+      font-size: 0.95rem;
     }
 
     .stamp {
-      min-width: 110px;
-      height: 40px;
-      padding: 0 12px;
+      min-width: 120px;
+      height: 44px;
+      padding: 0 14px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -1095,45 +1102,45 @@
       background:
         linear-gradient(90deg, rgba(217,183,234,0.2), rgba(142,177,214,0.2)),
         rgba(255,255,255,0.8);
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       box-shadow: inset 0 0 0 2px rgba(255,255,255,0.45);
     }
 
     .shrinerules {
       display: grid;
-      gap: 10px;
+      gap: 12px;
     }
 
     .rule {
       background: rgba(255,255,255,0.5);
       border-left: 4px solid #d9b7ea;
-      padding: 12px 14px;
+      padding: 14px 16px;
       border-radius: 14px;
       color: #6e849b;
       line-height: 1.8;
-      font-size: 0.93rem;
+      font-size: 0.98rem;
     }
 
     .currently-grid {
       display: grid;
-      gap: 12px;
+      gap: 14px;
     }
 
     .currently-item {
       border: 1px dashed #cfe0f2;
       border-radius: 16px;
-      padding: 12px 14px;
+      padding: 14px 16px;
       background: rgba(255,255,255,0.48);
       color: #6d849b;
-      font-size: 0.93rem;
+      font-size: 0.98rem;
       line-height: 1.8;
     }
 
     .new-feature-panel {
       background: rgba(255,255,255,0.52);
       border-radius: 20px;
-      padding: 14px 16px;
-      margin-bottom: 12px;
+      padding: 16px 18px;
+      margin-bottom: 14px;
       border: 1px solid rgba(217,183,234,0.45);
       transition: all 0.2s;
     }
@@ -1142,34 +1149,34 @@
       border-color: #d9b7ea;
     }
     .new-feature-title {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       font-weight: bold;
       color: #6a4e82;
       letter-spacing: 1px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       display: flex;
       align-items: center;
       gap: 6px;
     }
     .new-feature-title::before {
       content: "✧";
-      font-size: 1rem;
+      font-size: 1.1rem;
     }
     .new-feature-content {
-      font-size: 0.92rem;
+      font-size: 0.96rem;
       color: #6d849b;
       line-height: 1.8;
     }
     .hourglass-grid {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
     .hourglass-item {
       display: flex;
       justify-content: space-between;
       border-bottom: 1px dotted rgba(160,180,210,0.4);
-      padding: 6px 0;
+      padding: 8px 0;
     }
     .zone-list {
       list-style: none;
@@ -1177,58 +1184,123 @@
       margin: 0;
     }
     .zone-list li {
-      padding: 6px 0 6px 20px;
+      padding: 8px 0 8px 24px;
       position: relative;
       border-bottom: 1px dashed #e0eaf5;
     }
     .zone-list li::before {
       content: "✦";
       position: absolute;
-      left: 2px;
+      left: 4px;
       color: #b290c5;
     }
     .breathing-text {
       font-style: italic;
       background: rgba(217,183,234,0.12);
       border-radius: 14px;
-      padding: 10px 12px;
-      margin-top: 8px;
+      padding: 12px 14px;
+      margin-top: 10px;
     }
     .two-column-layout {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 16px;
+      gap: 18px;
+    }
+    /* 音乐播放器样式 */
+    .music-player {
+      background: rgba(255,255,255,0.7);
+      border: 2px solid #b8cfe6;
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+    }
+    .cassette {
+      width: 200px;
+      height: 100px;
+      margin: 0 auto 14px;
+      background: linear-gradient(#2a2a2a, #1a1a1a);
+      border: 4px solid #d9b7ea;
+      border-radius: 8px;
+      position: relative;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    .tape {
+      position: absolute;
+      top: 24px; left: 32px; right: 32px;
+      height: 46px;
+      background: repeating-linear-gradient(90deg, #ddd 0, #ddd 8px, #444 8px, #444 16px);
+      border: 2px solid #8b6b9e;
+    }
+    .label {
+      position: absolute;
+      bottom: 8px; left: 50%;
+      transform: translateX(-50%);
+      background: #fff;
+      color: #6a4e82;
+      padding: 4px 14px;
+      font-size: 0.8rem;
+      border: 1px solid #d9b7ea;
+    }
+    .now-playing {
+      margin: 14px 0;
+      font-size: 1rem;
+      color: #547493;
+    }
+    .controls button {
+      background: #d9b7ea;
+      color: white;
+      border: none;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      margin: 0 10px;
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+    .progress-container {
+      margin: 14px 0;
+    }
+    #progress {
+      width: 100%;
+    }
+    .playlist select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #c7d8ec;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.9);
+      font-size: 0.9rem;
     }
     @media (max-width: 680px) {
       .two-column-layout {
         grid-template-columns: 1fr;
-        gap: 12px;
+        gap: 14px;
       }
     }
 
     .footer-note {
-      margin-top: 38px;
+      margin-top: 48px;
       text-align: center;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: #7d98b5;
       border-top: 2px dotted #c7daee;
-      padding-top: 24px;
+      padding-top: 28px;
       line-height: 1.9;
     }
 
     .back-top {
       position: fixed;
-      right: 28px;
-      bottom: 28px;
+      right: 32px;
+      bottom: 32px;
       z-index: 10;
       border: none;
       border-radius: 60px;
       background: linear-gradient(to bottom, #f9fcff, #dceafb);
       border: 2px solid #b9d0e7;
       color: #547493;
-      padding: 12px 20px;
+      padding: 12px 24px;
       font-family: inherit;
-      font-size: 0.95rem;
+      font-size: 1rem;
       cursor: pointer;
       box-shadow: 0 10px 22px rgba(120,145,180,0.16);
       transition: transform .2s ease, box-shadow .2s ease;
@@ -1244,7 +1316,7 @@
       pointer-events: none;
       z-index: 9999;
       color: rgba(217,183,234,0.88);
-      font-size: 15px;
+      font-size: 18px;
       animation: cursorFade .8s ease-out forwards;
     }
 
@@ -1254,28 +1326,36 @@
     }
 
     @media (max-width: 1200px) {
-      .grid { grid-template-columns: 1fr; gap: 28px; }
+      .grid { grid-template-columns: 1fr; gap: 32px; }
       .hero-sticker { display: inline-block; }
       .stat-grid { grid-template-columns: repeat(2, 1fr); }
       .welcome-strip { grid-template-columns: 1fr; }
-      body { padding: calc(28px * var(--zoom-scale)) calc(20px * var(--zoom-scale)) calc(42px * var(--zoom-scale)); }
+      body { padding: 32px 24px 48px; }
     }
 
     @media (max-width: 680px) {
-      body { padding: calc(22px * var(--zoom-scale)) calc(12px * var(--zoom-scale)) calc(32px * var(--zoom-scale)); }
-      .hero img { height: 280px; }
-      .lace-shell { padding: 14px; }
-      .wrapper { padding: 16px; }
-      .inner-frame { padding: 14px; }
+      body { padding: 24px 16px 36px; }
+      .hero img { height: 320px; }
+      .lace-shell { padding: 16px; }
+      .wrapper { padding: 18px; }
+      .inner-frame { padding: 16px; }
       .image-wall { grid-template-columns: repeat(2, 1fr); }
       .favorites-grid { grid-template-columns: 1fr; }
-      .about-text { min-width: 100%; padding: 20px; }
+      .about-text { min-width: 100%; padding: 22px; }
       .hanging-tag,
       .float-sparkle { display: none; }
     }
   </style>
 </head>
 <body id="top">
+  <!-- 可拖拽宠物 -->
+  <div class="desktop-pet" id="pet1" style="left: 180px; top: 420px;">🌀</div>
+  <div class="desktop-pet" id="pet2" style="left: 680px; top: 520px;">✦</div>
+  <div class="desktop-pet" id="pet3" style="left: 920px; top: 280px;">
+    <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" width="68" style="border-radius:12px;">
+  </div>
+  <div class="desktop-pet" id="pet4" style="left: 420px; top: 650px;">♡</div>
+
   <div class="float-deco d1">✦ ✧</div>
   <div class="float-deco d2">♡</div>
   <div class="float-deco d3">☁</div>
@@ -1328,7 +1408,7 @@
             <div class="panel"><div class="panel-header">collection stats</div><div class="panel-body"><div class="stat-grid"><div class="stat-box"><div class="stat-number">42</div><div class="stat-label">照片</div></div><div class="stat-box"><div class="stat-number">18</div><div class="stat-label">日记</div></div><div class="stat-box"><div class="stat-number">26</div><div class="stat-label">星标</div></div><div class="stat-box"><div class="stat-number">7</div><div class="stat-label">分类</div></div></div><div class="progress-bar"><div class="progress-fill" style="width: 68%"></div></div><div class="progress-label">集齐度：68%</div></div></div>
             <div class="panel"><div class="panel-header">shrine rules</div><div class="panel-body"><div class="shrinerules"><div class="rule">① 请带着安静又温柔的心情浏览这里。</div><div class="rule">② 这里的内容偏向个人收藏与主观感想，不追求资料完整。</div><div class="rule">③ 如果你也喜欢 Reigen，希望你会在某个小角落停留一下。</div></div></div></div>
             <div class="panel" id="favorites"><div class="panel-header">favorite details</div><div class="panel-body"><ul class="side-list"><li><b>最喜欢的气质：</b>嘴上不靠谱，心里却很认真。</li><li><b>最喜欢的表情：</b>得意、尴尬、装镇定的时候。</li><li><b>最喜欢的片段：</b>他在混乱里仍旧努力保护别人。</li><li><b>最喜欢的感觉：</b>看似轻浮，其实很有人情味。</li></ul></div></div>
-            <div class="panel"><div class="panel-header">currently</div><div class="panel-body"><div class="currently-grid"><div class="currently-item"><b>reading</b>：角色分析帖 / old web 灵感页</div><div class="currently-item"><b>making</b>：gallery 子页面、button 区、更多台词页</div><div class="currently-item"><b>wanting</b>：更漂亮的 88x31 buttons 和 web badges</div></div><div class="fortune-egg"><div style="font-size:0.9rem; letter-spacing:2px;">✨ 今日随机小彩蛋 ✨</div><div class="fortune-text" id="dailyEggText">点击下方按钮，抽一句 Reigen 的小语录或今日心情～</div><button class="fortune-btn" id="getEggBtn">🍳 敲开彩蛋 🥚</button></div></div></div>
+            <div class="panel"><div class="panel-header">currently</div><div class="panel-body"><div class="currently-grid"><div class="currently-item"><b>reading</b>：角色分析帖 / old web 灵感页</div><div class="currently-item"><b>making</b>：gallery 子页面、button 区、更多台词页</div><div class="currently-item"><b>wanting</b>：更漂亮的 88x31 buttons 和 web badges</div></div><div class="fortune-egg"><div style="font-size:0.95rem; letter-spacing:2px;">✨ 今日随机小彩蛋 ✨</div><div class="fortune-text" id="dailyEggText">点击下方按钮，抽一句 Reigen 的小语录或今日心情～</div><button class="fortune-btn" id="getEggBtn">🍳 敲开彩蛋 🥚</button></div></div></div>
             <div class="panel"><div class="panel-header">⏳ 时光沙漏</div><div class="panel-body"><div class="new-feature-panel"><div class="new-feature-title">今日推荐旧网页</div><div class="new-feature-content"><div class="hourglass-grid"><div class="hourglass-item"><span>📟 1999年个人主页博物馆</span><span>➜ 正在加载回忆</span></div><div class="hourglass-item"><span>🎞️ 像素按钮生成器</span><span>✦ 灵感站点</span></div><div class="hourglass-item"><span>📻 复古聊天室模拟器</span><span>♡ 可可爱爱</span></div></div><div class="breathing-text">“旧网页就像一本泛黄的日记，每点开一个都是时间的诗。” 今天推荐的这三个小角落，藏着90年代互联网的呼吸声。如果你也迷恋粗糙的gif和不对称的表格，这里会是你的秘密花园。</div></div></div></div></div>
             <div class="panel"><div class="panel-header">🎧 匿名共感电台</div><div class="panel-body"><div class="new-feature-panel"><div class="new-feature-title">此刻正在收听：「蓝紫色雨夜·灵能回忆录」 混合音轨</div><div class="new-feature-content"><div style="margin-bottom: 10px;">▸ 雨声 + 老式磁带底噪 + 灵能百合影集中间那段温柔的钢琴间隙 ▸ 推荐搭配蕾丝主题页面一起服用，助你沉入回忆的深海。</div><div>🎵 播放列表：01. quiet archive theme / 02. old web lullaby / 03. reigen’s laughter (soft edit)</div><div class="breathing-text" style="margin-top: 10px;">没有歌词，只有氛围。就像在某个下雨的下午，你坐在旧电脑前，屏幕的光映在脸上，而你喜欢的故事正以像素的形式慢慢显影。</div></div></div></div></div>
             
@@ -1348,13 +1428,41 @@
             <div class="panel"><div class="panel-header">mood timeline</div><div class="panel-body"><div class="timeline"><div class="timeline-item active" title="今天"><div class="timeline-dot">✧</div><div class="timeline-date">Today</div><div class="timeline-mood">😊 开心</div></div><div class="timeline-item"><div class="timeline-dot">✦</div><div class="timeline-date">Yesterday</div><div class="timeline-mood">😌 平静</div></div><div class="timeline-item"><div class="timeline-dot">★</div><div class="timeline-date">2 days ago</div><div class="timeline-mood">😍 喜悦</div></div><div class="timeline-item"><div class="timeline-dot">☆</div><div class="timeline-date">3 days ago</div><div class="timeline-mood">🤔 思考</div></div></div></div></div>
             <div class="panel"><div class="panel-header">favorite things</div><div class="panel-body"><div class="favorites-grid"><div class="favorite-card"><h4>最喜欢的台词感</h4><p>嘴硬、夸张、看似骗人，但偶尔会突然认真到让人心软。</p></div><div class="favorite-card"><h4>最喜欢的色调</h4><p>浅蓝、灰蓝、淡紫、白色，高饱和点缀要少一点，像旧网页玻璃糖纸。</p></div><div class="favorite-card"><h4>最喜欢收藏的图</h4><p>侧脸、办公桌、笑得很微妙的时候、以及“看起来有点狼狈”的瞬间。</p></div><div class="favorite-card"><h4>最喜欢的网页感</h4><p>像 someone’s personal room，不是商业主页，而是带呼吸感的私人小站。</p></div></div></div></div>
             <div class="panel"><div class="panel-header">tiny note</div><div class="panel-body"><div class="tiny-note">i miss old internet websites where every page felt like someone quietly decorating a room for no reason...</div></div></div>
-            <div class="panel"><div class="panel-header">🔮 像素占卜屋</div><div class="panel-body"><div class="new-feature-panel"><div class="new-feature-title">今日灵能运势</div><div class="new-feature-content"><div id="fortuneMessage" style="background: rgba(217,183,234,0.18); border-radius: 16px; padding: 12px; margin-bottom: 12px; font-style: italic;">✨ 点击下方按钮，抽取今天的 Reigen 式幸运签 ✨</div><button class="soft-button" id="drawFortuneBtn" style="font-size:0.85rem; padding:6px 16px;">🎴 抽一张签 🎴</button></div></div><div class="new-feature-panel"><div class="new-feature-title">🕯️ 许愿池·存档处</div><div class="new-feature-content"><div>在这里许下一个小愿望，它会像旧网页的星星碎片一样被收藏起来。</div><div style="display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap;"><input type="text" id="wishInput" placeholder="写一句悄悄愿望..." style="flex:1; background:rgba(255,255,255,0.7); border:1px solid #c7d8ec; border-radius:30px; padding:8px 14px; font-family:inherit;"><button class="soft-button" id="submitWishBtn" style="padding:6px 16px;">✨ 存档</button></div><div id="wishFeedback" style="font-size:0.8rem; color:#8aa0b8; margin-top: 10px; text-align:center;"></div><div class="breathing-text" style="margin-top: 12px;">「你的每一份喜欢，都会被这个安静的小站轻轻接住。」今天也有 13 位路过的人在这里留下了悄悄话。</div></div></div></div></div>
+            <div class="panel"><div class="panel-header">🔮 像素占卜屋</div><div class="panel-body"><div class="new-feature-panel"><div class="new-feature-title">今日灵能运势</div><div class="new-feature-content"><div id="fortuneMessage" style="background: rgba(217,183,234,0.18); border-radius: 16px; padding: 14px; margin-bottom: 14px; font-style: italic;">✨ 点击下方按钮，抽取今天的 Reigen 式幸运签 ✨</div><button class="soft-button" id="drawFortuneBtn" style="font-size:0.9rem; padding:8px 18px;">🎴 抽一张签 🎴</button></div></div><div class="new-feature-panel"><div class="new-feature-title">🕯️ 许愿池·存档处</div><div class="new-feature-content"><div>在这里许下一个小愿望，它会像旧网页的星星碎片一样被收藏起来。</div><div style="display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap;"><input type="text" id="wishInput" placeholder="写一句悄悄愿望..." style="flex:1; background:rgba(255,255,255,0.7); border:1px solid #c7d8ec; border-radius:30px; padding:10px 16px; font-family:inherit;"><button class="soft-button" id="submitWishBtn" style="padding:8px 18px;">✨ 存档</button></div><div id="wishFeedback" style="font-size:0.85rem; color:#8aa0b8; margin-top: 12px; text-align:center;"></div><div class="breathing-text" style="margin-top: 14px;">「你的每一份喜欢，都会被这个安静的小站轻轻接住。」今天也有 13 位路过的人在这里留下了悄悄话。</div></div></div></div></div>
           </div>
 
-          <!-- 右栏：深夜匿名来信 + 其他原有模块 -->
+          <!-- 右栏：音乐播放器放在顶部 + 其他原有模块 -->
           <div class="column">
-            <!-- 角色深夜电台 - 右侧部分：深夜匿名来信 -->
-            <div class="panel"><div class="panel-header">📻 深夜匿名来信</div><div class="panel-body"><div class="new-feature-panel" style="margin-bottom: 0;"><div class="new-feature-title">一封来自远方的信</div><div class="new-feature-content"><div style="background: rgba(142,177,214,0.12); border-radius: 16px; padding: 12px; margin-bottom: 10px;"><i>“给灵能师先生：今天我也努力成为一个温柔的人了。虽然生活里没有超能力，但有想保护的人就够啦。—— 来自某个同担的留言”</i></div><div>你可以把这里当作一个树洞，或者某个不会被打扰的夜晚角落。虚构电台每晚都会放一首只属于 archive 的歌，歌名叫《淡紫色谎言与真心》。</div><div class="breathing-text" style="margin-top: 10px;">🎙️ 主播小语：「喜欢一个角色最浪漫的方式，就是为他留一间永远点着灯的屋子。」今晚的节目，献给所有在旧网页里寻找慰藉的人。</div></div></div></div></div>
+            <!-- 音乐播放器模块 -->
+            <div class="panel">
+              <div class="panel-header">🎵 lonely archive radio</div>
+              <div class="panel-body">
+                <div id="music-player" class="music-player">
+                  <div class="cassette">
+                    <div class="tape"></div>
+                    <div class="label">REIGEN ARCHIVE • 2026</div>
+                  </div>
+                  <div class="now-playing">
+                    <span id="song-title">quiet rain & piano</span>
+                    <span id="song-artist">soft blue internet</span>
+                  </div>
+                  <div class="controls">
+                    <button id="prev-btn">⫻</button>
+                    <button id="play-pause-btn">▶</button>
+                    <button id="next-btn">⫽</button>
+                  </div>
+                  <div class="progress-container">
+                    <input type="range" id="progress" value="0" min="0" max="100">
+                  </div>
+                  <div class="playlist">
+                    <select id="playlist-select"></select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 深夜匿名来信 -->
+            <div class="panel"><div class="panel-header">📻 深夜匿名来信</div><div class="panel-body"><div class="new-feature-panel" style="margin-bottom: 0;"><div class="new-feature-title">一封来自远方的信</div><div class="new-feature-content"><div style="background: rgba(142,177,214,0.12); border-radius: 16px; padding: 14px; margin-bottom: 12px;"><i>“给灵能师先生：今天我也努力成为一个温柔的人了。虽然生活里没有超能力，但有想保护的人就够啦。—— 来自某个同担的留言”</i></div><div>你可以把这里当作一个树洞，或者某个不会被打扰的夜晚角落。虚构电台每晚都会放一首只属于 archive 的歌，歌名叫《淡紫色谎言与真心》。</div><div class="breathing-text" style="margin-top: 12px;">🎙️ 主播小语：「喜欢一个角色最浪漫的方式，就是为他留一间永远点着灯的屋子。」今晚的节目，献给所有在旧网页里寻找慰藉的人。</div></div></div></div></div>
             
             <div class="panel"><div class="panel-header">site visitors</div><div class="panel-body"><div class="visitor-box"><p>今天也在喜欢 Reigen 吗？</p><div class="counter" id="visitorCounter">00920</div><div class="sparkle">♡ ♡ ♡ ♡ ♡</div></div></div></div>
             <div class="panel"><div class="panel-header">now playing</div><div class="panel-body"><div class="music-box"><img class="album-cover" src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="album cover"><div class="music-info"><div class="song">lonely archive radio</div><div class="artist">soft blue internet</div><div class="music-note">♪ replace this with your real song</div></div></div></div></div>
@@ -1365,7 +1473,7 @@
             <div class="panel" id="wishlist"><div class="panel-header">wishlist</div><div class="panel-body"><ul class="wishlist"><li>整理 Reigen 截图文件夹</li><li>做一个独立 gallery.html</li><li>补完台词收藏页</li><li>找几个真正的 88x31 buttons</li><li>给 guestbook 接入可留言服务</li></ul></div></div>
             <div class="panel"><div class="panel-header">guestbook</div><div class="panel-body"><div class="guestbook-box">guestbook placeholder ♡<br>这里现在是装饰版留言板。之后你可以换成 atabook / smartgb / 自己写的留言系统。<div class="guestbook-form"><input type="text" placeholder="your name"><textarea placeholder="leave a tiny message..."></textarea><button class="soft-button" type="button" onclick="alert('这是装饰版留言框，还没有接入真实留言功能 ♡')">sign guestbook</button></div></div></div></div>
             <div class="panel"><div class="panel-header">stamps collection</div><div class="panel-body"><div class="stamp-grid"><span class="stamp">psychic believer</span><span class="stamp">reigen archive</span><span class="stamp">soft lavender</span><span class="stamp">quiet website</span><span class="stamp">old homepage</span><span class="stamp">blue diary</span></div></div></div>
-            <div class="panel"><div class="panel-header">web friends</div><div class="panel-body"><div class="web-friends"><div class="webfriend">friend 01</div><div class="webfriend">friend 02</div><div class="webfriend">mutual 03</div><div class="webfriend">shrine 04</div></div><hr class="small-hr"><div style="text-align:center; color:#7a91aa; font-size:0.9rem;">这里可以以后替换成你的友链、同担站、素材站链接。</div></div></div>
+            <div class="panel"><div class="panel-header">web friends</div><div class="panel-body"><div class="web-friends"><div class="webfriend">friend 01</div><div class="webfriend">friend 02</div><div class="webfriend">mutual 03</div><div class="webfriend">shrine 04</div></div><hr class="small-hr"><div style="text-align:center; color:#7a91aa; font-size:0.95rem;">这里可以以后替换成你的友链、同担站、素材站链接。</div></div></div>
             <div class="panel"><div class="panel-header">credits</div><div class="panel-body"><ul class="side-list"><li><b>character</b>：Reigen Arataka / Mob Psycho 100</li><li><b>site vibe</b>：old personal web / soft shrine style</li><li><b>hosting</b>：Neocities</li><li><b>inspiration</b>：handmade archive pages & old web layouts</li></ul></div></div>
             <div class="panel"><div class="panel-header">updates</div><div class="panel-body"><p class="updates-text">+ 完整首页结构·放大视觉舒适版<br>+ 新增 now playing, diary log, gallery wall<br>+ 新增 status / wishlist / guestbook<br>+ 蕾丝边框与蓝紫色旧站风格<br>+ 鼠标星星尾迹·整体尺寸提升<br>+ 新增 welcome / favorites / links / stamps / web friends</p></div></div>
           </div>
@@ -1382,6 +1490,108 @@
   <button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ top</button>
 
   <script>
+    // 音乐播放器脚本
+    const playlist = [
+      { title: "quiet rain & piano", artist: "soft blue internet", src: "https://www.samplefocus.com/samples/quiet-rain-piano" },
+      { title: "lonely archive", artist: "reigen's memories", src: "https://www.samplefocus.com/samples/lonely-archive" },
+      { title: "old web lullaby", artist: "lace & pixels", src: "https://www.samplefocus.com/samples/old-web-lullaby" }
+    ];
+
+    let currentTrack = 0;
+    const audio = new Audio();
+    audio.volume = 0.65;
+
+    const playPauseBtn = document.getElementById('play-pause-btn');
+    const progress = document.getElementById('progress');
+    const songTitle = document.getElementById('song-title');
+    const songArtist = document.getElementById('song-artist');
+    const select = document.getElementById('playlist-select');
+
+    playlist.forEach((track, i) => {
+      const opt = document.createElement('option');
+      opt.value = i;
+      opt.textContent = `${track.title} — ${track.artist}`;
+      select.appendChild(opt);
+    });
+
+    function loadTrack(index) {
+      audio.src = playlist[index].src;
+      songTitle.textContent = playlist[index].title;
+      songArtist.textContent = playlist[index].artist;
+      select.value = index;
+    }
+
+    function togglePlay() {
+      if (audio.paused) {
+        audio.play().catch(e => console.log("播放需要用户交互"));
+        playPauseBtn.textContent = '❚❚';
+      } else {
+        audio.pause();
+        playPauseBtn.textContent = '▶';
+      }
+    }
+
+    playPauseBtn.addEventListener('click', togglePlay);
+    document.getElementById('next-btn').addEventListener('click', () => {
+      currentTrack = (currentTrack + 1) % playlist.length;
+      loadTrack(currentTrack);
+      audio.play().catch(e => console.log("播放需要用户交互"));
+      playPauseBtn.textContent = '❚❚';
+    });
+    document.getElementById('prev-btn').addEventListener('click', () => {
+      currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+      loadTrack(currentTrack);
+      audio.play().catch(e => console.log("播放需要用户交互"));
+      playPauseBtn.textContent = '❚❚';
+    });
+
+    select.addEventListener('change', (e) => {
+      currentTrack = parseInt(e.target.value);
+      loadTrack(currentTrack);
+      audio.play().catch(e => console.log("播放需要用户交互"));
+      playPauseBtn.textContent = '❚❚';
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      if (audio.duration) {
+        progress.value = (audio.currentTime / audio.duration) * 100;
+      }
+    });
+
+    progress.addEventListener('input', () => {
+      audio.currentTime = (progress.value / 100) * audio.duration;
+    });
+
+    loadTrack(0);
+
+    // 可拖拽宠物
+    function makeDraggable(el) {
+      let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      el.addEventListener('mousedown', dragMouseDown);
+      function dragMouseDown(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.addEventListener('mouseup', closeDragElement);
+        document.addEventListener('mousemove', elementDrag);
+      }
+      function elementDrag(e) {
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        el.style.top = (el.offsetTop - pos2) + "px";
+        el.style.left = (el.offsetLeft - pos1) + "px";
+      }
+      function closeDragElement() {
+        document.removeEventListener('mouseup', closeDragElement);
+        document.removeEventListener('mousemove', elementDrag);
+      }
+    }
+    document.querySelectorAll('.desktop-pet').forEach(pet => { makeDraggable(pet); });
+
+    // 访客计数器
     (function() {
       const counterElem = document.getElementById('visitorCounter');
       if (!counterElem) return;
@@ -1407,6 +1617,7 @@
       counterElem.innerText = String(currentCount).padStart(5, '0');
     })();
 
+    // 鼠标星星
     (function() {
       let last = 0;
       document.addEventListener('mousemove', function(e) {
@@ -1423,6 +1634,7 @@
       });
     })();
 
+    // timeline
     (function() {
       const items = document.querySelectorAll('.timeline-item');
       items.forEach(item => {
@@ -1433,6 +1645,7 @@
       });
     })();
 
+    // 彩蛋
     (function() {
       const eggTextDiv = document.getElementById('dailyEggText');
       const eggBtn = document.getElementById('getEggBtn');
@@ -1445,6 +1658,7 @@
       }
     })();
 
+    // 占卜
     (function() {
       const fortuneBtn = document.getElementById('drawFortuneBtn');
       const fortuneMsgDiv = document.getElementById('fortuneMessage');
@@ -1454,6 +1668,7 @@
       }
     })();
 
+    // 许愿
     (function() {
       const wishInput = document.getElementById('wishInput');
       const submitBtn = document.getElementById('submitWishBtn');
@@ -1464,10 +1679,10 @@
     })();
   </script>
   <style>
-    .fortune-egg { background: linear-gradient(135deg, rgba(217,183,234,0.12), rgba(142,177,214,0.12)); border-radius: 20px; padding: 16px; margin-top: 12px; text-align: center; border: 1px solid rgba(217,183,234,0.4); transition: all 0.2s; }
+    .fortune-egg { background: linear-gradient(135deg, rgba(217,183,234,0.12), rgba(142,177,214,0.12)); border-radius: 20px; padding: 18px; margin-top: 14px; text-align: center; border: 1px solid rgba(217,183,234,0.4); transition: all 0.2s; }
     .fortune-egg:hover { background: linear-gradient(135deg, rgba(217,183,234,0.22), rgba(142,177,214,0.22)); border-color: #d9b7ea; }
-    .fortune-text { font-size: 1rem; color: #5f7694; margin: 12px 0 10px; line-height: 1.65; min-height: 70px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.6); border-radius: 16px; padding: 12px; font-style: italic; }
-    .fortune-btn { background: rgba(217,183,234,0.28); border: 1px solid #c7d8ec; border-radius: 60px; padding: 6px 18px; font-size: 0.85rem; color: #6a4e82; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+    .fortune-text { font-size: 1rem; color: #5f7694; margin: 14px 0 12px; line-height: 1.65; min-height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.6); border-radius: 16px; padding: 14px; font-style: italic; }
+    .fortune-btn { background: rgba(217,183,234,0.28); border: 1px solid #c7d8ec; border-radius: 60px; padding: 8px 20px; font-size: 0.9rem; color: #6a4e82; cursor: pointer; transition: all 0.2s; font-family: inherit; }
     .fortune-btn:hover { background: #d9b7ea; color: white; border-color: #d9b7ea; transform: translateY(-2px); }
   </style>
 </body>
