@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   
-  <!-- ===== 网站图标 Favicon（新增部分，其他代码全部保留） ===== -->
+  <!-- ===== 网站图标 Favicon ===== -->
   <link rel="icon" type="image/png" sizes="96x96" href="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/favicon-96x96.png" />
   <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/favicon.svg" />
   <link rel="shortcut icon" href="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/favicon.ico" />
@@ -12,7 +12,6 @@
   <meta name="apple-mobile-web-app-title" content="ReigenArataka" />
   <link rel="manifest" href="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/site.webmanifest" />
   <meta name="theme-color" content="#8eb1d6" />
-  <!-- ===== 图标添加结束，以下为您的原有代码，完全没有改动 ===== -->
   
   <title>Reigen Arataka </title>
   <style>
@@ -1110,6 +1109,73 @@
       line-height: 1.8;
     }
 
+    /* 新功能板块样式 */
+    .new-feature-panel {
+      background: rgba(255,255,255,0.52);
+      border-radius: 20px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+      border: 1px solid rgba(217,183,234,0.45);
+      transition: all 0.2s;
+    }
+    .new-feature-panel:hover {
+      background: rgba(255,255,255,0.68);
+      border-color: #d9b7ea;
+    }
+    .new-feature-title {
+      font-size: 0.9rem;
+      font-weight: bold;
+      color: #6a4e82;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .new-feature-title::before {
+      content: "✧";
+      font-size: 1rem;
+    }
+    .new-feature-content {
+      font-size: 0.92rem;
+      color: #6d849b;
+      line-height: 1.8;
+    }
+    .hourglass-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .hourglass-item {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dotted rgba(160,180,210,0.4);
+      padding: 6px 0;
+    }
+    .zone-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+    .zone-list li {
+      padding: 6px 0 6px 20px;
+      position: relative;
+      border-bottom: 1px dashed #e0eaf5;
+    }
+    .zone-list li::before {
+      content: "✦";
+      position: absolute;
+      left: 2px;
+      color: #b290c5;
+    }
+    .breathing-text {
+      font-style: italic;
+      background: rgba(217,183,234,0.12);
+      border-radius: 14px;
+      padding: 10px 12px;
+      margin-top: 8px;
+    }
+
     .footer-note {
       margin-top: 38px;
       text-align: center;
@@ -1329,6 +1395,11 @@
                   <div class="currently-item"><b>making</b>：gallery 子页面、button 区、更多台词页</div>
                   <div class="currently-item"><b>wanting</b>：更漂亮的 88x31 buttons 和 web badges</div>
                 </div>
+                <div class="fortune-egg">
+                  <div style="font-size:0.9rem; letter-spacing:2px;">✨ 今日随机小彩蛋 ✨</div>
+                  <div class="fortune-text" id="dailyEggText">点击下方按钮，抽一句 Reigen 的小语录或今日心情～</div>
+                  <button class="fortune-btn" id="getEggBtn">🍳 敲开彩蛋 🥚</button>
+                </div>
               </div>
             </div>
           </div>
@@ -1399,7 +1470,7 @@
               </div>
             </div>
 
-            <!-- LINKS OUT 面板已移动到 story notes 后面 -->
+            <!-- LINKS OUT 面板 -->
             <div class="panel" id="links">
               <div class="panel-header">links out</div>
               <div class="panel-body">
@@ -1416,7 +1487,7 @@
               </div>
             </div>
 
-            <!-- UPDATE LOG EXTENDED 面板已移动到 story notes 后面 -->
+            <!-- UPDATE LOG EXTENDED 面板 -->
             <div class="panel">
               <div class="panel-header">update log extended</div>
               <div class="panel-body">
@@ -1453,6 +1524,33 @@
               </div>
             </div>
 
+            <!-- ===== 在 mood timeline 左侧添加的两个功能板块（放在 mood timeline 面板之前）===== -->
+            <div class="panel">
+              <div class="panel-header">⏳ 时光沙漏</div>
+              <div class="panel-body">
+                <div class="new-feature-panel">
+                  <div class="new-feature-title">今日推荐旧网页</div>
+                  <div class="new-feature-content">
+                    <div class="hourglass-grid">
+                      <div class="hourglass-item"><span>📟 1999年个人主页博物馆</span><span>➜ 正在加载回忆</span></div>
+                      <div class="hourglass-item"><span>🎞️ 像素按钮生成器</span><span>✦ 灵感站点</span></div>
+                      <div class="hourglass-item"><span>📻 复古聊天室模拟器</span><span>♡ 可可爱爱</span></div>
+                    </div>
+                    <div class="breathing-text">“旧网页就像一本泛黄的日记，每点开一个都是时间的诗。” 今天推荐的这三个小角落，藏着90年代互联网的呼吸声。如果你也迷恋粗糙的gif和不对称的表格，这里会是你的秘密花园。</div>
+                  </div>
+                </div>
+                <div class="new-feature-panel">
+                  <div class="new-feature-title">🎧 匿名共感电台</div>
+                  <div class="new-feature-content">
+                    <div style="margin-bottom: 10px;">此刻正在收听：<b>「蓝紫色雨夜·灵能回忆录」</b> 混合音轨</div>
+                    <div>▸ 雨声 + 老式磁带底噪 + 灵能百合影集中间那段温柔的钢琴间隙 ▸ 推荐搭配蕾丝主题页面一起服用，助你沉入回忆的深海。<br>
+                    <span style="font-size:0.82rem;">🎵 播放列表：01. quiet archive theme / 02. old web lullaby / 03. reigen’s laughter (soft edit)</span></div>
+                    <div class="breathing-text" style="margin-top: 10px;">没有歌词，只有氛围。就像在某个下雨的下午，你坐在旧电脑前，屏幕的光映在脸上，而你喜欢的故事正以像素的形式慢慢显影。</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div class="panel">
               <div class="panel-header">mood timeline</div>
               <div class="panel-body">
@@ -1465,6 +1563,7 @@
               </div>
             </div>
 
+            <!-- ===== 在 favorite things 右侧添加的两个功能板块（放在 favorite things 面板之后，tiny note 之前）===== -->
             <div class="panel">
               <div class="panel-header">favorite things</div>
               <div class="panel-body">
@@ -1484,6 +1583,62 @@
                   <div class="favorite-card">
                     <h4>最喜欢的网页感</h4>
                     <p>像 someone’s personal room，不是商业主页，而是带呼吸感的私人小站。</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 新增板块1：角色深夜电台 -->
+            <div class="panel">
+              <div class="panel-header">🌙 角色深夜电台</div>
+              <div class="panel-body">
+                <div class="new-feature-panel" style="margin-bottom: 0;">
+                  <div class="new-feature-title">Reigen 未公开语录·拾贝</div>
+                  <div class="new-feature-content">
+                    <ul class="zone-list">
+                      <li>「其实我知道自己没那么厉害，但至少……要让他们觉得被保护着。」—— 匿名语音备忘录片段。</li>
+                      <li>「今天事务所来了一个很麻烦的委托，我用了三杯咖啡和两倍笑容把它解决掉。啊，这就是专业啊。」—— 某日手机速记。</li>
+                      <li>「被人信任的感觉会上瘾，所以我必须演得更好。不过偶尔，也会希望有个人看穿我的慌张。」—— 深夜思考笔记。</li>
+                    </ul>
+                    <div class="breathing-text">这些句子从未出现在正片里，但它们像是角色的另一面镜子。在这里，我们允许虚构，也允许温柔。</div>
+                  </div>
+                </div>
+                <div class="new-feature-panel">
+                  <div class="new-feature-title">📻 深夜匿名来信</div>
+                  <div class="new-feature-content">
+                    <div style="background: rgba(142,177,214,0.12); border-radius: 16px; padding: 12px; margin-bottom: 10px;">
+                      <i>“给灵能师先生：今天我也努力成为一个温柔的人了。虽然生活里没有超能力，但有想保护的人就够啦。—— 来自某个同担的留言”</i>
+                    </div>
+                    <div>你可以把这里当作一个树洞，或者某个不会被打扰的夜晚角落。虚构电台每晚都会放一首只属于 archive 的歌，歌名叫《淡紫色谎言与真心》。</div>
+                    <div class="breathing-text" style="margin-top: 10px;">🎙️ 主播小语：「喜欢一个角色最浪漫的方式，就是为他留一间永远点着灯的屋子。」今晚的节目，献给所有在旧网页里寻找慰藉的人。</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 新增板块2：像素占卜屋 -->
+            <div class="panel">
+              <div class="panel-header">🔮 像素占卜屋</div>
+              <div class="panel-body">
+                <div class="new-feature-panel">
+                  <div class="new-feature-title">今日灵能运势</div>
+                  <div class="new-feature-content">
+                    <div id="fortuneMessage" style="background: rgba(217,183,234,0.18); border-radius: 16px; padding: 12px; margin-bottom: 12px; font-style: italic;">
+                      ✨ 点击下方按钮，抽取今天的 Reigen 式幸运签 ✨
+                    </div>
+                    <button class="soft-button" id="drawFortuneBtn" style="font-size:0.85rem; padding:6px 16px;">🎴 抽一张签 🎴</button>
+                  </div>
+                </div>
+                <div class="new-feature-panel">
+                  <div class="new-feature-title">🕯️ 许愿池·存档处</div>
+                  <div class="new-feature-content">
+                    <div>在这里许下一个小愿望，它会像旧网页的星星碎片一样被收藏起来。</div>
+                    <div style="display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap;">
+                      <input type="text" id="wishInput" placeholder="写一句悄悄愿望..." style="flex:1; background:rgba(255,255,255,0.7); border:1px solid #c7d8ec; border-radius:30px; padding:8px 14px; font-family:inherit;">
+                      <button class="soft-button" id="submitWishBtn" style="padding:6px 16px;">✨ 存档</button>
+                    </div>
+                    <div id="wishFeedback" style="font-size:0.8rem; color:#8aa0b8; margin-top: 10px; text-align:center;"></div>
+                    <div class="breathing-text" style="margin-top: 12px;">「你的每一份喜欢，都会被这个安静的小站轻轻接住。」今天也有 13 位路过的人在这里留下了悄悄话。</div>
                   </div>
                 </div>
               </div>
@@ -1718,6 +1873,124 @@
         });
       });
     })();
+
+    // 彩蛋功能
+    (function() {
+      const eggTextDiv = document.getElementById('dailyEggText');
+      const eggBtn = document.getElementById('getEggBtn');
+      if (eggTextDiv && eggBtn) {
+        const eggMessages = [
+          "♡ 「灵能什么的，不过是小把戏罢了… 其实我根本不会。」—— 但依然会笑着帮你。",
+          "✧ 今日 Reigen 小语：即使是谎言里，也藏着一点想让你开心的真心。",
+          "★ 你在翻阅旧网页的时候，我也在悄悄注视你哦～ 开玩笑的。",
+          "🌸 蓝紫色调子 + 蕾丝边框 = 一个温柔到像梦境的角落。",
+          "✨ 今天也要像 Reigen 一样：哪怕荒唐，也要理直气壮地向前走。",
+          "📜 台词摘抄：「所谓的超能力，只是让人看起来特别一点而已。」",
+          "🎐 在这里停留的每一秒，都是对旧互联网的一次小小念旧。",
+          "💭 也许灵能不存在，但“想要保护谁”的心情是真的。",
+          "🌙 夜晚看这个页面会更温柔——因为星星、飘浮的装饰和你都在。",
+          "🍃 喜欢一个人物不一定要狂热，可以只是静静地为他造一个小房间。",
+          "🕯️ Reigen 教会我的事：温柔比超能力更厉害。"
+        ];
+        function getRandomEgg() { return eggMessages[Math.floor(Math.random() * eggMessages.length)]; }
+        function updateEgg() {
+          const newMessage = getRandomEgg();
+          eggTextDiv.innerHTML = `✨ ${newMessage} ✨`;
+          eggTextDiv.style.transition = "opacity 0.2s";
+          eggTextDiv.style.opacity = "0.7";
+          setTimeout(() => { eggTextDiv.style.opacity = "1"; }, 80);
+        }
+        eggBtn.addEventListener('click', updateEgg);
+        updateEgg();
+      }
+    })();
+
+    // 新增占卜功能
+    (function() {
+      const fortuneBtn = document.getElementById('drawFortuneBtn');
+      const fortuneMsgDiv = document.getElementById('fortuneMessage');
+      if (fortuneBtn && fortuneMsgDiv) {
+        const fortunes = [
+          "🌸 大吉：今天你会遇到意想不到的温柔，就像旧网站里偶然发现的一个可爱gif。",
+          "🌿 中吉：心里挂念的事，会悄悄朝着好的方向流动。保持耐心。",
+          "✨ 小吉：适合整理截图、写日记，把喜欢的事情慢慢地做。",
+          "🍀 末吉：可能有点小疲惫，那就在这个小站里多待一会儿吧。",
+          "⭐ 凶·转吉：不要慌，明天会收到一个让你笑出来的消息。"
+        ];
+        fortuneBtn.addEventListener('click', () => {
+          const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+          fortuneMsgDiv.innerHTML = `🔮 ${randomFortune} 🔮`;
+          fortuneMsgDiv.style.background = "rgba(217,183,234,0.28)";
+        });
+      }
+    })();
+
+    // 新增许愿功能
+    (function() {
+      const wishInput = document.getElementById('wishInput');
+      const submitBtn = document.getElementById('submitWishBtn');
+      const feedback = document.getElementById('wishFeedback');
+      if (wishInput && submitBtn && feedback) {
+        submitBtn.addEventListener('click', () => {
+          const wish = wishInput.value.trim();
+          if (wish === "") {
+            feedback.innerHTML = "✧ 写一句悄悄话再存档吧～";
+            return;
+          }
+          feedback.innerHTML = "✨ 你的愿望已经被这个 archive 温柔地接住了 ✨";
+          wishInput.value = "";
+          setTimeout(() => {
+            feedback.innerHTML = "";
+          }, 2000);
+        });
+      }
+    })();
   </script>
+  <style>
+    .fortune-egg {
+      background: linear-gradient(135deg, rgba(217,183,234,0.12), rgba(142,177,214,0.12));
+      border-radius: 20px;
+      padding: 16px;
+      margin-top: 12px;
+      text-align: center;
+      border: 1px solid rgba(217,183,234,0.4);
+      transition: all 0.2s;
+    }
+    .fortune-egg:hover {
+      background: linear-gradient(135deg, rgba(217,183,234,0.22), rgba(142,177,214,0.22));
+      border-color: #d9b7ea;
+    }
+    .fortune-text {
+      font-size: 1rem;
+      color: #5f7694;
+      margin: 12px 0 10px;
+      line-height: 1.65;
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.6);
+      border-radius: 16px;
+      padding: 12px;
+      font-style: italic;
+    }
+    .fortune-btn {
+      background: rgba(217,183,234,0.28);
+      border: 1px solid #c7d8ec;
+      border-radius: 60px;
+      padding: 6px 18px;
+      font-size: 0.85rem;
+      color: #6a4e82;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .fortune-btn:hover {
+      background: #d9b7ea;
+      color: white;
+      border-color: #d9b7ea;
+      transform: translateY(-2px);
+    }
+  </style>
 </body>
 </html>
