@@ -269,7 +269,7 @@
       filter: saturate(0.9) brightness(1.03);
     }
 
-    /* ===== 左右箭头按钮 ===== */
+    /* ===== 左右箭头按钮（共用样式） ===== */
     .hero-arrow {
       position: absolute;
       top: 50%;
@@ -1218,6 +1218,55 @@
       gap: 18px;
     }
 
+    /* ===== 视频轮播样式（与图片轮播一致） ===== */
+    .video-slides-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    .video-slides-track {
+      display: flex;
+      width: 100%;
+      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .video-slide {
+      flex: 0 0 100%;
+      width: 100%;
+    }
+
+    .video-slide .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 比例 */
+      height: 0;
+      overflow: hidden;
+      border-radius: 16px;
+      background: #1a1a2e;
+    }
+
+    .video-slide .video-wrapper iframe,
+    .video-slide .video-wrapper video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 16px;
+      background: #0a0a1a;
+      object-fit: contain;
+    }
+
+    .video-caption {
+      margin: 12px 0 0 0;
+      color: #6d849b;
+      font-size: 0.95rem;
+      text-align: center;
+      line-height: 1.7;
+    }
+
     /* ===== 缩小版音乐播放器样式（缩小1.5倍） ===== */
     .music-player {
       background: rgba(255,255,255,0.7);
@@ -1486,6 +1535,77 @@
           <!-- 中栏 -->
           <div class="column">
             <div class="panel" id="about"><div class="panel-header">about this archive</div><div class="panel-body"><div class="about-main"><div class="about-text"><h2>你好，welcome to my site,</h2><div class="lead">这里是一个关于 <b>Reigen Arataka</b> 的温柔收藏页，<br>记录喜欢的瞬间、对白、故事，还有那些让人心动的小小记忆。</div><div class="desc">这个页面不是正式资料库，更像是一个旧互联网式的小房间：会慢慢贴照片、写碎碎念、存喜欢的台词，也会堆一些没有用但很可爱的网页小物。</div><div class="chips"><span class="chip"># psychic</span><span class="chip"># archive</span><span class="chip"># diary</span><span class="chip"># fanpage</span><span class="chip"># neocities</span></div><div class="signature">by reigenswife ♡</div></div><div class="sticker"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="Reigen daily"></div></div></div></div>
+            
+            <!-- ===== 视频轮播板块（3个视频 · 无限循环滑动） ===== -->
+            <div class="panel" id="video-carousel">
+              <div class="panel-header">🎬 灵能放映室 · 珍藏集</div>
+              <div class="panel-body">
+                <div class="video-slides-wrapper">
+                  <div class="video-slides-track" id="videoTrack">
+                    <!-- 视频1：YouTube - greedy -->
+                    <div class="video-slide">
+                      <div class="video-wrapper">
+                        <iframe 
+                          src="https://www.youtube.com/embed/OCBRHUyruws" 
+                          title="greedy - reigen arataka"
+                          frameborder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowfullscreen>
+                        </iframe>
+                      </div>
+                      <p class="video-caption">✨ greedy · Reigen Arataka</p>
+                    </div>
+                    <!-- 视频2：YouTube - Stress Remastered -->
+                    <div class="video-slide">
+                      <div class="video-wrapper">
+                        <iframe 
+                          src="https://www.youtube.com/embed/7kj0hcFcblc" 
+                          title="MP100 AMV Stress Remastered - Reigen Arataka"
+                          frameborder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowfullscreen>
+                        </iframe>
+                      </div>
+                      <p class="video-caption">✨ Stress Remastered · Reigen Arataka</p>
+                    </div>
+                    <!-- 视频3：本地视频 ass.mp4 -->
+                    <div class="video-slide">
+                      <div class="video-wrapper">
+                        <video controls style="width:100%; height:100%; object-fit:contain; background:#0a0a1a; border-radius:16px;">
+                          <source src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/videos/ass.mp4" type="video/mp4">
+                          你的浏览器不支持视频播放，请更换浏览器重试。
+                        </video>
+                      </div>
+                      <p class="video-caption">🎞️ 本地珍藏 · 灵能片段</p>
+                    </div>
+                    <!-- ===== 克隆第一个视频，实现无缝循环 ===== -->
+                    <div class="video-slide">
+                      <div class="video-wrapper">
+                        <iframe 
+                          src="https://www.youtube.com/embed/OCBRHUyruws" 
+                          title="greedy - reigen arataka"
+                          frameborder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowfullscreen>
+                        </iframe>
+                      </div>
+                      <p class="video-caption">✨ greedy · Reigen Arataka</p>
+                    </div>
+                  </div>
+                  <!-- 左右箭头 -->
+                  <button class="hero-arrow hero-arrow-left" id="videoPrev" aria-label="上一个视频">
+                    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                  </button>
+                  <button class="hero-arrow hero-arrow-right" id="videoNext" aria-label="下一个视频">
+                    <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+                  </button>
+                </div>
+                <p style="margin-top:14px; color:#6d849b; font-size:0.9rem; text-align:center; opacity:0.8;">
+                  👈 点击左右箭头切换视频 · 滑动浏览更多珍藏
+                </p>
+              </div>
+            </div>
+
             <div class="feature" id="gallery"><div class="panel-header">gallery wall</div><div class="panel-body"><h3>📸 小型截图墙</h3><p style="margin-bottom:14px;">这里可以继续替换成你自己的截图、官方图、同人图收藏。现在先用你已有的图片做占位。</p><div class="image-wall"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="gallery 1"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="gallery 2"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="gallery 3"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="gallery 4"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="gallery 5"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="gallery 6"></div><span class="tag">click nothing, just stare lovingly</span></div></div>
             <div class="feature" id="memories"><div class="panel-header">memories</div><div class="panel-body"><h3>💖 心动记忆</h3><p>记录特别喜欢的剧情、表情、台词，以及只属于你的情绪片段。</p><span class="tag">12 个片段</span></div></div>
             <div class="feature"><div class="panel-header">story notes</div><div class="panel-body"><h3>📖 灵能故事</h3><p>像日记一样整理剧情感想、同人设定和角色相关的小记录。这里之后可以扩展成 diary.html。</p><span class="tag">8 篇记录</span></div></div>
@@ -1702,6 +1822,110 @@
       }, 1000);
 
       window.heroSlider = { goToSlide, nextSlide, prevSlide };
+    })();
+
+    // ==================== 视频轮播 - 无限循环滑动（最后一张从右边回到第一张） ====================
+    (function() {
+      const track = document.getElementById('videoTrack');
+      const slides = document.querySelectorAll('.video-slide');
+      const prevBtn = document.getElementById('videoPrev');
+      const nextBtn = document.getElementById('videoNext');
+      const totalSlides = slides.length; // 4 (3张原图 + 1张克隆)
+      const realTotal = 3; // 实际视频数量
+      let currentIndex = 0;
+      let isTransitioning = false;
+
+      function goToSlide(index, animate = true) {
+        if (isTransitioning) return;
+        if (index < 0) index = 0;
+        if (index >= totalSlides) index = totalSlides - 1;
+        
+        isTransitioning = true;
+        currentIndex = index;
+        
+        if (animate) {
+          track.style.transition = 'transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        } else {
+          track.style.transition = 'none';
+        }
+        
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+        if (animate) {
+          setTimeout(() => {
+            isTransitioning = false;
+            // 如果到了克隆的最后一张（索引3），无缝跳回第一张（索引0）
+            if (currentIndex >= totalSlides - 1) {
+              track.style.transition = 'none';
+              currentIndex = 0;
+              track.style.transform = `translateX(0%)`;
+            }
+          }, 750);
+        } else {
+          isTransitioning = false;
+        }
+      }
+
+      function nextSlide() {
+        if (isTransitioning) return;
+        goToSlide(currentIndex + 1);
+      }
+
+      function prevSlide() {
+        if (isTransitioning) return;
+        if (currentIndex === 0) {
+          // 如果当前在第一张，先无动画跳到克隆的最后一张
+          track.style.transition = 'none';
+          currentIndex = totalSlides - 1;
+          track.style.transform = `translateX(-${currentIndex * 100}%)`;
+          setTimeout(() => {
+            goToSlide(currentIndex - 1);
+          }, 50);
+        } else {
+          goToSlide(currentIndex - 1);
+        }
+      }
+
+      // 左右箭头点击
+      prevBtn.addEventListener('click', function() {
+        prevSlide();
+      });
+
+      nextBtn.addEventListener('click', function() {
+        nextSlide();
+      });
+
+      // 键盘左右键支持
+      document.addEventListener('keydown', function(e) {
+        const wrapper = document.querySelector('.video-slides-wrapper');
+        if (wrapper && wrapper.contains(document.activeElement)) {
+          if (e.key === 'ArrowLeft') prevSlide();
+          else if (e.key === 'ArrowRight') nextSlide();
+        }
+      });
+
+      // 触摸滑动支持
+      const wrapper = document.querySelector('.video-slides-wrapper');
+      let startX = 0;
+      let isDragging = false;
+
+      wrapper.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+      }, { passive: true });
+
+      wrapper.addEventListener('touchend', function(e) {
+        if (!isDragging) return;
+        isDragging = false;
+        const endX = e.changedTouches[0].clientX;
+        const diff = startX - endX;
+        if (Math.abs(diff) > 50) {
+          diff > 0 ? nextSlide() : prevSlide();
+        }
+      }, { passive: true });
+
+      // 初始化：直接显示第一个视频
+      goToSlide(0, false);
     })();
 
     // ==================== 完整5首歌曲+歌词播放器 ====================
