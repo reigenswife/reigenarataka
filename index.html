@@ -1167,29 +1167,19 @@
       box-shadow: 0 11px 21px rgba(0,0,0,0.2);
     }
 
-    /* 原 top:48px → 32px, left/right:64px → 43px, height:92px → 61px, border:4px → 3px */
+    /* ===== Reigen 图片完全覆盖黑色磁带区域 ===== */
     .tape {
       position: absolute;
-      top: 32px;
-      left: 43px;
-      right: 43px;
-      height: 61px;
-      background: repeating-linear-gradient(90deg, #ddd 0, #ddd 11px, #444 11px, #444 21px);
-      border: 3px solid #8b6b9e;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: url('https://raw.githubusercontent.com/reigenswife/reigenarataka/main/images/reigen-16.png') center/cover no-repeat;
+      border: none;
+      border-radius: 8px;
     }
 
-    /* 原 font-size:1.6rem → 1.1rem, padding:8px 28px → 5px 19px, border:2px → 1.3px */
-    .label {
-      position: absolute;
-      bottom: 11px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #fff;
-      color: #6a4e82;
-      padding: 5px 19px;
-      font-size: 1.1rem;
-      border: 1.3px solid #d9b7ea;
-    }
+    /* 文字标签已删除，不再遮挡图片 */
 
     .now-playing {
       margin: 14px 0;
@@ -1257,8 +1247,7 @@
       .two-column-layout { grid-template-columns: 1fr; gap: 14px; }
       .lyric-en-main { font-size: 0.9rem; }
       .cassette { width: 100%; max-width: 265px; height: 133px; }
-      .tape { top: 32px; left: 43px; right: 43px; height: 61px; }
-      .label { font-size: 0.9rem; padding: 4px 14px; }
+      .tape { top: -8px; left: -8px; right: -8px; bottom: -8px; }
     }
 
     .footer-note {
@@ -1424,7 +1413,7 @@
                 <div id="music-player" class="music-player">
                   <div class="cassette">
                     <div class="tape"></div>
-                    <div class="label">REIGEN ARCHIVE • 2026</div>
+                    <!-- 文字标签已删除，不再遮挡图片 -->
                   </div>
                   <div class="now-playing">
                     <span id="song-title">We Belong Together</span>
