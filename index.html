@@ -244,6 +244,84 @@
       pointer-events: none;
     }
 
+    /* ===== 首图轮播样式 - 左右箭头切换（无小圆点） ===== */
+    .hero-slides-wrapper {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      overflow: hidden;
+      border-radius: 24px 24px 0 0;
+    }
+
+    .hero-slides-track {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .hero-slide {
+      flex: 0 0 100%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.9) brightness(1.03);
+    }
+
+    /* ===== 左右箭头按钮 ===== */
+    .hero-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 6;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(6px);
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: #ffffff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 0;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      user-select: none;
+    }
+
+    .hero-arrow:hover {
+      background: rgba(255, 255, 255, 0.45);
+      transform: translateY(-50%) scale(1.08);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+    }
+
+    .hero-arrow:active {
+      transform: translateY(-50%) scale(0.92);
+    }
+
+    .hero-arrow-left {
+      left: 16px;
+    }
+
+    .hero-arrow-right {
+      right: 16px;
+    }
+
+    .hero-arrow svg {
+      width: 24px;
+      height: 24px;
+      fill: none;
+      stroke: #ffffff;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.3));
+    }
+
     .hero {
       position: relative;
       overflow: hidden;
@@ -254,14 +332,6 @@
       margin-bottom: 24px;
     }
 
-    .hero img {
-      width: 100%;
-      height: 480px;
-      object-fit: cover;
-      display: block;
-      filter: saturate(0.9) brightness(1.03);
-    }
-
     .hero::after {
       content: "";
       position: absolute;
@@ -270,6 +340,8 @@
         linear-gradient(to top, rgba(70,90,110,0.38), transparent 55%),
         repeating-linear-gradient(to bottom, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 1px, transparent 2px, transparent 5px);
       pointer-events: none;
+      z-index: 1;
+      border-radius: 24px;
     }
 
     .hero-title {
@@ -1248,6 +1320,11 @@
       .lyric-en-main { font-size: 0.9rem; }
       .cassette { width: 100%; max-width: 265px; height: 133px; }
       .tape { top: -8px; left: -8px; right: -8px; bottom: -8px; }
+      .hero-slides-wrapper { height: 320px; }
+      .hero-arrow { width: 38px; height: 38px; font-size: 18px; }
+      .hero-arrow-left { left: 8px; }
+      .hero-arrow-right { right: 8px; }
+      .hero-arrow svg { width: 18px; height: 18px; }
     }
 
     .footer-note {
@@ -1312,6 +1389,7 @@
       .favorites-grid { grid-template-columns: 1fr; }
       .about-text { min-width: 100%; padding: 22px; }
       .hanging-tag, .float-sparkle { display: none; }
+      .hero-slides-wrapper { height: 320px; }
     }
     .fortune-egg { background: linear-gradient(135deg, rgba(217,183,234,0.12), rgba(142,177,214,0.12)); border-radius: 20px; padding: 18px; margin-top: 14px; text-align: center; border: 1px solid rgba(217,183,234,0.4); transition: all 0.2s; }
     .fortune-egg:hover { background: linear-gradient(135deg, rgba(217,183,234,0.22), rgba(142,177,214,0.22)); border-color: #d9b7ea; }
@@ -1348,7 +1426,23 @@
     <div class="wrapper">
       <div class="inner-frame">
         <section class="hero">
-          <img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="Reigen Arataka">
+          <div class="hero-slides-wrapper">
+            <div class="hero-slides-track" id="heroTrack">
+              <img class="hero-slide" src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="Reigen Arataka">
+              <img class="hero-slide" src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="Reigen Arataka">
+              <img class="hero-slide" src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="Reigen Arataka">
+              <!-- 克隆第一张作为最后一张，实现无缝循环 -->
+              <img class="hero-slide" src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="Reigen Arataka">
+            </div>
+            
+            <!-- ===== 左右箭头（无小圆点） ===== -->
+            <button class="hero-arrow hero-arrow-left" id="heroPrev" aria-label="上一张">
+              <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="hero-arrow hero-arrow-right" id="heroNext" aria-label="下一张">
+              <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+            </button>
+          </div>
           <div class="hero-title">
             <h1>REIGEN ARATAKA</h1>
             <p>quiet archive of memories · 個人收藏站</p>
@@ -1469,6 +1563,147 @@
   <button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ top</button>
 
   <script>
+    // ==================== 首图轮播 - 左右箭头（无小圆点） ====================
+    (function() {
+      const track = document.getElementById('heroTrack');
+      const slides = document.querySelectorAll('.hero-slide');
+      const prevBtn = document.getElementById('heroPrev');
+      const nextBtn = document.getElementById('heroNext');
+      const totalSlides = slides.length; // 4 (3张原图 + 1张克隆)
+      const realTotal = 3; // 实际图片数量
+      let currentIndex = 0;
+      let autoPlayTimer = null;
+      const intervalTime = 4000;
+      let isTransitioning = false;
+
+      function goToSlide(index, animate = true) {
+        if (isTransitioning) return;
+        if (index < 0) index = 0;
+        if (index >= totalSlides) index = totalSlides - 1;
+        
+        isTransitioning = true;
+        currentIndex = index;
+        
+        if (animate) {
+          track.style.transition = 'transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        } else {
+          track.style.transition = 'none';
+        }
+        
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+        if (animate) {
+          setTimeout(() => {
+            isTransitioning = false;
+            if (currentIndex >= totalSlides - 1) {
+              track.style.transition = 'none';
+              currentIndex = 0;
+              track.style.transform = `translateX(0%)`;
+            }
+          }, 750);
+        } else {
+          isTransitioning = false;
+        }
+      }
+
+      function nextSlide() {
+        if (isTransitioning) return;
+        goToSlide(currentIndex + 1);
+      }
+
+      function prevSlide() {
+        if (isTransitioning) return;
+        if (currentIndex === 0) {
+          track.style.transition = 'none';
+          currentIndex = totalSlides - 1;
+          track.style.transform = `translateX(-${currentIndex * 100}%)`;
+          setTimeout(() => {
+            goToSlide(currentIndex - 1);
+          }, 50);
+        } else {
+          goToSlide(currentIndex - 1);
+        }
+      }
+
+      function startAutoPlay() {
+        if (autoPlayTimer) clearInterval(autoPlayTimer);
+        autoPlayTimer = setInterval(nextSlide, intervalTime);
+      }
+
+      function stopAutoPlay() {
+        if (autoPlayTimer) {
+          clearInterval(autoPlayTimer);
+          autoPlayTimer = null;
+        }
+      }
+
+      // 左右箭头点击
+      prevBtn.addEventListener('click', function() {
+        stopAutoPlay();
+        prevSlide();
+        startAutoPlay();
+      });
+
+      nextBtn.addEventListener('click', function() {
+        stopAutoPlay();
+        nextSlide();
+        startAutoPlay();
+      });
+
+      // 键盘左右键支持
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') {
+          stopAutoPlay();
+          prevSlide();
+          startAutoPlay();
+        } else if (e.key === 'ArrowRight') {
+          stopAutoPlay();
+          nextSlide();
+          startAutoPlay();
+        }
+      });
+
+      // 鼠标悬停暂停
+      const wrapper = document.querySelector('.hero-slides-wrapper');
+      wrapper.addEventListener('mouseenter', stopAutoPlay);
+      wrapper.addEventListener('mouseleave', startAutoPlay);
+
+      // 触摸滑动
+      let startX = 0;
+      let isDragging = false;
+
+      wrapper.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+        stopAutoPlay();
+      }, { passive: true });
+
+      wrapper.addEventListener('touchend', function(e) {
+        if (!isDragging) return;
+        isDragging = false;
+        const endX = e.changedTouches[0].clientX;
+        const diff = startX - endX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) {
+            nextSlide();
+          } else {
+            prevSlide();
+          }
+        }
+        startAutoPlay();
+      }, { passive: true });
+
+      // 初始化
+      track.style.transition = 'none';
+      track.style.transform = 'translateX(0%)';
+      
+      setTimeout(() => {
+        startAutoPlay();
+      }, 1000);
+
+      window.heroSlider = { goToSlide, nextSlide, prevSlide };
+    })();
+
     // ==================== 完整5首歌曲+歌词播放器 ====================
     const playlist = [
       { 
