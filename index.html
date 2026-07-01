@@ -1146,14 +1146,106 @@
       gap: 18px;
     }
 
-    /* iframe 播放器容器样式 - 保留用于兼容旧样式 */
-    .music-player iframe {
-      width: 100%;
+    /* 音乐播放器样式 */
+    .music-player {
+      background: rgba(255,255,255,0.7);
+      border: 2px solid #b8cfe6;
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+    }
+    .cassette {
+      width: 200px;
+      height: 100px;
+      margin: 0 auto 14px;
+      background: linear-gradient(#2a2a2a, #1a1a1a);
+      border: 4px solid #d9b7ea;
+      border-radius: 8px;
+      position: relative;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    .tape {
+      position: absolute;
+      top: 24px; left: 32px; right: 32px;
+      height: 46px;
+      background: repeating-linear-gradient(90deg, #ddd 0, #ddd 8px, #444 8px, #444 16px);
+      border: 2px solid #8b6b9e;
+    }
+    .label {
+      position: absolute;
+      bottom: 8px; left: 50%;
+      transform: translateX(-50%);
+      background: #fff;
+      color: #6a4e82;
+      padding: 4px 14px;
+      font-size: 0.8rem;
+      border: 1px solid #d9b7ea;
+    }
+    .now-playing {
+      margin: 14px 0;
+      font-size: 1rem;
+      color: #547493;
+    }
+    .controls button {
+      background: #d9b7ea;
+      color: white;
       border: none;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      margin: 0 10px;
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .controls button:hover {
+      background: #b290c5;
+      transform: scale(1.05);
+    }
+    .progress-container {
+      margin: 14px 0;
+    }
+    #progress {
+      width: 100%;
+      cursor: pointer;
+    }
+    .playlist select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #c7d8ec;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.9);
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .lyrics-panel {
+      margin-top: 16px;
+      padding: 14px;
+      background: rgba(240, 245, 255, 0.7);
+      border-radius: 20px;
+      border: 1px solid #d9b7ea;
+      text-align: center;
+      min-height: 100px;
+    }
+    .lyric-line-main {
+      transition: opacity 0.6s ease;
+      opacity: 1;
+    }
+    .lyric-en-main {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #4a2c7d;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .lyric-zh-main {
+      font-size: 1rem;
+      color: #6a4e82;
     }
 
     @media (max-width: 680px) {
       .two-column-layout { grid-template-columns: 1fr; gap: 14px; }
+      .lyric-en-main { font-size: 1rem; }
     }
 
     .footer-note {
@@ -1307,21 +1399,42 @@
             <div class="panel"><div class="panel-header">mood timeline</div><div class="panel-body"><div class="timeline"><div class="timeline-item active" title="今天"><div class="timeline-dot">✧</div><div class="timeline-date">Today</div><div class="timeline-mood">😊 开心</div></div><div class="timeline-item"><div class="timeline-dot">✦</div><div class="timeline-date">Yesterday</div><div class="timeline-mood">😌 平静</div></div><div class="timeline-item"><div class="timeline-dot">★</div><div class="timeline-date">2 days ago</div><div class="timeline-mood">😍 喜悦</div></div><div class="timeline-item"><div class="timeline-dot">☆</div><div class="timeline-date">3 days ago</div><div class="timeline-mood">🤔 思考</div></div></div></div></div>
             <div class="panel"><div class="panel-header">favorite things</div><div class="panel-body"><div class="favorites-grid"><div class="favorite-card"><h4>最喜欢的台词感</h4><p>嘴硬、夸张、看似骗人，但偶尔会突然认真到让人心软。</p></div><div class="favorite-card"><h4>最喜欢的色调</h4><p>浅蓝、灰蓝、淡紫、白色，高饱和点缀要少一点，像旧网页玻璃糖纸。</p></div><div class="favorite-card"><h4>最喜欢收藏的图</h4><p>侧脸、办公桌、笑得很微妙的时候、以及“看起来有点狼狈”的瞬间。</p></div><div class="favorite-card"><h4>最喜欢的网页感</h4><p>像 someone’s personal room，不是商业主页，而是带呼吸感的私人小站。</p></div></div></div></div>
             <div class="panel"><div class="panel-header">tiny note</div><div class="panel-body"><div class="tiny-note">i miss old internet websites where every page felt like someone quietly decorating a room for no reason...</div></div></div>
-            <div class="panel"><div class="panel-header">🔮 像素占卜屋</div><div class="panel-body"><div class="new-feature-panel"><div class="new-feature-title">今日灵能运势</div><div class="new-feature-content"><div id="fortuneMessage" style="background: rgba(217,183,234,0.18); border-radius: 16px; padding: 14px; margin-bottom: 14px; font-style: italic;">✨ 点击下方按钮，抽取今天的 Reigen 式幸运签 ✨</div><button class="soft-button" id="drawFortuneBtn" style="font-size:0.9rem; padding:8px 18px;">🎴 抽一张签 🎴</button></div></div><div class="new-feature-panel"><div class="new-feature-title">🕯️ 许愿池·存档处</div><div class="new-feature-content"><div>在这里许下一个小愿望，它会像旧网页的星星碎片一样被收藏起来。</div><div style="display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap;"><input type="text" id="wishInput" placeholder="写一句悄悄愿望..." style="flex:1; background:rgba(255,255,255,0.7); border:1px solid #c7d8ec; border-radius:30px; padding:10px 16px; font-family:inherit;"><button class="soft-button" id="submitWishBtn" style="padding:8px 18px;">✨ 存档</button></div><div id="wishFeedback" style="font-size:0.85rem; color:#8aa0b8; margin-top: 12px; text-align:center;"></div><div class="breathing-text" style="margin-top: 14px;">「你的每一份喜欢，都会被这个安静的小站轻轻接住。」今天也有 13 位路过的人在这里留下了悄悄话。</div></div></div></div></div>
+            <div class="panel"><div class="panel-header">🔮 像素占卜屋</div><div class="panel-body"><div class="new-feature-panel"><div class="new-feature-title">今日灵能运势</div><div class="new-feature-content"><div id="fortuneMessage" style="background: rgba(217,183,234,0.18); border-radius: 16px; padding: 14px; margin-bottom: 14px; font-style: italic;">✨ 点击下方按钮，抽取今天的 Reigen 式幸运签 ✨</div><button class="soft-button" id="drawFortuneBtn" style="font-size:0.9rem; padding:8px 18px;">🎴 抽一张签 🎴</button></div></div><div class="new-feature-panel"><div class="new-feature-title">🕯️ 许愿池·存档处</div><div class="new-feature-content"><div>在这里许下一个小愿望，它会像旧网页的星星碎片一样被收藏起来。</div><div style="display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap;"><input type="text" id="wishInput" placeholder="写一句悄悄愿望..." style="flex:1; background:rgba(255,255,255,0.7); border:1px solid #c7d8ec; border-radius:30px; padding:10px 16px; font-family:inherit;"><button class="soft-button" id="submitWishBtn" style="padding:8px 18px;">✨ 存档</button></div><div id="wishFeedback" style="font-size:0.85rem; color:#8aa0b8; margin-top: 12px; text-align:center;"></div><div class="breathing-text" style="margin-top: 14px;">今天也有 13 位路过的人在这里留下了悄悄话。</div></div></div></div></div>
           </div>
 
           <!-- 右栏 -->
           <div class="column">
-            <!-- 音乐播放器模块 - 使用 iframe 嵌入独立播放器 -->
+            <!-- 音乐播放器模块（完整5首歌曲+歌词） -->
             <div class="panel">
               <div class="panel-header">🎵 lonely archive radio</div>
               <div class="panel-body">
-               <iframe 
-  src="https://reigenswife.github.io/reigenarataka/radio-player.html"
-  style="width:100%; height:530px; border:none; border-radius:24px;"
-  title="lonely archive radio"
-  loading="lazy">
-</iframe>
+                <div id="music-player" class="music-player">
+                  <div class="cassette">
+                    <div class="tape"></div>
+                    <div class="label">REIGEN ARCHIVE • 2026</div>
+                  </div>
+                  <div class="now-playing">
+                    <span id="song-title">We Belong Together</span>
+                    <span id="song-artist">Mariah Carey</span>
+                  </div>
+                  <div class="controls">
+                    <button id="prev-btn">⫻</button>
+                    <button id="play-pause-btn">▶</button>
+                    <button id="next-btn">⫽</button>
+                  </div>
+                  <div class="progress-container">
+                    <input type="range" id="progress" value="0" min="0" max="100">
+                  </div>
+                  <div class="playlist">
+                    <select id="playlist-select"></select>
+                  </div>
+                  <div class="lyrics-panel" id="lyricsPanel">
+                    <div class="lyric-line-main">
+                      <div class="lyric-en-main">♪ 等待播放 ♪</div>
+                      <div class="lyric-zh-main">点击播放按钮，倾听旋律中的故事</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -1354,6 +1467,167 @@
   <button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ top</button>
 
   <script>
+    // ==================== 完整5首歌曲+歌词播放器 ====================
+    const playlist = [
+      { 
+        title: "We Belong Together", 
+        artist: "Mariah Carey", 
+        src: "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/M500004QiRC30LMa8u.mp3",
+        lyrics: [
+          { time: 4.06, en: "Oh-ooh-ooh", zh: "" }, { time: 11.11, en: "Oh", zh: "" }, { time: 13.71, en: "Oh, oh-ooh", zh: "" },
+          { time: 17.42, en: "Sweet love, yeah", zh: "甜蜜的爱" }, { time: 21.56, en: "I didn't mean it when I said I didn't love you so", zh: "我并非本意 说自己不爱你" },
+          { time: 25.05, en: "I should have held on tight, I never shoulda let you go", zh: "我应该好好抓紧你 不放开手让你走" },
+          { time: 28.52, en: "I didn't know nothin', I was stupid, I was foolish", zh: "我却什么都没有做 愚蠢之极" },
+          { time: 31.31, en: "I was lyin' to myself", zh: "后悔莫及 自欺欺人" }, { time: 35.30, en: "I could not fathom that I would ever be without your love", zh: "我未料想过 没有你的爱我会怎么样" },
+          { time: 38.75, en: "Never imagined I'd be sittin' here beside myself", zh: "也没设想过没有你 自己将会如此孑然一身" },
+          { time: 42.22, en: "'Cause I didn't know you, 'cause I didn't know me, but I thought I knew everything", zh: "都怪我没懂你 更不懂我自己 以为我自己明白一切" },
+          { time: 45.42, en: "I never felt", zh: "却一直在自欺欺人" }, { time: 49.01, en: "The feelin' that I'm feelin' now that I don't hear your voice", zh: "所有曾经那各种缠绵 现在一切已化为乌有" },
+          { time: 52.52, en: "Or have your touch and kiss your lips 'cause I don't have a choice", zh: "再也感受不到你的爱抚和亲吻 可我已别无选择" },
+          { time: 55.94, en: "Oh, what I wouldn't give to have you lyin' by my side", zh: "我愿奋不顾身 去换取让你重回到我的身边" },
+          { time: 59.09, en: "Right here, 'cause, baby (We belong together)", zh: "就我身边 因为我们注定属于彼此" },
+          { time: 62.57, en: "When you left, I lost a part of me", zh: "当你离开我的时候我失魂落魄" }, { time: 66.81, en: "It's still so hard to believe", zh: "这一切仍难以让人想象" },
+          { time: 70.32, en: "Come back, baby, please", zh: "求求你回到我身边吧" }, { time: 72.40, en: "'Cause we belong together", zh: "因为我们注定属于彼此" },
+          { time: 75.16, en: "Who else am I gon' lean on when times get rough?", zh: "当我哀痛欲绝的时候 有谁能让我偎依在他身旁？" }
+        ]
+      },
+      { 
+        title: "Underneath the Stars", 
+        artist: "Mariah Carey", 
+        src: "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/3594040289.mp3",
+        lyrics: [
+          { time: 4.45, en: "One summer night", zh: "一个夏日的夜晚" }, { time: 9.02, en: "We ran away for a while", zh: "我们一同跑开" },
+          { time: 15.92, en: "Laughing we hurried beneath the sky", zh: "笑着 我们在天空下匆忙" }, { time: 21.20, en: "To an obscure place to hide", zh: "寻找一个安全的可以躲藏的地方" },
+          { time: 25.00, en: "That no-one could find", zh: "没有人能够找到" }, { time: 26.93, en: "And we drifted to another state of mind", zh: "接着我们进入了另一种心境" },
+          { time: 32.94, en: "And imagined I was yours and you were mine", zh: "想象我是你的你是我的" }, { time: 39.01, en: "As we lay upon the grass", zh: "我们躺在草地上" },
+          { time: 41.22, en: "There in the dark", zh: "黑暗中" }, { time: 43.95, en: "Underneath the stars", zh: "我们沐浴璀璨星光" }
+        ]
+      },
+      { 
+        title: "I Stay In Love", 
+        artist: "Mariah Carey", 
+        src: "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/i.stay.love.mp3",
+        lyrics: [
+          { time: 2.85, en: "Oh, ooh-ooh-ooh", zh: "" }, { time: 6.30, en: "Oh, ooh-ooh", zh: "" }, { time: 9.76, en: "Oh-oh, ooh-ooh-ooh", zh: "" },
+          { time: 12.41, en: "Why do I stay, why do I stay in love? Ooh", zh: "为什么我还要留在爱情里？" },
+          { time: 16.93, en: "Oh, ooh-ooh-ooh (Why do I stay)", zh: "为什么我还要留下" }, { time: 24.05, en: "Baby, I stay in love with you", zh: "宝贝，我依然深爱着你" }
+        ]
+      },
+      { 
+        title: "Don't Forget About Us", 
+        artist: "Mariah Carey", 
+        src: "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/Don't.Forget.About.Us..mp3",
+        lyrics: [
+          { time: 2.60, en: "(Don't forget about us)", zh: "别将我们遗忘" }, { time: 4.10, en: "Don't baby, don't baby, don't let it go", zh: "亲爱的别放手 别让它溜走" },
+          { time: 7.61, en: "No baby, no baby, no baby, no", zh: "不 宝贝 请不要这样" }, { time: 9.11, en: "(Don't forget about us)", zh: "别将我们遗忘" },
+          { time: 10.87, en: "Don't baby, don't baby, don't let it go", zh: "亲爱的别放手 别让它溜走" }, { time: 13.37, en: "My baby boy", zh: "我的爱人啊" },
+          { time: 17.13, en: "Just let it die with no goodbyes", zh: "任爱消逝无需告别" }, { time: 20.41, en: "Details don't matter, we both paid the price", zh: "细节已不重要 我们都付出代价" }
+        ]
+      },
+      { 
+        title: "Come To Me", 
+        artist: "Mariah Carey", 
+        src: "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/come.buck.to.me.mp3",
+        lyrics: [
+          { time: 10.67, en: "The rain falls on my windows", zh: "窗外雨声 淅淅沥沥" }, { time: 13.92, en: "And a coldness runs through my soul", zh: "一阵寒流 噬满我心" },
+          { time: 17.17, en: "And the rain falls, oh, the rain falls", zh: "雨一直下个不停" }, { time: 20.42, en: "I don't want to be alone", zh: "我不想 孑然一身" },
+          { time: 23.67, en: "I wish that I could Photoshop", zh: "只是想要 修复曾经" }, { time: 27.16, en: "All our bad memories", zh: "我们之间 糟糕回忆" }
+        ]
+      }
+    ];
+
+    let currentTrack = 0;
+    const audio = new Audio();
+    audio.volume = 0.65;
+    let isPlaying = false;
+
+    const playPauseBtn = document.getElementById('play-pause-btn');
+    const progress = document.getElementById('progress');
+    const songTitle = document.getElementById('song-title');
+    const songArtist = document.getElementById('song-artist');
+    const select = document.getElementById('playlist-select');
+    const lyricsPanel = document.getElementById('lyricsPanel');
+    let currentLyricIndex = -1;
+
+    function buildPlaylist() {
+      select.innerHTML = '';
+      playlist.forEach((track, i) => {
+        const opt = document.createElement('option');
+        opt.value = i;
+        opt.textContent = `${track.title} — ${track.artist}`;
+        select.appendChild(opt);
+      });
+    }
+
+    function updateLyricsDisplay() {
+      const track = playlist[currentTrack];
+      if (!track.lyrics || track.lyrics.length === 0) {
+        lyricsPanel.innerHTML = `<div class="lyric-line-main"><div class="lyric-en-main">♪ ${track.title} ♪</div><div class="lyric-zh-main">纯音乐 / 暂无歌词</div></div>`;
+        return;
+      }
+      const ct = audio.currentTime;
+      let activeIdx = -1;
+      for (let i = track.lyrics.length - 1; i >= 0; i--) {
+        if (ct >= track.lyrics[i].time) { activeIdx = i; break; }
+      }
+      if (activeIdx === currentLyricIndex) return;
+      currentLyricIndex = activeIdx;
+      if (activeIdx === -1) return;
+      const lyric = track.lyrics[activeIdx];
+      lyricsPanel.innerHTML = `<div class="lyric-line-main"><div class="lyric-en-main">${lyric.en}</div>${lyric.zh ? `<div class="lyric-zh-main">${lyric.zh}</div>` : ''}</div>`;
+    }
+
+    function loadTrack(index) {
+      currentTrack = index;
+      const track = playlist[currentTrack];
+      audio.src = track.src;
+      songTitle.textContent = track.title;
+      songArtist.textContent = track.artist;
+      select.value = currentTrack;
+      currentLyricIndex = -1;
+      updateLyricsDisplay();
+      if (isPlaying) audio.play().catch(e => console.log("播放需要用户交互"));
+    }
+
+    function togglePlay() {
+      if (audio.paused) {
+        audio.play().catch(e => console.log("播放需要用户交互"));
+        playPauseBtn.textContent = '❚❚';
+        isPlaying = true;
+      } else {
+        audio.pause();
+        playPauseBtn.textContent = '▶';
+        isPlaying = false;
+      }
+    }
+
+    playPauseBtn.addEventListener('click', togglePlay);
+    document.getElementById('next-btn').addEventListener('click', () => {
+      currentTrack = (currentTrack + 1) % playlist.length;
+      loadTrack(currentTrack);
+      if (isPlaying) audio.play().catch(e => console.log("播放需要用户交互"));
+      playPauseBtn.textContent = '❚❚';
+    });
+    document.getElementById('prev-btn').addEventListener('click', () => {
+      currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+      loadTrack(currentTrack);
+      if (isPlaying) audio.play().catch(e => console.log("播放需要用户交互"));
+      playPauseBtn.textContent = '❚❚';
+    });
+    select.addEventListener('change', (e) => {
+      currentTrack = parseInt(e.target.value);
+      loadTrack(currentTrack);
+      if (isPlaying) audio.play().catch(e => console.log("播放需要用户交互"));
+      playPauseBtn.textContent = '❚❚';
+    });
+    audio.addEventListener('timeupdate', () => {
+      if (audio.duration) progress.value = (audio.currentTime / audio.duration) * 100;
+      updateLyricsDisplay();
+    });
+    progress.addEventListener('input', () => { audio.currentTime = (progress.value / 100) * audio.duration; });
+    audio.addEventListener('ended', () => { document.getElementById('next-btn').click(); });
+    buildPlaylist();
+    loadTrack(0);
+
     // 可拖拽宠物
     function makeDraggable(el) {
       let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -1470,4 +1744,3 @@
   </script>
 </body>
 </html>
-这样吗
