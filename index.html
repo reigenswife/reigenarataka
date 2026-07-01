@@ -1146,7 +1146,7 @@
       gap: 18px;
     }
 
-    /* 音乐播放器样式 */
+    /* ===== 放大版音乐播放器样式 ===== */
     .music-player {
       background: rgba(255,255,255,0.7);
       border: 2px solid #b8cfe6;
@@ -1154,33 +1154,40 @@
       padding: 20px;
       text-align: center;
     }
+
     .cassette {
-      width: 200px;
-      height: 100px;
+      width: 400px;
+      height: 200px;
       margin: 0 auto 14px;
       background: linear-gradient(#2a2a2a, #1a1a1a);
-      border: 4px solid #d9b7ea;
-      border-radius: 8px;
+      border: 8px solid #d9b7ea;
+      border-radius: 16px;
       position: relative;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.2);
     }
+
     .tape {
       position: absolute;
-      top: 24px; left: 32px; right: 32px;
-      height: 46px;
-      background: repeating-linear-gradient(90deg, #ddd 0, #ddd 8px, #444 8px, #444 16px);
-      border: 2px solid #8b6b9e;
+      top: 48px;
+      left: 64px;
+      right: 64px;
+      height: 92px;
+      background: repeating-linear-gradient(90deg, #ddd 0, #ddd 16px, #444 16px, #444 32px);
+      border: 4px solid #8b6b9e;
     }
+
     .label {
       position: absolute;
-      bottom: 8px; left: 50%;
+      bottom: 16px;
+      left: 50%;
       transform: translateX(-50%);
       background: #fff;
       color: #6a4e82;
-      padding: 4px 14px;
-      font-size: 0.8rem;
-      border: 1px solid #d9b7ea;
+      padding: 8px 28px;
+      font-size: 1.6rem;
+      border: 2px solid #d9b7ea;
     }
+
     .now-playing {
       margin: 14px 0;
       font-size: 1rem;
@@ -1246,6 +1253,9 @@
     @media (max-width: 680px) {
       .two-column-layout { grid-template-columns: 1fr; gap: 14px; }
       .lyric-en-main { font-size: 1rem; }
+      .cassette { width: 100%; height: 160px; }
+      .tape { top: 36px; left: 40px; right: 40px; height: 74px; }
+      .label { font-size: 1.0rem; padding: 6px 16px; }
     }
 
     .footer-note {
@@ -1399,7 +1409,7 @@
             <div class="panel"><div class="panel-header">mood timeline</div><div class="panel-body"><div class="timeline"><div class="timeline-item active" title="今天"><div class="timeline-dot">✧</div><div class="timeline-date">Today</div><div class="timeline-mood">😊 开心</div></div><div class="timeline-item"><div class="timeline-dot">✦</div><div class="timeline-date">Yesterday</div><div class="timeline-mood">😌 平静</div></div><div class="timeline-item"><div class="timeline-dot">★</div><div class="timeline-date">2 days ago</div><div class="timeline-mood">😍 喜悦</div></div><div class="timeline-item"><div class="timeline-dot">☆</div><div class="timeline-date">3 days ago</div><div class="timeline-mood">🤔 思考</div></div></div></div></div>
             <div class="panel"><div class="panel-header">favorite things</div><div class="panel-body"><div class="favorites-grid"><div class="favorite-card"><h4>最喜欢的台词感</h4><p>嘴硬、夸张、看似骗人，但偶尔会突然认真到让人心软。</p></div><div class="favorite-card"><h4>最喜欢的色调</h4><p>浅蓝、灰蓝、淡紫、白色，高饱和点缀要少一点，像旧网页玻璃糖纸。</p></div><div class="favorite-card"><h4>最喜欢收藏的图</h4><p>侧脸、办公桌、笑得很微妙的时候、以及“看起来有点狼狈”的瞬间。</p></div><div class="favorite-card"><h4>最喜欢的网页感</h4><p>像 someone’s personal room，不是商业主页，而是带呼吸感的私人小站。</p></div></div></div></div>
             <div class="panel"><div class="panel-header">tiny note</div><div class="panel-body"><div class="tiny-note">i miss old internet websites where every page felt like someone quietly decorating a room for no reason...</div></div></div>
-            <div class="panel"><div class="panel-header">🔮 像素占卜屋</div><div class="panel-body"><div class="new-feature-panel"><div class="new-feature-title">今日灵能运势</div><div class="new-feature-content"><div id="fortuneMessage" style="background: rgba(217,183,234,0.18); border-radius: 16px; padding: 14px; margin-bottom: 14px; font-style: italic;">✨ 点击下方按钮，抽取今天的 Reigen 式幸运签 ✨</div><button class="soft-button" id="drawFortuneBtn" style="font-size:0.9rem; padding:8px 18px;">🎴 抽一张签 🎴</button></div></div><div class="new-feature-panel"><div class="new-feature-title">🕯️ 许愿池·存档处</div><div class="new-feature-content"><div>在这里许下一个小愿望，它会像旧网页的星星碎片一样被收藏起来。</div><div style="display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap;"><input type="text" id="wishInput" placeholder="写一句悄悄愿望..." style="flex:1; background:rgba(255,255,255,0.7); border:1px solid #c7d8ec; border-radius:30px; padding:10px 16px; font-family:inherit;"><button class="soft-button" id="submitWishBtn" style="padding:8px 18px;">✨ 存档</button></div><div id="wishFeedback" style="font-size:0.85rem; color:#8aa0b8; margin-top: 12px; text-align:center;"></div><div class="breathing-text" style="margin-top: 14px;">今天也有 13 位路过的人在这里留下了悄悄话。</div></div></div></div></div>
+            <div class="panel"><div class="panel-header">🔮 像素占卜屋</div><div class="panel-body"><div class="new-feature-panel"><div class="new-feature-title">今日灵能运势</div><div class="new-feature-content"><div id="fortuneMessage" style="background: rgba(217,183,234,0.18); border-radius: 16px; padding: 14px; margin-bottom: 14px; font-style: italic;">✨ 点击下方按钮，抽取今天的 Reigen 式幸运签 ✨</div><button class="soft-button" id="drawFortuneBtn" style="font-size:0.9rem; padding:8px 18px;">🎴 抽一张签 🎴</button></div></div><div class="new-feature-panel"><div class="new-feature-title">🕯️ 许愿池·存档处</div><div class="new-feature-content"><div>在这里许下一个小愿望，它会像旧网页的星星碎片一样被收藏起来。</div><div style="display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap;"><input type="text" id="wishInput" placeholder="写一句悄悄愿望..." style="flex:1; background:rgba(255,255,255,0.7); border:1px solid #c7d8ec; border-radius:30px; padding:10px 16px; font-family:inherit;"><button class="soft-button" id="submitWishBtn" style="padding:8px 18px;">✨ 存档</button></div><div id="wishFeedback" style="font-size:0.85rem; color:#8aa0b8; margin-top: 12px; text-align:center;"></div><div class="breathing-text" style="margin-top: 14px;">「你的每一份喜欢，都会被这个安静的小站轻轻接住。」今天也有 13 位路过的人在这里留下了悄悄话。</div></div></div></div></div>
           </div>
 
           <!-- 右栏 -->
