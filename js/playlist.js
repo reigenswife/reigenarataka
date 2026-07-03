@@ -64,16 +64,18 @@ const playlist = [
       { time: 23.67, en: "I wish that I could Photoshop", zh: "只是想要 修复曾经" }, { time: 27.16, en: "All our bad memories", zh: "我们之间 糟糕回忆" }
     ]
   },
-  { 
-    title: "Feat. San E", 
-    artist: "未知歌手", 
-    src: "audio/Feat. San E.mp3",
-    lyrics: []  // 纯音乐 / 暂无歌词
-  },
-  { 
-    title: "Emotional", 
-    artist: "未知歌手", 
-    src: "audio/Emotional.mp3",
-    lyrics: []  // 纯音乐 / 暂无歌词
-  }
+  // 以下两首暂时停用：仓库里的音频文件是空的（只有2字节），
+  // 不是缺路径的问题，需要重新上传真实mp3文件后才能取消注释启用。
+  // { 
+  //   title: "Feat. San E", 
+  //   artist: "未知歌手", 
+  //   src: "audio/Feat. San E.mp3",
+  //   lyrics: []  // 纯音乐 / 暂无歌词
+  // },
+  // { 
+  //   title: "Emotional", 
+  //   artist: "未知歌手", 
+  //   src: "audio/Emotional.mp3",
+  //   lyrics: []  // 纯音乐 / 暂无歌词
+  // }
 ];
