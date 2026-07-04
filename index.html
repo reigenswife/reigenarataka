@@ -1658,8 +1658,8 @@
         <section class="grid">
           <!-- 左栏 -->
           <div class="column" id="col-0">
-            <div class="panel"><div class="panel-header">directory</div><div class="panel-body"><div class="menu-list"><a href="#gallery" class="menu-item">📸 gallery / 相册</a><a href="#memories" class="menu-item">💖 memory / 心动记忆</a><a href="#diary" class="menu-item">📖 diary / 灵能故事</a><a href="#quotes" class="menu-item">💬 quotes / 经典语录</a><a href="#wishlist" class="menu-item">🛍 wishlist / 周边清单</a><a href="#favorites" class="menu-item">⭐ favorites / 喜欢内容</a><a href="#links" class="menu-item">🔗 links / 外链收藏</a><a href="#about" class="menu-item">👤 about / 关于本站</a></div></div></div>
-            <div class="panel"><div class="panel-header">photo card</div><div class="panel-body mini-photo"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="Reigen photo"></div></div>
+            <div class="panel pin-panel"><div class="panel-header">directory</div><div class="panel-body"><div class="menu-list"><a href="#gallery" class="menu-item">📸 gallery / 相册</a><a href="#memories" class="menu-item">💖 memory / 心动记忆</a><a href="#diary" class="menu-item">📖 diary / 灵能故事</a><a href="#quotes" class="menu-item">💬 quotes / 经典语录</a><a href="#wishlist" class="menu-item">🛍 wishlist / 周边清单</a><a href="#favorites" class="menu-item">⭐ favorites / 喜欢内容</a><a href="#links" class="menu-item">🔗 links / 外链收藏</a><a href="#about" class="menu-item">👤 about / 关于本站</a></div></div></div>
+            <div class="panel pin-panel"><div class="panel-header">photo card</div><div class="panel-body mini-photo"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="Reigen photo"></div></div>
             <div class="panel" id="flip-gallery">
               <div class="panel-header">回忆卡片（悬停翻面）</div>
               <div class="panel-body">
@@ -1732,7 +1732,7 @@
 
           <!-- 中栏 -->
           <div class="column" id="col-1">
-            <div class="panel" id="about"><div class="panel-header">about this archive</div><div class="panel-body"><div class="about-main"><div class="about-text"><h2>你好，welcome to my site,</h2><div class="lead">这里是一个关于 <b>Reigen Arataka</b> 的温柔收藏页，<br>记录喜欢的瞬间、对白、故事，还有那些让人心动的小小记忆。</div><div class="desc">这个页面不是正式资料库，更像是一个旧互联网式的小房间：会慢慢贴照片、写碎碎念、存喜欢的台词，也会堆一些没有用但很可爱的网页小物。</div><div class="chips"><span class="chip"># psychic</span><span class="chip"># archive</span><span class="chip"># diary</span><span class="chip"># fanpage</span><span class="chip"># neocities</span></div><div class="signature">by reigenswife ♡</div></div><div class="sticker"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="Reigen daily"></div></div></div></div>
+            <div class="panel pin-panel" id="about"><div class="panel-header">about this archive</div><div class="panel-body"><div class="about-main"><div class="about-text"><h2>你好，welcome to my site,</h2><div class="lead">这里是一个关于 <b>Reigen Arataka</b> 的温柔收藏页，<br>记录喜欢的瞬间、对白、故事，还有那些让人心动的小小记忆。</div><div class="desc">这个页面不是正式资料库，更像是一个旧互联网式的小房间：会慢慢贴照片、写碎碎念、存喜欢的台词，也会堆一些没有用但很可爱的网页小物。</div><div class="chips"><span class="chip"># psychic</span><span class="chip"># archive</span><span class="chip"># diary</span><span class="chip"># fanpage</span><span class="chip"># neocities</span></div><div class="signature">by reigenswife ♡</div></div><div class="sticker"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="Reigen daily"></div></div></div></div>
             <div class="panel" id="poem-card">
               <div class="panel-header">诗与台词摘录</div>
               <div class="panel-body">
@@ -1831,7 +1831,7 @@
           <!-- 右栏 -->
           <div class="column" id="col-2">
             <!-- 音乐播放器模块（完整5首歌曲+歌词） -->
-            <div class="panel">
+            <div class="panel pin-panel">
               <div class="panel-header">🎵 lonely archive radio</div>
               <div class="panel-body">
                 <div id="music-player" class="music-player">
@@ -2353,8 +2353,10 @@
     })();
 
     // ==================== 三栏自动填平（masonry） ====================
-    // 把三栏里所有的卡片按「当前最矮的那一栏优先」重新分配，
+    // 把三栏里"未固定"的卡片按「当前最矮的那一栏优先」重新分配，
     // 这样无论增删多少模块，三栏结尾都会差不多齐平，底部不会再留大片空白。
+    // 带 .pin-panel 的卡片（directory / photo card / about this archive / lonely archive radio）
+    // 永远留在原来的栏目最前面，不会被搬走。
     (function() {
       function distribute() {
         if (window.innerWidth <= 1200) return; // 窄屏时是单列堆叠，不需要重排
@@ -2365,11 +2367,21 @@
         ];
         if (cols.some(c => !c)) return;
 
-        const items = [];
-        cols.forEach(col => { Array.from(col.children).forEach(child => items.push(child)); });
-
-        const heights = [0, 0, 0];
         const gap = 28; // 对应 .column 的 gap
+        const heights = [0, 0, 0];
+        const items = [];
+
+        cols.forEach((col, idx) => {
+          Array.from(col.children).forEach(child => {
+            if (child.classList.contains('pin-panel')) {
+              // 固定卡片：不参与搬动，只把它的高度计入这一栏的起始高度
+              heights[idx] += child.offsetHeight + gap;
+            } else {
+              items.push(child);
+            }
+          });
+        });
+
         items.forEach(item => {
           let minIdx = 0;
           for (let i = 1; i < heights.length; i++) {
