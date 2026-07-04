@@ -56,6 +56,8 @@
       overflow-x: hidden;
       position: relative;
       font-size: calc(16px * var(--base-scale));
+      /* ===== 整站放大 1.2 倍 ===== */
+      zoom: 1.2;
     }
 
     body::before {
@@ -1429,7 +1431,7 @@
       body { padding: 32px 24px 48px; }
     }
     @media (max-width: 680px) {
-      body { padding: 24px 16px 36px; }
+      body { padding: 24px 16px 36px; zoom: 1; }
       .hero img { height: 320px; }
       .lace-shell { padding: 16px; }
       .wrapper { padding: 18px; }
@@ -1524,7 +1526,59 @@
       box-shadow: 0 3px 8px rgba(120,145,180,0.15);
     }
 
-    /* --- 6. 自定义鼠标指针样式 --- */
+    /* --- 5. 待办清单小组件 --- */
+    .todo-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+    .todo-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border: 1px dashed #d5e2f0;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.42);
+      color: #6c849d;
+      font-size: 0.98rem;
+      line-height: 1.5;
+      transition: background 0.2s ease;
+    }
+    .todo-list li input[type="checkbox"] {
+      accent-color: #d9b7ea;
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+      cursor: pointer;
+    }
+    .todo-list li.done span { text-decoration: line-through; color: #a9bbcf; }
+    .todo-list li.done { background: rgba(217,183,234,0.1); }
+
+    /* --- 6. 小测验组件 --- */
+    .quiz-question { color: #5f7694; font-size: 1rem; margin-bottom: 14px; line-height: 1.7; }
+    .quiz-options { display: flex; flex-wrap: wrap; gap: 10px; }
+    .quiz-options button {
+      flex: 1 1 auto;
+      min-width: 120px;
+    }
+    .quiz-result {
+      margin-top: 14px;
+      font-size: 0.95rem;
+      color: #6a4e82;
+      background: rgba(217,183,234,0.16);
+      border-radius: 14px;
+      padding: 12px 14px;
+      line-height: 1.7;
+      min-height: 26px;
+      font-style: italic;
+      display: none;
+    }
+    .quiz-result.show { display: block; }
+
+    /* --- 7. 自定义鼠标指针样式 --- */
     body {
       cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><text y="18" font-size="18">✧</text></svg>') 12 12, auto;
     }
@@ -1652,6 +1706,21 @@
             
             <!-- 角色深夜电台 -->
             <div class="panel"><div class="panel-header">🌙 角色深夜电台 · 拾贝</div><div class="panel-body"><div class="new-feature-panel" style="margin-bottom: 0;"><div class="new-feature-title">Reigen 未公开语录·拾贝</div><div class="new-feature-content"><ul class="zone-list"><li>「其实我知道自己没那么厉害，但至少……要让他们觉得被保护着。」—— 匿名语音备忘录片段。</li><li>「今天事务所来了一个很麻烦的委托，我用了三杯咖啡和两倍笑容把它解决掉。啊，这就是专业啊。」—— 某日手机速记。</li><li>「被人信任的感觉会上瘾，所以我必须演得更好。不过偶尔，也会希望有个人看穿我的慌张。」—— 深夜思考笔记。</li></ul><div class="breathing-text">这些句子从未出现在正片里，但它们像是角色的另一面镜子。在这里，我们允许虚构，也允许温柔。</div></div></div></div></div>
+
+            <!-- 私藏关键词 -->
+            <div class="panel"><div class="panel-header">私藏关键词</div><div class="panel-body"><div class="chips"><span class="chip"># 嘴硬心软</span><span class="chip"># 灵能事务所</span><span class="chip"># 伪科学但可爱</span><span class="chip"># 保护欲</span><span class="chip"># 装镇定</span><span class="chip"># 咖啡续命</span><span class="chip"># 旧网页魂</span></div></div></div>
+
+            <!-- 今日代办清单 -->
+            <div class="panel"><div class="panel-header">✦ 今日代办清单</div><div class="panel-body"><ul class="todo-list" id="todoList"><li><input type="checkbox"><span>整理今天新截的图</span></li><li><input type="checkbox"><span>补一条日记 / 灵能故事</span></li><li><input type="checkbox"><span>找一张适合做 sticker 的照片</span></li><li><input type="checkbox"><span>回复三条留言板悄悄话</span></li><li><input type="checkbox"><span>给收藏进度条加一点点</span></li></ul></div></div>
+
+            <!-- 小测验 -->
+            <div class="panel"><div class="panel-header">🔍 小测验 · 你的灵能属性</div><div class="panel-body"><div class="quiz-question">如果委托突然变得很棘手，你会——</div><div class="quiz-options"><button class="soft-button" data-quiz="a">硬撑着装专业</button><button class="soft-button" data-quiz="b">立刻找借口开溜</button><button class="soft-button" data-quiz="c">认真想办法解决</button></div><div class="quiz-result" id="quizResult"></div></div></div>
+
+            <!-- 留言精选 -->
+            <div class="panel"><div class="panel-header">💌 留言精选</div><div class="panel-body"><div class="new-feature-panel" style="margin-bottom:10px;"><div class="new-feature-content">「路过留个脚印，这个蓝紫色的小站真的很治愈～」—— 匿名访客</div></div><div class="new-feature-panel" style="margin-bottom:10px;"><div class="new-feature-content">「原来还有人会认真给一个角色做 shrine，眼睛湿了。」—— 同担留言</div></div><div class="new-feature-panel" style="margin-bottom:0;"><div class="new-feature-content">「拍一拍功能好可爱，我拍了快一百下了 ✧」—— 路过的手滑读者</div></div></div></div>
+
+            <!-- 建设中告示 & 浏览小贴士 -->
+            <div class="panel"><div class="panel-header">🚧 建设中 & 浏览小贴士</div><div class="panel-body"><div class="status-box"><div class="status-row"><span class="status-label">最佳浏览器</span><span>Chrome / Edge 最新版</span></div><div class="status-row"><span class="status-label">建议分辨率</span><span>1440×900 及以上</span></div><div class="status-row"><span class="status-label">字体</span><span>Maple Mono（缺字会自动替代）</span></div><div class="status-row"><span class="status-label">施工中页面</span><span>gallery.html / diary.html</span></div></div></div></div>
           </div>
 
           <!-- 中栏 -->
@@ -2266,6 +2335,36 @@
           srcEl.textContent = "—— " + lines[idx].source;
           lineEl.style.opacity = 1;
         }, 200);
+      });
+    })();
+
+    // ==================== 今日代办清单 ====================
+    (function() {
+      const list = document.getElementById('todoList');
+      if (!list) return;
+      list.querySelectorAll('li').forEach(item => {
+        const box = item.querySelector('input[type="checkbox"]');
+        box.addEventListener('change', () => {
+          item.classList.toggle('done', box.checked);
+        });
+      });
+    })();
+
+    // ==================== 小测验 · 灵能属性 ====================
+    (function() {
+      const buttons = document.querySelectorAll('[data-quiz]');
+      const resultEl = document.getElementById('quizResult');
+      if (!buttons.length || !resultEl) return;
+      const results = {
+        a: "✧ 你是「嘴硬心软型」——表面在硬撑专业，其实早就在心里认真起来了。",
+        b: "✧ 你是「随缘溜走型」——遇事先保命，但关键时刻从不真的丢下别人。",
+        c: "✧ 你是「隐藏靠谱型」——平时看着不着调，真遇到事反而最让人安心。"
+      };
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          resultEl.textContent = results[btn.getAttribute('data-quiz')] || "";
+          resultEl.classList.add('show');
+        });
       });
     })();
   </script>
