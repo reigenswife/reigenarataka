@@ -1445,6 +1445,92 @@
     .fortune-text { font-size: 1rem; color: #5f7694; margin: 14px 0 12px; line-height: 1.65; min-height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.6); border-radius: 16px; padding: 14px; font-style: italic; }
     .fortune-btn { background: rgba(217,183,234,0.28); border: 1px solid #c7d8ec; border-radius: 60px; padding: 8px 20px; font-size: 0.9rem; color: #6a4e82; cursor: pointer; transition: all 0.2s; font-family: inherit; }
     .fortune-btn:hover { background: #d9b7ea; color: white; border-color: #d9b7ea; transform: translateY(-2px); }
+
+    /* ===================================================== */
+    /* ============ 新增模块样式（不影响原有样式） ============ */
+    /* ===================================================== */
+
+    /* --- 1. 拍一拍互动小组件 --- */
+    #pat-widget .panel-body { text-align: center; }
+    #patImg { transition: transform 0.15s ease; }
+
+    /* --- 2. 诗与台词摘录卡片 --- */
+    .poem-box {
+      position: relative;
+      background: linear-gradient(135deg, rgba(217,183,234,0.10), rgba(142,177,214,0.10));
+      border-radius: 20px;
+      padding: 28px 24px 20px;
+      text-align: center;
+      border: 1px solid rgba(217,183,234,0.35);
+    }
+    .poem-quote-mark {
+      position: absolute;
+      top: -6px; left: 18px;
+      font-size: 3rem;
+      color: rgba(217,183,234,0.5);
+      font-family: Georgia, serif;
+    }
+    .poem-line {
+      font-size: 1.1rem;
+      line-height: 1.9;
+      color: #52718e;
+      margin: 10px 0 12px;
+      font-style: italic;
+      transition: opacity .3s ease;
+    }
+    .poem-source {
+      font-size: 0.85rem;
+      color: #9ab0c5;
+      margin: 0;
+    }
+
+    /* --- 3. 照片卡翻面效果 --- */
+    .flip-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .flip-card { perspective: 1000px; aspect-ratio: 1 / 1; }
+    .flip-inner {
+      position: relative;
+      width: 100%; height: 100%;
+      transition: transform .6s;
+      transform-style: preserve-3d;
+    }
+    .flip-card:hover .flip-inner { transform: rotateY(180deg); }
+    .flip-front, .flip-back {
+      position: absolute; inset: 0;
+      backface-visibility: hidden;
+      border-radius: 18px;
+      overflow: hidden;
+    }
+    .flip-front img { width: 100%; height: 100%; object-fit: cover; }
+    .flip-back {
+      background: linear-gradient(135deg, rgba(217,183,234,0.88), rgba(142,177,214,0.88));
+      transform: rotateY(180deg);
+      display: flex; align-items: center; justify-content: center;
+      padding: 14px; text-align: center;
+      color: white; font-size: 0.9rem; line-height: 1.7;
+    }
+    @media (max-width: 680px) {
+      .flip-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* --- 4. 个人小档案卡 --- */
+    .palette-swatch {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      border: 1.5px solid rgba(255,255,255,0.8);
+      box-shadow: 0 3px 8px rgba(120,145,180,0.15);
+    }
+
+    /* --- 6. 自定义鼠标指针样式 --- */
+    body {
+      cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><text y="18" font-size="18">✧</text></svg>') 12 12, auto;
+    }
+    a, button, .menu-item, .soft-button, .fortune-btn, .link-pill, .blinkie {
+      cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><text y="18" font-size="18">♡</text></svg>') 12 12, pointer;
+    }
   </style>
 </head>
 <body id="top">
@@ -1519,8 +1605,44 @@
           <div class="column">
             <div class="panel"><div class="panel-header">directory</div><div class="panel-body"><div class="menu-list"><a href="#gallery" class="menu-item">📸 gallery / 相册</a><a href="#memories" class="menu-item">💖 memory / 心动记忆</a><a href="#diary" class="menu-item">📖 diary / 灵能故事</a><a href="#quotes" class="menu-item">💬 quotes / 经典语录</a><a href="#wishlist" class="menu-item">🛍 wishlist / 周边清单</a><a href="#favorites" class="menu-item">⭐ favorites / 喜欢内容</a><a href="#links" class="menu-item">🔗 links / 外链收藏</a><a href="#about" class="menu-item">👤 about / 关于本站</a></div></div></div>
             <div class="panel"><div class="panel-header">photo card</div><div class="panel-body mini-photo"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="Reigen photo"></div></div>
+            <div class="panel" id="pat-widget">
+              <div class="panel-header">拍一拍 reigen</div>
+              <div class="panel-body" style="text-align:center;">
+                <img id="patImg"
+                     src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg"
+                     alt="pat"
+                     style="width:140px;border-radius:20px;border:2px solid var(--frame-strong);cursor:pointer;box-shadow:5px 5px 18px rgba(0,0,0,0.06);">
+                <div style="margin-top:14px;color:#6d849b;font-size:1rem;">
+                  已经被拍了 <span id="patCount" style="color:#8eb1d6;font-weight:bold;">0</span> 下 ✧
+                </div>
+                <div style="font-size:0.85rem;color:#9ab0c5;margin-top:6px;" id="patMsg">
+                  点击图片拍拍他～
+                </div>
+              </div>
+            </div>
             <div class="panel" id="quotes"><div class="panel-header">favorite quote</div><div class="panel-body"><p class="quote-text">“我可是21世纪最强的灵能师。”<br>—— Reigen Arataka<br><br><span style="color:#9aabc0;">收藏理由：很荒唐，但又很有生命力。</span></p></div></div>
             <div class="panel"><div class="panel-header">site status</div><div class="panel-body"><div class="status-box"><div class="status-row"><span class="status-label">mood</span><span>sleepy but happy</span></div><div class="status-row"><span class="status-label">watching</span><span>Mob Psycho 100</span></div><div class="status-row"><span class="status-label">collecting</span><span>screenshots & lines</span></div><div class="status-row"><span class="status-label">layout</span><span>lace archive v2 (放大版)</span></div></div></div></div>
+            <div class="panel" id="profile-card">
+              <div class="panel-header">personal profile</div>
+              <div class="panel-body">
+                <div class="status-box">
+                  <div class="status-row"><span class="status-label">最近在追</span><span>Mob Psycho 100</span></div>
+                  <div class="status-row"><span class="status-label">心情</span><span>安稳的午后 ✧</span></div>
+                  <div class="status-row"><span class="status-label">最近沉迷</span><span>整理旧网页 & 收藏截图</span></div>
+                  <div class="status-row"><span class="status-label">喜欢的季节</span><span>下雨的初夏</span></div>
+                </div>
+                <div style="margin-top:16px;">
+                  <div style="font-size:0.9rem;color:#88a0bb;margin-bottom:8px;">调色盘</div>
+                  <div style="display:flex;gap:10px;">
+                    <div class="palette-swatch" style="background:#8eb1d6;"></div>
+                    <div class="palette-swatch" style="background:#d9b7ea;"></div>
+                    <div class="palette-swatch" style="background:#dfe9f7;"></div>
+                    <div class="palette-swatch" style="background:#e8c9f4;"></div>
+                    <div class="palette-swatch" style="background:#fffdf8;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="panel"><div class="panel-header">collection stats</div><div class="panel-body"><div class="stat-grid"><div class="stat-box"><div class="stat-number">42</div><div class="stat-label">照片</div></div><div class="stat-box"><div class="stat-number">18</div><div class="stat-label">日记</div></div><div class="stat-box"><div class="stat-number">26</div><div class="stat-label">星标</div></div><div class="stat-box"><div class="stat-number">7</div><div class="stat-label">分类</div></div></div><div class="progress-bar"><div class="progress-fill" style="width: 68%"></div></div><div class="progress-label">集齐度：68%</div></div></div>
             <div class="panel"><div class="panel-header">shrine rules</div><div class="panel-body"><div class="shrinerules"><div class="rule">① 请带着安静又温柔的心情浏览这里。</div><div class="rule">② 这里的内容偏向个人收藏与主观感想，不追求资料完整。</div><div class="rule">③ 如果你也喜欢 Reigen，希望你会在某个小角落停留一下。</div></div></div></div>
             <div class="panel" id="favorites"><div class="panel-header">favorite details</div><div class="panel-body"><ul class="side-list"><li><b>最喜欢的气质：</b>嘴上不靠谱，心里却很认真。</li><li><b>最喜欢的表情：</b>得意、尴尬、装镇定的时候。</li><li><b>最喜欢的片段：</b>他在混乱里仍旧努力保护别人。</li><li><b>最喜欢的感觉：</b>看似轻浮，其实很有人情味。</li></ul></div></div>
@@ -1535,6 +1657,19 @@
           <!-- 中栏 -->
           <div class="column">
             <div class="panel" id="about"><div class="panel-header">about this archive</div><div class="panel-body"><div class="about-main"><div class="about-text"><h2>你好，welcome to my site,</h2><div class="lead">这里是一个关于 <b>Reigen Arataka</b> 的温柔收藏页，<br>记录喜欢的瞬间、对白、故事，还有那些让人心动的小小记忆。</div><div class="desc">这个页面不是正式资料库，更像是一个旧互联网式的小房间：会慢慢贴照片、写碎碎念、存喜欢的台词，也会堆一些没有用但很可爱的网页小物。</div><div class="chips"><span class="chip"># psychic</span><span class="chip"># archive</span><span class="chip"># diary</span><span class="chip"># fanpage</span><span class="chip"># neocities</span></div><div class="signature">by reigenswife ♡</div></div><div class="sticker"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="Reigen daily"></div></div></div></div>
+            <div class="panel" id="poem-card">
+              <div class="panel-header">诗与台词摘录</div>
+              <div class="panel-body">
+                <div class="poem-box">
+                  <div class="poem-quote-mark">&quot;</div>
+                  <p class="poem-line" id="poemLine">才不是谁都可以，是因为是你才特别。</p>
+                  <p class="poem-source" id="poemSource">—— 自由摘抄 / 私人收藏</p>
+                </div>
+                <div style="text-align:center;margin-top:14px;">
+                  <button class="fortune-btn" id="nextPoemBtn">下一句 →</button>
+                </div>
+              </div>
+            </div>
             
             <!-- ===== 视频轮播板块（3个视频 · 无限循环滑动） ===== -->
             <div class="panel" id="video-carousel">
@@ -1607,6 +1742,31 @@
             </div>
 
             <div class="feature" id="gallery"><div class="panel-header">gallery wall</div><div class="panel-body"><h3>📸 小型截图墙</h3><p style="margin-bottom:14px;">这里可以继续替换成你自己的截图、官方图、同人图收藏。现在先用你已有的图片做占位。</p><div class="image-wall"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="gallery 1"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="gallery 2"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="gallery 3"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="gallery 4"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="gallery 5"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="gallery 6"></div><span class="tag">click nothing, just stare lovingly</span></div></div>
+            <div class="panel" id="flip-gallery">
+              <div class="panel-header">回忆卡片（悬停翻面）</div>
+              <div class="panel-body">
+                <div class="flip-grid">
+                  <div class="flip-card">
+                    <div class="flip-inner">
+                      <div class="flip-front"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170218.jpg" alt="memory 1"></div>
+                      <div class="flip-back"><p>某个安静的下午，截的图。</p></div>
+                    </div>
+                  </div>
+                  <div class="flip-card">
+                    <div class="flip-inner">
+                      <div class="flip-front"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_202412151702181.jpg" alt="memory 2"></div>
+                      <div class="flip-back"><p>这张笑得很好看。</p></div>
+                    </div>
+                  </div>
+                  <div class="flip-card">
+                    <div class="flip-inner">
+                      <div class="flip-front"><img src="https://raw.githubusercontent.com/reigenswife/reigenarataka/main/_20241215170204.jpg" alt="memory 3"></div>
+                      <div class="flip-back"><p>喜欢他装镇定的样子。</p></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="feature" id="memories"><div class="panel-header">memories</div><div class="panel-body"><h3>💖 心动记忆</h3><p>记录特别喜欢的剧情、表情、台词，以及只属于你的情绪片段。</p><span class="tag">12 个片段</span></div></div>
             <div class="feature"><div class="panel-header">story notes</div><div class="panel-body"><h3>📖 灵能故事</h3><p>像日记一样整理剧情感想、同人设定和角色相关的小记录。这里之后可以扩展成 diary.html。</p><span class="tag">8 篇记录</span></div></div>
             <div class="panel" id="links"><div class="panel-header">links out</div><div class="panel-body"><p class="desc" style="margin-bottom:14px;">可以放你喜欢的角色页面、素材站、图床、灵感站和友链。现在先做成展示版。</p><div class="link-buttons"><a class="link-pill" href="https://seolhae.neocities.org/" target="_blank">✧ inspiration site</a><a class="link-pill" href="https://neocities.org/" target="_blank">✦ neocities</a><a class="link-pill" href="https://www.cameronsworld.net/" target="_blank">★ old web mood</a><a class="link-pill" href="https://gifcities.org/" target="_blank">♡ gifcities</a><a class="link-pill" href="https://www.are.na/" target="_blank">☁ reference dump</a></div></div></div>
@@ -1667,6 +1827,19 @@
             <div class="panel"><div class="panel-header">guestbook</div><div class="panel-body"><div class="guestbook-box">guestbook placeholder ♡<br>这里现在是装饰版留言板。之后你可以换成 atabook / smartgb / 自己写的留言系统。<div class="guestbook-form"><input type="text" placeholder="your name"><textarea placeholder="leave a tiny message..."></textarea><button class="soft-button" type="button" onclick="alert('这是装饰版留言框，还没有接入真实留言功能 ♡')">sign guestbook</button></div></div></div></div>
             <div class="panel"><div class="panel-header">stamps collection</div><div class="panel-body"><div class="stamp-grid"><span class="stamp">psychic believer</span><span class="stamp">reigen archive</span><span class="stamp">soft lavender</span><span class="stamp">quiet website</span><span class="stamp">old homepage</span><span class="stamp">blue diary</span></div></div></div>
             <div class="panel"><div class="panel-header">web friends</div><div class="panel-body"><div class="web-friends"><div class="webfriend">friend 01</div><div class="webfriend">friend 02</div><div class="webfriend">mutual 03</div><div class="webfriend">shrine 04</div></div><hr class="small-hr"><div style="text-align:center; color:#7a91aa; font-size:0.95rem;">这里可以以后替换成你的友链、同担站、素材站链接。</div></div></div>
+            <div class="panel" id="webring">
+              <div class="panel-header">webring</div>
+              <div class="panel-body" style="text-align:center;">
+                <div style="display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;">
+                  <a href="#" class="soft-button" style="padding:8px 18px;font-size:0.9rem;">← prev</a>
+                  <span style="color:#5f7694;font-size:0.95rem;letter-spacing:1px;">reigen archive webring</span>
+                  <a href="#" class="soft-button" style="padding:8px 18px;font-size:0.9rem;">next →</a>
+                </div>
+                <div style="margin-top:12px;font-size:0.85rem;color:#8aa0b8;line-height:1.7;">
+                  如果你也喜欢旧网页 / 个人小站，欢迎把链接换到这里，和其他 shrine 互相串门 ♡
+                </div>
+              </div>
+            </div>
             <div class="panel"><div class="panel-header">credits</div><div class="panel-body"><ul class="side-list"><li><b>character</b>：Reigen Arataka / Mob Psycho 100</li><li><b>site vibe</b>：old personal web / soft shrine style</li><li><b>hosting</b>：Neocities</li><li><b>inspiration</b>：handmade archive pages & old web layouts</li></ul></div></div>
             <div class="panel"><div class="panel-header">updates</div><div class="panel-body"><p class="updates-text">+ 完整首页结构·放大视觉舒适版<br>+ 新增 now playing, diary log, gallery wall<br>+ 新增 status / wishlist / guestbook<br>+ 蕾丝边框与蓝紫色旧站风格<br>+ 鼠标星星尾迹·整体尺寸提升<br>+ 新增 welcome / favorites / links / stamps / web friends</p></div></div>
           </div>
@@ -2044,6 +2217,56 @@
       if (wishInput && submitBtn && feedback) {
         submitBtn.addEventListener('click', () => { const wish = wishInput.value.trim(); if (wish === "") { feedback.innerHTML = "✧ 写一句悄悄话再存档吧～"; return; } feedback.innerHTML = "✨ 你的愿望已经被这个 archive 温柔地接住了 ✨"; wishInput.value = ""; setTimeout(() => { feedback.innerHTML = ""; }, 2000); });
       }
+    })();
+
+    // ==================== 拍一拍互动小组件 ====================
+    (function() {
+      const img = document.getElementById('patImg');
+      const countEl = document.getElementById('patCount');
+      const msgEl = document.getElementById('patMsg');
+      if (!img) return;
+
+      const msgs = [
+        "诶，别拍了别拍了（其实很开心）", "灵能反应正在充能中…",
+        "「喂，这样很不专业诶」", "摸头杀 +1", "他假装生气，但没躲开",
+        "拍拍会掉星星屑✧", "今天也辛苦了呢"
+      ];
+
+      let count = 0;
+      try { count = parseInt(localStorage.getItem('reigen_pat_count') || '0', 10); } catch(e) {}
+      countEl.textContent = count;
+
+      img.addEventListener('click', () => {
+        count++;
+        countEl.textContent = count;
+        try { localStorage.setItem('reigen_pat_count', String(count)); } catch(e) {}
+        msgEl.textContent = msgs[Math.floor(Math.random() * msgs.length)];
+        img.style.transform = 'scale(0.92) rotate(-3deg)';
+        setTimeout(() => { img.style.transform = 'scale(1) rotate(0deg)'; }, 150);
+      });
+    })();
+
+    // ==================== 诗与台词摘录切换 ====================
+    (function() {
+      const lines = [
+        { text: "才不是谁都可以，是因为是你才特别。", source: "自由摘抄 / 私人收藏" },
+        { text: "嘴上不靠谱，心里却很认真。", source: "关于他的印象" },
+        { text: "即使荒唐，也要理直气壮地向前走。", source: "自己写的碎碎念" }
+      ];
+      let idx = 0;
+      const lineEl = document.getElementById('poemLine');
+      const srcEl = document.getElementById('poemSource');
+      const btn = document.getElementById('nextPoemBtn');
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        idx = (idx + 1) % lines.length;
+        lineEl.style.opacity = 0;
+        setTimeout(() => {
+          lineEl.textContent = lines[idx].text;
+          srcEl.textContent = "—— " + lines[idx].source;
+          lineEl.style.opacity = 1;
+        }, 200);
+      });
     })();
   </script>
 </body>
