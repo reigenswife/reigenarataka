@@ -91,17 +91,42 @@
     transform: scale(1.06);
     filter: brightness(1.03) saturate(1.05);
   }
-  .gallery-item .num {
-    position: absolute;
-    top: 8px;
-    left: 10px;
-    font-size: 0.75rem;
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 48px;
+  }
+  .pagination-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: 2px solid var(--frame-strong);
+    background: rgba(255,255,255,0.8);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all .2s ease;
+  }
+  .pagination-btn:hover:not(:disabled) {
+    background: #97b4d3;
     color: white;
-    background: rgba(80,100,130,0.55);
-    padding: 3px 10px;
-    border-radius: 999px;
-    letter-spacing: 1px;
-    display: none;
+    transform: translateY(-2px);
+  }
+  .pagination-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .pagination-info {
+    color: var(--muted);
+    font-size: 0.95rem;
+    min-width: 120px;
+    text-align: center;
   }
 
   .footer-note {
@@ -182,6 +207,12 @@
     <!-- 图片由脚本自动生成 -->
   </div>
 
+  <div class="pagination">
+    <button class="pagination-btn" id="prevBtn">‹</button>
+    <span class="pagination-info"><span id="currentPage">1</span> / <span id="totalPages">1</span></span>
+    <button class="pagination-btn" id="nextBtn">›</button>
+  </div>
+
   <div class="footer-note">
     made with love ♡ Reigen personal archive
   </div>
@@ -196,54 +227,117 @@
 
 <script>
   const base = "https://raw.githubusercontent.com/reigenswife/reigenarataka/main/images/";
-  const files = [
+  
+  // 所有图片列表
+  const allFiles = [
+    // 第一页 (1-16)
+    "reigen-1.jpg","reigen-2.jpg","reigen-3.jpg","reigen-4.jpg",
+    "reigen-5.jpg","reigen-6.jpg","reigen-7.jpg","reigen-8.jpg",
+    "reigen-9.jpg","reigen-10.jpg","reigen-11.jpg","reigen-12.jpg",
+    "reigen-13.jpg","reigen-14.jpg","reigen-15.jpg","reigen-16.png",
+    
+    // 第二页 - 在这里添加更多图片
     "reigen-1.jpg","reigen-2.jpg","reigen-3.jpg","reigen-4.jpg",
     "reigen-5.jpg","reigen-6.jpg","reigen-7.jpg","reigen-8.jpg",
     "reigen-9.jpg","reigen-10.jpg","reigen-11.jpg","reigen-12.jpg",
     "reigen-13.jpg","reigen-14.jpg","reigen-15.jpg","reigen-16.png"
   ];
-  const urls = files.map(f => base + f);
-
+  
+  const allUrls = allFiles.map(f => base + f);
+  const imagesPerPage = 16; // 每页显示16张（4x4）
+  
+  let currentPage = 1;
+  const totalPages = Math.ceil(allUrls.length / imagesPerPage);
+  
   const grid = document.getElementById('galleryGrid');
-  urls.forEach((url, i) => {
-    const item = document.createElement('div');
-    item.className = 'gallery-item';
-    item.innerHTML = `<img src="${url}" alt="reigen ${i+1}" loading="lazy">`;
-    item.addEventListener('click', () => openLightbox(i));
-    grid.appendChild(item);
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const currentPageSpan = document.getElementById('currentPage');
+  const totalPagesSpan = document.getElementById('totalPages');
+  
+  totalPagesSpan.textContent = totalPages;
+
+  function renderPage(pageNum) {
+    // 清空网格
+    grid.innerHTML = '';
+    
+    // 计算起始和结束索引
+    const startIdx = (pageNum - 1) * imagesPerPage;
+    const endIdx = Math.min(startIdx + imagesPerPage, allUrls.length);
+    
+    // 渲染该页的图片
+    for (let i = startIdx; i < endIdx; i++) {
+      const item = document.createElement('div');
+      item.className = 'gallery-item';
+      item.innerHTML = `<img src="${allUrls[i]}" alt="reigen ${i+1}" loading="lazy">`;
+      item.addEventListener('click', () => openLightbox(i));
+      grid.appendChild(item);
+    }
+    
+    // 更新页码显示
+    currentPageSpan.textContent = pageNum;
+    
+    // 更新按钮状态
+    prevBtn.disabled = pageNum === 1;
+    nextBtn.disabled = pageNum === totalPages;
+  }
+
+  // 分页按钮事件
+  prevBtn.addEventListener('click', () => {
+    if (currentPage > 1) {
+      currentPage--;
+      renderPage(currentPage);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   });
 
+  nextBtn.addEventListener('click', () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      renderPage(currentPage);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+
+  // Lightbox 功能
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightboxImg');
-  let currentIndex = 0;
+  let currentLightboxIndex = 0;
 
   function openLightbox(i) {
-    currentIndex = i;
-    lightboxImg.src = urls[currentIndex];
+    currentLightboxIndex = i;
+    lightboxImg.src = allUrls[currentLightboxIndex];
     lightbox.classList.add('open');
   }
+  
   function closeLightbox() {
     lightbox.classList.remove('open');
   }
-  function showNext() {
-    currentIndex = (currentIndex + 1) % urls.length;
-    lightboxImg.src = urls[currentIndex];
+  
+  function showNextLightbox() {
+    currentLightboxIndex = (currentLightboxIndex + 1) % allUrls.length;
+    lightboxImg.src = allUrls[currentLightboxIndex];
   }
-  function showPrev() {
-    currentIndex = (currentIndex - 1 + urls.length) % urls.length;
-    lightboxImg.src = urls[currentIndex];
+  
+  function showPrevLightbox() {
+    currentLightboxIndex = (currentLightboxIndex - 1 + allUrls.length) % allUrls.length;
+    lightboxImg.src = allUrls[currentLightboxIndex];
   }
 
   document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
-  document.getElementById('lightboxNext').addEventListener('click', showNext);
-  document.getElementById('lightboxPrev').addEventListener('click', showPrev);
+  document.getElementById('lightboxNext').addEventListener('click', showNextLightbox);
+  document.getElementById('lightboxPrev').addEventListener('click', showPrevLightbox);
   lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+  
   document.addEventListener('keydown', (e) => {
     if (!lightbox.classList.contains('open')) return;
     if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowRight') showNext();
-    if (e.key === 'ArrowLeft') showPrev();
+    if (e.key === 'ArrowRight') showNextLightbox();
+    if (e.key === 'ArrowLeft') showPrevLightbox();
   });
+
+  // 初始化页面
+  renderPage(currentPage);
 </script>
 </body>
 </html>
